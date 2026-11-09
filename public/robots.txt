@@ -1,0 +1,24 @@
+# Robots.txt for FlowPeople by Fluxora
+User-agent: *
+Allow: /
+Allow: /how-it-works
+Allow: /features
+Allow: /pricing
+Allow: /about
+Allow: /about-fluxora
+Allow: /who-its-for
+Allow: /contact
+Allow: /announcements
+Allow: /faq
+Allow: /privacy
+Allow: /terms
+Allow: /biometric-attendance
+Allow: /gps-attendance
+
+# Disallow private administrative desks
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+
+Sitemap: https://flowpeople.fluxora.com/sitemap.xml
+

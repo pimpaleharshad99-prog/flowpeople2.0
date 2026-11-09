@@ -1,0 +1,2484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="description" content="FlowPeople by Fluxora: A modern human resource management system featuring effortless front-desk biometric attendance, precision mobile GPS geofencing, leave management, and workforce analytics with a perpetual one-time license." />
+  <link rel="canonical" href="https://flowpeople.fluxora.com/" />
+  <title>FlowPeople by Fluxora — A Smarter Way to Manage Every Workday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    (function () {
+      ['warn', 'log', 'info'].forEach(function (k) {
+        var o = console[k];
+        console[k] = function () {
+          var m = arguments[0];
+          if (typeof m === 'string' && m.indexOf('cdn.tailwindcss.com') !== -1) return;
+          return o.apply(console, arguments);
+        };
+      });
+    })();
+  </script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --fp-sage: #A5A79B;
+      --fp-softsage: #D8D9D0;
+      --fp-cream: #E8D2B5;
+      --fp-burgundy: #590907;
+      --fp-offwhite: #F8F6F1;
+      --fp-charcoal: #242321;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #F8F6F1;
+      color: #242321;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background-color: #F8F6F1;
+      color: #242321;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-editorial {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      letter-spacing: -0.02em;
+    }
+
+    /* Floating Frosted Liquid-Glass Navbar */
+    .nav-glass {
+      background: linear-gradient(135deg, rgba(255, 253, 249, 0.78) 0%, rgba(246, 238, 226, 0.68) 100%);
+      backdrop-filter: blur(26px) saturate(190%);
+      -webkit-backdrop-filter: blur(26px) saturate(190%);
+      border: 1.5px solid rgba(255, 255, 255, 0.88);
+      box-shadow:
+        0 16px 40px -8px rgba(36, 35, 33, 0.18),
+        0 4px 14px rgba(89, 9, 7, 0.08),
+        inset 0 1px 2px rgba(255, 255, 255, 0.96);
+    }
+
+    .nav-glass-dock {
+      background: rgba(255, 255, 255, 0.52);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      box-shadow: inset 0 1px 2px rgba(36, 35, 33, 0.05);
+    }
+
+    /* 3D Logo Emblem in Opening Experience */
+    .logo-3d-stage {
+      perspective: 1000px;
+    }
+
+    @keyframes logo3dEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(34px) rotateX(38deg) rotateY(-28deg) scale(0.72);
+      }
+      65% {
+        opacity: 1;
+        transform: translateY(-6px) rotateX(-6deg) rotateY(8deg) scale(1.04);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg) rotateY(0deg) scale(1);
+      }
+    }
+
+    @keyframes logoFloatIdle {
+      0%, 100% {
+        transform: translateY(0px) rotateX(2deg) rotateY(-3deg);
+      }
+      50% {
+        transform: translateY(-8px) rotateX(-2deg) rotateY(3deg);
+      }
+    }
+
+    .logo-3d-emblem {
+      transform-style: preserve-3d;
+      animation:
+        logo3dEntrance 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards,
+        logoFloatIdle 6s ease-in-out 1.5s infinite;
+      box-shadow:
+        0 28px 60px -12px rgba(89, 9, 7, 0.32),
+        0 10px 24px -6px rgba(36, 35, 33, 0.18),
+        inset 0 1px 2px rgba(255, 255, 255, 0.35);
+    }
+
+    @keyframes orbitSpinSlow {
+      0% { transform: rotateZ(0deg) rotateX(64deg); }
+      100% { transform: rotateZ(360deg) rotateX(64deg); }
+    }
+
+    .logo-orbit-ring {
+      animation: orbitSpinSlow 18s linear infinite;
+    }
+
+    /* Letter-by-letter Welcome Animation */
+    .welcome-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(28px) rotateX(-35deg);
+      transform-origin: bottom center;
+      animation: charReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation-delay: var(--char-delay, 0ms);
+    }
+
+    @keyframes charReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(28px) rotateX(-35deg);
+        filter: blur(4px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotateX(0deg);
+        filter: blur(0px);
+      }
+    }
+
+    @keyframes fadeSlideUp {
+      0% {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .tagline-reveal {
+      opacity: 0;
+      animation: fadeSlideUp 1.1s cubic-bezier(0.16, 1, 0.3, 1) 1.25s forwards;
+    }
+
+    .scroll-cue-reveal {
+      opacity: 0;
+      animation: fadeSlideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+    }
+
+    .hero-footer-box {
+      background: linear-gradient(145deg, rgba(253, 250, 244, 0.96) 0%, rgba(238, 219, 192, 0.94) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 2px solid rgba(255, 255, 255, 0.92);
+      box-shadow:
+        0 20px 44px -10px rgba(0, 0, 0, 0.6),
+        0 0 28px rgba(255, 228, 184, 0.32),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    }
+
+    .hero-footer-box:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 26px 52px -10px rgba(0, 0, 0, 0.68),
+        0 0 36px rgba(255, 228, 184, 0.48),
+        inset 0 1px 2px rgba(255, 255, 255, 1);
+    }
+
+    /* Frosted Glass Cards & Interactive Experience Stages */
+    .frosted-showcase-card {
+      background: rgba(248, 246, 241, 0.78);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow:
+        0 32px 80px -20px rgba(36, 35, 33, 0.12),
+        0 0 0 1px rgba(232, 210, 181, 0.55);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.55s ease;
+    }
+
+    .frosted-showcase-card:hover {
+      transform: translateY(-6px);
+      box-shadow:
+        0 42px 95px -18px rgba(89, 9, 7, 0.16),
+        0 0 0 1px rgba(89, 9, 7, 0.25);
+    }
+
+    /* Ultra-Bezel-less iPhone 18 Pro Max (Desert Titanium) */
+    .iphone18-pro-max {
+      position: relative;
+      width: 268px;
+      height: 540px;
+      border-radius: 48px;
+      padding: 3px;
+      background: linear-gradient(145deg, #E8D2B5 0%, #9E9689 28%, #2C2926 62%, #E8D2B5 100%);
+      box-shadow:
+        0 34px 75px -12px rgba(10, 9, 8, 0.58),
+        0 12px 28px -8px rgba(89, 9, 7, 0.22),
+        0 0 0 1px rgba(232, 210, 181, 0.42),
+        inset 0 0 2px rgba(255, 255, 255, 0.65);
+      transform-style: preserve-3d;
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .iphone18-oled-screen {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 45px;
+      background: #F8F6F1;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: inset 0 0 0 1.5px #141312;
+    }
+
+    .dynamic-island {
+      height: 20px;
+      min-width: 72px;
+      padding: 0 9px;
+      border-radius: 999px;
+      background: #141312;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .dynamic-island.expanded {
+      min-width: 132px;
+      height: 23px;
+      background: #1E1D1B;
+    }
+
+    @keyframes pulseRing {
+      0%, 100% { transform: scale(0.95); opacity: 0.5; }
+      50% { transform: scale(1.06); opacity: 0.95; }
+    }
+
+    .animate-pulse-ring {
+      animation: pulseRing 2.5s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    @keyframes scanLaserMove {
+      0%, 100% { top: 14%; opacity: 0.85; }
+      50% { top: 82%; opacity: 1; }
+    }
+
+    .biometric-laser-line {
+      animation: scanLaserMove 2.6s ease-in-out infinite;
+    }
+
+    @keyframes tapPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(89, 9, 7, 0.45); }
+      50% { box-shadow: 0 0 0 10px rgba(89, 9, 7, 0); }
+    }
+
+    .btn-tap-pulse {
+      animation: tapPulse 2s infinite;
+    }
+
+    .cinema-plate {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      will-change: transform, opacity;
+      transition: opacity 0.22s linear;
+    }
+
+    [data-anim] {
+      opacity: 0;
+      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: var(--d, 0ms);
+    }
+    [data-anim="up"] { transform: translateY(40px); }
+    [data-anim="left"] { transform: translateX(-44px); }
+    [data-anim="right"] { transform: translateX(44px); }
+    [data-anim="zoom"] { transform: scale(0.93); }
+    [data-anim].in { opacity: 1; transform: none; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F8F6F1; }
+    ::-webkit-scrollbar-thumb { background: #A5A79B; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #590907; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .logo-3d-emblem, .logo-orbit-ring, .welcome-char, .tagline-reveal,
+      .scroll-cue-reveal, .animate-pulse-ring, .biometric-laser-line, .btn-tap-pulse {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      [data-anim] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+
+    /* React Bits <Lightfall /> Container & Canvas Styles */
+    .lightfall-container {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .lightfall-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .hero-glass-pill {
+      background: rgba(255, 250, 242, 0.17);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 242, 222, 0.52);
+      box-shadow: 0 14px 36px -10px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .hero-telemetry-card {
+      background: linear-gradient(135deg, rgba(255, 250, 242, 0.19) 0%, rgba(232, 210, 181, 0.14) 100%);
+      backdrop-filter: blur(24px) saturate(160%);
+      -webkit-backdrop-filter: blur(24px) saturate(160%);
+      border: 1px solid rgba(255, 242, 222, 0.48);
+      box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.32);
+    }
+
+    .lightfall-warp-active .logo-3d-emblem {
+      box-shadow:
+        0 0 70px 8px rgba(232, 210, 181, 0.38),
+        0 28px 60px -12px rgba(89, 9, 7, 0.65),
+        inset 0 1px 3px rgba(255, 255, 255, 0.6);
+      transform: scale(1.05);
+    }
+
+  </style>
+</head>
+<body id="top" class="bg-[#F8F6F1] text-[#242321] selection:bg-[#590907] selection:text-[#F8F6F1]">
+
+  <!-- ===================================================================== -->
+  <!-- TOP FIXED HEADER (GLASS NAVBAR WITH SEAMLESS ROUTE NAVIGATION)        -->
+  <!-- ===================================================================== -->
+    <!-- ===================================================================== -->
+  <!-- EXACT PERSISTENT FLOATING FROSTED GLASS NAVBAR                        -->
+  <!-- ===================================================================== -->
+  <header class="fixed top-2.5 left-3 right-3 sm:top-3.5 sm:left-6 sm:right-6 z-50">
+    <div class="nav-glass max-w-7xl mx-auto rounded-2xl sm:rounded-full flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 sm:px-5">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <span class="transition-transform group-hover:scale-105">
+          <svg class="h-9 w-9 rounded-[10px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="fpGradHeader" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#590907" />
+                <stop offset="52%" stop-color="#981C14" />
+                <stop offset="100%" stop-color="#E0AF84" />
+              </linearGradient>
+            </defs>
+            <rect width="100" height="100" rx="26" fill="url(#fpGradHeader)" />
+            <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+            <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+            <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+          </svg>
+        </span>
+        <span class="flex flex-col leading-none">
+          <span class="text-[17px] font-bold tracking-tight">
+            <span class="text-[#242321]">Flow</span><span class="text-[#590907]">people</span>
+          </span>
+          <span class="mt-1 text-[9px] font-semibold uppercase tracking-[0.28em] text-[#590907]/75">BY FLUXORA</span>
+        </span>
+      </a>
+
+      <nav aria-label="Experience Switcher" class="nav-glass-dock flex items-center gap-1 rounded-full p-1 text-xs sm:text-sm font-medium">
+        <a href="index.html" id="navBtnHub" class="rounded-full bg-[#590907] text-[#F8F6F1] px-3.5 py-1.5 font-semibold shadow-xs transition">Overview</a>
+        <a href="flowpeople_v8.html" id="navBtnBio" class="rounded-full text-[#242321]/85 hover:bg-white/70 hover:text-[#590907] px-3.5 py-1.5 transition">Biometric Attendance</a>
+        <a href="gps-attendance.html" id="navBtnGps" class="rounded-full text-[#242321]/85 hover:bg-white/70 hover:text-[#590907] px-3.5 py-1.5 transition">GPS Attendance</a>
+      <a href="pricing.html" id="navBtnPricing" class="rounded-full text-[#242321]/85 hover:bg-white/70 hover:text-[#590907] px-3.5 py-1.5 transition">Pricing</a>
+        <a href="about.html" id="navBtnAbout" class="rounded-full text-[#242321]/85 hover:bg-white/70 hover:text-[#590907] px-3.5 py-1.5 transition">About</a>
+      
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a href="index.html#choose-attendance" id="headerPrimaryCta" class="rounded-full bg-[#590907] px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-[#F8F6F1] shadow-sm transition hover:bg-[#590907]/90">
+          Explore Experiences
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- VIEW 1: MAIN CINEMATIC ATTENDANCE LANDING PAGE (WELCOME HUB)          -->
+  <!-- ===================================================================== -->
+  <div id="view-hub" class="block">
+    <main>
+
+      <!-- ================================================================= -->
+      <!-- 1. OPENING EXPERIENCE — FULL-SCREEN LIGHTFALL WEBGL2 HERO         -->
+      <!-- ================================================================= -->
+      <section id="welcome-hero" class="relative min-h-screen w-full overflow-hidden flex flex-col items-center justify-center gap-6 px-4 sm:px-8 pt-24 pb-8 select-none cursor-crosshair"
+               style="background: radial-gradient(circle at 50% 0%, #3a0605 0%, #160404 42%, #080303 100%);">
+
+        <!-- React Bits <Lightfall /> WebGL2 Shader Component Mount -->
+        <div id="lightfallMount" class="lightfall-container" aria-hidden="true">
+          <canvas id="welcomeParticlesCanvas" class="lightfall-canvas"></canvas>
+        </div>
+
+        <!-- Subtle Vignette -->
+        <div class="pointer-events-none absolute inset-0 z-[2]"
+             style="background: radial-gradient(circle at 50% 42%, transparent 45%, rgba(8, 3, 3, 0.35) 100%);"></div>
+
+        <!-- Center 3D Logo Symbol + Below-Logo Brand Lockup + High-Contrast Hero Typography -->
+        <div id="welcomeCenterContent" class="relative z-10 mx-auto max-w-4xl text-center flex flex-col items-center py-2 px-4">
+
+          <!-- 3D Reveal Flowpeople Logo Symbol + Signature Below-Logo Lockup -->
+          <div class="logo-3d-stage relative mb-6 flex flex-col items-center justify-center">
+            <div class="relative flex items-center justify-center">
+              <div class="pointer-events-none absolute h-36 w-36 sm:h-40 sm:w-40 rounded-full border border-[#FFE4B8]/45 logo-orbit-ring"></div>
+              <div class="pointer-events-none absolute h-28 w-28 sm:h-32 sm:w-32 rounded-full bg-[#FFE4B8]/30 blur-2xl"></div>
+
+              <!-- Main 3D Squircle Emblem (Website-Themed F• Icon) -->
+              <div class="logo-3d-emblem relative flex h-24 w-24 sm:h-28 sm:w-28 items-center justify-center rounded-[28px] overflow-hidden bg-[#FFFDF9]/15 p-0.5 border-2 border-[#FFF5E4]/80 shadow-[0_0_45px_rgba(255,228,184,0.35)] transition-all duration-300">
+                <img data-fp-img="fp_logo" alt="Flowpeople by Fluxora Logo" class="h-full w-full object-cover rounded-[26px]" />
+              </div>
+            </div>
+
+            <!-- Signature Below-Logo Name Lockup ("Flowpeople / BY FLUXORA") -->
+            <div class="mt-4 flex flex-col items-center leading-none">
+              <div class="text-2xl sm:text-3xl font-bold tracking-tight drop-shadow-[0_4px_18px_rgba(0,0,0,0.75)]">
+                <span class="text-white">Flow</span><span class="text-[#FFE4B8]">people</span>
+              </div>
+              <div class="mt-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.34em] text-[#FFF5E4] drop-shadow-[0_2px_10px_rgba(0,0,0,0.75)]">
+                BY FLUXORA
+              </div>
+            </div>
+          </div>
+
+          <!-- High-Contrast Luminous Eyebrow Tag -->
+          <div class="tagline-reveal mb-4 inline-flex items-center gap-2 rounded-full bg-white/18 border border-[#FFE4B8]/65 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em] text-white backdrop-blur-md shadow-[0_8px_24px_rgba(0,0,0,0.35)]">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#FFE4B8]"></span>
+            <span>Next-Gen Biometric &amp; GPS Attendance</span>
+          </div>
+
+          <!-- Stylish Animated "Welcome to Flowpeople" Headline -->
+          <h1 id="welcomeHeadline" aria-label="Welcome to Flowpeople"
+              class="font-editorial text-5xl sm:text-7xl md:text-[88px] font-semibold tracking-tight text-white leading-[1.02] drop-shadow-[0_8px_32px_rgba(0,0,0,0.85)]">
+            Welcome to Flowpeople
+          </h1>
+
+          <!-- High-Contrast Luminous Tagline Reveal -->
+          <p class="tagline-reveal mt-5 text-lg sm:text-2xl font-normal tracking-wide text-white max-w-2xl leading-relaxed drop-shadow-[0_4px_20px_rgba(0,0,0,0.85)]">
+            A Smarter Way to Manage Every Workday — where effortless front-desk biometrics and precision mobile geofencing meet in one unified platform.
+          </p>
+
+          <!-- Hero Action Bar (All Luminous Light Text — Zero Dark Text) -->
+          <div class="tagline-reveal mt-8 flex flex-wrap items-center justify-center gap-3.5">
+            <a href="#choose-attendance"
+               style="background: linear-gradient(135deg, #8F1610 0%, #B83324 52%, #D47A47 100%);"
+               class="group inline-flex items-center gap-3 rounded-full border border-[#FFE4B8]/80 px-7 py-3.5 text-xs sm:text-sm font-semibold text-white shadow-[0_14px_34px_rgba(255,228,184,0.28)] transition hover:brightness-110">
+              <span>Choose Attendance Mode</span>
+              <span class="inline-block transition-transform group-hover:translate-y-0.5 text-[#FFE4B8]" aria-hidden="true">↓</span>
+            </a>
+            <a href="flowpeople_v8.html" class="hero-glass-pill inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-xs sm:text-sm font-semibold text-white transition hover:border-white/80 hover:bg-white/25">
+              <span class="text-[#FFE4B8]">01</span>
+              <span>· Biometric Kiosk</span>
+            </a>
+            <a href="gps-attendance.html" class="hero-glass-pill inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-xs sm:text-sm font-semibold text-white transition hover:border-white/80 hover:bg-white/25">
+              <span class="text-[#FFE4B8]">02</span>
+              <span>· GPS Geofence</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Hero Footer Boxes + Scroll Cue (Ultra-Visible Warm Cream Cards) -->
+        <div class="scroll-cue-reveal relative z-10 w-full max-w-6xl mx-auto flex flex-col items-center gap-5 pt-2">
+          <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+            <!-- Box 1: Biometric Speed -->
+            <div class="hero-footer-box rounded-2xl px-5 py-4 flex flex-col justify-between">
+              <div class="inline-flex items-center gap-2 self-start rounded-full bg-[#590907]/12 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-[#590907] font-bold">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#590907]"></span>
+                <span>Biometric Speed</span>
+              </div>
+              <div class="mt-2.5 text-xl sm:text-2xl font-extrabold text-[#590907] tabular-nums tracking-tight">&lt; 2.0 Seconds</div>
+              <div class="mt-1 text-xs text-[#7A1510] font-semibold">Contactless Reception Scan</div>
+            </div>
+
+            <!-- Box 2: Geofence Radius -->
+            <div class="hero-footer-box rounded-2xl px-5 py-4 flex flex-col justify-between">
+              <div class="inline-flex items-center gap-2 self-start rounded-full bg-[#590907]/12 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-[#590907] font-bold">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#590907]"></span>
+                <span>Geofence Radius</span>
+              </div>
+              <div class="mt-2.5 text-xl sm:text-2xl font-extrabold text-[#590907] tabular-nums tracking-tight">100m Verified</div>
+              <div class="mt-1 text-xs text-[#7A1510] font-semibold">Unlocks on Zone Entry</div>
+            </div>
+
+            <!-- Box 3: HR Cloud Sync -->
+            <div class="hero-footer-box rounded-2xl px-5 py-4 flex flex-col justify-between">
+              <div class="inline-flex items-center gap-2 self-start rounded-full bg-[#590907]/12 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-[#590907] font-bold">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#590907]"></span>
+                <span>HR Cloud Sync</span>
+              </div>
+              <div class="mt-2.5 text-xl sm:text-2xl font-extrabold text-[#590907] tabular-nums tracking-tight">Real-Time · 99.9%</div>
+              <div class="mt-1 text-xs text-[#7A1510] font-semibold">Instant Shift &amp; Payroll Logs</div>
+            </div>
+
+            <!-- Box 4: Lightfall Tunnel -->
+            <div class="hero-footer-box rounded-2xl px-5 py-4 flex flex-col justify-between">
+              <div class="inline-flex items-center gap-2 self-start rounded-full bg-[#590907]/12 px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-[#590907] font-bold">
+                <span class="h-1.5 w-1.5 rounded-full bg-[#590907]"></span>
+                <span>Lightfall Tunnel</span>
+              </div>
+              <div id="lightfallTelemetryState" class="mt-2.5 text-xl sm:text-2xl font-extrabold text-[#590907] tracking-tight">Interactive Lens</div>
+              <div class="mt-1 text-xs text-[#7A1510] font-semibold">Move Cursor · Interactive Glow</div>
+            </div>
+          </div>
+
+          <!-- Minimal Scroll Down Indicator -->
+          <a href="#choose-attendance" class="flex flex-col items-center gap-1.5 text-white hover:text-[#FFE4B8] transition">
+            <span class="text-[10px] uppercase tracking-[0.28em] font-semibold">Scroll to Explore</span>
+            <span class="block h-6 w-px bg-gradient-to-b from-[#FFE4B8] to-transparent"></span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 2. SCROLL-DRIVEN STORYTELLING INTRO ("Attendance, Your Way.")     -->
+      <!-- ================================================================= -->
+      <section id="choose-attendance" class="relative z-20 bg-[#F8F6F1] pt-14 pb-8 sm:pt-18 sm:pb-10 px-4 sm:px-8 overflow-hidden">
+        <div class="pointer-events-none absolute top-12 left-1/2 -translate-x-1/2 h-80 w-[48rem] rounded-full bg-[#E8D2B5]/45 blur-3xl"></div>
+
+        <div class="relative mx-auto max-w-4xl text-center">
+          <div data-anim="up" class="inline-flex items-center gap-2.5 rounded-full bg-[#E8D2B5]/70 px-4 py-1.5 text-xs font-semibold text-[#590907] border border-[#590907]/15">
+            <svg class="h-5 w-5 rounded-[6px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradSuite" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradSuite)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+            <span class="tracking-tight font-bold"><span class="text-[#242321]">Flow</span><span class="text-[#590907]">people</span></span>
+            <span class="text-[10px] tracking-[0.22em] uppercase text-[#590907]/80">BY FLUXORA · Attendance Suite</span>
+          </div>
+
+          <h2 data-anim="up" style="--d:100ms" class="font-editorial mt-6 text-5xl sm:text-7xl md:text-[80px] font-semibold tracking-tight text-[#242321] leading-[1.04]">
+            Attendance, <span class="italic font-normal text-[#590907]">Your Way.</span>
+          </h2>
+
+          <p data-anim="up" style="--d:200ms" class="mx-auto mt-6 max-w-2xl text-lg sm:text-2xl leading-relaxed text-[#242321]/75 font-light">
+            Choose the attendance experience that works best for your workplace.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 3. TWO ATTENDANCE EXPERIENCE OPTIONS                              -->
+      <!-- ================================================================= -->
+      <section class="relative z-20 bg-[#F8F6F1] pb-4 sm:pb-6 px-4 sm:px-8">
+        <div class="mx-auto max-w-7xl space-y-10 sm:space-y-12">
+
+          <!-- ============================================================= -->
+          <!-- OPTION 01 — BIOMETRIC ATTENDANCE                              -->
+          <!-- ============================================================= -->
+          <article id="option-biometric" data-anim="up" class="frosted-showcase-card rounded-[40px] p-6 sm:p-10 lg:p-14 overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+              <!-- Left Column: Narrative + Interactive Step Selector + CTA -->
+              <div class="lg:col-span-5 space-y-6">
+                <div class="inline-flex items-center gap-2.5 rounded-full bg-[#E8D2B5]/70 px-4 py-1.5 text-xs font-semibold tracking-[0.18em] uppercase text-[#590907]">
+                  <span>Option 01</span>
+                  <span>·</span>
+                  <span>Reception Terminal</span>
+                </div>
+
+                <div class="space-y-2">
+                  <h3 class="font-editorial text-4xl sm:text-6xl font-semibold text-[#242321] leading-[1.06]">
+                    Biometric Attendance
+                  </h3>
+                  <p class="text-xl sm:text-2xl font-medium text-[#590907]">
+                    Simple. Secure. Seamless.
+                  </p>
+                </div>
+
+                <p class="text-sm sm:text-base leading-relaxed text-[#242321]/75">
+                  Designed for effortless front-desk arrivals. As an employee approaches the sleek office reception screen, a quick contactless scan verifies their identity and logs attendance in two seconds.
+                </p>
+
+                <!-- Interactive 4-Step Story Timeline Pills for Option 01 -->
+                <div class="space-y-2 pt-1" role="tablist" aria-label="Biometric Attendance Steps">
+                  <div class="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#A5A79B]">
+                    Interactive Preview · Click or Hover Steps
+                  </div>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button type="button" data-bio-step="0" class="bio-step-btn rounded-2xl bg-[#590907] text-[#F8F6F1] px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] opacity-75">01</div>
+                      <div class="text-xs font-semibold">Entrance</div>
+                    </button>
+                    <button type="button" data-bio-step="1" class="bio-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] text-[#A5A79B]">02</div>
+                      <div class="text-xs font-semibold">Approach</div>
+                    </button>
+                    <button type="button" data-bio-step="2" class="bio-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] text-[#A5A79B]">03</div>
+                      <div class="text-xs font-semibold">Scan</div>
+                    </button>
+                    <button type="button" data-bio-step="3" class="bio-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] text-[#A5A79B]">04</div>
+                      <div class="text-xs font-semibold">Confirmed</div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Primary CTA Button: Explore Biometric -->
+                <div class="pt-3">
+                  <a href="flowpeople_v8.html" id="exploreBiometricBtn" class="group inline-flex items-center gap-3 rounded-full bg-[#590907] px-8 py-4 text-sm sm:text-base font-semibold text-[#F8F6F1] shadow-lg transition hover:bg-[#590907]/90"><span>Explore Biometric Kiosk</span><span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span></a>
+                </div>
+              </div>
+
+              <!-- Right Column: Nano Banana Visual Stage + Live Scanning Kiosk Animation -->
+              <div class="lg:col-span-7">
+                <div class="relative rounded-[32px] overflow-hidden bg-[#1E1D1B] aspect-[16/10] shadow-2xl">
+                  <!-- Background Nano Banana Image Layer -->
+                  <img id="bioStageImg0" data-fp-img="bio_entrance" alt="Modern office entrance with employee approaching biometric terminal"
+                       class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="opacity: 1; transform: scale(1.02);" />
+                  <img id="bioStageImg1" data-fp-img="bio_scan" alt="Employee scanning at FlowPeople biometric device"
+                       class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="opacity: 0; transform: scale(1.05);" />
+                  <img id="bioStageImg2" data-fp-img="bio_confirm" alt="Frameless glass biometric device showing confirmed check-in"
+                       class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="opacity: 0; transform: scale(1.02);" />
+
+                  <!-- Warm Cinematic Vignette -->
+                  <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1E1D1B]/45 via-transparent to-[#1E1D1B]/65"></div>
+
+                  <!-- Live Floating Biometric Terminal Widget on Right of Stage -->
+                  <div class="absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 w-52 sm:w-60 rounded-3xl bg-[#1E1D1B]/80 backdrop-blur-2xl p-4 sm:p-5 text-[#F8F6F1] shadow-2xl border border-[#E8D2B5]/25">
+                    <div class="flex items-center justify-between pb-2.5 mb-3 border-b border-white/10">
+                      <div class="flex items-center gap-2">
+                        <svg class="h-6 w-6 rounded-[6px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradOpt1Kiosk" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradOpt1Kiosk)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+                        <div class="flex flex-col leading-none">
+                          <span class="text-xs font-bold"><span class="text-white">Flow</span><span class="text-[#FFE4B8]">people</span></span>
+                          <span class="mt-0.5 text-[8px] font-semibold tracking-[0.22em] uppercase text-[#FFE4B8]/85">BY FLUXORA</span>
+                        </div>
+                      </div>
+                      <span class="text-[11px] text-[#A5A79B] tabular-nums">09:02 AM</span>
+                    </div>
+
+                    <!-- Dynamic Biometric Scanner Graphic -->
+                    <div class="relative mx-auto h-28 w-28 rounded-2xl overflow-hidden bg-black/40 border border-[#E8D2B5]/40 flex items-center justify-center">
+                      <img data-fp-img="rahul_avatar" alt="Rahul Sharma" class="h-full w-full object-cover opacity-85" />
+                      <!-- Animated Scanning Ring & Laser -->
+                      <div id="bioScanRingOverlay" class="absolute inset-2 rounded-full border-2 border-[#E8D2B5] animate-pulse-ring"></div>
+                      <div id="bioLaserLine" class="biometric-laser-line absolute left-2 right-2 h-0.5 bg-[#E8D2B5] shadow-[0_0_12px_#E8D2B5]"></div>
+                      <!-- Confirmed Badge Overlay -->
+                      <div id="bioConfirmedCheck" class="hidden absolute inset-0 bg-[#590907]/85 backdrop-blur-xs flex flex-col items-center justify-center">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-full bg-[#E8D2B5] text-[#590907] text-xl font-bold">✓</div>
+                        <span class="mt-1.5 text-[10px] font-semibold uppercase tracking-wider text-[#E8D2B5]">Confirmed</span>
+                      </div>
+                    </div>
+
+                    <!-- Status Text below Scanner -->
+                    <div class="mt-3 text-center">
+                      <div id="bioHudStatusTitle" class="text-xs font-semibold text-[#E8D2B5]">Ready at Entrance</div>
+                      <div id="bioHudStatusSub" class="mt-0.5 text-[11px] text-[#F8F6F1]/75">Rahul Sharma · 09:02 AM</div>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Left Scene Caption Pill -->
+                  <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 rounded-full bg-[#1E1D1B]/75 backdrop-blur-md px-4 py-2 text-xs font-medium text-[#F8F6F1] border border-white/10">
+                    <span id="bioSceneCaption">01 · Sunlit Office Reception Entrance</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+          <!-- ============================================================= -->
+          <!-- OPTION 02 — GPS ATTENDANCE                                    -->
+          <!-- ============================================================= -->
+          <article id="option-gps" data-anim="up" class="frosted-showcase-card rounded-[40px] p-6 sm:p-10 lg:p-14 overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+              <!-- Left Column: Visual Stage with Nano Banana GPS Boundary & Interactive Check-in -->
+              <div class="lg:col-span-7 lg:order-1 order-2">
+                <div class="relative rounded-[32px] overflow-hidden bg-[#1E1D1B] aspect-[16/10] shadow-2xl">
+                  <!-- Background Nano Banana GPS Images -->
+                  <img id="gpsStageImg0" data-fp-img="gps_map" alt="Modern office building with circular GPS attendance zone"
+                       class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="opacity: 1; transform: scale(1.02);" />
+                  <img id="gpsStageImg1" data-fp-img="gps_approach" alt="Employee approaching the office with smartphone"
+                       class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="opacity: 0; transform: scale(1.04);" />
+                  <img id="gpsStageImg2" data-fp-img="gps_iphone18" alt="iPhone 18 Pro Max with enabled Check-in button inside GPS zone"
+                       class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="opacity: 0; transform: scale(1.02);" />
+                  <img id="gpsStageImg3" data-fp-img="gps_confirm" alt="Attendance confirmed in office and HR dashboard"
+                       class="absolute inset-0 w-full h-full object-cover transition-all duration-700" style="opacity: 0; transform: scale(1.02);" />
+
+                  <!-- Warm Vignette -->
+                  <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#1E1D1B]/50 via-transparent to-[#1E1D1B]/70"></div>
+
+                  <!-- Live Animated GPS Radius Ring Overlay on Left of Stage -->
+                  <div class="pointer-events-none absolute left-5 top-5 sm:left-7 sm:top-7 w-36 h-36 sm:w-44 sm:h-44 rounded-3xl bg-[#1E1D1B]/65 backdrop-blur-xl border border-[#E8D2B5]/25 p-3 flex flex-col justify-between">
+                    <div class="flex items-center justify-between text-[10px] text-[#E8D2B5] font-semibold">
+                      <span>GPS Zone</span>
+                      <span id="hubGpsDistanceLabel">140m</span>
+                    </div>
+                    <svg class="w-full h-24" viewBox="0 0 120 90" fill="none">
+                      <line x1="16" y1="74" x2="74" y2="44" stroke="#E8D2B5" stroke-width="1.5" stroke-dasharray="3 3" opacity="0.55" />
+                      <circle cx="74" cy="44" r="28" fill="#E8D2B5" fill-opacity="0.18" stroke="#E8D2B5" stroke-width="1.2" stroke-dasharray="4 3" class="animate-pulse-ring" />
+                      <circle id="hubGpsZoneCircle" cx="74" cy="44" r="19" fill="#590907" fill-opacity="0.45" stroke="#E8D2B5" stroke-width="1.8" />
+                      <circle cx="74" cy="44" r="3.5" fill="#F8F6F1" />
+                      <g id="hubGpsEmpPin" transform="translate(22, 70)">
+                        <circle r="7" fill="#E8D2B5" fill-opacity="0.3" />
+                        <circle r="4" fill="#E8D2B5" stroke="#1E1D1B" stroke-width="1.5" />
+                      </g>
+                    </svg>
+                    <div id="hubGpsZoneBadge" class="text-[10px] text-center font-medium text-[#F8F6F1]/85 truncate">
+                      Outside Zone
+                    </div>
+                  </div>
+
+                  <!-- Live Interactive Mini iPhone 18 Pro Max Check-in Card on Right of Stage -->
+                  <div class="absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 w-52 sm:w-60 rounded-[30px] p-[2px] bg-gradient-to-br from-[#E8D2B5] via-[#9E9689] to-[#2C2926] shadow-2xl">
+                    <div class="rounded-[28px] bg-[#F8F6F1] p-4 text-[#242321]">
+                      <!-- Mini Dynamic Island -->
+                      <div class="mx-auto mb-2.5 h-4 w-20 rounded-full bg-[#141312] flex items-center justify-center gap-1.5">
+                        <span class="h-1.5 w-1.5 rounded-full bg-[#E8D2B5]"></span>
+                        <span id="hubPhoneIslandText" class="text-[9px] font-medium text-[#F8F6F1]">GPS Zone</span>
+                      </div>
+                      <!-- Mini Phone Flowpeople Brand Header -->
+                      <div class="mb-2.5 flex items-center justify-between px-0.5">
+                        <div class="flex items-center gap-1.5">
+                          <svg class="h-5 w-5 rounded-[5px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradOpt2Phone" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradOpt2Phone)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+                          <div class="flex flex-col leading-none">
+                            <span class="text-[11px] font-bold"><span class="text-[#242321]">Flow</span><span class="text-[#590907]">people</span></span>
+                            <span class="text-[7px] font-semibold uppercase tracking-[0.2em] text-[#590907]/75">BY FLUXORA</span>
+                          </div>
+                        </div>
+                        <span class="rounded-full bg-[#E8D2B5]/70 px-2 py-0.5 text-[8px] font-semibold text-[#590907]">GPS</span>
+                      </div>
+
+                      <!-- Zone Status Banner -->
+                      <div id="hubPhoneBanner" class="rounded-2xl bg-[#D8D9D0]/70 p-2.5 text-center transition-all">
+                        <div id="hubPhoneBannerTitle" class="text-[11px] font-semibold text-[#242321]">
+                          Outside Attendance Zone
+                        </div>
+                        <div id="hubPhoneBannerSub" class="text-[10px] text-[#242321]/65 mt-0.5">
+                          Enter office zone to enable
+                        </div>
+                      </div>
+
+                      <!-- Verification Details -->
+                      <div class="mt-2.5 space-y-1 rounded-2xl bg-white p-2.5 text-[11px] shadow-xs">
+                        <div class="flex justify-between">
+                          <span class="text-[#A5A79B]">Office</span>
+                          <span class="font-semibold text-[#242321]">Main Office</span>
+                        </div>
+                        <div class="flex justify-between">
+                          <span class="text-[#A5A79B]">Check-in</span>
+                          <span id="hubPhoneStateLabel" class="font-semibold text-[#A5A79B]">Disabled</span>
+                        </div>
+                      </div>
+
+                      <!-- Manual Check-in Button (Disabled outside zone, Enabled inside zone, Confirmed on tap) -->
+                      <button type="button" id="hubPhoneCheckinBtn"
+                              class="mt-3 w-full rounded-2xl bg-[#D8D9D0] py-2.5 text-xs font-semibold text-[#A5A79B] transition">
+                        Check-in Disabled
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Bottom Left Caption -->
+                  <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 rounded-full bg-[#1E1D1B]/75 backdrop-blur-md px-4 py-2 text-xs font-medium text-[#F8F6F1] border border-white/10">
+                    <span id="gpsSceneCaption">01 · Approaching Office GPS Boundary</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Narrative + Interactive Step Selector + CTA -->
+              <div class="lg:col-span-5 lg:order-2 order-1 space-y-6">
+                <div class="inline-flex items-center gap-2.5 rounded-full bg-[#E8D2B5]/70 px-4 py-1.5 text-xs font-semibold tracking-[0.18em] uppercase text-[#590907]">
+                  <span>Option 02</span>
+                  <span>·</span>
+                  <span>Mobile Geofence</span>
+                </div>
+
+                <div class="space-y-2">
+                  <h3 class="font-editorial text-4xl sm:text-6xl font-semibold text-[#242321] leading-[1.06]">
+                    GPS-Based Attendance
+                  </h3>
+                  <p class="text-xl sm:text-2xl font-medium text-[#590907]">
+                    Right Place. One Tap. You're In.
+                  </p>
+                </div>
+
+                <p class="text-sm sm:text-base leading-relaxed text-[#242321]/75">
+                  HR defines your office GPS zone once. When an employee enters the permitted boundary, the Check-in button on their smartphone unlocks—recording attendance only when they tap Check-in.
+                </p>
+
+                <!-- Interactive 4-Step Story Timeline Pills for Option 02 -->
+                <div class="space-y-2 pt-1" role="tablist" aria-label="GPS Attendance Steps">
+                  <div class="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#A5A79B]">
+                    Interactive Preview · Enter Zone Then Tap Check-in
+                  </div>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button type="button" data-gps-step="0" class="gps-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] text-[#A5A79B]">01</div>
+                      <div class="text-xs font-semibold">Approaching</div>
+                    </button>
+                    <button type="button" data-gps-step="1" class="gps-step-btn rounded-2xl bg-[#590907] text-[#F8F6F1] px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] opacity-75">02</div>
+                      <div class="text-xs font-semibold">Enter Zone</div>
+                    </button>
+                    <button type="button" data-gps-step="2" class="gps-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] text-[#A5A79B]">03</div>
+                      <div class="text-xs font-semibold">Tap Check-in</div>
+                    </button>
+                    <button type="button" data-gps-step="3" class="gps-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition">
+                      <div class="text-[10px] text-[#A5A79B]">04</div>
+                      <div class="text-xs font-semibold">Confirmed</div>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Primary CTA Button: Explore GPS Attendance -->
+                <div class="pt-3">
+                  <a href="gps-attendance.html" id="exploreGpsBtn" class="group inline-flex items-center gap-3 rounded-full bg-[#590907] px-8 py-4 text-sm sm:text-base font-semibold text-[#F8F6F1] shadow-lg transition hover:bg-[#590907]/90"><span>Explore GPS Attendance</span><span class="inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">→</span></a>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ================================================================= -->
+      <!-- 6. FINAL MINIMAL CLOSING SECTION                                  -->
+      <!-- ================================================================= -->
+      <section class="relative z-20 overflow-hidden pt-4 pb-12 sm:pt-6 sm:pb-16 px-4 sm:px-8"
+               style="background: linear-gradient(180deg, #F8F6F1 0%, #E8D2B5 100%);">
+        <div class="relative mx-auto max-w-4xl text-center flex flex-col items-center">
+
+          <!-- Flowpeople Squircle Logo + Signature Below-Logo Lockup (Exact image_c26356.png Lockup in Website Theme) -->
+          <div data-anim="zoom" class="mb-5 flex flex-col items-center">
+            <div class="flex h-20 w-20 sm:h-24 sm:w-24 items-center justify-center rounded-[26px] overflow-hidden bg-[#590907] p-0.5 border border-[#590907]/25 shadow-2xl">
+              <img data-fp-img="fp_logo" alt="Flowpeople by Fluxora Logo" class="h-full w-full object-cover rounded-[24px]" />
+            </div>
+            <div class="mt-3.5 flex flex-col items-center leading-none">
+              <div class="text-2xl sm:text-3xl font-bold tracking-tight">
+                <span class="text-[#242321]">Flow</span><span class="text-[#590907]">people</span>
+              </div>
+              <div class="mt-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.34em] text-[#590907]/75">
+                BY FLUXORA
+              </div>
+            </div>
+          </div>
+
+          <h2 data-anim="up" style="--d:80ms" class="font-editorial text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-[#242321] leading-[1.06]">
+            One Platform. Two Smarter Ways to Track Attendance.
+          </h2>
+
+          <p data-anim="up" style="--d:160ms" class="mt-6 max-w-xl text-lg sm:text-xl text-[#242321]/80 font-normal leading-relaxed">
+            Experience a better way to manage your workplace with <span class="font-semibold"><span class="text-[#242321]">Flow</span><span class="text-[#590907]">people</span></span>.
+          </p>
+
+          <div data-anim="up" style="--d:240ms" class="mt-8 flex flex-wrap items-center justify-center gap-4">
+            <button type="button" data-nav-view="biometric"
+                    class="rounded-full bg-[#590907] px-7 py-3.5 text-sm font-semibold text-[#F8F6F1] shadow-md transition hover:bg-[#590907]/90">
+              Explore Biometric
+            </button>
+            <a href="gps-attendance.html" class="rounded-full bg-[#F8F6F1] px-7 py-3.5 text-sm font-semibold text-[#590907] shadow-sm transition hover:bg-white">Explore GPS Attendance</a>
+          </div>
+
+          <div data-anim="up" style="--d:320ms" class="mt-7 pt-5 border-t border-[#590907]/15 flex items-center gap-3 text-sm">
+            <svg class="h-8 w-8 rounded-[9px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradClosingFoot" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradClosingFoot)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+            <div class="flex flex-col text-left leading-none">
+              <span class="text-base font-bold tracking-tight">
+                <span class="text-[#242321]">Flow</span><span class="text-[#590907]">people</span>
+              </span>
+              <span class="mt-1 text-[9px] font-semibold uppercase tracking-[0.28em] text-[#590907]/75">BY FLUXORA</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- VIEW 2: EXISTING BIOMETRIC ATTENDANCE LANDING PAGE (/biometric)       -->
+  <!-- ===================================================================== -->
+  <div id="view-biometric" class="hidden pt-14">
+    <section class="relative min-h-[calc(100vh-3.5rem)] w-full bg-[#1E1D1B] overflow-hidden flex items-center py-12 px-4 sm:px-8">
+      <img id="bioPageBgImg" data-fp-img="bio_entrance" alt="Biometric Attendance Office Entrance" class="cinema-plate" style="opacity: 0.85;" />
+      <div class="pointer-events-none absolute inset-0" style="background: linear-gradient(90deg, rgba(24,23,21,0.78) 0%, rgba(24,23,21,0.28) 55%, rgba(24,23,21,0.52) 100%);"></div>
+
+      <div class="relative z-10 mx-auto max-w-7xl w-full flex flex-col md:flex-row items-center justify-between gap-10">
+        <!-- Left Story Content -->
+        <div class="max-w-xl text-[#F8F6F1]">
+          <div class="mb-5 inline-flex items-center gap-3.5 rounded-2xl border border-[#FFE4B8]/50 bg-white/15 px-4 py-2.5 backdrop-blur-xl shadow-lg">
+            <svg class="h-10 w-10 rounded-[11px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradBioHero" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradBioHero)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+            <div class="leading-none">
+              <div class="text-lg font-bold tracking-tight">
+                <span class="text-white">Flow</span><span class="text-[#FFE4B8]">people</span>
+              </div>
+              <div class="mt-1 text-[9px] font-semibold tracking-[0.28em] uppercase text-[#FFF5E4]">BY FLUXORA · BIOMETRIC TERMINAL</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-block h-2 w-2 rounded-full bg-[#E8D2B5]"></span>
+            <span id="bioPageTag" class="text-sm font-medium text-[#E8D2B5]">Scene 1 · Arrival</span>
+          </div>
+          <h1 id="bioPageHeading" class="text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.08]">
+            Just Look. You're Checked In.
+          </h1>
+          <p id="bioPageSub" class="mt-4 text-base sm:text-lg leading-relaxed text-[#F8F6F1]/90">
+            Simple, contactless biometric attendance at your office entrance. Walk in, look at the reception screen, and you're done in two seconds.
+          </p>
+
+          <!-- Interactive 4-Scene Switcher on the Biometric Page -->
+          <div class="mt-7 flex flex-wrap gap-2">
+            <button type="button" data-bio-page-scene="0" class="bio-page-scene-btn rounded-full bg-[#590907] text-[#F8F6F1] px-4 py-2 text-xs font-semibold">1. Arrive</button>
+            <button type="button" data-bio-page-scene="1" class="bio-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-4 py-2 text-xs font-semibold hover:bg-white/25">2. Step Up</button>
+            <button type="button" data-bio-page-scene="2" class="bio-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-4 py-2 text-xs font-semibold hover:bg-white/25">3. Biometric Scan</button>
+            <button type="button" data-bio-page-scene="3" class="bio-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-4 py-2 text-xs font-semibold hover:bg-white/25">4. Checked In</button>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <button type="button" data-nav-view="hub" class="rounded-full bg-[#F8F6F1] px-6 py-3 text-xs sm:text-sm font-semibold text-[#590907] shadow-md hover:bg-white transition">
+              ← Back to Attendance Options
+            </button>
+            <button type="button" data-nav-view="gps" class="rounded-full border border-white/35 px-6 py-3 text-xs sm:text-sm font-semibold text-[#F8F6F1] hover:bg-white/10 transition">
+              Switch to GPS Attendance →
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Biometric Reception Terminal UI -->
+        <div class="w-full max-w-xs rounded-3xl bg-[#1E1D1B]/85 backdrop-blur-2xl border border-[#E8D2B5]/30 p-6 text-[#F8F6F1] shadow-2xl">
+          <div class="flex items-center justify-between border-b border-white/15 pb-3 mb-4">
+            <div class="flex items-center gap-2.5">
+              <svg class="h-7 w-7 rounded-[8px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradBioTerm" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradBioTerm)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+              <div class="flex flex-col leading-none">
+                <span class="text-xs font-bold"><span class="text-white">Flow</span><span class="text-[#FFE4B8]">people</span></span>
+                <span class="mt-0.5 text-[8px] font-semibold uppercase tracking-[0.24em] text-[#FFF5E4]/85">BY FLUXORA</span>
+              </div>
+            </div>
+            <span class="text-xs font-medium text-[#FFE4B8]">09:02 AM</span>
+          </div>
+
+          <div class="relative mx-auto h-40 w-40 rounded-2xl overflow-hidden border border-[#E8D2B5]/50 bg-black/40">
+            <img data-fp-img="rahul_avatar" alt="Rahul Sharma" class="h-full w-full object-cover" />
+            <div class="biometric-laser-line absolute left-2 right-2 h-0.5 bg-[#E8D2B5] shadow-[0_0_12px_#E8D2B5]"></div>
+          </div>
+
+          <div class="mt-4 rounded-2xl bg-white/5 p-3.5 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-[#A5A79B]">Employee</span>
+              <span class="font-semibold text-[#F8F6F1]">Rahul Sharma</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[#A5A79B]">Verification</span>
+              <span id="bioPageTerminalState" class="font-semibold text-[#E8D2B5]">Biometric Verified ✓</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-[#A5A79B]">Time</span>
+              <span class="font-semibold text-[#F8F6F1]">09:02 AM · Present</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- VIEW 3: EXISTING GPS ATTENDANCE LANDING PAGE (/gps-attendance)        -->
+  <!-- ===================================================================== -->
+  <div id="view-gps" class="hidden pt-14">
+    <section class="relative min-h-[calc(100vh-3.5rem)] w-full bg-[#1E1D1B] overflow-hidden flex items-center py-12 px-4 sm:px-8">
+      <img id="gpsPageBgImg" data-fp-img="gps_iphone18" alt="GPS Attendance Office Zone" class="cinema-plate" style="opacity: 0.85;" />
+      <div class="pointer-events-none absolute inset-0" style="background: linear-gradient(90deg, rgba(24,23,21,0.78) 0%, rgba(24,23,21,0.28) 55%, rgba(24,23,21,0.52) 100%);"></div>
+
+      <div class="relative z-10 mx-auto max-w-7xl w-full flex flex-col md:flex-row items-center justify-between gap-10">
+        <!-- Left Story Content (Properly Aligned FLUXORA.hq Sign) -->
+        <div class="max-w-xl text-[#F8F6F1]">
+          <div class="mb-5 inline-flex items-center gap-3.5 rounded-2xl border border-[#FFE4B8]/50 bg-white/15 px-4 py-2.5 backdrop-blur-xl shadow-lg">
+            <svg class="h-10 w-10 rounded-[11px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradGpsHero" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradGpsHero)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+            <div class="leading-none">
+              <div class="text-lg font-bold tracking-tight">
+                <span class="text-white">Flow</span><span class="text-[#FFE4B8]">people</span>
+              </div>
+              <div class="mt-1 text-[9px] font-semibold tracking-[0.28em] uppercase text-[#FFF5E4]">BY FLUXORA · MAIN OFFICE GPS ZONE</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2 mb-3">
+            <span class="inline-block h-2 w-2 rounded-full bg-[#E8D2B5]"></span>
+            <span id="gpsPageTag" class="text-sm font-medium text-[#E8D2B5]">GPS Smart Attendance</span>
+          </div>
+          <h1 id="gpsPageHeading" class="text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.08]">
+            Right Place. One Tap. You're In.
+          </h1>
+          <p id="gpsPageSub" class="mt-4 text-base sm:text-lg leading-relaxed text-[#F8F6F1]/90">
+            HR sets the office GPS boundary. When you enter the permitted zone, the Check-in button on your iPhone 18 Pro Max becomes enabled—ready for your tap.
+          </p>
+
+          <!-- Interactive 5-Scene Switcher on the GPS Page -->
+          <div class="mt-7 flex flex-wrap gap-2">
+            <button type="button" data-gps-page-scene="0" class="gps-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-3.5 py-2 text-xs font-semibold hover:bg-white/25">1. Set Zone</button>
+            <button type="button" data-gps-page-scene="1" class="gps-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-3.5 py-2 text-xs font-semibold hover:bg-white/25">2. Approaching</button>
+            <button type="button" data-gps-page-scene="2" class="gps-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-3.5 py-2 text-xs font-semibold hover:bg-white/25">3. Enter Zone</button>
+            <button type="button" data-gps-page-scene="3" class="gps-page-scene-btn rounded-full bg-[#590907] text-[#F8F6F1] px-3.5 py-2 text-xs font-semibold">4. Check-in Enabled</button>
+            <button type="button" data-gps-page-scene="4" class="gps-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-3.5 py-2 text-xs font-semibold hover:bg-white/25">5. Confirmed</button>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <button type="button" data-nav-view="hub" class="rounded-full bg-[#F8F6F1] px-6 py-3 text-xs sm:text-sm font-semibold text-[#590907] shadow-md hover:bg-white transition">
+              ← Back to Attendance Options
+            </button>
+            <button type="button" data-nav-view="biometric" class="rounded-full border border-white/35 px-6 py-3 text-xs sm:text-sm font-semibold text-[#F8F6F1] hover:bg-white/10 transition">
+              Switch to Biometric →
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Ultra-Bezel-less Desert Titanium iPhone 18 Pro Max -->
+        <div class="iphone18-pro-max">
+          <div class="iphone18-oled-screen px-4 pt-2.5 pb-2 text-[#242321]">
+            <div>
+              <div class="flex items-center justify-between px-2 pt-0.5">
+                <span class="text-[11px] font-semibold tabular-nums">9:02</span>
+                <div class="dynamic-island expanded">
+                  <span class="h-2 w-2 rounded-full bg-[#E8D2B5]"></span>
+                  <span id="gpsPageIslandText" class="text-[10px] font-medium text-[#F8F6F1]">In Office Zone</span>
+                </div>
+                <span class="text-[10px] font-semibold">5G</span>
+              </div>
+
+              <div class="mt-3 flex items-center justify-between px-1">
+                <div class="flex items-center gap-2">
+                  <svg class="h-7 w-7 rounded-[8px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="fpGradIphoneApp" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#590907" />
+              <stop offset="52%" stop-color="#981C14" />
+              <stop offset="100%" stop-color="#E0AF84" />
+            </linearGradient>
+          </defs>
+          <rect width="100" height="100" rx="26" fill="url(#fpGradIphoneApp)" />
+          <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+          <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+          <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+        </svg>
+                  <div class="flex flex-col leading-none">
+                    <span class="text-xs font-bold tracking-tight">
+                      <span class="text-[#242321]">Flow</span><span class="text-[#590907]">people</span>
+                    </span>
+                    <span class="mt-0.5 text-[7px] font-semibold uppercase tracking-[0.24em] text-[#590907]/80">BY FLUXORA</span>
+                  </div>
+                </div>
+                <span class="rounded-full bg-[#E8D2B5]/60 px-2.5 py-0.5 text-[10px] font-semibold text-[#590907]">Main Office</span>
+              </div>
+            </div>
+
+            <!-- Live GPS Map inside iPhone 18 Pro Max -->
+            <div class="relative my-2.5 h-44 w-full overflow-hidden rounded-[24px] bg-[#E8D2B5]/40">
+              <img data-fp-img="gps_map" alt="GPS Zone Map" class="h-full w-full object-cover opacity-85" />
+              <svg class="absolute inset-0 h-full w-full" viewBox="0 0 240 165" fill="none">
+                <circle cx="144" cy="78" r="44" fill="#E8D2B5" fill-opacity="0.28" stroke="#590907" stroke-width="1.5" stroke-dasharray="4 3" class="animate-pulse-ring" />
+                <circle cx="144" cy="78" r="30" fill="#590907" fill-opacity="0.32" stroke="#590907" stroke-width="2.2" />
+                <circle id="gpsPagePin" cx="136" cy="82" r="6" fill="#590907" stroke="#F8F6F1" stroke-width="2" />
+              </svg>
+            </div>
+
+            <!-- Interactive Check-in Card inside iPhone 18 Pro Max -->
+            <div class="space-y-2.5 rounded-[22px] bg-white p-3.5 shadow-xs">
+              <div id="gpsPageZoneStatus" class="rounded-xl bg-[#E8D2B5]/60 px-3 py-2 text-center text-xs font-semibold text-[#590907]">
+                You're Within the Attendance Zone
+              </div>
+              <div class="space-y-1 text-xs">
+                <div class="flex justify-between">
+                  <span class="text-[#A5A79B]">Location</span>
+                  <span id="gpsPageLocText" class="font-semibold text-[#590907]">Location Verified</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-[#A5A79B]">Office</span>
+                  <span class="font-semibold text-[#242321]">Main Office</span>
+                </div>
+                <div class="flex justify-between">
+                  <span class="text-[#A5A79B]">Check-in</span>
+                  <span id="gpsPageBtnStateText" class="font-semibold text-[#590907]">Enabled</span>
+                </div>
+              </div>
+              <button type="button" id="gpsPageTapBtn" class="btn-tap-pulse w-full rounded-2xl bg-[#590907] py-3 text-xs font-semibold text-[#F8F6F1] shadow-md transition hover:bg-[#590907]/90">
+                Tap to Check in · Main Office
+              </button>
+            </div>
+
+            <div class="mt-2 flex justify-center">
+              <div class="h-1 w-28 rounded-full bg-[#242321]/25"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- EXACT FLOWPEOPLE BY FLUXORA FOOTER                                    -->
+  <!-- ===================================================================== -->
+    <!-- ===================================================================== -->
+  <!-- EXACT PERSISTENT DARK FOOTER WITH FLUXORA.hq RADIAL SPOTLIGHT         -->
+  <!-- ===================================================================== -->
+  <footer class="relative z-30 overflow-hidden bg-[#1c1b19] text-[#F8F6F1]">
+    <div class="mx-auto max-w-6xl px-4 pt-16 sm:px-8">
+      <div class="grid grid-cols-2 gap-10 md:grid-cols-5">
+        <div class="col-span-2">
+          <div class="inline-flex flex-col items-start">
+            <div class="flex items-center gap-3">
+              <svg class="h-10 w-10 rounded-[11px] shrink-0 shadow-sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                  <linearGradient id="fpGradFooter" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#590907" />
+                    <stop offset="52%" stop-color="#981C14" />
+                    <stop offset="100%" stop-color="#E0AF84" />
+                  </linearGradient>
+                </defs>
+                <rect width="100" height="100" rx="26" fill="url(#fpGradFooter)" />
+                <rect x="1.5" y="1.5" width="97" height="97" rx="24.5" stroke="#FFF5E4" stroke-opacity="0.35" stroke-width="2" />
+                <path d="M 31.5 31.2 A 6.0 6.0 0 0 1 37.7 25.2 C 50.5 25.2 62.0 28.2 67.8 33.8 C 70.4 36.3 68.4 40.5 64.4 39.2 C 58.5 37.2 51.5 36.2 43.4 36.2 A 1.5 1.5 0 0 0 41.9 37.7 L 41.9 46.2 A 1.5 1.5 0 0 0 43.4 47.7 L 54.4 47.7 A 4.9 4.9 0 0 1 54.4 57.5 L 43.4 57.5 A 1.5 1.5 0 0 0 41.9 59.0 L 41.9 68.0 A 5.2 5.2 0 0 1 31.5 68.0 Z" fill="#FFFDF9" />
+                <circle cx="70.6" cy="52.6" r="5.35" fill="#FFFDF9" />
+              </svg>
+              <div class="flex flex-col leading-none">
+                <span class="text-xl font-bold tracking-tight">
+                  <span class="text-white">Flow</span><span class="text-[#FFE4B8]">people</span>
+                </span>
+                <span class="mt-1 text-[9px] font-semibold uppercase tracking-[0.3em] text-[#FFF5E4]/85">BY FLUXORA</span>
+              </div>
+            </div>
+          </div>
+          <p class="mt-4 max-w-xs text-sm leading-relaxed text-[#F8F6F1]/75">Simple, friendly attendance and HR for modern teams. By Fluxora.</p>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold">Experiences</h4>
+          <ul class="mt-4 space-y-2.5 text-sm text-[#F8F6F1]/65">
+            <li><a href="index.html" class="hover:text-white transition">Welcome Hub</a></li>
+            <li><a href="flowpeople_v8.html" class="hover:text-white transition">Biometric Attendance</a></li>
+            <li><a href="gps-attendance.html" class="hover:text-white transition">GPS Attendance</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold">Platform</h4>
+          <ul class="mt-4 space-y-2.5 text-sm text-[#F8F6F1]/65">
+            <li><a href="index.html#choose-attendance" class="hover:text-white transition">Attendance Options</a></li>
+            <li><a href="flowpeople_v8.html#about" class="hover:text-white transition">Option 01 · Biometric</a></li>
+            <li><a href="gps-attendance.html#services" class="hover:text-white transition">Option 02 · GPS Zone</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-sm font-semibold">Get in touch</h4>
+          <ul class="mt-4 space-y-2.5 text-sm text-[#F8F6F1]/65">
+            <li><a href="mailto:hqfluxora@gmail.com" class="hover:text-white transition">hqfluxora@gmail.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-[#F8F6F1]/50 sm:flex-row">
+        <span>© 2026 Fluxora. All rights reserved.</span>
+        <span class="flex gap-5"><a href="privacy.html" class="hover:text-white">Privacy Policy</a><a href="terms.html" class="hover:text-white">Terms &amp; Conditions</a></span>
+      </div>
+    </div>
+    <div id="fxWrap" class="mx-auto w-full max-w-[1400px] px-4 pb-6 pt-10 sm:px-8">
+      <div id="fxWord" aria-hidden="true" class="select-none whitespace-nowrap text-center font-semibold leading-none" style="--mx:50%; --my:50%; --o:0; font-size:100px; letter-spacing:0.04em; color:transparent; -webkit-background-clip:text; background-clip:text; background-image: radial-gradient(circle 240px at var(--mx) var(--my), rgba(255,236,205,calc(0.95*var(--o))) 0%, rgba(232,210,181,calc(0.55*var(--o))) 40%, rgba(255,255,255,0) 100%), linear-gradient(100deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.07) 100%); transition: --o .3s;">FLUXORA<span>.hq</span></div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- SCRIPTS: IMAGE HYDRATION, WELCOME ANIMATION, INTERACTIVE OPTIONS      -->
+  <!-- ===================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. Shared Nano Banana Image Dictionary (Zero Duplication)
+      var FP_IMAGES = {
+        fp_logo: '/images/fp_logo.jpg',
+        rahul_avatar: '/images/rahul_avatar.jpg',
+        bio_entrance: '/images/bio_entrance.jpg',
+        bio_scan: '/images/bio_scan.jpg',
+        bio_confirm: '/images/bio_confirm.jpg',
+        gps_office: '/images/gps_office.jpg',
+        gps_approach: '/images/gps_approach.jpg',
+        gps_map: '/images/gps_map.jpg',
+        gps_iphone18: '/images/gps_iphone18.jpg',
+        gps_confirm: '/images/gps_confirm.jpg'
+      };
+
+      var imgEls = document.querySelectorAll('[data-fp-img]');
+      for (var i = 0; i < imgEls.length; i++) {
+        var key = imgEls[i].getAttribute('data-fp-img');
+        if (FP_IMAGES[key]) {
+          imgEls[i].setAttribute('src', FP_IMAGES[key]);
+        }
+      }
+
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // 2. Letter-by-Letter 3D Reveal for "Welcome to Flowpeople" (High-Contrast Luminous White & Champagne Gold)
+      var welcomeHeadline = document.getElementById('welcomeHeadline');
+      if (welcomeHeadline && !reduceMotion) {
+        var text = 'Welcome to Flowpeople';
+        var words = text.split(' ');
+        var charIndex = 0;
+        var htmlParts = [];
+        for (var w = 0; w < words.length; w++) {
+          var wordChars = [];
+          var isBrand = words[w] === 'Flowpeople';
+          for (var c = 0; c < words[w].length; c++) {
+            var delay = 260 + charIndex * 38;
+            var colorClass = 'text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]';
+            if (isBrand && c >= 4) {
+              colorClass = 'text-[#FFE4B8] italic drop-shadow-[0_4px_26px_rgba(0,0,0,0.9)]';
+            }
+            wordChars.push(
+              '<span class="welcome-char ' + colorClass + '" style="--char-delay:' + delay + 'ms">' +
+                words[w][c] +
+              '</span>'
+            );
+            charIndex++;
+          }
+          htmlParts.push('<span class="inline-block whitespace-nowrap">' + wordChars.join('') + '</span>');
+        }
+        welcomeHeadline.innerHTML = htmlParts.join(' ');
+      }
+
+      // 3. React Bits <Lightfall /> WebGL2 Shader Component Integration
+      // Configured with exact props:
+      // colors={["#e8d2b5"]} backgroundColor="#590907" speed={0.3} streakCount={2}
+      // streakWidth={1.4} twinkle={0.3} backgroundGlow={0.1} headGlow={0.6}
+      // bloom={0.35} mouseInteraction={true} holdToWarp={true} intro={true}
+      // streakLength={1.5} density={0.7}
+      var LIGHTFALL_PROPS = {
+        colors: ['#e8d2b5'],
+        backgroundColor: '#590907',
+        speed: 0.3,
+        streakCount: 2,
+        streakWidth: 1.4,
+        streakLength: 1.5,
+        density: 0.7,
+        twinkle: 0.3,
+        glow: 1.0,
+        backgroundGlow: 0.1,
+        headGlow: 0.6,
+        depth: 0.5,
+        bloom: 0.35,
+        zoom: 3.0,
+        opacity: 1.0,
+        mouseInteraction: true,
+        mouseStrength: 0.4,
+        mouseRadius: 0.45,
+        mouseDampening: 0.15,
+        lens: 0.5,
+        holdToWarp: true,
+        intro: true,
+        fade: 0.0,
+        lightMode: false,
+        paused: false
+      };
+
+      var canvas = document.getElementById('welcomeParticlesCanvas');
+      var heroSection = document.getElementById('welcome-hero');
+      var telemetryState = document.getElementById('lightfallTelemetryState');
+
+      function parseHexRgb(hex) {
+        var clean = (hex || '#ffffff').replace('#', '').trim();
+        if (clean.length === 3) {
+          clean = clean[0] + clean[0] + clean[1] + clean[1] + clean[2] + clean[2];
+        }
+        var num = parseInt(clean, 16);
+        if (isNaN(num)) return [1, 1, 1];
+        return [
+          ((num >> 16) & 255) / 255,
+          ((num >> 8) & 255) / 255,
+          (num & 255) / 255
+        ];
+      }
+
+      if (canvas) {
+        var gl = canvas.getContext('webgl2', {
+          alpha: false,
+          depth: false,
+          stencil: false,
+          antialias: false,
+          powerPreference: 'high-performance'
+        });
+
+        if (gl) {
+          var VERTEX_SRC = `#version 300 es
+in vec2 aPosition;
+void main() {
+  gl_Position = vec4(aPosition, 0.0, 1.0);
+}`;
+
+          var STREAKS_SRC = `#version 300 es
+precision highp float;
+uniform vec2 uView;
+uniform float uZoom;
+uniform float uPhase;
+uniform float uTwinkleClock;
+uniform float uRings;
+uniform vec3 uColors[8];
+uniform int uColorCount;
+uniform int uStreakCount;
+uniform int uColumns;
+uniform float uWidth;
+uniform float uTail;
+uniform float uTwinkle;
+uniform float uHead;
+uniform float uDepth;
+uniform vec4 uMouse;
+uniform vec3 uLens;
+uniform float uLightMode;
+uniform float uEncode;
+out vec4 outColor;
+
+const vec3 CAMERA = vec3(0.0, -0.8888889, -0.2222222);
+const float TAU = 6.28318530718;
+const float SPACING = 0.005;
+const float REACH = 0.32;
+
+uint scramble(uint x) {
+  x ^= x >> 16;
+  x *= 0x7feb352du;
+  x ^= x >> 15;
+  x *= 0x846ca68bu;
+  x ^= x >> 16;
+  return x;
+}
+
+float unit(uint x) {
+  return float(x & 0xffffu) / 65535.0;
+}
+
+float stroke(float d, float w) {
+  float s = max(0.75 * w, 0.55);
+  return 0.75 * w / s * exp(-0.5 * d * d / (s * s));
+}
+
+float orb(float d, float r) {
+  float s = max(0.6 * r, 0.7);
+  float e = 0.6 * r / s;
+  return e * e * exp(-0.5 * d * d / (s * s));
+}
+
+void main() {
+  vec2 frag = gl_FragCoord.xy;
+  vec2 screen = (2.0 * frag - uView) / uView.x;
+  vec2 p = screen;
+  mat2 warp = mat2(1.0);
+  if (uLens.z > 0.0) {
+    vec2 o = p - uLens.xy;
+    float e = uLens.z * exp(-dot(o, o) / (REACH * REACH));
+    p -= o * e;
+    warp = mat2(1.0 - e) + outerProduct(o, o) * (2.0 * e / (REACH * REACH));
+  }
+
+  vec3 dir = vec3(p, uZoom);
+  vec3 exits = (1.0 - CAMERA * sign(dir)) / max(abs(dir), vec3(1e-6));
+  float u = min(exits.x, min(exits.y, exits.z));
+  for (int i = 0; i < 5; i++) {
+    vec3 h = CAMERA + u * dir;
+    vec3 h2 = h * h;
+    u -= (dot(h2, h2) - 1.0) / (4.0 * dot(dir, h2 * h));
+  }
+  vec3 hit = CAMERA + u * dir;
+  vec3 normal = hit * hit * hit;
+  float facing = dot(normal, dir);
+  vec3 stepX = u * (vec3(1.0, 0.0, 0.0) - dir * (normal.x / facing));
+  vec3 stepY = u * (vec3(0.0, 1.0, 0.0) - dir * (normal.y / facing));
+  float ring = hit.y * hit.y + hit.z * hit.z;
+  float theta = atan(hit.z, hit.y);
+  mat2 jacobian = mat2(
+    stepX.x,
+    (hit.y * stepX.z - hit.z * stepX.y) / ring,
+    stepY.x,
+    (hit.y * stepY.z - hit.z * stepY.y) / ring
+  ) * warp * (2.0 / uView.x);
+
+  vec2 gradX = vec2(jacobian[0][0], jacobian[1][0]);
+  vec2 gradTheta = vec2(jacobian[0][1], jacobian[1][1]);
+  float scale = max(length(gradX), 1e-8);
+  float det = max(abs(gradX.x * gradTheta.y - gradX.y * gradTheta.x), 1e-12);
+  float along = scale / det;
+  float skew = dot(gradX, gradTheta) / det;
+  float spacing = SPACING / scale;
+  float detail = smoothstep(1.6, 3.2, spacing);
+  if (detail <= 0.0) {
+    outColor = vec4(0.0, 0.0, 0.0, 1.0);
+    return;
+  }
+  float halfWidth = min(uWidth / scale, 0.2 * spacing);
+  float headRadius = min(2.0 * uWidth / scale, 0.35 * spacing);
+  float headReach = 4.0 * max(0.6 * headRadius, 0.7);
+  float edge = uColumns > 1 ? 1.0 : 0.5;
+  float period = TAU / uRings;
+  float fog = exp(-max(u * length(dir) - 0.6, 0.0) * 1.6 * uDepth);
+
+  float boost = 1.0;
+  if (uMouse.z > 0.0) {
+    vec2 m = screen - uMouse.xy;
+    boost += 2.0 * uMouse.z * exp(-dot(m, m) / max(uMouse.w * uMouse.w, 1e-4));
+  }
+
+  int count = max(uColorCount, 1);
+  vec3 total = vec3(0.0);
+  for (int layer = 0; layer < 16; layer++) {
+    if (layer >= uStreakCount) break;
+    float x = hit.x + float(layer) * SPACING / 8.0;
+    float nearest = floor(x / SPACING + 0.5);
+    float side = x >= nearest * SPACING ? 1.0 : -1.0;
+    for (int k = 0; k < 2; k++) {
+      if (k >= uColumns) break;
+      float column = nearest + side * float(k);
+      float across = (x - column * SPACING) / scale;
+      uint seed = scramble(uint(int(column) + 65536) + uint(layer) * 0x9e3779b9u);
+      if (unit(seed >> 8) > 0.72) continue;
+      uint next = scramble(seed);
+      float hue = unit(seed >> 16);
+      float delta = theta - uPhase * (1.0 + floor(unit(seed) * 16.0) / 16.0) - unit(next) * period;
+      delta -= period * floor(delta / period + 0.5);
+      float ahead = delta * along - across * skew;
+      if (abs(ahead) > headReach && (delta > 0.0 || -delta * uTail > 3.2)) continue;
+      float behind = max(-delta, 0.0);
+      float fall = exp(-uTail * behind) * (1.0 - smoothstep(0.5, 0.95, behind / (0.5 * period)));
+      fall *= 1.0 - smoothstep(1.2, 3.2, uTail * behind);
+      float reach = length(vec2(across, ahead));
+      float trail = stroke(ahead > 0.0 ? reach : abs(across), halfWidth * mix(0.4, 1.0, fall)) * fall;
+      float glint = orb(reach, headRadius) * mix(3.0, 1.8, uLightMode);
+      float weight = mix(1.5, 1.0 + sin(uTwinkleClock + 7.0 * hue + 4.0), uTwinkle);
+      weight *= 1.0 - smoothstep(0.72 * edge, edge, abs(across) / spacing);
+      vec3 color = uColors[min(int(hue * float(count)), count - 1)];
+      vec3 hot = mix(color, vec3(1.0), uHead * (1.0 - uLightMode));
+      total += (trail * color + glint * hot) * weight;
+    }
+  }
+
+  outColor = vec4(total * fog * boost * detail * uEncode, 1.0);
+}`;
+
+          var DOWNSAMPLE_SRC = `#version 300 es
+precision highp float;
+uniform sampler2D uSource;
+uniform vec2 uTarget;
+uniform vec2 uTexel;
+uniform float uLimit;
+out vec4 outColor;
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / uTarget;
+  vec3 color = texture(uSource, uv - uTexel).rgb;
+  color += texture(uSource, uv + uTexel).rgb;
+  color += texture(uSource, uv + vec2(uTexel.x, -uTexel.y)).rgb;
+  color += texture(uSource, uv + vec2(-uTexel.x, uTexel.y)).rgb;
+  outColor = vec4(min(color * 0.25, vec3(uLimit)), 1.0);
+}`;
+
+          var BLUR_SRC = `#version 300 es
+precision highp float;
+uniform sampler2D uSource;
+uniform vec2 uTarget;
+uniform vec2 uStep;
+out vec4 outColor;
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / uTarget;
+  vec3 color = texture(uSource, uv).rgb * 0.181862;
+  color += (texture(uSource, uv + uStep * 1.423135).rgb + texture(uSource, uv - uStep * 1.423135).rgb) * 0.284316;
+  color += (texture(uSource, uv + uStep * 3.326702).rgb + texture(uSource, uv - uStep * 3.326702).rgb) * 0.106598;
+  color += (texture(uSource, uv + uStep * 5.242989).rgb + texture(uSource, uv - uStep * 5.242989).rgb) * 0.018156;
+  outColor = vec4(color, 1.0);
+}`;
+
+          var COMPOSITE_SRC = `#version 300 es
+precision highp float;
+uniform sampler2D uScene;
+uniform sampler2D uBloom0;
+uniform sampler2D uBloom1;
+uniform sampler2D uBloom2;
+uniform sampler2D uBloom3;
+uniform vec2 uView;
+uniform float uDecode;
+uniform float uGlow;
+uniform float uBloom;
+uniform float uPresence;
+uniform float uOpacity;
+uniform float uFade;
+uniform float uLightMode;
+uniform vec3 uTopColor;
+uniform float uTopGlow;
+out vec4 outColor;
+
+float smootherstep01(float t) {
+  t = clamp(t, 0.0, 1.0);
+  return t * t * t * (t * (t * 6.0 - 15.0) + 10.0);
+}
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / uView;
+  vec3 light = texelFetch(uScene, ivec2(gl_FragCoord.xy), 0).rgb * uDecode;
+  vec3 bloom = (
+    texture(uBloom0, uv).rgb * 0.42 +
+    texture(uBloom1, uv).rgb * 0.30 +
+    texture(uBloom2, uv).rgb * 0.18 +
+    texture(uBloom3, uv).rgb * 0.10
+  ) * uDecode;
+
+  vec2 screen = (2.0 * gl_FragCoord.xy - uView) / uView.x;
+  vec2 topCoord = vec2(screen.x * 0.62, uv.y - 1.02);
+  float topMask = exp(-dot(topCoord, topCoord) * 2.35);
+  vec3 topLight = uTopColor * (uTopGlow * 2.8 * topMask);
+
+  vec3 hdr = (light + bloom * uBloom * 2.1 + topLight) * uGlow * uPresence;
+  vec3 mapped = hdr / (1.0 + hdr * 0.32);
+
+  if (uFade > 0.0) {
+    vec2 edge = min(uv, 1.0 - uv);
+    float vig = smootherstep01(min(edge.x, edge.y) / max(0.25 * uFade, 1e-4));
+    mapped *= vig;
+  }
+
+  vec3 col = mix(mapped, 1.0 - exp(-mapped * 1.35), uLightMode);
+  outColor = vec4(col, uOpacity);
+}`;
+
+          function compileShader(type, source) {
+            var sh = gl.createShader(type);
+            gl.shaderSource(sh, source);
+            gl.compileShader(sh);
+            if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+              console.error('Shader error:', gl.getShaderInfoLog(sh));
+              gl.deleteShader(sh);
+              return null;
+            }
+            return sh;
+          }
+
+          function createProgram(vsSource, fsSource) {
+            var vs = compileShader(gl.VERTEX_SHADER, vsSource);
+            var fs = compileShader(gl.FRAGMENT_SHADER, fsSource);
+            if (!vs || !fs) return null;
+            var prog = gl.createProgram();
+            gl.attachShader(prog, vs);
+            gl.attachShader(prog, fs);
+            gl.bindAttribLocation(prog, 0, 'aPosition');
+            gl.linkProgram(prog);
+            gl.deleteShader(vs);
+            gl.deleteShader(fs);
+            if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+              console.error('Program link error:', gl.getProgramInfoLog(prog));
+              return null;
+            }
+            return prog;
+          }
+
+          var streaksProg = createProgram(VERTEX_SRC, STREAKS_SRC);
+          var downsampleProg = createProgram(VERTEX_SRC, DOWNSAMPLE_SRC);
+          var blurProg = createProgram(VERTEX_SRC, BLUR_SRC);
+          var compositeProg = createProgram(VERTEX_SRC, COMPOSITE_SRC);
+
+          var quadVao = gl.createVertexArray();
+          gl.bindVertexArray(quadVao);
+          var quadBuf = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, quadBuf);
+          gl.bufferData(
+            gl.ARRAY_BUFFER,
+            new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]),
+            gl.STATIC_DRAW
+          );
+          gl.enableVertexAttribArray(0);
+          gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+          var hasFloatFbo = !!gl.getExtension('EXT_color_buffer_float');
+          gl.getExtension('OES_texture_float_linear');
+
+          function createRenderTarget(w, h) {
+            var tex = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D, tex);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            if (hasFloatFbo) {
+              gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA16F, w, h, 0, gl.RGBA, gl.HALF_FLOAT, null);
+            } else {
+              gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+            }
+            var fbo = gl.createFramebuffer();
+            gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+            return { fbo: fbo, tex: tex, w: w, h: h };
+          }
+
+          var sceneRT = null;
+          var bloomA = [];
+          var bloomB = [];
+          var viewW = 0;
+          var viewH = 0;
+
+          function rebuildTargets(w, h) {
+            if (sceneRT) {
+              gl.deleteFramebuffer(sceneRT.fbo);
+              gl.deleteTexture(sceneRT.tex);
+            }
+            for (var i = 0; i < bloomA.length; i++) {
+              gl.deleteFramebuffer(bloomA[i].fbo);
+              gl.deleteTexture(bloomA[i].tex);
+              gl.deleteFramebuffer(bloomB[i].fbo);
+              gl.deleteTexture(bloomB[i].tex);
+            }
+            bloomA = [];
+            bloomB = [];
+            sceneRT = createRenderTarget(w, h);
+            var bw = w;
+            var bh = h;
+            for (var level = 0; level < 4; level++) {
+              bw = Math.max(2, bw >> 1);
+              bh = Math.max(2, bh >> 1);
+              bloomA.push(createRenderTarget(bw, bh));
+              bloomB.push(createRenderTarget(bw, bh));
+            }
+          }
+
+          function syncSize() {
+            var dpr = Math.min(window.devicePixelRatio || 1, 2);
+            var cw = Math.max(1, Math.floor((canvas.clientWidth || window.innerWidth) * dpr));
+            var ch = Math.max(1, Math.floor((canvas.clientHeight || window.innerHeight) * dpr));
+            if (cw !== viewW || ch !== viewH) {
+              viewW = cw;
+              viewH = ch;
+              canvas.width = cw;
+              canvas.height = ch;
+              rebuildTargets(cw, ch);
+            }
+          }
+          syncSize();
+          window.addEventListener('resize', syncSize);
+
+          // Pre-cache uniform locations
+          var uStreaks = {
+            uView: gl.getUniformLocation(streaksProg, 'uView'),
+            uZoom: gl.getUniformLocation(streaksProg, 'uZoom'),
+            uPhase: gl.getUniformLocation(streaksProg, 'uPhase'),
+            uTwinkleClock: gl.getUniformLocation(streaksProg, 'uTwinkleClock'),
+            uRings: gl.getUniformLocation(streaksProg, 'uRings'),
+            uColors: gl.getUniformLocation(streaksProg, 'uColors[0]'),
+            uColorCount: gl.getUniformLocation(streaksProg, 'uColorCount'),
+            uStreakCount: gl.getUniformLocation(streaksProg, 'uStreakCount'),
+            uColumns: gl.getUniformLocation(streaksProg, 'uColumns'),
+            uWidth: gl.getUniformLocation(streaksProg, 'uWidth'),
+            uTail: gl.getUniformLocation(streaksProg, 'uTail'),
+            uTwinkle: gl.getUniformLocation(streaksProg, 'uTwinkle'),
+            uHead: gl.getUniformLocation(streaksProg, 'uHead'),
+            uDepth: gl.getUniformLocation(streaksProg, 'uDepth'),
+            uMouse: gl.getUniformLocation(streaksProg, 'uMouse'),
+            uLens: gl.getUniformLocation(streaksProg, 'uLens'),
+            uLightMode: gl.getUniformLocation(streaksProg, 'uLightMode'),
+            uEncode: gl.getUniformLocation(streaksProg, 'uEncode')
+          };
+
+          var uDown = {
+            uSource: gl.getUniformLocation(downsampleProg, 'uSource'),
+            uTarget: gl.getUniformLocation(downsampleProg, 'uTarget'),
+            uTexel: gl.getUniformLocation(downsampleProg, 'uTexel'),
+            uLimit: gl.getUniformLocation(downsampleProg, 'uLimit')
+          };
+
+          var uBlur = {
+            uSource: gl.getUniformLocation(blurProg, 'uSource'),
+            uTarget: gl.getUniformLocation(blurProg, 'uTarget'),
+            uStep: gl.getUniformLocation(blurProg, 'uStep')
+          };
+
+          var uComp = {
+            uScene: gl.getUniformLocation(compositeProg, 'uScene'),
+            uBloom0: gl.getUniformLocation(compositeProg, 'uBloom0'),
+            uBloom1: gl.getUniformLocation(compositeProg, 'uBloom1'),
+            uBloom2: gl.getUniformLocation(compositeProg, 'uBloom2'),
+            uBloom3: gl.getUniformLocation(compositeProg, 'uBloom3'),
+            uView: gl.getUniformLocation(compositeProg, 'uView'),
+            uDecode: gl.getUniformLocation(compositeProg, 'uDecode'),
+            uGlow: gl.getUniformLocation(compositeProg, 'uGlow'),
+            uBloom: gl.getUniformLocation(compositeProg, 'uBloom'),
+            uPresence: gl.getUniformLocation(compositeProg, 'uPresence'),
+            uOpacity: gl.getUniformLocation(compositeProg, 'uOpacity'),
+            uFade: gl.getUniformLocation(compositeProg, 'uFade'),
+            uLightMode: gl.getUniformLocation(compositeProg, 'uLightMode'),
+            uTopColor: gl.getUniformLocation(compositeProg, 'uTopColor'),
+            uTopGlow: gl.getUniformLocation(compositeProg, 'uTopGlow')
+          };
+
+          var flatColors = new Float32Array(24);
+          var parsedColors = LIGHTFALL_PROPS.colors.slice(0, 8).map(parseHexRgb);
+          for (var cIdx = 0; cIdx < 8; cIdx++) {
+            var rgb = parsedColors[cIdx % parsedColors.length];
+            flatColors[cIdx * 3] = rgb[0];
+            flatColors[cIdx * 3 + 1] = rgb[1];
+            flatColors[cIdx * 3 + 2] = rgb[2];
+          }
+          var topRgb = parseHexRgb(LIGHTFALL_PROPS.backgroundColor);
+
+          // Interactive Pointer & Hold-to-Warp State
+          var pointerTargetX = 0.0;
+          var pointerTargetY = 0.0;
+          var pointerCurX = 0.0;
+          var pointerCurY = 0.0;
+          var pointerActive = 0.0;
+          var pointerPresence = 0.0;
+          var isHoldingWarp = false;
+          var warpLevel = LIGHTFALL_PROPS.intro && !reduceMotion ? 1.0 : 0.0;
+          var introTimer = LIGHTFALL_PROPS.intro && !reduceMotion ? 1.85 : 0.0;
+          var phase = 0.0;
+          var twinkleClock = 0.0;
+          var presence = 0.0;
+          var lastTime = performance.now();
+
+          function updatePointerFromEvent(clientX, clientY) {
+            var rect = (heroSection || canvas).getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+            var x = (clientX - rect.left) / rect.width;
+            var y = 1.0 - (clientY - rect.top) / rect.height;
+            var aspect = rect.height / rect.width;
+            pointerTargetX = 2.0 * x - 1.0;
+            pointerTargetY = (2.0 * y - 1.0) * aspect;
+            pointerActive = 1.0;
+          }
+
+          function setHoldingState(holding) {
+            if (!LIGHTFALL_PROPS.holdToWarp) return;
+            isHoldingWarp = holding;
+            if (heroSection) {
+              heroSection.classList.toggle('lightfall-warp-active', holding);
+            }
+            if (telemetryState) {
+              telemetryState.textContent = holding ? 'Hyper-Warp Active' : 'Interactive Lens';
+            }
+          }
+
+          if (heroSection) {
+            heroSection.addEventListener('pointermove', function (e) {
+              updatePointerFromEvent(e.clientX, e.clientY);
+            });
+            heroSection.addEventListener('pointerleave', function () {
+              pointerActive = 0.0;
+              setHoldingState(false);
+            });
+            heroSection.addEventListener('pointerdown', function (e) {
+              if (e.target && e.target.closest && e.target.closest('a, [data-nav-view]')) {
+                return;
+              }
+              updatePointerFromEvent(e.clientX, e.clientY);
+              setHoldingState(true);
+            });
+            window.addEventListener('pointerup', function () {
+              if (isHoldingWarp) setHoldingState(false);
+            });
+          }
+
+          function renderLightfall(now) {
+            var dt = Math.min(0.05, Math.max(0.001, (now - lastTime) * 0.001));
+            lastTime = now;
+
+            syncSize();
+
+            if (!LIGHTFALL_PROPS.paused && !reduceMotion) {
+              if (introTimer > 0) {
+                introTimer = Math.max(0.0, introTimer - dt);
+              }
+              var targetWarp = (isHoldingWarp || introTimer > 0) ? 1.0 : 0.0;
+              warpLevel += (targetWarp - warpLevel) * Math.min(1.0, dt * (isHoldingWarp ? 5.5 : 2.6));
+
+              var damp = Math.max(0.001, LIGHTFALL_PROPS.mouseDampening);
+              var alpha = 1.0 - Math.exp(-dt / damp);
+              pointerCurX += (pointerTargetX - pointerCurX) * alpha;
+              pointerCurY += (pointerTargetY - pointerCurY) * alpha;
+              pointerPresence += (pointerActive - pointerPresence) * Math.min(1.0, dt * 6.0);
+
+              var speedMult = 1.0 + warpLevel * 2.0;
+              phase += dt * LIGHTFALL_PROPS.speed * 0.42 * speedMult;
+              twinkleClock += dt * 1.15;
+              presence = Math.min(1.0, presence + dt * 1.2);
+            } else if (presence === 0.0) {
+              presence = 1.0;
+            }
+
+            var encodeFactor = 0.25;
+            var decodeFactor = 4.0;
+            var effectiveStreakLength = LIGHTFALL_PROPS.streakLength * (1.0 + warpLevel * 1.5);
+            var uTailVal = 1.45 / Math.max(0.1, effectiveStreakLength);
+            var uRingsVal = Math.max(2.0, LIGHTFALL_PROPS.density * 8.5);
+
+            gl.bindVertexArray(quadVao);
+
+            // PASS 1: Render falling streaks into sceneRT
+            gl.bindFramebuffer(gl.FRAMEBUFFER, sceneRT.fbo);
+            gl.viewport(0, 0, sceneRT.w, sceneRT.h);
+            gl.useProgram(streaksProg);
+            gl.uniform2f(uStreaks.uView, sceneRT.w, sceneRT.h);
+            gl.uniform1f(uStreaks.uZoom, LIGHTFALL_PROPS.zoom - warpLevel * 0.45);
+            gl.uniform1f(uStreaks.uPhase, phase);
+            gl.uniform1f(uStreaks.uTwinkleClock, twinkleClock);
+            gl.uniform1f(uStreaks.uRings, uRingsVal);
+            gl.uniform3fv(uStreaks.uColors, flatColors);
+            gl.uniform1i(uStreaks.uColorCount, parsedColors.length);
+            gl.uniform1i(uStreaks.uStreakCount, LIGHTFALL_PROPS.streakCount);
+            gl.uniform1i(uStreaks.uColumns, 2);
+            gl.uniform1f(uStreaks.uWidth, LIGHTFALL_PROPS.streakWidth);
+            gl.uniform1f(uStreaks.uTail, uTailVal);
+            gl.uniform1f(uStreaks.uTwinkle, LIGHTFALL_PROPS.twinkle);
+            gl.uniform1f(uStreaks.uHead, Math.min(1.0, LIGHTFALL_PROPS.headGlow + warpLevel * 0.25));
+            gl.uniform1f(uStreaks.uDepth, LIGHTFALL_PROPS.depth);
+            gl.uniform4f(
+              uStreaks.uMouse,
+              pointerCurX,
+              pointerCurY,
+              LIGHTFALL_PROPS.mouseInteraction ? LIGHTFALL_PROPS.mouseStrength * pointerPresence : 0.0,
+              LIGHTFALL_PROPS.mouseRadius
+            );
+            gl.uniform3f(
+              uStreaks.uLens,
+              pointerCurX,
+              pointerCurY,
+              LIGHTFALL_PROPS.mouseInteraction ? LIGHTFALL_PROPS.lens * pointerPresence : 0.0
+            );
+            gl.uniform1f(uStreaks.uLightMode, LIGHTFALL_PROPS.lightMode ? 1.0 : 0.0);
+            gl.uniform1f(uStreaks.uEncode, encodeFactor);
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+            // PASS 2: Multi-level Downsample & Separable Gaussian Blur for Bloom
+            var prevTex = sceneRT.tex;
+            var prevW = sceneRT.w;
+            var prevH = sceneRT.h;
+
+            for (var lvl = 0; lvl < 4; lvl++) {
+              var targetA = bloomA[lvl];
+              var targetB = bloomB[lvl];
+
+              // Downsample from previous level into targetA
+              gl.bindFramebuffer(gl.FRAMEBUFFER, targetA.fbo);
+              gl.viewport(0, 0, targetA.w, targetA.h);
+              gl.useProgram(downsampleProg);
+              gl.activeTexture(gl.TEXTURE0);
+              gl.bindTexture(gl.TEXTURE_2D, prevTex);
+              gl.uniform1i(uDown.uSource, 0);
+              gl.uniform2f(uDown.uTarget, targetA.w, targetA.h);
+              gl.uniform2f(uDown.uTexel, 0.5 / prevW, 0.5 / prevH);
+              gl.uniform1f(uDown.uLimit, 2.5);
+              gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+              // Horizontal Blur: targetA -> targetB
+              gl.bindFramebuffer(gl.FRAMEBUFFER, targetB.fbo);
+              gl.viewport(0, 0, targetB.w, targetB.h);
+              gl.useProgram(blurProg);
+              gl.activeTexture(gl.TEXTURE0);
+              gl.bindTexture(gl.TEXTURE_2D, targetA.tex);
+              gl.uniform1i(uBlur.uSource, 0);
+              gl.uniform2f(uBlur.uTarget, targetB.w, targetB.h);
+              gl.uniform2f(uBlur.uStep, 1.0 / targetA.w, 0.0);
+              gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+              // Vertical Blur: targetB -> targetA
+              gl.bindFramebuffer(gl.FRAMEBUFFER, targetA.fbo);
+              gl.viewport(0, 0, targetA.w, targetA.h);
+              gl.bindTexture(gl.TEXTURE_2D, targetB.tex);
+              gl.uniform2f(uBlur.uTarget, targetA.w, targetA.h);
+              gl.uniform2f(uBlur.uStep, 0.0, 1.0 / targetB.h);
+              gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+              prevTex = targetA.tex;
+              prevW = targetA.w;
+              prevH = targetA.h;
+            }
+
+            // PASS 3: Composite Scene + 4 Bloom Mips + Top Burgundy Glow to Screen
+            gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+            gl.viewport(0, 0, viewW, viewH);
+            gl.useProgram(compositeProg);
+
+            gl.activeTexture(gl.TEXTURE0);
+            gl.bindTexture(gl.TEXTURE_2D, sceneRT.tex);
+            gl.uniform1i(uComp.uScene, 0);
+
+            for (var b = 0; b < 4; b++) {
+              gl.activeTexture(gl.TEXTURE1 + b);
+              gl.bindTexture(gl.TEXTURE_2D, bloomA[b].tex);
+            }
+            gl.uniform1i(uComp.uBloom0, 1);
+            gl.uniform1i(uComp.uBloom1, 2);
+            gl.uniform1i(uComp.uBloom2, 3);
+            gl.uniform1i(uComp.uBloom3, 4);
+
+            gl.uniform2f(uComp.uView, viewW, viewH);
+            gl.uniform1f(uComp.uDecode, decodeFactor);
+            gl.uniform1f(uComp.uGlow, LIGHTFALL_PROPS.glow + warpLevel * 0.35);
+            gl.uniform1f(uComp.uBloom, LIGHTFALL_PROPS.bloom + warpLevel * 0.2);
+            gl.uniform1f(uComp.uPresence, presence);
+            gl.uniform1f(uComp.uOpacity, LIGHTFALL_PROPS.opacity);
+            gl.uniform1f(uComp.uFade, LIGHTFALL_PROPS.fade);
+            gl.uniform1f(uComp.uLightMode, LIGHTFALL_PROPS.lightMode ? 1.0 : 0.0);
+            gl.uniform3f(uComp.uTopColor, topRgb[0], topRgb[1], topRgb[2]);
+            gl.uniform1f(uComp.uTopGlow, LIGHTFALL_PROPS.backgroundGlow);
+
+            gl.drawArrays(gl.TRIANGLES, 0, 6);
+
+            lightfallRaf = requestAnimationFrame(renderLightfall);
+          }
+
+          var lightfallRaf = requestAnimationFrame(renderLightfall);
+
+          window.addEventListener('pageshow', function () {
+            syncSize();
+            lastTime = performance.now();
+            cancelAnimationFrame(lightfallRaf);
+            lightfallRaf = requestAnimationFrame(renderLightfall);
+          });
+          document.addEventListener('visibilitychange', function () {
+            if (!document.hidden) {
+              lastTime = performance.now();
+              cancelAnimationFrame(lightfallRaf);
+              lightfallRaf = requestAnimationFrame(renderLightfall);
+            }
+          });
+        }
+      }
+
+      // 4. Option 01 — Biometric Attendance Interactive Stage Controller
+      var BIO_STEPS = [
+        {
+          imgIdx: 0,
+          title: 'Ready at Entrance',
+          sub: 'Modern Office Reception',
+          caption: '01 · Sunlit Office Reception Entrance',
+          confirmed: false
+        },
+        {
+          imgIdx: 0,
+          title: 'Employee Approaching',
+          sub: 'Screen wakes automatically',
+          caption: '02 · Employee Approaching Biometric Device',
+          confirmed: false
+        },
+        {
+          imgIdx: 1,
+          title: 'Scanning Face · 98%',
+          sub: 'Contactless recognition',
+          caption: '03 · Seamless Contactless Biometric Scan',
+          confirmed: false
+        },
+        {
+          imgIdx: 2,
+          title: 'Attendance Confirmed',
+          sub: 'Rahul Sharma · 09:02 AM',
+          caption: '04 · Confirmed & Synced to HR Records',
+          confirmed: true
+        }
+      ];
+
+      var bioImgs = [
+        document.getElementById('bioStageImg0'),
+        document.getElementById('bioStageImg1'),
+        document.getElementById('bioStageImg2')
+      ];
+      var bioHudStatusTitle = document.getElementById('bioHudStatusTitle');
+      var bioHudStatusSub = document.getElementById('bioHudStatusSub');
+      var bioSceneCaption = document.getElementById('bioSceneCaption');
+      var bioConfirmedCheck = document.getElementById('bioConfirmedCheck');
+      var bioStepBtns = document.querySelectorAll('.bio-step-btn');
+      var currentBioStep = 0;
+
+      function setBioStep(idx) {
+        currentBioStep = idx;
+        var st = BIO_STEPS[idx];
+        for (var i = 0; i < bioImgs.length; i++) {
+          if (!bioImgs[i]) continue;
+          bioImgs[i].style.opacity = i === st.imgIdx ? '1' : '0';
+        }
+        if (bioHudStatusTitle) bioHudStatusTitle.textContent = st.title;
+        if (bioHudStatusSub) bioHudStatusSub.textContent = st.sub;
+        if (bioSceneCaption) bioSceneCaption.textContent = st.caption;
+        if (bioConfirmedCheck) {
+          bioConfirmedCheck.classList.toggle('hidden', !st.confirmed);
+          bioConfirmedCheck.classList.toggle('flex', st.confirmed);
+        }
+        for (var b = 0; b < bioStepBtns.length; b++) {
+          var active = b === idx;
+          bioStepBtns[b].className = active
+            ? 'bio-step-btn rounded-2xl bg-[#590907] text-[#F8F6F1] px-3 py-2.5 text-left transition shadow-sm'
+            : 'bio-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition';
+        }
+      }
+
+      for (var b = 0; b < bioStepBtns.length; b++) {
+        bioStepBtns[b].addEventListener('click', function () {
+          setBioStep(parseInt(this.getAttribute('data-bio-step'), 10));
+        });
+        bioStepBtns[b].addEventListener('mouseenter', function () {
+          setBioStep(parseInt(this.getAttribute('data-bio-step'), 10));
+        });
+      }
+
+      // 5. Option 02 — GPS Attendance Interactive Stage Controller (Enforces Zone Entry + Manual Tap)
+      var GPS_STEPS = [
+        {
+          imgIdx: 1,
+          dist: '140m',
+          pinX: 24,
+          pinY: 68,
+          zoneBadge: 'Outside Zone',
+          island: 'Approaching',
+          bannerTitle: 'Outside Attendance Zone',
+          bannerSub: 'Enter office zone to enable',
+          bannerClass: 'rounded-2xl bg-[#D8D9D0]/70 p-2.5 text-center transition-all',
+          stateLabel: 'Disabled',
+          stateColor: 'font-semibold text-[#A5A79B]',
+          btnText: 'Check-in Disabled',
+          btnClass: 'mt-3 w-full rounded-2xl bg-[#D8D9D0] py-2.5 text-xs font-semibold text-[#A5A79B] cursor-not-allowed transition',
+          caption: '01 · Employee Approaching Workplace with Smartphone'
+        },
+        {
+          imgIdx: 0,
+          dist: '32m (In Zone)',
+          pinX: 66,
+          pinY: 48,
+          zoneBadge: 'Within GPS Zone',
+          island: 'In Office Zone',
+          bannerTitle: "You're Within the Attendance Zone",
+          bannerSub: 'Location Verified · Ready for tap',
+          bannerClass: 'rounded-2xl bg-[#E8D2B5]/80 p-2.5 text-center transition-all',
+          stateLabel: 'Enabled',
+          stateColor: 'font-semibold text-[#590907]',
+          btnText: 'Tap to Check in',
+          btnClass: 'btn-tap-pulse mt-3 w-full rounded-2xl bg-[#590907] py-2.5 text-xs font-semibold text-[#F8F6F1] cursor-pointer shadow-md transition hover:bg-[#590907]/90',
+          caption: '02 · Inside Permitted GPS Boundary · Check-in Unlocked'
+        },
+        {
+          imgIdx: 2,
+          dist: '18m (In Zone)',
+          pinX: 72,
+          pinY: 45,
+          zoneBadge: 'Ready for Tap',
+          island: 'Ready to Tap',
+          bannerTitle: "You're Within the Attendance Zone",
+          bannerSub: 'Tap enabled Check-in button below',
+          bannerClass: 'rounded-2xl bg-[#E8D2B5] p-2.5 text-center transition-all',
+          stateLabel: 'Enabled · Tap Now',
+          stateColor: 'font-semibold text-[#590907]',
+          btnText: 'Tap to Check in · Main Office',
+          btnClass: 'btn-tap-pulse mt-3 w-full rounded-2xl bg-[#590907] py-2.5 text-xs font-semibold text-[#F8F6F1] cursor-pointer shadow-md transition hover:bg-[#590907]/90',
+          caption: '03 · Employee Manually Taps Enabled Check-in Button'
+        },
+        {
+          imgIdx: 3,
+          dist: 'Checked In ✓',
+          pinX: 74,
+          pinY: 44,
+          zoneBadge: 'Present · 09:02 AM',
+          island: 'Checked In ✓',
+          bannerTitle: 'Check-in Successful',
+          bannerSub: 'Rahul Sharma · 09:02 AM · Present',
+          bannerClass: 'rounded-2xl bg-[#590907] text-[#F8F6F1] p-2.5 text-center transition-all',
+          stateLabel: 'Present (09:02 AM)',
+          stateColor: 'font-semibold text-[#590907]',
+          btnText: '✓ Attendance Recorded',
+          btnClass: 'mt-3 w-full rounded-2xl bg-[#242321] py-2.5 text-xs font-semibold text-[#E8D2B5] transition',
+          caption: '04 · Check-in Confirmed & Synced to HR Dashboard'
+        }
+      ];
+
+      var gpsImgs = [
+        document.getElementById('gpsStageImg0'),
+        document.getElementById('gpsStageImg1'),
+        document.getElementById('gpsStageImg2'),
+        document.getElementById('gpsStageImg3')
+      ];
+      var hubGpsDistanceLabel = document.getElementById('hubGpsDistanceLabel');
+      var hubGpsEmpPin = document.getElementById('hubGpsEmpPin');
+      var hubGpsZoneBadge = document.getElementById('hubGpsZoneBadge');
+      var hubPhoneIslandText = document.getElementById('hubPhoneIslandText');
+      var hubPhoneBanner = document.getElementById('hubPhoneBanner');
+      var hubPhoneBannerTitle = document.getElementById('hubPhoneBannerTitle');
+      var hubPhoneBannerSub = document.getElementById('hubPhoneBannerSub');
+      var hubPhoneStateLabel = document.getElementById('hubPhoneStateLabel');
+      var hubPhoneCheckinBtn = document.getElementById('hubPhoneCheckinBtn');
+      var gpsSceneCaption = document.getElementById('gpsSceneCaption');
+      var gpsStepBtns = document.querySelectorAll('.gps-step-btn');
+      var currentGpsStep = 1;
+
+      function setGpsStep(idx) {
+        currentGpsStep = idx;
+        var st = GPS_STEPS[idx];
+        for (var i = 0; i < gpsImgs.length; i++) {
+          if (!gpsImgs[i]) continue;
+          gpsImgs[i].style.opacity = i === st.imgIdx ? '1' : '0';
+        }
+        if (hubGpsDistanceLabel) hubGpsDistanceLabel.textContent = st.dist;
+        if (hubGpsEmpPin) hubGpsEmpPin.setAttribute('transform', 'translate(' + st.pinX + ', ' + st.pinY + ')');
+        if (hubGpsZoneBadge) hubGpsZoneBadge.textContent = st.zoneBadge;
+        if (hubPhoneIslandText) hubPhoneIslandText.textContent = st.island;
+        if (hubPhoneBanner) hubPhoneBanner.className = st.bannerClass;
+        if (hubPhoneBannerTitle) {
+          hubPhoneBannerTitle.textContent = st.bannerTitle;
+          hubPhoneBannerTitle.className = idx === 3 ? 'text-[11px] font-semibold text-[#E8D2B5]' : 'text-[11px] font-semibold text-[#242321]';
+        }
+        if (hubPhoneBannerSub) {
+          hubPhoneBannerSub.textContent = st.bannerSub;
+          hubPhoneBannerSub.className = idx === 3 ? 'text-[10px] text-[#F8F6F1]/85 mt-0.5' : 'text-[10px] text-[#242321]/65 mt-0.5';
+        }
+        if (hubPhoneStateLabel) {
+          hubPhoneStateLabel.textContent = st.stateLabel;
+          hubPhoneStateLabel.className = st.stateColor;
+        }
+        if (hubPhoneCheckinBtn) {
+          hubPhoneCheckinBtn.textContent = st.btnText;
+          hubPhoneCheckinBtn.className = st.btnClass;
+        }
+        if (gpsSceneCaption) gpsSceneCaption.textContent = st.caption;
+
+        for (var g = 0; g < gpsStepBtns.length; g++) {
+          var active = g === idx;
+          gpsStepBtns[g].className = active
+            ? 'gps-step-btn rounded-2xl bg-[#590907] text-[#F8F6F1] px-3 py-2.5 text-left transition shadow-sm'
+            : 'gps-step-btn rounded-2xl bg-white/80 text-[#242321] hover:bg-[#E8D2B5]/50 px-3 py-2.5 text-left transition';
+        }
+      }
+
+      for (var g = 0; g < gpsStepBtns.length; g++) {
+        gpsStepBtns[g].addEventListener('click', function () {
+          setGpsStep(parseInt(this.getAttribute('data-gps-step'), 10));
+        });
+        gpsStepBtns[g].addEventListener('mouseenter', function () {
+          setGpsStep(parseInt(this.getAttribute('data-gps-step'), 10));
+        });
+      }
+
+      if (hubPhoneCheckinBtn) {
+        hubPhoneCheckinBtn.addEventListener('click', function () {
+          if (currentGpsStep >= 1) {
+            setGpsStep(3);
+          } else {
+            setGpsStep(1);
+          }
+        });
+      }
+
+      // Gentle auto-cycle on the two option previews so visitors see the story come alive
+      if (!reduceMotion) {
+        setInterval(function () {
+          var hubView = document.getElementById('view-hub');
+          if (hubView && !hubView.classList.contains('hidden')) {
+            setBioStep((currentBioStep + 1) % 4);
+          }
+        }, 3600);
+      }
+
+      // 6. Seamless Multi-Page Experience Router (Explore Biometric / Explore GPS Attendance / Welcome Hub)
+      var viewHub = document.getElementById('view-hub');
+      var viewBio = document.getElementById('view-biometric');
+      var viewGps = document.getElementById('view-gps');
+      var navBtnHub = document.getElementById('navBtnHub');
+      var navBtnBio = document.getElementById('navBtnBio');
+      var navBtnGps = document.getElementById('navBtnGps');
+      var backToHubPill = document.getElementById('backToHubPill');
+
+      function switchView(target) {
+        viewHub.classList.toggle('hidden', target !== 'hub');
+        viewBio.classList.toggle('hidden', target !== 'biometric');
+        viewGps.classList.toggle('hidden', target !== 'gps');
+
+        if (backToHubPill) {
+          backToHubPill.classList.toggle('hidden', target === 'hub');
+        }
+        var activeNavCls = 'rounded-full bg-[#590907] text-[#F8F6F1] px-3.5 py-1.5 font-semibold shadow-xs transition';
+        var idleNavCls = 'rounded-full text-[#242321]/85 hover:bg-white/70 hover:text-[#590907] px-3.5 py-1.5 transition';
+        if (navBtnHub) navBtnHub.className = target === 'hub' ? activeNavCls : idleNavCls;
+        if (navBtnBio) navBtnBio.className = target === 'biometric' ? activeNavCls : idleNavCls;
+        if (navBtnGps) navBtnGps.className = target === 'gps' ? activeNavCls : idleNavCls;
+
+        window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+
+      var navTriggers = document.querySelectorAll('[data-nav-view]');
+      for (var n = 0; n < navTriggers.length; n++) {
+        navTriggers[n].addEventListener('click', function (e) {
+          var targetView = this.getAttribute('data-nav-view');
+          var href = this.getAttribute('href');
+          if (targetView) {
+            if (!href || href === '#top') {
+              e.preventDefault();
+            }
+            switchView(targetView);
+          }
+        });
+      }
+
+      // 7. Interactive Scene Buttons inside Biometric & GPS Dedicated Views
+      var bioPageBtns = document.querySelectorAll('.bio-page-scene-btn');
+      var bioPageBgImg = document.getElementById('bioPageBgImg');
+      var bioPageTag = document.getElementById('bioPageTag');
+      var bioPageHeading = document.getElementById('bioPageHeading');
+      var bioPageTerminalState = document.getElementById('bioPageTerminalState');
+      var BIO_PAGE_SCENES = [
+        { img: 'bio_entrance', tag: 'Scene 1 · Arrival', head: 'Your Workday Starts Here.', state: 'Ready for Check-in' },
+        { img: 'bio_entrance', tag: 'Scene 2 · Step Up', head: 'Meet Effortless Attendance.', state: 'Detecting Employee…' },
+        { img: 'bio_scan', tag: 'Scene 3 · Biometric Scan', head: "Just Look. You're Checked In.", state: 'Scanning Face · 100%' },
+        { img: 'bio_confirm', tag: 'Scene 4 · Confirmed', head: 'One Look. Done.', state: 'Biometric Verified ✓' }
+      ];
+      for (var bp = 0; bp < bioPageBtns.length; bp++) {
+        bioPageBtns[bp].addEventListener('click', function () {
+          var sIdx = parseInt(this.getAttribute('data-bio-page-scene'), 10);
+          var sc = BIO_PAGE_SCENES[sIdx];
+          if (bioPageBgImg && FP_IMAGES[sc.img]) bioPageBgImg.setAttribute('src', FP_IMAGES[sc.img]);
+          if (bioPageTag) bioPageTag.textContent = sc.tag;
+          if (bioPageHeading) bioPageHeading.textContent = sc.head;
+          if (bioPageTerminalState) bioPageTerminalState.textContent = sc.state;
+          for (var k = 0; k < bioPageBtns.length; k++) {
+            bioPageBtns[k].className = k === sIdx
+              ? 'bio-page-scene-btn rounded-full bg-[#590907] text-[#F8F6F1] px-4 py-2 text-xs font-semibold'
+              : 'bio-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-4 py-2 text-xs font-semibold hover:bg-white/25';
+          }
+        });
+      }
+
+      var gpsPageBtns = document.querySelectorAll('.gps-page-scene-btn');
+      var gpsPageBgImg = document.getElementById('gpsPageBgImg');
+      var gpsPageTag = document.getElementById('gpsPageTag');
+      var gpsPageHeading = document.getElementById('gpsPageHeading');
+      var gpsPageZoneStatus = document.getElementById('gpsPageZoneStatus');
+      var gpsPageLocText = document.getElementById('gpsPageLocText');
+      var gpsPageBtnStateText = document.getElementById('gpsPageBtnStateText');
+      var gpsPageTapBtn = document.getElementById('gpsPageTapBtn');
+
+      var GPS_PAGE_SCENES = [
+        { img: 'gps_office', tag: 'Scene 1 · Office Zone', head: 'Your Workplace. Your Attendance Zone.', zone: '100m GPS Zone Configured', loc: 'Main Office', state: 'Awaiting Arrival', btn: 'Outside Attendance Zone' },
+        { img: 'gps_approach', tag: 'Scene 2 · Approaching', head: 'Attendance Starts When You Arrive.', zone: 'Outside Attendance Zone', loc: 'Approaching (115m)', state: 'Disabled', btn: 'Check-in Disabled' },
+        { img: 'gps_map', tag: 'Scene 3 · Entering GPS Zone', head: 'The Right Place. The Right Time.', zone: "You're Within the Attendance Zone", loc: 'Location Verified', state: 'Unlocked', btn: 'Tap to Check in · Main Office' },
+        { img: 'gps_iphone18', tag: 'Scene 4 · Check-in Enabled', head: 'Your Check-in. Ready When You Are.', zone: "You're Within the Attendance Zone", loc: 'Location Verified', state: 'Enabled', btn: 'Tap to Check in · Main Office' },
+        { img: 'gps_confirm', tag: 'Scene 5 · Connected', head: 'Every Arrival. Connected.', zone: 'Check-in Successful · 09:02 AM', loc: 'Rahul Sharma · Present', state: 'Synced to HR Dashboard', btn: '✓ Checked In · 09:02 AM' }
+      ];
+
+      function setGpsPageScene(sIdx) {
+        var sc = GPS_PAGE_SCENES[sIdx];
+        if (gpsPageBgImg && FP_IMAGES[sc.img]) gpsPageBgImg.setAttribute('src', FP_IMAGES[sc.img]);
+        if (gpsPageTag) gpsPageTag.textContent = sc.tag;
+        if (gpsPageHeading) gpsPageHeading.textContent = sc.head;
+        if (gpsPageZoneStatus) gpsPageZoneStatus.textContent = sc.zone;
+        if (gpsPageLocText) gpsPageLocText.textContent = sc.loc;
+        if (gpsPageBtnStateText) gpsPageBtnStateText.textContent = sc.state;
+        if (gpsPageTapBtn) gpsPageTapBtn.textContent = sc.btn;
+        for (var k = 0; k < gpsPageBtns.length; k++) {
+          gpsPageBtns[k].className = k === sIdx
+            ? 'gps-page-scene-btn rounded-full bg-[#590907] text-[#F8F6F1] px-3.5 py-2 text-xs font-semibold'
+            : 'gps-page-scene-btn rounded-full bg-white/15 text-[#F8F6F1] px-3.5 py-2 text-xs font-semibold hover:bg-white/25';
+        }
+      }
+
+      for (var gp = 0; gp < gpsPageBtns.length; gp++) {
+        gpsPageBtns[gp].addEventListener('click', function () {
+          setGpsPageScene(parseInt(this.getAttribute('data-gps-page-scene'), 10));
+        });
+      }
+
+      if (gpsPageTapBtn) {
+        gpsPageTapBtn.addEventListener('click', function () {
+          setGpsPageScene(4);
+        });
+      }
+
+      // 8. Scroll-Driven Parallax & Section Reveals
+      var anims = Array.prototype.slice.call(document.querySelectorAll('[data-anim]'));
+      if (!('IntersectionObserver' in window)) {
+        anims.forEach(function (e) { e.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.02, rootMargin: '0px 0px 100px 0px' });
+        anims.forEach(function (e) { io.observe(e); });
+      }
+
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined' && !reduceMotion) {
+        gsap.registerPlugin(ScrollTrigger);
+        gsap.to('#welcomeCenterContent', {
+          y: -28,
+          scale: 0.98,
+          opacity: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '#welcome-hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- Exact Footer FLUXORA.hq Spotlight Script -->
+  <script>
+    (function () {
+      var w = document.getElementById('fxWord'), wrap = document.getElementById('fxWrap');
+      if (!w || !wrap) return;
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      function fit() {
+        w.style.fontSize = '100px';
+        var avail = wrap.clientWidth - parseFloat(getComputedStyle(wrap).paddingLeft) - parseFloat(getComputedStyle(wrap).paddingRight);
+        var cur = w.scrollWidth || w.getBoundingClientRect().width;
+        var range = document.createRange(); range.selectNodeContents(w);
+        cur = range.getBoundingClientRect().width || cur;
+        w.style.fontSize = Math.max(24, Math.floor(100 * avail / cur * 0.98)) + 'px';
+      }
+      fit();
+      window.addEventListener('resize', fit);
+      window.addEventListener('load', function () { fit(); setTimeout(fit, 300); setTimeout(fit, 1200); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      var on = false, t0 = performance.now(), o = 0;
+      w.addEventListener('mousemove', function (e) {
+        var r = w.getBoundingClientRect();
+        w.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        w.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        on = true;
+      });
+      w.addEventListener('mouseleave', function () { on = false; });
+      (function loop(t) {
+        var level = on ? 1 : (reduce ? 0 : 0.5);
+        o += (level - o) * 0.12;
+        w.style.setProperty('--o', o.toFixed(3));
+        if (!on && !reduce) {
+          var r = w.getBoundingClientRect(), k = ((t - t0) / 6000) % 1;
+          w.style.setProperty('--mx', (r.width * k) + 'px');
+          w.style.setProperty('--my', (r.height * 0.5) + 'px');
+        }
+        requestAnimationFrame(loop);
+      })(t0);
+    })();
+  
+
+      // Interactive FLUXORA.hq Radial Spotlight
+      var fxWord = document.getElementById('fxWord');
+      var fxWrap = document.getElementById('fxWrap');
+      if (fxWord && fxWrap) {
+        fxWrap.addEventListener('mousemove', function (e) {
+          var rect = fxWord.getBoundingClientRect();
+          var mx = ((e.clientX - rect.left) / rect.width) * 100;
+          var my = ((e.clientY - rect.top) / rect.height) * 100;
+          fxWord.style.setProperty('--mx', mx + '%');
+          fxWord.style.setProperty('--my', my + '%');
+          fxWord.style.setProperty('--o', '1');
+        });
+        fxWrap.addEventListener('mouseleave', function () {
+          fxWord.style.setProperty('--o', '0');
+        });
+      }
+
+</script>
+</body>
+</html>

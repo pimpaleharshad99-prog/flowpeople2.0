@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --fp-burgundy: #590907;
+  --fp-cream: #E8D2B5;
+  --fp-sage: #A5A79B;
+  --fp-softsage: #D8D9D0;
+  --fp-offwhite: #F8F6F1;
+  --fp-charcoal: #242321;
+  --fp-success: #299D68;
+
+  /* Aliases for f2 components */
+  --burg: #590907;
+  --cream: #E8D2B5;
+  --sage: #A5A79B;
+  --off: #F8F6F1;
+  --white: #ffffff;
+  --ink: #242321;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--fp-offwhite);
+  color: var(--fp-charcoal);
+  overflow-x: hidden;
+}
+
+.serif-heading, .font-editorial {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+/* Glassmorphism & Surface Utilities */
+.nav-glass {
+  background: rgba(248, 246, 241, 0.78);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(232, 210, 181, 0.35);
+  box-shadow: 0 10px 32px -4px rgba(36, 35, 33, 0.08), 0 1px 2px 0 rgba(36, 35, 33, 0.04);
+}
+
+.nav-glass-dock {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(232, 210, 181, 0.45);
+}
+
+.hero-footer-box {
+  background: rgba(248, 246, 241, 0.88);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(232, 210, 181, 0.5);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-footer-box:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 14px 28px -6px rgba(89, 9, 7, 0.12);
+  border-color: rgba(89, 9, 7, 0.25);
+}
+
+.frosted-showcase-card {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(232, 210, 181, 0.55);
+  box-shadow: 0 20px 40px -12px rgba(89, 9, 7, 0.08);
+}
+
+.fp-kiosk-glass {
+  background: rgba(30, 29, 27, 0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(232, 210, 181, 0.2);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.4);
+}
+
+.cinema-plate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.45s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* 3D Logo Keyframes */
+@keyframes logo3dEntrance {
+  0% {
+    opacity: 0;
+    transform: perspective(1200px) rotateX(18deg) rotateY(-12deg) scale(0.92) translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1) translateY(0);
+  }
+}
+
+@keyframes logoFloatIdle {
+  0%, 100% {
+    transform: perspective(1200px) translateY(0) rotateX(0deg) rotateY(0deg);
+  }
+  50% {
+    transform: perspective(1200px) translateY(-8px) rotateX(2deg) rotateY(-1deg);
+  }
+}
+
+@keyframes orbitSpinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes charReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) rotateX(-20deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0deg);
+  }
+}
+
+@keyframes pulseRing {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 0.2; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+@keyframes scanLaserMove {
+  0% { transform: translateY(-100%); }
+  50% { transform: translateY(100%); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes tapPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(41, 157, 104, 0.6); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(41, 157, 104, 0); }
+}
+
+.logo-3d-stage {
+  perspective: 1200px;
+  animation: logo3dEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.logo-3d-emblem {
+  animation: logoFloatIdle 6s ease-in-out infinite;
+  transform-style: preserve-3d;
+}
+
+.logo-orbit-ring {
+  animation: orbitSpinSlow 24s linear infinite;
+}
+
+.biometric-laser-line {
+  animation: scanLaserMove 3s ease-in-out infinite;
+}
+
+.btn-tap-pulse {
+  animation: tapPulse 2s infinite;
+}
+
+/* Lightfall WebGL2 Canvas */
+.lightfall-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.lightfall-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: auto;
+}
+
+/* f2 Hero & 3D Interactive Card Classes */
+.tilt-card {
+  transition: transform 0.15s ease-out, box-shadow 0.2s ease-out;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Footer FLUXORA.hq Giant Spotlight */
+.fluxora-footer-word {
+  font-family: 'Inter', -apple-system, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.85;
+  text-transform: uppercase;
+  color: #242321;
+  background: radial-gradient(circle 380px at var(--mx, 50%) var(--my, 50%), #F8F6F1 0%, rgba(248, 246, 241, 0.25) 50%, #242321 85%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: opacity 0.3s ease;
+  user-select: none;
+}
+
+/* Accessibility: Respect Prefers-Reduced-Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
