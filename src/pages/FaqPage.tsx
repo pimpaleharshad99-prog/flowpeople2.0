@@ -40,7 +40,7 @@ const FAQ_DATA: FaqItem[] = [
   {
     category: 'General',
     q: 'Is FlowPeople suitable for small businesses?',
-    a: 'Yes, absolutely. The Starter tier is specifically crafted for organizations with up to 30 employees, offering a complete HR management suite for a single one-time payment of ₹30,000 with ₹0 recurring maintenance fees.'
+    a: 'Yes, absolutely. The Starter tier is specifically crafted for organizations with up to 30 employees, offering a complete HR management suite for a single one-time payment of ₹30,000 with ₹0 recurring maintenance fees (T&C Apply).'
   },
 
   // B. Pricing and Licensing
@@ -62,7 +62,7 @@ const FAQ_DATA: FaqItem[] = [
   {
     category: 'Pricing and Licensing',
     q: 'Are there recurring software maintenance fees?',
-    a: 'No. FlowPeople charges ₹0 in recurring software maintenance fees across all plan tiers for the purchased software version.'
+    a: 'No. FlowPeople charges ₹0 in recurring software maintenance fees across all plan tiers for the purchased software version (T&C Apply).'
   },
   {
     category: 'Pricing and Licensing',

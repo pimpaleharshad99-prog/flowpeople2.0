@@ -83,7 +83,7 @@ const CHALLENGES_VS_FLOWPEOPLE = [
   {
     challenge: 'Compounding Subscription Costs',
     pain: 'SaaS vendors charging ₹250–₹500/user/month that inflates drastically with every new hire.',
-    solution: 'One-time perpetual license with ₹0 recurring software maintenance fees across all tiers.'
+    solution: 'One-time perpetual license with ₹0 recurring software maintenance fees across all tiers (T&C Apply).'
   },
   {
     challenge: 'Attendance Verification Disputes',

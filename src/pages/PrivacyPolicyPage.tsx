@@ -226,7 +226,7 @@ export default function PrivacyPolicyPage() {
               <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
                 <p>
                   Welcome to <b>FlowPeople</b>, an intelligent Human Resource Management System (HRMS)
-                  architected and operated by <b>[Fluxora Technologies Private Limited]</b> ("Fluxora", "we", "us", or "our").
+                  architected and operated by <b>FLUXORA Technologies</b> ("Fluxora", "we", "us", or "our").
                   FlowPeople is designed to help modern organizations streamline employee lifecycle management,
                   attendance logging, leave administration, organizational reporting, and document workflows.
                 </p>
@@ -798,7 +798,7 @@ export default function PrivacyPolicyPage() {
                     <div>
                       <span className="text-[#6B615A] block uppercase font-mono tracking-wider">Legal Entity</span>
                       <span className="font-bold text-sm text-[#242321] block mt-1">
-                        Fluxora Technologies
+                        FLUXORA Technologies
                       </span>
                       <span className="text-[#6B615A] text-[11px] block mt-0.5">
                         Brand: FlowPeople · Parent: Fluxora

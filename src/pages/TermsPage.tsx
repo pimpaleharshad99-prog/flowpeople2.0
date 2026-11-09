@@ -293,7 +293,7 @@ export default function TermsPage() {
               <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
                 <p>
                   These Terms &amp; Conditions ("Terms" or "Agreement") constitute a legally binding agreement
-                  between <b>[Fluxora Technologies Private Limited]</b> ("Fluxora", "we", "us", or "our") and
+                  between <b>FLUXORA Technologies</b> ("Fluxora", "we", "us", or "our") and
                   the purchasing or utilizing organization ("Customer", "Organization", "you", or "your").
                 </p>
                 <p>
@@ -332,7 +332,7 @@ export default function TermsPage() {
                   </div>
                   <div>
                     <b className="text-sm font-semibold text-[#590907]">Fluxora:</b>
-                    <span className="text-[#6B615A] block mt-0.5">[Fluxora Technologies Private Limited], the software author, licensor, and service provider.</span>
+                    <span className="text-[#6B615A] block mt-0.5">FLUXORA Technologies, the software author, licensor, and service provider.</span>
                   </div>
                   <div>
                     <b className="text-sm font-semibold text-[#590907]">Customer / Organization:</b>
@@ -480,7 +480,7 @@ export default function TermsPage() {
 
                 <div className="space-y-2 text-xs text-[#6B615A]">
                   <p><b>Statutory Taxes:</b> All stated fees exclude Goods and Services Tax (GST) and applicable statutory surcharges, which will be invoiced at the prevailing statutory rate.</p>
-                  <p><b>Zero Software Maintenance:</b> Fluxora charges ₹0 in recurring software maintenance fees for the purchased version.</p>
+                  <p><b>Zero Software Maintenance:</b> Fluxora charges ₹0 in recurring software maintenance fees for the purchased version (T&C Apply).</p>
                   <p><b>Separate Infrastructure Charges:</b> External infrastructure fees—including database hosting (MongoDB Atlas), cloud storage (Google Drive), physical tablet kiosks, and third-party API fees—are payable directly by the Customer to those respective providers.</p>
                   <p><b>Custom Development:</b> Bespoke integrations, special workflows, or on-site engineering beyond the plan scope are quoted and invoiced separately.</p>
                 </div>
@@ -859,7 +859,7 @@ export default function TermsPage() {
                     <div>
                       <span className="text-[#6B615A] block uppercase font-mono tracking-wider">Legal Entity</span>
                       <span className="font-bold text-sm text-[#242321] block mt-1">
-                        Fluxora Technologies
+                        FLUXORA Technologies
                       </span>
                       <span className="text-[#6B615A] text-[11px] block mt-0.5">
                         Brand: FlowPeople · Parent: Fluxora

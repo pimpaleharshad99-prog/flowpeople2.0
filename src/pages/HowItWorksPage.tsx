@@ -326,7 +326,7 @@ export default function HowItWorksPage() {
             </h2>
 
             <p className="max-w-xl mx-auto text-base sm:text-lg text-white/85 font-light leading-relaxed">
-              Get your organization started with a single one-time license and zero recurring software maintenance fees.
+              Get your organization started with a single one-time license and zero recurring software maintenance fees (T&C Apply).
             </p>
 
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">

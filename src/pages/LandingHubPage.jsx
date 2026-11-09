@@ -572,7 +572,7 @@ export default function LandingHubPage() {
             </h3>
 
             <p className="text-base sm:text-lg text-[#F8F6F1]/85 font-light max-w-xl mx-auto leading-relaxed">
-              Start with the front-desk kiosk, enable GPS for your mobile workforce, or run both simultaneously with zero recurring software fees.
+              Start with the front-desk kiosk, enable GPS for your mobile workforce, or run both simultaneously with zero recurring software fees (T&C Apply).
             </p>
 
             <div className="pt-6 flex flex-wrap items-center justify-center gap-3.5">

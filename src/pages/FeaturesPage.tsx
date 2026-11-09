@@ -482,7 +482,7 @@ export default function FeaturesPage() {
             </h2>
 
             <p className="max-w-xl mx-auto text-base sm:text-lg text-white/85 font-light leading-relaxed">
-              One-time perpetual licensing with zero recurring software maintenance fees. Pick the tier that matches your headcount.
+              One-time perpetual licensing with zero recurring software maintenance fees (T&C Apply). Pick the tier that matches your headcount.
             </p>
 
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">

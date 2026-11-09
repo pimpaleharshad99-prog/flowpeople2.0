@@ -136,7 +136,7 @@ export default function AboutFluxoraPage() {
               <h3 className="text-xl font-bold text-[#242321]">Technology That Creates Real Value</h3>
               <p className="text-sm text-[#6B615A] leading-relaxed">
                 We build products that respect customer budgets. By offering one-time perpetual licensing with
-                ₹0 recurring maintenance fees, we align our success with our customers' long-term prosperity.
+                ₹0 recurring maintenance fees (T&C Apply), we align our success with our customers' long-term prosperity.
               </p>
             </div>
           </div>
@@ -239,7 +239,7 @@ export default function AboutFluxoraPage() {
               <div>· Dedicated Database</div>
               <div>· Google Drive Sync</div>
               <div>· Contactless Kiosk</div>
-              <div>· ₹0 Maintenance</div>
+              <div>· ₹0 Maintenance <span className="text-[10px] text-[#FFE4B8] opacity-80">(T&C Apply)</span></div>
             </div>
           </div>
         </div>

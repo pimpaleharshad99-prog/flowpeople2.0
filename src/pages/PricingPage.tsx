@@ -238,8 +238,8 @@ const BENEFITS = [
   },
   {
     key: 'zero',
-    title: 'No Maintenance Fee',
-    desc: 'FlowPeople charges ₹0 in recurring software maintenance.',
+    title: 'No Maintenance Fee*',
+    desc: 'FlowPeople charges ₹0 in recurring software maintenance (T&C Apply).',
     icon: (
       <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
         <circle cx="16" cy="16" r="12" />
@@ -251,7 +251,7 @@ const BENEFITS = [
 
 const COST_ROWS = [
   { item: 'One-time license purchase', cost: 'Paid once', isOk: true },
-  { item: 'Recurring FlowPeople maintenance', cost: '₹0', isOk: true },
+  { item: 'Recurring FlowPeople maintenance (T&C Apply)', cost: '₹0', isOk: true },
   { item: 'GST', cost: 'Additional', isOk: false },
   { item: 'MongoDB Atlas / database hosting', cost: 'Additional', isOk: false },
   { item: 'Google Drive storage', cost: 'Additional', isOk: false },
@@ -271,7 +271,7 @@ const FAQS = [
   },
   {
     q: 'Are there recurring maintenance fees?',
-    a: 'FlowPeople charges ₹0 in recurring software maintenance. Costs from other services, such as hosting and storage, are separate.'
+    a: 'FlowPeople charges ₹0 in recurring software maintenance (T&C Apply). Costs from other services, such as hosting and storage, are separate.'
   },
   {
     q: 'Are hosting and storage included?',
@@ -502,7 +502,7 @@ export default function PricingPage() {
               Pay once. Own the license.
             </h2>
             <p className="text-[#6B615A] text-[1.1rem] max-w-[58ch]">
-              Three licenses, each a single payment with no recurring FlowPeople maintenance fee.
+              Three licenses, each a single payment with no recurring FlowPeople maintenance fee (T&C Apply).
               Pick the one that matches your headcount and the way you work.
             </p>
           </div>
@@ -535,7 +535,7 @@ export default function PricingPage() {
                       </span>
                     </div>
                     <p className="text-[0.85rem] text-[#6B615A] mt-1.5">
-                      Plus GST. No recurring maintenance fee.
+                      Plus GST. No recurring maintenance fee <span className="text-[11px] text-[#590907] font-semibold">(T&C Apply)</span>.
                     </p>
                   </div>
 
@@ -690,7 +690,7 @@ export default function PricingPage() {
             </h2>
             <p className="text-[#6B615A] text-[1.1rem] max-w-[58ch]">
               Your data stays in your own database and your own Google Drive. FlowPeople does not
-              charge recurring software maintenance fees on any plan.
+              charge recurring software maintenance fees on any plan (T&C Apply).
             </p>
           </div>
 
@@ -709,7 +709,7 @@ export default function PricingPage() {
 
           <div className="mt-6 py-5 px-7 bg-[#F3EBDD] font-semibold rounded-full flex gap-3.5 items-center justify-center text-center flex-wrap text-[#2A2320]">
             <span className="text-[1.5rem] font-bold text-[#590907]">₹0</span>
-            <span>recurring FlowPeople maintenance fee, on every plan.</span>
+            <span>recurring FlowPeople maintenance fee, on every plan <span className="text-xs text-[#590907] font-bold">(T&C Apply)</span>.</span>
           </div>
         </section>
 
@@ -718,7 +718,7 @@ export default function PricingPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-7 sm:gap-16 items-start bg-[#F3EBDD] rounded-[40px] p-7 sm:p-16">
             <div>
               <h2 id="cost-h" className="text-[clamp(1.9rem,4vw,2.9rem)] font-semibold tracking-tight text-[#2A2320]">
-                One Investment. No Monthly Software Maintenance.
+                One Investment. No Monthly Software Maintenance <span className="text-xs text-[#590907] align-super font-semibold">(T&C Apply)</span>.
               </h2>
               <p className="text-[#6B615A] text-[1.1rem] mt-5 leading-relaxed">
                 You buy the license once. After that, FlowPeople does not bill you for the software.
@@ -731,6 +731,7 @@ export default function PricingPage() {
                   recurring FlowPeople
                   <br />
                   maintenance fee
+                  <span className="block text-[11px] text-[#590907] font-semibold mt-0.5">(T&C Apply)</span>
                 </small>
               </div>
             </div>

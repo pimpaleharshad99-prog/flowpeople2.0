@@ -86,7 +86,7 @@ const COMPARISON_POINTS = [
   {
     title: 'Software Maintenance Fees',
     traditional: 'Mandatory annual 18–25% maintenance and upgrade contracts.',
-    flowpeople: '₹0 recurring FlowPeople software maintenance fee across all plans.'
+    flowpeople: '₹0 recurring FlowPeople software maintenance fee across all plans (T&C Apply).'
   },
   {
     title: 'Capacity & Headcount Limits',
@@ -233,7 +233,7 @@ export default function AboutPage() {
                     <CheckCircle2 className="h-4 w-4 text-[#299D68]" />
                     <span>Dedicated Client Database &amp; Google Drive Connected</span>
                   </span>
-                  <span className="text-[11px] font-mono text-white/50">Zero Recurring Maintenance</span>
+                  <span className="text-[11px] font-mono text-white/50">Zero Recurring Maintenance <span className="text-[9px] text-[#FFE4B8]/80">(T&C Apply)</span></span>
                 </div>
               </div>
             </div>
@@ -407,7 +407,7 @@ export default function AboutPage() {
               <div className="text-sm font-bold text-[#590907] uppercase tracking-wider mb-2">03 · Predictability</div>
               <h3 className="text-lg font-bold text-[#242321]">Transparent Value</h3>
               <p className="mt-2 text-xs text-[#6B615A] leading-relaxed">
-                A one-time perpetual license with ₹0 recurring maintenance fees gives businesses peace of mind.
+                A one-time perpetual license with ₹0 recurring maintenance fees (T&C Apply) gives businesses peace of mind.
               </p>
             </div>
           </div>
