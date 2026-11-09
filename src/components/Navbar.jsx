@@ -80,7 +80,7 @@ function NavbarContent({ visible: propVisible }) {
         contractedWidth="760px"
         expandedWidth="100%"
         visible={visible}
-        className="border border-slate-200/80 justify-between gap-3 sm:gap-4"
+        className="justify-between gap-3 sm:gap-4"
       >
         {/* Left: FlowPeople Brand Logo */}
         <Link
@@ -92,11 +92,15 @@ function NavbarContent({ visible: propVisible }) {
           <BrandLogo variant="navbar" />
         </Link>
 
-        {/* Center Pill Dock with Aceternity Hover Capsule Animation */}
+        {/* Center Pill Dock: Bezel-less & transparent when scrolled */}
         <nav
           aria-label="Experience Navigation"
           onMouseLeave={() => setHoveredIdx(null)}
-          className="nav-glass-dock relative flex items-center gap-0.5 sm:gap-1 rounded-full p-1 text-xs sm:text-[13px] font-medium border border-indigo-100/60 flex-shrink-0 whitespace-nowrap"
+          className={`relative flex items-center gap-0.5 sm:gap-1 rounded-full p-1 text-xs sm:text-[13px] font-medium flex-shrink-0 whitespace-nowrap transition-all duration-300 ${
+            visible
+              ? 'bg-transparent border-0 border-transparent shadow-none'
+              : 'nav-glass-dock border border-indigo-100/60'
+          }`}
         >
           {navLinks.map((item, idx) => {
             const isAbout = item.to === '/about';
@@ -186,7 +190,7 @@ function NavbarContent({ visible: propVisible }) {
       {/* MOBILE RESIZABLE NAVBAR (Screen width < lg)                     */}
       {/* Quick pill only stays at upper part; removed on scroll          */}
       {/* ============================================================== */}
-      <MobileNav visible={visible} className="border border-slate-200/80">
+      <MobileNav visible={visible}>
         <MobileNavHeader>
           {/* Brand Logo */}
           <Link

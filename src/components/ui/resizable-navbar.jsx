@@ -87,7 +87,7 @@ export const NavBody = ({
   children,
   className,
   visible: propVisible,
-  contractedWidth = "840px",
+  contractedWidth = "760px",
   expandedWidth = "100%",
 }) => {
   const context = useNavbar();
@@ -96,11 +96,13 @@ export const NavBody = ({
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
-        WebkitBackdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
+        backgroundColor: visible ? "rgba(255, 255, 255, 0.18)" : "rgba(255, 255, 255, 0.88)",
+        borderColor: visible ? "transparent" : "rgba(226, 232, 240, 0.85)",
+        backdropFilter: visible ? "blur(14px) saturate(180%)" : "blur(24px) saturate(190%)",
+        WebkitBackdropFilter: visible ? "blur(14px) saturate(180%)" : "blur(24px) saturate(190%)",
         boxShadow: visible
-          ? "0 20px 40px -12px rgba(79, 70, 229, 0.22), 0 4px 16px -4px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(79, 70, 229, 0.15)"
-          : "0 10px 28px -12px rgba(79, 70, 229, 0.10), 0 2px 10px -4px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.08)",
+          ? "0 8px 24px -6px rgba(0, 0, 0, 0.04)"
+          : "0 10px 32px -4px rgba(15, 23, 42, 0.06), 0 1px 2px 0 rgba(15, 23, 42, 0.03)",
         width: visible ? contractedWidth : expandedWidth,
         maxWidth: visible ? contractedWidth : "1152px",
         y: visible ? 8 : 0,
@@ -116,7 +118,8 @@ export const NavBody = ({
         mass: 0.8,
       }}
       className={cn(
-        "pointer-events-auto relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full py-2.5 lg:flex nav-glass",
+        "pointer-events-auto relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full py-2.5 lg:flex transition-colors duration-300",
+        visible ? "border-0 border-transparent bg-white/20 shadow-none ring-0" : "nav-glass border border-slate-200/80",
         className
       )}
     >
@@ -195,11 +198,13 @@ export const MobileNav = ({
   return (
     <motion.div
       animate={{
-        backdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
-        WebkitBackdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
+        backgroundColor: visible ? "rgba(255, 255, 255, 0.20)" : "rgba(255, 255, 255, 0.88)",
+        borderColor: visible ? "transparent" : "rgba(226, 232, 240, 0.85)",
+        backdropFilter: visible ? "blur(14px) saturate(180%)" : "blur(24px) saturate(190%)",
+        WebkitBackdropFilter: visible ? "blur(14px) saturate(180%)" : "blur(24px) saturate(190%)",
         boxShadow: visible
-          ? "0 18px 36px -12px rgba(79, 70, 229, 0.22), 0 4px 16px -4px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(79, 70, 229, 0.15)"
-          : "0 10px 24px -12px rgba(79, 70, 229, 0.10), 0 2px 10px -4px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.08)",
+          ? "0 8px 24px -6px rgba(0, 0, 0, 0.04)"
+          : "0 10px 32px -4px rgba(15, 23, 42, 0.06), 0 1px 2px 0 rgba(15, 23, 42, 0.03)",
         width: visible ? "90%" : "100%",
         maxWidth: visible ? "90%" : "100%",
         y: visible ? 6 : 0,
@@ -214,7 +219,8 @@ export const MobileNav = ({
         mass: 0.8,
       }}
       className={cn(
-        "pointer-events-auto relative z-50 mx-auto flex w-full max-w-6xl flex-col items-center justify-between rounded-2xl px-3.5 py-2 sm:px-5 lg:hidden nav-glass",
+        "pointer-events-auto relative z-50 mx-auto flex w-full max-w-6xl flex-col items-center justify-between rounded-2xl px-3.5 py-2 sm:px-5 lg:hidden transition-colors duration-300",
+        visible ? "border-0 border-transparent bg-white/20 shadow-none ring-0" : "nav-glass border border-slate-200/80",
         className
       )}
     >
