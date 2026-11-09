@@ -246,34 +246,55 @@ export default function AboutFluxoraPage() {
       </section>
 
       {/* ===================================================================== */}
-      {/* 6. SECTION E: OUR VISION & FINAL CTA                                  */}
+      {/* 6. SECTION E: OUR VISION & FINAL CTA WITH LUXURY GOLDEN TOUCH         */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-28 bg-[#590907] text-[#F8F6F1] text-center">
-        <div className="mx-auto max-w-4xl px-4 sm:px-8 space-y-6">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#E8D2B5]">
-            OUR VISION
-          </span>
+      <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] text-center overflow-hidden border-t-2 border-[#D4AF37]/35 shadow-[inset_0_10px_40px_rgba(0,0,0,0.5)]">
+        {/* Ambient Golden Radial Glow Halos */}
+        <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#D4AF37]/25 via-[#FFE4B8]/10 to-transparent blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#D4AF37]/10 blur-3xl" />
 
-          <h2 className="text-3xl sm:text-5xl font-bold font-serif text-[#F8F6F1]">
-            Less Complexity. More Possibility.
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-8 space-y-6">
+          {/* Opulent Luminous Eyebrow Pill */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4AF37]/20 via-white/15 to-[#D4AF37]/20 border border-[#FFE4B8]/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#FFE4B8] shadow-[0_4px_24px_rgba(212,175,55,0.2)] backdrop-blur-xl">
+            <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+            <span>Our Vision · FLUXORA Technologies</span>
+          </div>
+
+          {/* Serif Headline with Gold Shimmer Accent */}
+          <h2 className="serif-heading text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] max-w-3xl mx-auto drop-shadow-sm">
+            Less Complexity.{' '}
+            <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
+              More Possibility.
+            </span>
           </h2>
 
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-white/80 leading-relaxed">
+          {/* Subtext */}
+          <p className="max-w-2xl mx-auto text-base sm:text-lg text-[#F8F6F1]/90 font-light leading-relaxed drop-shadow-sm">
             We believe technology should make work simpler, businesses more capable and digital experiences
             more meaningful.
           </p>
 
-          <div className="pt-8">
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
+          <div className="pt-6 sm:pt-8 space-y-5">
+            <h3 className="serif-heading text-2xl sm:text-3xl font-semibold text-white tracking-wide">
               Have an Idea? Let's Build Something Meaningful.
             </h3>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-[#E8D2B5] px-7 py-3.5 text-sm font-semibold text-[#3A1B12] shadow-sm transition hover:bg-white hover:scale-[1.02]"
-            >
-              <span>Contact Fluxora</span>
-              <ArrowRight className="h-4 w-4" />
-            </Link>
+
+            {/* Action Buttons */}
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#FFE4B8] via-[#E8D2B5] to-[#D4AF37] text-[#3A1B12] px-8 sm:px-10 py-4 text-sm sm:text-base font-bold shadow-xl shadow-[#D4AF37]/25 hover:shadow-[0_12px_36px_rgba(212,175,55,0.45)] hover:scale-[1.03] transition-all border border-[#FFFDF9]/60 cursor-pointer"
+              >
+                <span>Contact Fluxora</span>
+                <ArrowRight className="h-4 w-4 text-[#3A1B12] transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+              <Link
+                to="/pricing"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 px-7 py-4 text-sm sm:text-base font-semibold text-white shadow-md backdrop-blur-md transition-all hover:scale-[1.02] cursor-pointer"
+              >
+                <span>Explore Pricing</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
