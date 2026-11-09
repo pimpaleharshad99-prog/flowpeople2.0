@@ -148,11 +148,11 @@ export default function GpsAttendancePage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#F8F6F1] text-[#242321] pt-20">
+    <div className="relative min-h-screen bg-[#F8F6F1] text-[#242321]">
       {/* ===================================================================== */}
       {/* 1. DARK GLASS SHOWROOM: 5-STAGE GPS SIMULATOR (#view-gps)             */}
       {/* ===================================================================== */}
-      <section className="relative min-h-[92vh] w-full bg-[#1E1D1B] overflow-hidden flex items-center py-12 px-4 sm:px-8 text-[#F8F6F1]">
+      <section className="relative min-h-[92vh] sm:min-h-screen w-full bg-[#1E1D1B] overflow-hidden flex items-center pt-28 sm:pt-36 pb-16 px-4 sm:px-8 text-[#F8F6F1]">
         {/* Background Ambient Cinema Plate */}
         <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen overflow-hidden">
           <img
@@ -174,14 +174,12 @@ export default function GpsAttendancePage() {
         <div className="relative z-10 mx-auto max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Left: Narrative & 5-Stage Step Controls */}
           <div className="max-w-xl text-[#F8F6F1] space-y-6">
-            {/* Header Lockup */}
-            <div className="inline-flex items-center gap-3.5 rounded-2xl border border-[#FFE4B8]/40 bg-white/10 px-4 py-2.5 backdrop-blur-xl shadow-lg">
-              <BrandLogo variant="navbar" />
-              <div className="border-l border-white/20 pl-3">
-                <div className="text-[10px] font-semibold tracking-[0.28em] uppercase text-[#FFE4B8]">
-                  MAIN OFFICE GPS ZONE
-                </div>
-              </div>
+            {/* Zone Status Pill */}
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#FFE4B8]/40 bg-white/10 px-4 py-1.5 backdrop-blur-xl shadow-md">
+              <MapPin className="h-4 w-4 text-[#299D68]" />
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#FFE4B8]">
+                Main Office · 100m Precision Geofence
+              </span>
             </div>
 
             {/* Live GPS Coordinates Badge */}
