@@ -154,10 +154,14 @@ export default function AdminPage() {
   // Delete Lead Handler
   const handleDeleteLead = async (leadId: string) => {
     if (window.confirm('Are you sure you want to delete this lead? This action cannot be undone.')) {
-      await leadService.deleteLead(leadId);
-      setLeads((prev) => prev.filter((l) => l.id !== leadId));
-      if (selectedLead?.id === leadId) {
-        setSelectedLead(null);
+      const res = await leadService.deleteLead(leadId);
+      if (res.success) {
+        setLeads((prev) => prev.filter((l) => l.id !== leadId));
+        if (selectedLead?.id === leadId) {
+          setSelectedLead(null);
+        }
+      } else {
+        alert(res.error || 'Failed to delete lead from MongoDB Atlas database.');
       }
     }
   };
@@ -176,7 +180,7 @@ export default function AdminPage() {
     });
 
     if (res.success) {
-      setLeads((prev) => [res.lead, ...prev]);
+      setLeads((prev) => [res.lead, ...prev.filter((l) => l.id !== res.lead.id)]);
       setShowAddLeadModal(false);
       setNewLeadForm({
         full_name: '',
@@ -188,6 +192,8 @@ export default function AdminPage() {
         inquiry_type: 'Book a Demo',
         message: ''
       });
+    } else {
+      alert(res.error || 'Failed to save lead into MongoDB Atlas database.');
     }
   };
 

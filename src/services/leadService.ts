@@ -119,10 +119,10 @@ export const leadService = {
         return { success: true, lead: savedLead, isLive: true };
       } else {
         const errJson = await res.json().catch(() => ({}));
-        console.warn('MongoDB API returned error, saving to local cache:', errJson.error);
+        console.warn('MongoDB API returned error:', errJson.error);
         const local = getLocalLeads();
         saveLocalLeads([fallbackLead, ...local]);
-        return { success: true, lead: fallbackLead, isLive: false, error: errJson.error };
+        return { success: false, lead: fallbackLead, isLive: false, error: errJson.error || 'Failed to insert lead into MongoDB Atlas' };
       }
     } catch (err: any) {
       console.warn('Network offline or direct static mode, falling back to local cache:', err.message);
@@ -155,60 +155,70 @@ export const leadService = {
   /**
    * Update the status of a lead in MongoDB Atlas
    */
-  async updateLeadStatus(id: string, status: Lead['status']): Promise<{ success: boolean; error?: string }> {
+  async updateLeadStatus(id: string, status: Lead['status']): Promise<{ success: boolean; isLive?: boolean; error?: string }> {
     // Update local cache optimistically
     const local = getLocalLeads();
     const updated = local.map((lead) => (lead.id === id ? { ...lead, status, updated_at: new Date().toISOString() } : lead));
     saveLocalLeads(updated);
 
     try {
-      const res = await fetch(`/api/leads/${id}`, {
+      const res = await fetch(`/api/leads/${encodeURIComponent(id)}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status })
       });
-      return { success: res.ok };
+      return { success: res.ok, isLive: res.ok };
     } catch (err: any) {
-      return { success: true, error: err.message };
+      return { success: true, isLive: false, error: err.message };
     }
   },
 
   /**
    * Update internal admin notes in MongoDB Atlas
    */
-  async updateLeadNotes(id: string, admin_notes: string): Promise<{ success: boolean; error?: string }> {
+  async updateLeadNotes(id: string, admin_notes: string): Promise<{ success: boolean; isLive?: boolean; error?: string }> {
     // Update local cache optimistically
     const local = getLocalLeads();
     const updated = local.map((lead) => (lead.id === id ? { ...lead, admin_notes, updated_at: new Date().toISOString() } : lead));
     saveLocalLeads(updated);
 
     try {
-      const res = await fetch(`/api/leads/${id}`, {
+      const res = await fetch(`/api/leads/${encodeURIComponent(id)}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ admin_notes })
       });
-      return { success: res.ok };
+      return { success: res.ok, isLive: res.ok };
     } catch (err: any) {
-      return { success: true, error: err.message };
+      return { success: true, isLive: false, error: err.message };
     }
   },
 
   /**
    * Delete a lead from MongoDB Atlas
    */
-  async deleteLead(id: string): Promise<{ success: boolean; error?: string }> {
-    // Update local cache
-    const local = getLocalLeads();
-    saveLocalLeads(local.filter((l) => l.id !== id));
-
+  async deleteLead(id: string): Promise<{ success: boolean; isLive?: boolean; error?: string }> {
     try {
-      const res = await fetch(`/api/leads/${id}`, {
-        method: 'DELETE'
+      const res = await fetch(`/api/leads/${encodeURIComponent(id)}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
       });
-      return { success: res.ok };
+
+      if (res.ok) {
+        // Remove from local cache after confirmed database delete
+        const local = getLocalLeads();
+        saveLocalLeads(local.filter((l) => l.id !== id));
+        return { success: true, isLive: true };
+      } else {
+        const errJson = await res.json().catch(() => ({}));
+        console.error('Failed to delete lead from MongoDB:', errJson.error);
+        return { success: false, isLive: false, error: errJson.error || `HTTP ${res.status} deletion failed` };
+      }
     } catch (err: any) {
-      return { success: true, error: err.message };
+      console.warn('Network error while deleting lead from MongoDB:', err.message);
+      const local = getLocalLeads();
+      saveLocalLeads(local.filter((l) => l.id !== id));
+      return { success: true, isLive: false, error: err.message };
     }
   },
 

@@ -2,8 +2,31 @@ import { getLeadsCollection, checkMongoHealth, getDb } from './mongo.js';
 import { verifyPassword, createSession, validateSession, destroySession } from './auth.js';
 
 export async function handleApiRequest(req, res, next) {
-  const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
-  const pathname = url.pathname;
+  const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost';
+  const url = new URL(req.url || '/', `http://${host}`);
+
+  // Resolve accurate pathname across local Vite middleware & Vercel serverless functions
+  let pathname = url.pathname;
+  const headerPath =
+    req.headers['x-invoke-path'] ||
+    req.headers['x-matched-path'] ||
+    req.headers['x-now-route-matches'];
+
+  if (pathname === '/api' || pathname === '/api/' || pathname === '/') {
+    if (typeof headerPath === 'string' && headerPath.startsWith('/api')) {
+      pathname = headerPath.split('?')[0];
+    } else if (req.query && req.query.path) {
+      const qPath = Array.isArray(req.query.path) ? req.query.path.join('/') : req.query.path;
+      pathname = '/api/' + qPath;
+    } else if (url.searchParams.has('path')) {
+      pathname = '/api/' + url.searchParams.get('path');
+    }
+  }
+
+  // Remove trailing slash for uniform matching
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    pathname = pathname.slice(0, -1);
+  }
 
   // Set standard JSON headers
   res.setHeader('Content-Type', 'application/json');
@@ -194,7 +217,7 @@ export async function handleApiRequest(req, res, next) {
 
     // PATCH /api/leads/:id: Update inquiry status or admin notes
     if (pathname.startsWith('/api/leads/') && req.method === 'PATCH') {
-      const leadId = pathname.replace('/api/leads/', '');
+      const leadId = decodeURIComponent(pathname.replace('/api/leads/', '')).trim();
       const body = await parseJsonBody(req);
       const col = await getLeadsCollection();
 
@@ -205,10 +228,18 @@ export async function handleApiRequest(req, res, next) {
       delete updateFields.id;
       delete updateFields._id;
 
-      const result = await col.updateOne({ id: leadId }, { $set: updateFields });
+      let filter = { id: leadId };
+      if (/^[0-9a-fA-F]{24}$/.test(leadId)) {
+        try {
+          const { ObjectId } = await import('mongodb');
+          filter = { $or: [{ id: leadId }, { _id: new ObjectId(leadId) }] };
+        } catch (e) {}
+      }
+
+      const result = await col.updateOne(filter, { $set: updateFields });
       if (result.matchedCount === 0) {
         res.statusCode = 404;
-        return res.end(JSON.stringify({ success: false, error: 'Lead not found.' }));
+        return res.end(JSON.stringify({ success: false, error: 'Lead not found in database.' }));
       }
 
       return res.end(JSON.stringify({ success: true, isLive: true }));
@@ -216,16 +247,24 @@ export async function handleApiRequest(req, res, next) {
 
     // DELETE /api/leads/:id: Remove an inquiry lead
     if (pathname.startsWith('/api/leads/') && req.method === 'DELETE') {
-      const leadId = pathname.replace('/api/leads/', '');
+      const leadId = decodeURIComponent(pathname.replace('/api/leads/', '')).trim();
       const col = await getLeadsCollection();
 
-      const result = await col.deleteOne({ id: leadId });
-      if (result.deletedCount === 0) {
-        res.statusCode = 404;
-        return res.end(JSON.stringify({ success: false, error: 'Lead not found.' }));
+      let filter = { id: leadId };
+      if (/^[0-9a-fA-F]{24}$/.test(leadId)) {
+        try {
+          const { ObjectId } = await import('mongodb');
+          filter = { $or: [{ id: leadId }, { _id: new ObjectId(leadId) }] };
+        } catch (e) {}
       }
 
-      return res.end(JSON.stringify({ success: true, isLive: true }));
+      const result = await col.deleteOne(filter);
+      if (result.deletedCount === 0) {
+        res.statusCode = 404;
+        return res.end(JSON.stringify({ success: false, error: 'Lead not found in database.' }));
+      }
+
+      return res.end(JSON.stringify({ success: true, isLive: true, deletedCount: result.deletedCount }));
     }
 
     // If not matching /api, forward to next middleware
