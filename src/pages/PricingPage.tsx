@@ -164,7 +164,7 @@ const BENEFITS = [
     title: 'Dedicated Client Database',
     desc: 'Your organization gets its own database. It is not shared with other clients.',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <ellipse cx="16" cy="8" rx="10" ry="4" />
         <path d="M6 8v8c0 2.2 4.5 4 10 4s10-1.8 10-4V8M6 16v8c0 2.2 4.5 4 10 4s10-1.8 10-4v-8" />
       </svg>
@@ -175,7 +175,7 @@ const BENEFITS = [
     title: 'Client-Owned Google Drive',
     desc: 'Documents and backups go to a Google Drive that you own.',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <path d="M11 4h10l8 14-5 9H8l-5-9z" />
         <path d="M11 4l8 14h10M3 18h16" />
       </svg>
@@ -186,7 +186,7 @@ const BENEFITS = [
     title: 'PDF and Structured Data Exports',
     desc: 'Take your records out as PDF files or structured data whenever you need them.',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <path d="M8 3h11l6 6v20H8z" />
         <path d="M19 3v6h6M12 17h9M12 22h9" />
       </svg>
@@ -197,7 +197,7 @@ const BENEFITS = [
     title: 'Monthly Backups',
     desc: 'Backed up every month, with three months of rolling retention.',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <path d="M16 5a11 11 0 1 1-9.5 5.5" />
         <path d="M5 4v7h7M16 10v6l4 3" />
       </svg>
@@ -208,7 +208,7 @@ const BENEFITS = [
     title: 'Initial Setup',
     desc: 'We set up your database, Drive connection and workspace before you start.',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <path d="M4 27l9-9M13 18l-3-3 12-12 5 5-12 12z" />
         <path d="M20 6l6 6" />
       </svg>
@@ -219,7 +219,7 @@ const BENEFITS = [
     title: 'Training and Handover',
     desc: 'Your admins get trained, then we hand the system over to you.',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <circle cx="11" cy="11" r="5" />
         <circle cx="23" cy="13" r="4" />
         <path d="M2 27c0-5 4-8 9-8s9 3 9 8M20 22c4-1 9 1 9 5" />
@@ -231,7 +231,7 @@ const BENEFITS = [
     title: 'Perpetual License',
     desc: 'Yours to keep for the purchased version, subject to license terms.',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <path d="M16 3l11 4v8c0 7-5 12-11 14C10 27 5 22 5 15V7z" />
         <path d="M11 16l4 4 7-8" />
       </svg>
@@ -242,7 +242,7 @@ const BENEFITS = [
     title: 'No Maintenance Fee*',
     desc: 'FlowPeople charges ₹0 in recurring software maintenance (T&C Apply).',
     icon: (
-      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#F3EBDD] rounded-full text-[#590907] mb-4">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.6" className="w-10 h-10 p-[9px] bg-[#EEF2FF] rounded-full text-[#4F46E5] mb-4">
         <circle cx="16" cy="16" r="12" />
         <path d="M9 23L23 9" />
       </svg>
@@ -522,24 +522,24 @@ export default function PricingPage() {
                   <span className="card-glow" />
 
                   <div>
-                    <div className="text-[1.1rem] font-semibold text-[#2A2320]">{plan.name}</div>
+                    <div className="text-[1.1rem] font-semibold text-[#0F172A]">{plan.name}</div>
                   </div>
 
                   <div>
                     <div className="flex items-baseline gap-2.5 flex-wrap">
-                      <span className="font-bold text-[clamp(2.4rem,4vw,3rem)] leading-none tracking-tight font-mono text-[#2A2320]">
+                      <span className="font-bold text-[clamp(2.4rem,4vw,3rem)] leading-none tracking-tight font-mono text-[#0F172A]">
                         {fmt(currentPrice)}
                       </span>
-                      <span className="text-[0.8rem] font-semibold bg-[#E8D2B5] text-[#3A1B12] px-3 py-1 rounded-full">
+                      <span className="text-[0.8rem] font-semibold bg-indigo-50 border border-indigo-200 text-[#4F46E5] px-3 py-1 rounded-full">
                         one-time
                       </span>
                     </div>
-                    <p className="text-[0.85rem] text-[#6B615A] mt-1.5">
-                      Plus GST. No recurring maintenance fee <span className="text-[11px] text-[#590907] font-semibold">(T&C Apply)</span>.
+                    <p className="text-[0.85rem] text-[#64748B] mt-1.5">
+                      Plus GST. No recurring maintenance fee <span className="text-[11px] text-[#4F46E5] font-semibold">(T&C Apply)</span>.
                     </p>
                   </div>
 
-                  <div className="flex items-center gap-3 p-3.5 sm:p-4 bg-[#F3EBDD] rounded-[18px] text-[0.95rem] text-[#2A2320]">
+                  <div className="flex items-center gap-3 p-3.5 sm:p-4 bg-slate-100 rounded-[18px] text-[0.95rem] text-[#0F172A]">
                     <b className="text-[1.5rem] font-bold leading-none">{plan.capacity}</b>
                     <span>Up to {plan.capacity} employees</span>
                   </div>
@@ -707,31 +707,31 @@ export default function PricingPage() {
             ))}
           </div>
 
-          <div className="mt-6 py-5 px-7 bg-[#F3EBDD] font-semibold rounded-full flex gap-3.5 items-center justify-center text-center flex-wrap text-[#2A2320]">
-            <span className="text-[1.5rem] font-bold text-[#590907]">₹0</span>
-            <span>recurring FlowPeople maintenance fee, on every plan <span className="text-xs text-[#590907] font-bold">(T&C Apply)</span>.</span>
+          <div className="mt-6 py-5 px-7 bg-slate-100 font-semibold rounded-full flex gap-3.5 items-center justify-center text-center flex-wrap text-[#0F172A]">
+            <span className="text-[1.5rem] font-bold text-[#4F46E5]">₹0</span>
+            <span>recurring FlowPeople maintenance fee, on every plan <span className="text-xs text-[#4F46E5] font-bold">(T&C Apply)</span>.</span>
           </div>
         </section>
 
         {/* Section 4: Cost Transparency Breakdown */}
         <section className="pb-16 sm:pb-24 pt-0" aria-labelledby="cost-h">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-7 sm:gap-16 items-start bg-[#F3EBDD] rounded-[40px] p-7 sm:p-16">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-7 sm:gap-16 items-start bg-slate-100 rounded-[40px] p-7 sm:p-16">
             <div>
-              <h2 id="cost-h" className="text-[clamp(1.9rem,4vw,2.9rem)] font-semibold tracking-tight text-[#2A2320]">
-                One Investment. No Monthly Software Maintenance <span className="text-xs text-[#590907] align-super font-semibold">(T&C Apply)</span>.
+              <h2 id="cost-h" className="text-[clamp(1.9rem,4vw,2.9rem)] font-semibold tracking-tight text-[#0F172A]">
+                One Investment. No Monthly Software Maintenance <span className="text-xs text-[#4F46E5] align-super font-semibold">(T&C Apply)</span>.
               </h2>
-              <p className="text-[#6B615A] text-[1.1rem] mt-5 leading-relaxed">
+              <p className="text-[#64748B] text-[1.1rem] mt-5 leading-relaxed">
                 You buy the license once. After that, FlowPeople does not bill you for the software.
                 Some costs sit outside our license and go to the services you choose, so we list
                 them here instead of hiding them.
               </p>
-              <div className="font-bold text-[clamp(4.5rem,13vw,8rem)] leading-[0.9] text-[#590907] tracking-tighter mt-9">
+              <div className="font-bold text-[clamp(4.5rem,13vw,8rem)] leading-[0.9] text-[#4F46E5] tracking-tighter mt-9">
                 ₹0
-                <small className="block font-medium text-[0.95rem] text-[#6B615A] mt-3 leading-snug tracking-normal">
+                <small className="block font-medium text-[0.95rem] text-[#64748B] mt-3 leading-snug tracking-normal">
                   recurring FlowPeople
                   <br />
                   maintenance fee
-                  <span className="block text-[11px] text-[#590907] font-semibold mt-0.5">(T&C Apply)</span>
+                  <span className="block text-[11px] text-[#4F46E5] font-semibold mt-0.5">(T&C Apply)</span>
                 </small>
               </div>
             </div>
@@ -742,9 +742,9 @@ export default function PricingPage() {
                   key={idx}
                   className="flex justify-between items-center gap-4 py-4 px-5 bg-[#FFFFFF] rounded-[18px] transition-transform hover:translate-x-1"
                 >
-                  <span className="text-[#2A2320] font-medium text-[0.95rem]">{row.item}</span>
+                  <span className="text-[#0F172A] font-medium text-[0.95rem]">{row.item}</span>
                   <span
-                    className={`font-semibold whitespace-nowrap text-right text-[0.95rem] ${row.isOk ? 'text-[#4C7A5C]' : 'text-[#6B615A]'
+                    className={`font-semibold whitespace-nowrap text-right text-[0.95rem] ${row.isOk ? 'text-[#10B981]' : 'text-[#64748B]'
                       }`}
                   >
                     {row.cost}
@@ -758,7 +758,7 @@ export default function PricingPage() {
         {/* Section 5: FAQ Accordion */}
         <section className="pb-16 sm:pb-24 pt-0" aria-labelledby="faq-h">
           <div className="grid gap-3.5 mb-8 sm:mb-12 max-w-[720px]">
-            <h2 id="faq-h" className="text-[clamp(1.9rem,4vw,2.9rem)] font-semibold tracking-tight text-[#2A2320]">
+            <h2 id="faq-h" className="text-[clamp(1.9rem,4vw,2.9rem)] font-semibold tracking-tight text-[#0F172A]">
               Questions, answered plainly.
             </h2>
           </div>
@@ -777,14 +777,14 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* Section 6: Final CTA with Opulent Golden Touch */}
+        {/* Section 6: Final CTA with Tech Blue/Indigo */}
         <section id="contact" className="pb-16 sm:pb-28 pt-4" aria-labelledby="fin-h">
-          <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5),0_0_40px_rgba(212,175,55,0.18)] border-2 border-[#D4AF37]/40">
-            {/* Dynamic Golden Lightfall Canvas Background */}
+          <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E1B4B] text-white p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(79,70,229,0.35)] border-2 border-indigo-500/30">
+            {/* Dynamic Blue Lightfall Canvas Background */}
             <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
               <Lightfall
-                colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
-                backgroundColor="#3D0604"
+                colors={['#60A5FA', '#818CF8', '#38BDF8', '#C7D2FE', '#FFFFFF']}
+                backgroundColor="#0B0F19"
                 speed={0.25}
                 streakCount={3}
                 streakWidth={1.3}
@@ -796,27 +796,27 @@ export default function PricingPage() {
               />
             </div>
 
-            {/* Ambient Golden Radial Glow Halos */}
-            <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#D4AF37]/25 via-[#FFE4B8]/10 to-transparent blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#D4AF37]/10 blur-3xl" />
+            {/* Ambient Radial Glow Halos */}
+            <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#2563EB]/25 via-[#4F46E5]/10 to-transparent blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#4F46E5]/10 blur-3xl" />
 
             <div className="relative z-10 max-w-3xl mx-auto space-y-5">
-              {/* Opulent Luminous Eyebrow Pill */}
-              <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4AF37]/20 via-white/15 to-[#D4AF37]/20 border border-[#FFE4B8]/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#FFE4B8] shadow-[0_4px_24px_rgba(212,175,55,0.2)] backdrop-blur-xl">
-                <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+              {/* Luminous Eyebrow Pill */}
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-blue-400/40 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-blue-200 backdrop-blur-xl">
+                <Sparkles className="h-3.5 w-3.5 text-[#38BDF8]" />
                 <span>Simple Setup · Perpetual License</span>
               </div>
 
-              {/* Serif Headline with Gold Shimmer Accent */}
-              <h2 id="fin-h" className="serif-heading text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] max-w-2xl mx-auto drop-shadow-sm">
+              {/* Headline */}
+              <h2 id="fin-h" className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.1] max-w-2xl mx-auto drop-shadow-sm">
                 Ready to Make HR Management <br className="hidden sm:inline" />
-                <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
+                <span className="font-extrabold bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
                   Simpler?
                 </span>
               </h2>
 
               {/* Subtext */}
-              <p className="text-base sm:text-lg md:text-xl text-[#F8F6F1]/90 font-light max-w-xl mx-auto leading-relaxed drop-shadow-sm">
+              <p className="text-base sm:text-lg md:text-xl text-slate-200 font-normal max-w-xl mx-auto leading-relaxed drop-shadow-sm">
                 Tell us your team size and what you need. We will recommend a plan and walk you through setup.
               </p>
 
@@ -825,10 +825,10 @@ export default function PricingPage() {
                 <button
                   type="button"
                   onClick={() => openInquiry('General inquiry')}
-                  className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#FFE4B8] via-[#E8D2B5] to-[#D4AF37] text-[#3A1B12] px-8 sm:px-10 py-4 text-sm sm:text-base font-bold shadow-xl shadow-[#D4AF37]/25 hover:shadow-[0_12px_36px_rgba(212,175,55,0.45)] hover:scale-[1.03] transition-all border border-[#FFFDF9]/60 cursor-pointer"
+                  className="group inline-flex items-center gap-2.5 rounded-full bg-[#4F46E5] text-white px-8 sm:px-10 py-4 text-sm sm:text-base font-bold shadow-xl shadow-indigo-500/25 hover:bg-[#4338CA] hover:scale-[1.03] transition-all cursor-pointer"
                 >
                   <span>Talk to Our Team</span>
-                  <ArrowRight className="h-4 w-4 text-[#3A1B12] transition-transform duration-300 group-hover:translate-x-1" />
+                  <ArrowRight className="h-4 w-4 text-white transition-transform duration-300 group-hover:translate-x-1" />
                 </button>
 
                 <a
@@ -861,12 +861,12 @@ export default function PricingPage() {
             </h3>
 
             <form onSubmit={handleSubmit} className="grid gap-4">
-              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#2A2320]">
+              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Selected plan
                 <select
                   value={selectedPlan}
                   onChange={(e) => setSelectedPlan(e.target.value)}
-                  className="p-3 bg-[#FBF7F0] text-[#2A2320] border border-[rgba(42,35,32,0.08)] rounded-[14px] text-[1rem] outline-none focus:border-[#590907]"
+                  className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 >
                   <option value="Starter">Starter</option>
                   <option value="Professional">Professional</option>
@@ -876,7 +876,7 @@ export default function PricingPage() {
                 </select>
               </label>
 
-              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#2A2320]">
+              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Your name
                 <input
                   type="text"
@@ -885,11 +885,11 @@ export default function PricingPage() {
                   onChange={(e) => setInquiryName(e.target.value)}
                   autoComplete="name"
                   placeholder="Your full name"
-                  className="p-3 bg-[#FBF7F0] text-[#2A2320] border border-[rgba(42,35,32,0.08)] rounded-[14px] text-[1rem] outline-none focus:border-[#590907]"
+                  className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 />
               </label>
 
-              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#2A2320]">
+              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Work email
                 <input
                   type="email"
@@ -898,11 +898,11 @@ export default function PricingPage() {
                   onChange={(e) => setInquiryEmail(e.target.value)}
                   autoComplete="email"
                   placeholder="name@company.com"
-                  className="p-3 bg-[#FBF7F0] text-[#2A2320] border border-[rgba(42,35,32,0.08)] rounded-[14px] text-[1rem] outline-none focus:border-[#590907]"
+                  className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 />
               </label>
 
-              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#2A2320]">
+              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Number of employees
                 <input
                   type="text"
@@ -910,20 +910,20 @@ export default function PricingPage() {
                   value={inquirySize}
                   onChange={(e) => setInquirySize(e.target.value)}
                   placeholder="For example, 60"
-                  className="p-3 bg-[#FBF7F0] text-[#2A2320] border border-[rgba(42,35,32,0.08)] rounded-[14px] text-[1rem] outline-none focus:border-[#590907]"
+                  className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 />
               </label>
 
-              <p className="text-[0.8rem] text-[#6B615A]">
+              <p className="text-[0.8rem] text-[#64748B]">
                 Inquiries are transmitted directly to our solutions desk for plan setup and licensing.
               </p>
 
               {isSubmitted && (
-                <div className="p-3.5 bg-[rgba(76,122,92,0.12)] text-[#4C7A5C] text-[0.92rem] rounded-[14px] font-medium space-y-1">
+                <div className="p-3.5 bg-emerald-50 text-emerald-800 border border-emerald-200 text-[0.92rem] rounded-[14px] font-medium space-y-1">
                   <div>Inquiry received! Our team will contact you shortly regarding the <b>{selectedPlan}</b> plan.</div>
-                  <div className="text-xs text-[#2A2320]">
+                  <div className="text-xs text-[#0F172A]">
                     Need custom workflows or enterprise terms?{' '}
-                    <a href={`/contact?type=Book%20a%20Demo&plan=${selectedPlan}`} className="underline text-[#590907] font-semibold">
+                    <a href={`/contact?type=Book%20a%20Demo&plan=${selectedPlan}`} className="underline text-[#4F46E5] font-semibold">
                       Schedule a live demonstration &rarr;
                     </a>
                   </div>

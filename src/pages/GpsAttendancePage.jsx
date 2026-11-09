@@ -149,11 +149,11 @@ export default function GpsAttendancePage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#F8F6F1] text-[#242321]">
+    <div className="relative min-h-screen bg-[#F8FAFC] text-[#0F172A]">
       {/* ===================================================================== */}
       {/* 1. DARK GLASS SHOWROOM: 5-STAGE GPS SIMULATOR (#view-gps)             */}
       {/* ===================================================================== */}
-      <section className="relative min-h-[92vh] sm:min-h-screen w-full bg-[#1E1D1B] overflow-hidden flex items-center pt-28 sm:pt-36 pb-16 px-4 sm:px-8 text-[#F8F6F1]">
+      <section className="relative min-h-[92vh] sm:min-h-screen w-full bg-[#0B0F19] overflow-hidden flex items-center pt-28 sm:pt-36 pb-16 px-4 sm:px-8 text-[#F8F6F1]">
         {/* Background Ambient Cinema Plate */}
         <div className="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen overflow-hidden">
           <img
@@ -176,9 +176,9 @@ export default function GpsAttendancePage() {
           {/* Left: Narrative & 5-Stage Step Controls */}
           <div className="max-w-2xl lg:max-w-2xl text-[#F8F6F1] space-y-6">
             {/* Zone Status Pill */}
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-[#FFE4B8]/40 bg-white/10 px-4 py-1.5 backdrop-blur-xl shadow-md">
+            <div className="inline-flex items-center gap-2.5 rounded-full border border-blue-400/40 bg-white/10 px-4 py-1.5 backdrop-blur-xl shadow-md">
               <MapPin className="h-4 w-4 text-[#299D68]" />
-              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-[#FFE4B8]">
+              <span className="text-xs font-semibold tracking-[0.2em] uppercase text-blue-200">
                 Main Office · 100m Precision Geofence
               </span>
             </div>
@@ -189,14 +189,14 @@ export default function GpsAttendancePage() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#299D68] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#299D68]"></span>
               </span>
-              <span className="text-xs font-mono font-medium text-[#E8D2B5]">
+              <span className="text-xs font-mono font-medium text-blue-300">
                 19.0760° N · 72.8777° E · 100m Geofence Active
               </span>
             </div>
 
             {/* Dynamic Headline & Narrative */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-[#E8D2B5] mb-2.5">
+              <div className="text-xs font-semibold uppercase tracking-wider text-blue-300 mb-2.5">
                 {curScene.tag} · {curScene.distance}
               </div>
               <h1 className="serif-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-white drop-shadow-md">
@@ -214,7 +214,7 @@ export default function GpsAttendancePage() {
                 <button
                   type="button"
                   onClick={() => setAutoPlay(!autoPlay)}
-                  className="text-[#FFE4B8] hover:underline font-semibold"
+                  className="text-blue-200 hover:underline font-semibold"
                 >
                   {autoPlay ? 'Pause Auto-Play' : 'Auto-Play Stages'}
                 </button>
@@ -231,7 +231,7 @@ export default function GpsAttendancePage() {
                     }}
                     className={`rounded-full px-3.5 py-2 text-xs font-semibold transition ${
                       sceneIdx === idx
-                        ? 'bg-[#590907] text-[#F8F6F1] shadow-lg border border-[#E8D2B5]/50 scale-105'
+                        ? 'bg-[#4F46E5] text-[#F8FAFC] shadow-lg border border-indigo-400/50 scale-105'
                         : 'bg-white/10 text-[#F8F6F1] hover:bg-white/20'
                     }`}
                   >
@@ -245,7 +245,7 @@ export default function GpsAttendancePage() {
             <div className="pt-4 flex flex-wrap gap-3">
               <Link
                 to="/"
-                className="rounded-full bg-[#F8F6F1] px-6 py-3 text-xs sm:text-sm font-semibold text-[#590907] shadow-md hover:bg-white transition"
+                className="rounded-full bg-[#F8FAFC] px-6 py-3 text-xs sm:text-sm font-semibold text-[#4F46E5] shadow-md hover:bg-white transition"
               >
                 ← Back to Main Hub
               </Link>
@@ -260,14 +260,14 @@ export default function GpsAttendancePage() {
 
           {/* Right: Ultra-Bezel-less Desert Titanium iPhone 18 Pro Max Chassis */}
           <div className="relative w-full max-w-sm rounded-[54px] p-3.5 bg-gradient-to-b from-[#bfa286] via-[#8c745d] to-[#45372b] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.8),inset_0_1px_3px_rgba(255,255,255,0.4)] border border-[#dfc2a6]/50">
-            <div className="rounded-[44px] overflow-hidden bg-[#F8F6F1] text-[#242321] p-4 pt-3 flex flex-col justify-between aspect-[9/19.5] shadow-inner relative">
+            <div className="rounded-[44px] overflow-hidden bg-[#F8FAFC] text-[#0F172A] p-4 pt-3 flex flex-col justify-between aspect-[9/19.5] shadow-inner relative">
               {/* Top Dynamic Island */}
               <div>
                 <div className="flex items-center justify-between px-3 pt-0.5">
                   <span className="text-xs font-bold tabular-nums font-mono">9:02</span>
                   <div className="flex items-center gap-2 rounded-full bg-black text-white px-3 py-1 shadow-md">
                     <span className="h-2 w-2 rounded-full bg-[#299D68] animate-pulse"></span>
-                    <span className="text-[10px] font-semibold text-[#FFE4B8]">{curScene.island}</span>
+                    <span className="text-[10px] font-semibold text-blue-200">{curScene.island}</span>
                   </div>
                   <span className="text-[10px] font-bold">5G</span>
                 </div>
@@ -275,14 +275,14 @@ export default function GpsAttendancePage() {
                 {/* FlowPeople App Header */}
                 <div className="mt-3 flex items-center justify-between px-1">
                   <BrandLogo variant="navbar" />
-                  <span className="rounded-full bg-[#E8D2B5]/70 px-2.5 py-0.5 text-[10px] font-semibold text-[#590907]">
+                  <span className="rounded-full bg-[#EEF2FF]/70 px-2.5 py-0.5 text-[10px] font-semibold text-[#4F46E5]">
                     Office Geofence
                   </span>
                 </div>
               </div>
 
               {/* Live Map with 100m Geofence Ring and Pulsing Employee Pin */}
-              <div className="relative my-3 h-52 w-full overflow-hidden rounded-2xl bg-[#1E1D1B] shadow-inner">
+              <div className="relative my-3 h-52 w-full overflow-hidden rounded-2xl bg-[#0B0F19] shadow-inner">
                 <img
                   src={FP_IMAGES.gps_map}
                   alt="GPS Zone Map"
@@ -304,7 +304,7 @@ export default function GpsAttendancePage() {
                     className="animate-pulse-ring"
                   />
                   {/* Office Center Core */}
-                  <circle cx="144" cy="78" r="8" fill="#590907" stroke="#FFE4B8" strokeWidth="2" />
+                  <circle cx="144" cy="78" r="8" fill="#4F46E5" stroke="#38BDF8" strokeWidth="2" />
 
                   {/* Employee Live Position Pin */}
                   <circle
@@ -319,25 +319,25 @@ export default function GpsAttendancePage() {
                 </svg>
 
                 {/* Live Distance overlay pill */}
-                <div className="absolute top-2 left-2 rounded-full bg-black/80 px-2.5 py-0.5 text-[10px] font-semibold text-[#FFE4B8] backdrop-blur-md">
+                <div className="absolute top-2 left-2 rounded-full bg-black/80 px-2.5 py-0.5 text-[10px] font-semibold text-blue-200 backdrop-blur-md">
                   {curScene.distance}
                 </div>
               </div>
 
               {/* Interactive Status Card inside Smartphone */}
-              <div className="space-y-2.5 rounded-2xl bg-white p-3.5 shadow-md border border-[#E8D2B5]/40">
-                <div className="rounded-xl bg-[#E8D2B5]/50 px-3 py-1.5 text-center text-xs font-semibold text-[#590907]">
+              <div className="space-y-2.5 rounded-2xl bg-white p-3.5 shadow-md border border-slate-200">
+                <div className="rounded-xl bg-[#EEF2FF]/50 px-3 py-1.5 text-center text-xs font-semibold text-[#4F46E5]">
                   {curScene.zone}
                 </div>
 
                 <div className="space-y-1 text-xs">
                   <div className="flex justify-between">
                     <span className="text-[#A5A79B]">Location</span>
-                    <span className="font-semibold text-[#590907]">{curScene.loc}</span>
+                    <span className="font-semibold text-[#4F46E5]">{curScene.loc}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[#A5A79B]">Office Zone</span>
-                    <span className="font-semibold text-[#242321]">HQ · 100m Radius</span>
+                    <span className="font-semibold text-[#0F172A]">HQ · 100m Radius</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[#A5A79B]">Engine State</span>
@@ -380,26 +380,26 @@ export default function GpsAttendancePage() {
       <section className="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
         {/* Mode Switcher Header */}
         <div className="text-center max-w-4xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#E8D2B5]/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#590907] mb-3">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#EEF2FF]/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#4F46E5] mb-3">
             <Radio className="h-3.5 w-3.5" />
             <span>Interactive Live Simulation</span>
           </div>
-          <h2 className="serif-heading text-4xl sm:text-6xl lg:text-7xl font-bold text-[#141312] leading-[1.08]">
-            Right Place. <span className="italic text-[#590907]">Right Time.</span>
+          <h2 className="serif-heading text-4xl sm:text-6xl lg:text-7xl font-bold text-[#0F172A] leading-[1.08]">
+            Right Place. <span className="italic text-[#4F46E5]">Right Time.</span>
           </h2>
-          <p className="mt-5 text-lg sm:text-xl text-[#242321] font-medium max-w-3xl mx-auto leading-relaxed">
+          <p className="mt-5 text-lg sm:text-xl text-[#0F172A] font-medium max-w-3xl mx-auto leading-relaxed">
             Test how FlowPeople verifies your location in real time. Click the status card below to simulate an instant check-in.
           </p>
 
           {/* Mode Switcher Buttons */}
-          <div className="mt-6 inline-flex rounded-full bg-white p-1.5 shadow-sm border border-[#E8D2B5]/60">
+          <div className="mt-6 inline-flex rounded-full bg-white p-1.5 shadow-sm border border-slate-200">
             <button
               type="button"
               onClick={() => setActiveMode('gps')}
               className={`rounded-full px-5 py-2 text-xs font-bold transition ${
                 activeMode === 'gps'
-                  ? 'bg-[#590907] text-[#F8F6F1] shadow-sm'
-                  : 'text-[#242321] hover:text-[#590907]'
+                  ? 'bg-[#4F46E5] text-[#F8FAFC] shadow-sm'
+                  : 'text-[#0F172A] hover:text-[#4F46E5]'
               }`}
             >
               GPS Office Zone (Active)
@@ -407,7 +407,7 @@ export default function GpsAttendancePage() {
             <button
               type="button"
               onClick={() => navigate('/biometric-attendance')}
-              className="rounded-full px-5 py-2 text-xs font-semibold text-[#242321] hover:text-[#590907] transition"
+              className="rounded-full px-5 py-2 text-xs font-semibold text-[#0F172A] hover:text-[#4F46E5] transition"
             >
               Biometric Kiosk →
             </button>
@@ -427,17 +427,17 @@ export default function GpsAttendancePage() {
                 handleTryCheckIn();
               }
             }}
-            className="group cursor-pointer rounded-3xl bg-white p-6 sm:p-8 shadow-xl border border-[#E8D2B5] transition-all hover:shadow-2xl hover:border-[#590907]/40 relative overflow-hidden"
+            className="group cursor-pointer rounded-3xl bg-white p-6 sm:p-8 shadow-xl border border-slate-200 transition-all hover:shadow-2xl hover:border-[#4F46E5]/40 relative overflow-hidden"
           >
             {/* Luminous Glow when verifying */}
             {isVerifying && (
-              <div className="absolute inset-0 bg-[#E8D2B5]/30 animate-pulse pointer-events-none" />
+              <div className="absolute inset-0 bg-[#EEF2FF]/30 animate-pulse pointer-events-none" />
             )}
 
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
                 <span className={`h-3 w-3 rounded-full ${isVerifying ? 'bg-amber-500 animate-ping' : 'bg-[#299D68]'}`} />
-                <span className="text-xs font-bold uppercase tracking-wider text-[#590907]">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#4F46E5]">
                   {isVerifying ? 'Verifying GPS Coordinates…' : 'Office 100m Zone Active'}
                 </span>
               </div>
@@ -445,7 +445,7 @@ export default function GpsAttendancePage() {
             </div>
 
             <div className="space-y-1">
-              <h3 className="text-2xl font-bold text-[#242321]">
+              <h3 className="text-2xl font-bold text-[#0F172A]">
                 {isVerifying ? 'Checking your location…' : 'Inside the office zone'}
               </h3>
               <p className="text-sm text-[#299D68] font-semibold flex items-center gap-1.5">
@@ -454,8 +454,8 @@ export default function GpsAttendancePage() {
               </p>
             </div>
 
-            <div className="mt-6 pt-4 border-t border-[#E8D2B5]/40 flex items-center justify-between text-xs text-[#A5A79B]">
-              <span className="font-medium text-[#590907] group-hover:underline">
+            <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between text-xs text-[#A5A79B]">
+              <span className="font-medium text-[#4F46E5] group-hover:underline">
                 {isVerifying ? 'Verifying…' : 'Tap to test another check-in →'}
               </span>
               <span>Coordinates: 19.0760° N, 72.8777° E</span>
@@ -468,13 +468,13 @@ export default function GpsAttendancePage() {
           <div
             onMouseMove={handleCardMouseMove}
             onMouseLeave={handleCardMouseLeave}
-            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-[#E8D2B5]/60"
+            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-slate-200"
           >
-            <div className="h-10 w-10 rounded-2xl bg-[#590907]/10 flex items-center justify-center text-[#590907] mb-4">
+            <div className="h-10 w-10 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] mb-4">
               <MapPin className="h-5 w-5" />
             </div>
-            <h4 className="text-lg font-bold text-[#242321]">100m Geofence Precision</h4>
-            <p className="mt-2 text-sm text-[#242321]/75 leading-relaxed">
+            <h4 className="text-lg font-bold text-[#0F172A]">100m Geofence Precision</h4>
+            <p className="mt-2 text-sm text-[#0F172A]/75 leading-relaxed">
               Define the boundary of your office building. Check-ins are strictly allowed only when within the verified circle.
             </p>
           </div>
@@ -482,13 +482,13 @@ export default function GpsAttendancePage() {
           <div
             onMouseMove={handleCardMouseMove}
             onMouseLeave={handleCardMouseLeave}
-            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-[#E8D2B5]/60"
+            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-slate-200"
           >
-            <div className="h-10 w-10 rounded-2xl bg-[#590907]/10 flex items-center justify-center text-[#590907] mb-4">
+            <div className="h-10 w-10 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] mb-4">
               <Smartphone className="h-5 w-5" />
             </div>
-            <h4 className="text-lg font-bold text-[#242321]">Zero Hardware Required</h4>
-            <p className="mt-2 text-sm text-[#242321]/75 leading-relaxed">
+            <h4 className="text-lg font-bold text-[#0F172A]">Zero Hardware Required</h4>
+            <p className="mt-2 text-sm text-[#0F172A]/75 leading-relaxed">
               No badge readers or fingerprint scanners. Employees mark attendance directly on their iOS or Android smartphones.
             </p>
           </div>
@@ -496,13 +496,13 @@ export default function GpsAttendancePage() {
           <div
             onMouseMove={handleCardMouseMove}
             onMouseLeave={handleCardMouseLeave}
-            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-[#E8D2B5]/60"
+            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-slate-200"
           >
-            <div className="h-10 w-10 rounded-2xl bg-[#590907]/10 flex items-center justify-center text-[#590907] mb-4">
+            <div className="h-10 w-10 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] mb-4">
               <Clock className="h-5 w-5" />
             </div>
-            <h4 className="text-lg font-bold text-[#242321]">Real-Time Sync</h4>
-            <p className="mt-2 text-sm text-[#242321]/75 leading-relaxed">
+            <h4 className="text-lg font-bold text-[#0F172A]">Real-Time Sync</h4>
+            <p className="mt-2 text-sm text-[#0F172A]/75 leading-relaxed">
               Timestamps hit the manager dashboard the second they are verified, with zero latency or manual data entry.
             </p>
           </div>
@@ -510,13 +510,13 @@ export default function GpsAttendancePage() {
           <div
             onMouseMove={handleCardMouseMove}
             onMouseLeave={handleCardMouseLeave}
-            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-[#E8D2B5]/60"
+            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-slate-200"
           >
-            <div className="h-10 w-10 rounded-2xl bg-[#590907]/10 flex items-center justify-center text-[#590907] mb-4">
+            <div className="h-10 w-10 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] mb-4">
               <CalendarCheck className="h-5 w-5" />
             </div>
-            <h4 className="text-lg font-bold text-[#242321]">Leaves & Requests</h4>
-            <p className="mt-2 text-sm text-[#242321]/75 leading-relaxed">
+            <h4 className="text-lg font-bold text-[#0F172A]">Leaves & Requests</h4>
+            <p className="mt-2 text-sm text-[#0F172A]/75 leading-relaxed">
               Apply for sick days or PTO directly in the flow. Managers approve in one click without leaving their chat or email.
             </p>
           </div>
@@ -524,13 +524,13 @@ export default function GpsAttendancePage() {
           <div
             onMouseMove={handleCardMouseMove}
             onMouseLeave={handleCardMouseLeave}
-            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-[#E8D2B5]/60"
+            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-slate-200"
           >
-            <div className="h-10 w-10 rounded-2xl bg-[#590907]/10 flex items-center justify-center text-[#590907] mb-4">
+            <div className="h-10 w-10 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] mb-4">
               <FileText className="h-5 w-5" />
             </div>
-            <h4 className="text-lg font-bold text-[#242321]">Exportable Reports</h4>
-            <p className="mt-2 text-sm text-[#242321]/75 leading-relaxed">
+            <h4 className="text-lg font-bold text-[#0F172A]">Exportable Reports</h4>
+            <p className="mt-2 text-sm text-[#0F172A]/75 leading-relaxed">
               Generate payroll-ready CSV and PDF attendance summaries with one click at the end of each billing cycle.
             </p>
           </div>
@@ -538,25 +538,25 @@ export default function GpsAttendancePage() {
           <div
             onMouseMove={handleCardMouseMove}
             onMouseLeave={handleCardMouseLeave}
-            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-[#E8D2B5]/60"
+            className="tilt-card rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-slate-200"
           >
-            <div className="h-10 w-10 rounded-2xl bg-[#590907]/10 flex items-center justify-center text-[#590907] mb-4">
+            <div className="h-10 w-10 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] mb-4">
               <ShieldCheck className="h-5 w-5" />
             </div>
-            <h4 className="text-lg font-bold text-[#242321]">Anti-Spoof Security</h4>
-            <p className="mt-2 text-sm text-[#242321]/75 leading-relaxed">
+            <h4 className="text-lg font-bold text-[#0F172A]">Anti-Spoof Security</h4>
+            <p className="mt-2 text-sm text-[#0F172A]/75 leading-relaxed">
               Hardware-backed location telemetry detects VPNs and mock location apps, guaranteeing true physical presence.
             </p>
           </div>
         </div>
 
         {/* Demo Booking Band with Opulent Golden Touch */}
-        <div id="contact" className="mt-20 rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5),0_0_40px_rgba(212,175,55,0.18)] border-2 border-[#D4AF37]/40 max-w-5xl mx-auto">
+        <div id="contact" className="mt-20 rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E1B4B] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5),0_0_40px_rgba(212,175,55,0.18)] border-2 border-indigo-500/30 max-w-5xl mx-auto">
           {/* Dynamic Golden Lightfall Canvas Background */}
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
             <Lightfall
-              colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
-              backgroundColor="#3D0604"
+              colors={['#60A5FA', '#818CF8', '#38BDF8', '#C7D2FE', '#FFFFFF']}
+              backgroundColor="#0B0F19"
               speed={0.25}
               streakCount={3}
               streakWidth={1.3}
@@ -569,18 +569,18 @@ export default function GpsAttendancePage() {
           </div>
 
           {/* Ambient Golden Radial Glow Halos */}
-          <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#D4AF37]/25 via-[#FFE4B8]/10 to-transparent blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#D4AF37]/10 blur-3xl" />
+          <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#2563EB]/25 via-[#4F46E5]/10 to-transparent blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-indigo-500/20 blur-3xl" />
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4AF37]/20 via-white/15 to-[#D4AF37]/20 border border-[#FFE4B8]/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#FFE4B8] shadow-[0_4px_24px_rgba(212,175,55,0.2)] backdrop-blur-xl">
-              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+            <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-blue-500/20 via-white/15 to-indigo-500/20 border border-blue-400/40 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-blue-200 shadow-[0_4px_24px_rgba(79,70,229,0.2)] backdrop-blur-xl">
+              <Sparkles className="h-3.5 w-3.5 text-[#38BDF8]" />
               <span>100m Precision Geofencing</span>
             </div>
 
             <h3 className="serif-heading text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] max-w-2xl mx-auto drop-shadow-sm">
               See FlowPeople GPS in{' '}
-              <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
+              <span className="italic font-normal bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
                 action.
               </span>
             </h3>
@@ -592,10 +592,10 @@ export default function GpsAttendancePage() {
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 to="/contact?type=Book%20a%20Demo"
-                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#FFE4B8] via-[#E8D2B5] to-[#D4AF37] text-[#3A1B12] px-8 sm:px-10 py-4 text-sm sm:text-base font-bold shadow-xl shadow-[#D4AF37]/25 hover:shadow-[0_12px_36px_rgba(212,175,55,0.45)] hover:scale-[1.03] transition-all border border-[#FFFDF9]/60 cursor-pointer"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white px-8 sm:px-10 py-4 text-sm sm:text-base font-bold shadow-xl shadow-indigo-500/25 hover:shadow-[0_12px_36px_rgba(212,175,55,0.45)] hover:scale-[1.03] transition-all border border-[#FFFDF9]/60 cursor-pointer"
               >
                 <span>Book a Live Demo</span>
-                <ArrowRight className="h-4 w-4 text-[#3A1B12] transition-transform duration-300 group-hover:translate-x-1" />
+                <ArrowRight className="h-4 w-4 text-white transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
 
               <Link

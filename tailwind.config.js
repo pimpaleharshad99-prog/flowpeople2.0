@@ -8,21 +8,28 @@ export default {
     extend: {
       colors: {
         fp: {
-          burgundy: '#590907',
-          cream: '#E8D2B5',
-          sage: '#A5A79B',
-          softsage: '#D8D9D0',
-          offwhite: '#F8F6F1',
-          charcoal: '#242321',
-          success: '#299D68'
+          blue: '#2563EB',
+          indigo: '#4F46E5',
+          'indigo-deep': '#4338CA',
+          cyan: '#0EA5E9',
+          slate: '#0F172A',
+          tint: '#EEF2FF',
+          'tint-border': '#E0E7FF',
+          // Theme Aliases
+          burgundy: '#4F46E5',
+          cream: '#EEF2FF',
+          sage: '#64748B',
+          softsage: '#E2E8F0',
+          offwhite: '#F8FAFC',
+          charcoal: '#0F172A',
+          success: '#10B981'
         }
       },
       fontFamily: {
         serif: ['"Cormorant Garamond"', 'serif'],
-        sans: ['"Inter"', 'sans-serif'],
+        sans: ['"Inter"', '"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       }
     },
   },
   plugins: [],
 };
-

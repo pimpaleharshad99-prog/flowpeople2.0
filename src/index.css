@@ -3,21 +3,33 @@
 @tailwind utilities;
 
 :root {
-  --fp-burgundy: #590907;
-  --fp-cream: #E8D2B5;
-  --fp-sage: #A5A79B;
-  --fp-softsage: #D8D9D0;
-  --fp-offwhite: #F8F6F1;
-  --fp-charcoal: #242321;
-  --fp-success: #299D68;
+  --fp-primary: #4F46E5;
+  --fp-blue: #2563EB;
+  --fp-indigo: #4F46E5;
+  --fp-cyan: #0EA5E9;
+  --fp-tint: #EEF2FF;
+  --fp-tint-border: #E0E7FF;
+  --fp-slate-900: #0F172A;
+  --fp-slate-700: #334155;
+  --fp-slate-500: #64748B;
+  --fp-slate-100: #F1F5F9;
+  --fp-slate-50: #F8FAFC;
+  --fp-success: #10B981;
 
-  /* Aliases for f2 components */
-  --burg: #590907;
-  --cream: #E8D2B5;
-  --sage: #A5A79B;
-  --off: #F8F6F1;
+  /* Aliases mapped to new modern blue/indigo/slate palette */
+  --fp-burgundy: #4F46E5;
+  --fp-cream: #EEF2FF;
+  --fp-sage: #64748B;
+  --fp-softsage: #E2E8F0;
+  --fp-offwhite: #F8FAFC;
+  --fp-charcoal: #0F172A;
+
+  --burg: #4F46E5;
+  --cream: #EEF2FF;
+  --sage: #64748B;
+  --off: #F8FAFC;
   --white: #ffffff;
-  --ink: #242321;
+  --ink: #0F172A;
 }
 
 html {
@@ -25,9 +37,9 @@ html {
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: var(--fp-offwhite);
-  color: var(--fp-charcoal);
+  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--fp-slate-50);
+  color: var(--fp-slate-900);
   overflow-x: hidden;
 }
 
@@ -37,47 +49,47 @@ body {
 
 /* Glassmorphism & Surface Utilities */
 .nav-glass {
-  background: rgba(248, 246, 241, 0.78);
+  background: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid rgba(232, 210, 181, 0.35);
-  box-shadow: 0 10px 32px -4px rgba(36, 35, 33, 0.08), 0 1px 2px 0 rgba(36, 35, 33, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 10px 32px -4px rgba(15, 23, 42, 0.06), 0 1px 2px 0 rgba(15, 23, 42, 0.03);
 }
 
 .nav-glass-dock {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(241, 245, 249, 0.7);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(232, 210, 181, 0.45);
+  border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
 .hero-footer-box {
-  background: rgba(248, 246, 241, 0.88);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(14px);
-  border: 1px solid rgba(232, 210, 181, 0.5);
+  border: 1px solid rgba(226, 232, 240, 0.8);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-footer-box:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 14px 28px -6px rgba(89, 9, 7, 0.12);
-  border-color: rgba(89, 9, 7, 0.25);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow: 0 14px 28px -6px rgba(79, 70, 229, 0.12);
+  border-color: rgba(79, 70, 229, 0.3);
 }
 
 .frosted-showcase-card {
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(18px);
-  border: 1px solid rgba(232, 210, 181, 0.55);
-  box-shadow: 0 20px 40px -12px rgba(89, 9, 7, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 20px 40px -12px rgba(79, 70, 229, 0.06);
 }
 
 .fp-kiosk-glass {
-  background: rgba(30, 29, 27, 0.88);
+  background: rgba(15, 23, 42, 0.88);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(232, 210, 181, 0.2);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
 }
 
 .cinema-plate {

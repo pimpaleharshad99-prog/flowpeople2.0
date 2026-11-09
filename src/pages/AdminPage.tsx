@@ -240,29 +240,53 @@ export default function AdminPage() {
   // =========================================================================
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#FBF7F0] text-[#242321] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
+      <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col justify-center items-center py-12 px-4 relative overflow-hidden">
+        {/* Soft Ethereal Radial Background Glow */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              'radial-gradient(ellipse 80% 60% at 50% 15%, rgba(199, 210, 254, 0.45) 0%, rgba(224, 231, 255, 0.25) 45%, rgba(248, 250, 252, 1) 100%)'
+          }}
+        />
+
+        {/* Brand Lockup */}
+        <div className="relative z-10 w-full max-w-[420px] text-center mb-7">
           <Link to="/" className="inline-block transition hover:opacity-90">
-            <BrandLogo variant="navbar" />
+            <div className="flex flex-col items-center">
+              {/* Gradient Squircle Emblem with F. */}
+              <div className="relative flex items-center justify-center h-14 w-14 rounded-[18px] bg-gradient-to-br from-[#38BDF8] via-[#2563EB] to-[#4F46E5] shadow-lg shadow-blue-500/25 mb-3">
+                <span className="text-white font-black text-2xl font-sans tracking-tight">F.</span>
+              </div>
+
+              {/* Wordmark */}
+              <div className="flex items-center text-2xl font-extrabold tracking-tight">
+                <span className="text-[#0F172A]">Flow</span>
+                <span className="text-[#4F46E5]">people</span>
+              </div>
+              <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#64748B] mt-0.5">
+                BY FLUXORA
+              </span>
+            </div>
           </Link>
 
-          <div className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold uppercase tracking-wider text-[#590907]">
-            <Lock className="h-3 w-3 text-[#590907]" />
-            <span>EXECUTIVE ACCESS CONTROL</span>
-          </div>
-
-          <h2 className="mt-3 text-2xl sm:text-3xl font-bold font-serif tracking-tight text-[#242321]">
-            FlowPeople Admin Desk
-          </h2>
-          <p className="mt-2 text-xs sm:text-sm text-[#6B615A]">
-            Sign in with administrative credentials to access organizational leads &amp; inquiries.
+          <p className="mt-3 text-xs sm:text-sm text-[#64748B] max-w-sm mx-auto">
+            Biometric workforce &amp; attendance suite for modern enterprises
           </p>
         </div>
 
-        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4">
-          <div className="rounded-3xl border border-[rgba(89,9,7,0.12)] bg-white p-7 sm:p-9 shadow-lg">
+        {/* Enterprise Sign In Card */}
+        <div className="relative z-10 w-full max-w-[420px]">
+          <div className="rounded-2xl sm:rounded-3xl border border-[#E2E8F0] bg-white p-7 sm:p-9 shadow-xl shadow-indigo-100/40">
+            <h2 className="text-lg sm:text-xl font-bold text-[#0F172A] tracking-tight">
+              Enterprise Sign In
+            </h2>
+            <p className="mt-1 text-xs sm:text-sm text-[#64748B] mb-5">
+              Sign in with your work email and password.
+            </p>
+
             {loginError && (
-              <div className="mb-5 p-3.5 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 flex items-center gap-2">
+              <div className="mb-5 p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 flex items-center gap-2">
                 <AlertCircle className="h-4 w-4 shrink-0 text-red-600" />
                 <span>{loginError}</span>
               </div>
@@ -270,45 +294,48 @@ export default function AdminPage() {
 
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-[#242321] uppercase tracking-wider mb-1">
-                  Admin Email
+                <label className="block text-xs font-semibold text-[#0F172A] mb-1.5">
+                  Work Email
                 </label>
-                <div className="relative">
-                  <Mail className="absolute left-3.5 top-3.5 h-4 w-4 text-[#A5A79B]" />
-                  <input
-                    type="email"
-                    required
-                    value={loginEmail}
-                    onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="admin@flowpeople.com"
-                    autoComplete="email"
-                    className="w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] pl-10 pr-4 py-2.5 text-xs sm:text-sm text-[#242321] outline-none focus:border-[#590907]"
-                  />
-                </div>
+                <input
+                  type="email"
+                  required
+                  value={loginEmail}
+                  onChange={(e) => setLoginEmail(e.target.value)}
+                  placeholder="name@company.com"
+                  autoComplete="email"
+                  className="w-full rounded-xl border border-[#E0E7FF] bg-[#EEF2FF] px-4 py-3 text-xs sm:text-sm text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white transition"
+                />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#242321] uppercase tracking-wider mb-1">
-                  Master Password
-                </label>
-                <div className="relative">
-                  <Lock className="absolute left-3.5 top-3.5 h-4 w-4 text-[#A5A79B]" />
-                  <input
-                    type="password"
-                    required
-                    value={loginPass}
-                    onChange={(e) => setLoginPass(e.target.value)}
-                    placeholder="••••••••••••"
-                    className="w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] pl-10 pr-4 py-2.5 text-xs sm:text-sm text-[#242321] outline-none focus:border-[#590907]"
-                  />
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="block text-xs font-semibold text-[#0F172A]">
+                    Password
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => alert('Password reset is managed by your enterprise administrator or MongoDB Atlas master config.')}
+                    className="text-xs text-[#4F46E5] hover:underline font-medium cursor-pointer"
+                  >
+                    Forgot password?
+                  </button>
                 </div>
+                <input
+                  type="password"
+                  required
+                  value={loginPass}
+                  onChange={(e) => setLoginPass(e.target.value)}
+                  placeholder="••••••••••••"
+                  className="w-full rounded-xl border border-[#E0E7FF] bg-[#EEF2FF] px-4 py-3 text-xs sm:text-sm text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white transition"
+                />
               </div>
 
               <div className="pt-2">
                 <button
                   type="submit"
                   disabled={isLoggingIn}
-                  className="w-full flex items-center justify-center gap-2 rounded-full bg-[#590907] px-5 py-3 text-xs sm:text-sm font-semibold text-[#F8F6F1] shadow-sm transition hover:bg-[#590907]/90 cursor-pointer disabled:opacity-70"
+                  className="w-full flex items-center justify-center gap-2 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] px-5 py-3.5 text-xs sm:text-sm font-semibold text-white shadow-md shadow-indigo-500/25 transition cursor-pointer disabled:opacity-70"
                 >
                   {isLoggingIn ? (
                     <>
@@ -316,18 +343,24 @@ export default function AdminPage() {
                       <span>Verifying with MongoDB Atlas...</span>
                     </>
                   ) : (
-                    <>
-                      <ShieldCheck className="h-4 w-4" />
-                      <span>Authenticate &amp; Access Dashboard</span>
-                    </>
+                    <span>Sign in</span>
                   )}
                 </button>
               </div>
             </form>
+
+            <p className="mt-5 text-center text-[11px] text-[#94A3B8] leading-relaxed">
+              B2B enterprise account. Employee logins are provisioned by your system administrator.
+            </p>
           </div>
 
-          <div className="mt-6 text-center">
-            <Link to="/" className="text-xs text-[#6B615A] hover:text-[#590907] transition inline-flex items-center gap-1">
+          {/* Bottom Security Note */}
+          <p className="text-center text-xs text-[#94A3B8] mt-7">
+            Protected by enterprise-grade security and encrypted access controls.
+          </p>
+
+          <div className="mt-4 text-center">
+            <Link to="/" className="text-xs text-[#64748B] hover:text-[#4F46E5] transition inline-flex items-center gap-1">
               <span>&larr; Return to Public Website</span>
             </Link>
           </div>
@@ -340,37 +373,37 @@ export default function AdminPage() {
   // VIEW 2: AUTHENTICATED LEADS MANAGEMENT DASHBOARD
   // =========================================================================
   return (
-    <div className="min-h-screen bg-[#FBF7F0] text-[#242321] pb-20">
+    <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] pb-20">
       {/* 1. TOP ADMIN BAR */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-[rgba(89,9,7,0.1)] px-4 sm:px-8 py-3.5">
+      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 px-4 sm:px-8 py-3.5">
         <div className="mx-auto max-w-7xl flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <Link to="/" className="inline-block transition hover:opacity-90">
               <BrandLogo variant="navbar" />
             </Link>
-            <div className="h-5 w-[1px] bg-[rgba(89,9,7,0.15)] hidden sm:block"></div>
+            <div className="h-5 w-[1px] bg-slate-200 hidden sm:block"></div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#590907] bg-[#590907]/10 px-2.5 py-0.5 rounded-full">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-0.5 rounded-full border border-indigo-100">
                 Leads Center
               </span>
               {isLiveDatabase ? (
                 <button
                   type="button"
                   onClick={() => setShowDbInfoModal(true)}
-                  className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#299D68] bg-[#299D68]/10 px-2.5 py-0.5 rounded-full border border-[#299D68]/20 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#10B981] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 cursor-pointer"
                   title="Connected to MongoDB Atlas (cluster0.la6tjpd.mongodb.net)"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#299D68] animate-pulse"></span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
                   <span>MongoDB Atlas Live</span>
                 </button>
               ) : (
                 <button
                   type="button"
                   onClick={() => setShowDbInfoModal(true)}
-                  className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#D97706] bg-[#D97706]/10 px-2.5 py-0.5 rounded-full border border-[#D97706]/20 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 text-[11px] font-medium text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 cursor-pointer"
                   title="Click to view MongoDB Atlas architecture"
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#D97706]"></span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
                   <span>MongoDB Vault (Cached)</span>
                 </button>
               )}
@@ -379,14 +412,14 @@ export default function AdminPage() {
 
           <div className="flex items-center gap-3">
             <div className="text-right hidden md:block">
-              <div className="text-xs font-bold text-[#242321]">{user.name}</div>
-              <div className="text-[10px] text-[#6B615A]">{user.email}</div>
+              <div className="text-xs font-bold text-[#0F172A]">{user.name}</div>
+              <div className="text-[10px] text-[#64748B]">{user.email}</div>
             </div>
 
             <button
               type="button"
               onClick={handleLogout}
-              className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] px-3.5 py-1.5 text-xs font-semibold text-[#590907] transition hover:bg-[#590907] hover:text-white cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-slate-50 px-3.5 py-1.5 text-xs font-semibold text-[#4F46E5] transition hover:bg-[#4F46E5] hover:text-white cursor-pointer"
             >
               <LogOut className="h-3.5 w-3.5" />
               <span>Sign Out</span>
@@ -398,12 +431,12 @@ export default function AdminPage() {
       {/* 2. DASHBOARD BODY */}
       <main className="mx-auto max-w-7xl px-4 sm:px-8 pt-8 space-y-8">
         {/* Header Hero Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[rgba(89,9,7,0.08)] pb-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 pb-6">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold font-serif text-[#242321]">
+            <h1 className="text-2xl sm:text-3xl font-bold font-sans text-[#0F172A] tracking-tight">
               Inbound Leads &amp; Demonstration Inquiries
             </h1>
-            <p className="text-xs sm:text-sm text-[#6B615A] mt-1">
+            <p className="text-xs sm:text-sm text-[#64748B] mt-1">
               Real-time submission pipeline for organizations exploring FlowPeople biometric and GPS attendance.
             </p>
           </div>
@@ -412,7 +445,7 @@ export default function AdminPage() {
             <button
               type="button"
               onClick={loadLeads}
-              className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(89,9,7,0.15)] bg-white px-3.5 py-2 text-xs font-semibold text-[#242321] hover:bg-[#F3EBDD] transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-[#0F172A] hover:bg-slate-50 transition cursor-pointer"
             >
               <RefreshCw className={`h-3.5 w-3.5 ${loading ? 'animate-spin' : ''}`} />
               <span>Refresh</span>
@@ -421,16 +454,16 @@ export default function AdminPage() {
             <button
               type="button"
               onClick={() => leadService.exportToCSV(filteredLeads)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-[rgba(89,9,7,0.15)] bg-white px-3.5 py-2 text-xs font-semibold text-[#242321] hover:bg-[#F3EBDD] transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-3.5 py-2 text-xs font-semibold text-[#0F172A] hover:bg-slate-50 transition cursor-pointer"
             >
-              <Download className="h-3.5 w-3.5 text-[#590907]" />
+              <Download className="h-3.5 w-3.5 text-[#4F46E5]" />
               <span>Export CSV</span>
             </button>
 
             <button
               type="button"
               onClick={() => setShowAddLeadModal(true)}
-              className="inline-flex items-center gap-1.5 rounded-full bg-[#590907] text-[#F8F6F1] px-4 py-2 text-xs font-semibold hover:bg-[#590907]/90 transition shadow-xs cursor-pointer"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#4F46E5] text-white px-4 py-2 text-xs font-semibold hover:bg-[#4338CA] transition shadow-xs cursor-pointer"
             >
               <Plus className="h-3.5 w-3.5" />
               <span>Add Lead Manually</span>
@@ -440,43 +473,43 @@ export default function AdminPage() {
 
         {/* 3. METRIC CARDS ROW */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div className="rounded-2xl border border-[rgba(89,9,7,0.1)] bg-white p-5 shadow-xs">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#6B615A]">Total Leads</span>
-            <div className="mt-2 text-3xl font-bold font-serif text-[#242321]">{metrics.total}</div>
-            <div className="mt-1 text-[11px] text-[#A5A79B]">Inbound submissions</div>
+          <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-xs">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748B]">Total Leads</span>
+            <div className="mt-2 text-3xl font-bold text-[#0F172A]">{metrics.total}</div>
+            <div className="mt-1 text-[11px] text-[#94A3B8]">Inbound submissions</div>
           </div>
 
-          <div className="rounded-2xl border border-[#D97706]/30 bg-[#FFFBEB] p-5 shadow-xs">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#D97706]">New / Action Required</span>
-            <div className="mt-2 text-3xl font-bold font-serif text-[#D97706]">{metrics.newCount}</div>
-            <div className="mt-1 text-[11px] text-[#B45309]">Uncontacted leads</div>
+          <div className="rounded-2xl border border-amber-200 bg-amber-50/50 p-5 shadow-xs">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700">New / Action Required</span>
+            <div className="mt-2 text-3xl font-bold text-amber-700">{metrics.newCount}</div>
+            <div className="mt-1 text-[11px] text-amber-600">Uncontacted leads</div>
           </div>
 
-          <div className="rounded-2xl border border-[rgba(89,9,7,0.1)] bg-white p-5 shadow-xs">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#590907]">Demo Requests</span>
-            <div className="mt-2 text-3xl font-bold font-serif text-[#590907]">{metrics.demoCount}</div>
-            <div className="mt-1 text-[11px] text-[#6B615A]">Scheduled or requested</div>
+          <div className="rounded-2xl border border-indigo-200 bg-indigo-50/40 p-5 shadow-xs">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#4F46E5]">Demo Requests</span>
+            <div className="mt-2 text-3xl font-bold text-[#4F46E5]">{metrics.demoCount}</div>
+            <div className="mt-1 text-[11px] text-[#64748B]">Scheduled or requested</div>
           </div>
 
-          <div className="rounded-2xl border border-[#299D68]/30 bg-[#F0FDF4] p-5 shadow-xs">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-[#299D68]">In Progress / Qualified</span>
-            <div className="mt-2 text-3xl font-bold font-serif text-[#299D68]">{metrics.qualifiedCount}</div>
-            <div className="mt-1 text-[11px] text-[#15803D]">Commercial dialogue</div>
+          <div className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-5 shadow-xs">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">In Progress / Qualified</span>
+            <div className="mt-2 text-3xl font-bold text-emerald-700">{metrics.qualifiedCount}</div>
+            <div className="mt-1 text-[11px] text-emerald-600">Commercial dialogue</div>
           </div>
         </div>
 
         {/* 4. CONTROLS & FILTER TOOLBAR */}
-        <div className="rounded-2xl border border-[rgba(89,9,7,0.1)] bg-white p-4 shadow-xs space-y-4">
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xs space-y-4">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
             {/* Live Search Input */}
             <div className="relative flex-1">
-              <Search className="absolute left-3.5 top-3 h-4 w-4 text-[#A5A79B]" />
+              <Search className="absolute left-3.5 top-3 h-4 w-4 text-[#94A3B8]" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by lead name, company, email, phone number, or notes..."
-                className="w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] pl-10 pr-4 py-2 text-xs sm:text-sm text-[#242321] outline-none focus:border-[#590907]"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 pl-10 pr-4 py-2 text-xs sm:text-sm text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white"
               />
             </div>
 
@@ -485,7 +518,7 @@ export default function AdminPage() {
               <select
                 value={typeFilter}
                 onChange={(e) => setTypeFilter(e.target.value)}
-                className="rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] px-3 py-2 text-xs text-[#242321] outline-none focus:border-[#590907]"
+                className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-[#0F172A] outline-none focus:border-[#4F46E5]"
               >
                 <option value="all">All Inquiry Types</option>
                 <option value="Book a Demo">Book a Demo</option>
@@ -499,7 +532,7 @@ export default function AdminPage() {
               <button
                 type="button"
                 onClick={() => setSortOrder((prev) => (prev === 'desc' ? 'asc' : 'desc'))}
-                className="rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] px-3 py-2 text-xs text-[#242321] hover:bg-white inline-flex items-center gap-1 cursor-pointer"
+                className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-[#0F172A] hover:bg-white inline-flex items-center gap-1 cursor-pointer"
                 title="Toggle sort direction"
               >
                 <ArrowUpDown className="h-3.5 w-3.5" />
@@ -509,8 +542,8 @@ export default function AdminPage() {
           </div>
 
           {/* Status Tabs */}
-          <div className="flex flex-wrap items-center gap-1.5 border-t border-[rgba(89,9,7,0.06)] pt-3 text-xs">
-            <span className="text-[#6B615A] font-semibold mr-2 flex items-center gap-1">
+          <div className="flex flex-wrap items-center gap-1.5 border-t border-slate-100 pt-3 text-xs">
+            <span className="text-[#64748B] font-semibold mr-2 flex items-center gap-1">
               <Filter className="h-3 w-3" />
               <span>Status:</span>
             </span>
@@ -529,8 +562,8 @@ export default function AdminPage() {
                 onClick={() => setStatusFilter(tab.id)}
                 className={`rounded-full px-3 py-1 font-medium transition cursor-pointer ${
                   statusFilter === tab.id
-                    ? 'bg-[#590907] text-[#F8F6F1] shadow-xs'
-                    : 'bg-[#FBF7F0] text-[#6B615A] hover:bg-[#F3EBDD]'
+                    ? 'bg-[#4F46E5] text-white shadow-xs'
+                    : 'bg-slate-100 text-[#64748B] hover:bg-slate-200'
                 }`}
               >
                 {tab.label}
@@ -540,11 +573,11 @@ export default function AdminPage() {
         </div>
 
         {/* 5. LEADS DATA TABLE */}
-        <div className="rounded-3xl border border-[rgba(89,9,7,0.1)] bg-white shadow-sm overflow-hidden">
+        <div className="rounded-3xl border border-slate-200 bg-white shadow-sm overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>
-                <tr className="border-b border-[rgba(89,9,7,0.1)] bg-[#FBF7F0]/60 text-[11px] font-bold uppercase tracking-wider text-[#6B615A]">
+                <tr className="border-b border-slate-200 bg-slate-50 text-[11px] font-bold uppercase tracking-wider text-[#64748B]">
                   <th className="py-3.5 px-4 sm:px-6">Lead &amp; Organization</th>
                   <th className="py-3.5 px-4">Contact Details</th>
                   <th className="py-3.5 px-4">Inquiry / Plan</th>
@@ -553,14 +586,14 @@ export default function AdminPage() {
                   <th className="py-3.5 px-4 sm:px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[rgba(89,9,7,0.06)]">
+              <tbody className="divide-y divide-slate-100">
                 {filteredLeads.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="py-12 text-center text-[#A5A79B]">
+                    <td colSpan={6} className="py-12 text-center text-[#94A3B8]">
                       <div className="flex flex-col items-center justify-center space-y-2">
-                        <MessageSquare className="h-8 w-8 text-[#A5A79B]/60" />
-                        <span className="text-sm font-medium text-[#242321]">No leads found</span>
-                        <span className="text-xs text-[#6B615A]">Try resetting your search query or status filter.</span>
+                        <MessageSquare className="h-8 w-8 text-slate-300" />
+                        <span className="text-sm font-medium text-[#0F172A]">No leads found</span>
+                        <span className="text-xs text-[#64748B]">Try resetting your search query or status filter.</span>
                       </div>
                     </td>
                   </tr>
@@ -568,7 +601,7 @@ export default function AdminPage() {
                   filteredLeads.map((lead) => (
                     <tr
                       key={lead.id}
-                      className="hover:bg-[#FBF7F0]/80 transition group cursor-pointer"
+                      className="hover:bg-slate-50/80 transition group cursor-pointer"
                       onClick={() => {
                         setSelectedLead(lead);
                         setNotesDraft(lead.admin_notes || '');
@@ -577,15 +610,15 @@ export default function AdminPage() {
                       {/* Name & Company */}
                       <td className="py-4 px-4 sm:px-6">
                         <div className="flex items-center gap-3">
-                          <div className="h-9 w-9 rounded-full bg-[#590907]/10 text-[#590907] flex items-center justify-center font-bold text-xs shrink-0">
+                          <div className="h-9 w-9 rounded-full bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center font-bold text-xs shrink-0">
                             {lead.full_name.charAt(0).toUpperCase()}
                           </div>
                           <div>
-                            <div className="font-bold text-[#242321] group-hover:text-[#590907] transition">
+                            <div className="font-bold text-[#0F172A] group-hover:text-[#4F46E5] transition">
                               {lead.full_name}
                             </div>
-                            <div className="text-xs text-[#6B615A] flex items-center gap-1">
-                              <Building className="h-3 w-3 text-[#A5A79B]" />
+                            <div className="text-xs text-[#64748B] flex items-center gap-1">
+                              <Building className="h-3 w-3 text-slate-400" />
                               <span>{lead.company_name}</span>
                             </div>
                           </div>
@@ -598,18 +631,18 @@ export default function AdminPage() {
                           <a
                             href={`mailto:${lead.business_email}`}
                             onClick={(e) => e.stopPropagation()}
-                            className="text-[#590907] hover:underline flex items-center gap-1 font-medium"
+                            className="text-[#4F46E5] hover:underline flex items-center gap-1 font-medium"
                           >
-                            <Mail className="h-3 w-3 text-[#A5A79B]" />
+                            <Mail className="h-3 w-3 text-slate-400" />
                             <span>{lead.business_email}</span>
                           </a>
                           {lead.phone_number && (
                             <a
                               href={`tel:${lead.phone_number}`}
                               onClick={(e) => e.stopPropagation()}
-                              className="text-[#6B615A] hover:underline flex items-center gap-1 text-[11px]"
+                              className="text-[#64748B] hover:underline flex items-center gap-1 text-[11px]"
                             >
-                              <Phone className="h-3 w-3 text-[#A5A79B]" />
+                              <Phone className="h-3 w-3 text-slate-400" />
                               <span>{lead.phone_number}</span>
                             </a>
                           )}
@@ -622,26 +655,26 @@ export default function AdminPage() {
                           <span
                             className={`inline-block rounded-md px-2 py-0.5 text-[11px] font-semibold ${
                               lead.inquiry_type?.toLowerCase().includes('demo')
-                                ? 'bg-[#590907]/10 text-[#590907]'
-                                : 'bg-[#E8D2B5]/30 text-[#4A423D]'
+                                ? 'bg-indigo-50 text-[#4F46E5] border border-indigo-100'
+                                : 'bg-slate-100 text-slate-700'
                             }`}
                           >
                             {lead.inquiry_type || 'General'}
                           </span>
-                          <div className="text-[11px] text-[#A5A79B] mt-1">
-                            Plan: <span className="font-medium text-[#242321]">{lead.interested_plan || 'Starter'}</span>
+                          <div className="text-[11px] text-[#94A3B8] mt-1">
+                            Plan: <span className="font-medium text-[#0F172A]">{lead.interested_plan || 'Starter'}</span>
                             {lead.employee_count && ` · ${lead.employee_count}`}
                           </div>
                         </div>
                       </td>
 
                       {/* Date */}
-                      <td className="py-4 px-4 whitespace-nowrap text-xs text-[#6B615A]">
+                      <td className="py-4 px-4 whitespace-nowrap text-xs text-[#64748B]">
                         <div className="flex items-center gap-1">
-                          <Clock className="h-3 w-3 text-[#A5A79B]" />
+                          <Clock className="h-3 w-3 text-slate-400" />
                           <span>{new Date(lead.created_at).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
                         </div>
-                        <div className="text-[10px] text-[#A5A79B]">
+                        <div className="text-[10px] text-[#94A3B8]">
                           {new Date(lead.created_at).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })}
                         </div>
                       </td>
@@ -678,7 +711,7 @@ export default function AdminPage() {
                               setSelectedLead(lead);
                               setNotesDraft(lead.admin_notes || '');
                             }}
-                            className="p-1.5 rounded-lg text-[#6B615A] hover:bg-[#F3EBDD] hover:text-[#590907] transition cursor-pointer"
+                            className="p-1.5 rounded-lg text-[#64748B] hover:bg-slate-100 hover:text-[#4F46E5] transition cursor-pointer"
                             title="Inspect Lead Details"
                           >
                             <ExternalLink className="h-4 w-4" />
@@ -686,7 +719,7 @@ export default function AdminPage() {
                           <button
                             type="button"
                             onClick={() => handleDeleteLead(lead.id)}
-                            className="p-1.5 rounded-lg text-[#A5A79B] hover:bg-red-50 hover:text-red-700 transition cursor-pointer"
+                            className="p-1.5 rounded-lg text-[#94A3B8] hover:bg-red-50 hover:text-red-700 transition cursor-pointer"
                             title="Delete Lead"
                           >
                             <Trash2 className="h-4 w-4" />
@@ -706,23 +739,23 @@ export default function AdminPage() {
       {/* 6. MODAL: DETAILED LEAD INSPECTION & INTERNAL NOTES                   */}
       {/* ===================================================================== */}
       {selectedLead && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-2xl rounded-3xl bg-white border border-[rgba(89,9,7,0.15)] shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto space-y-6">
-            <div className="flex items-start justify-between border-b border-[rgba(89,9,7,0.08)] pb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-xs">
+          <div className="w-full max-w-2xl rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto space-y-6">
+            <div className="flex items-start justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#590907]">
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#4F46E5]">
                   LEAD PROFILE DOSSIER
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold font-serif text-[#242321] mt-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#0F172A] mt-1">
                   {selectedLead.full_name}
                 </h3>
-                <p className="text-xs text-[#6B615A]">{selectedLead.company_name}</p>
+                <p className="text-xs text-[#64748B]">{selectedLead.company_name}</p>
               </div>
 
               <button
                 type="button"
                 onClick={() => setSelectedLead(null)}
-                className="p-1.5 rounded-full hover:bg-[#F3EBDD] text-[#6B615A] cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-slate-100 text-[#64748B] cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -732,7 +765,7 @@ export default function AdminPage() {
             <div className="grid grid-cols-2 gap-3">
               <a
                 href={`mailto:${selectedLead.business_email}`}
-                className="flex items-center justify-center gap-2 rounded-xl bg-[#590907] text-[#F8F6F1] py-2.5 px-4 text-xs font-semibold hover:bg-[#590907]/90 transition"
+                className="flex items-center justify-center gap-2 rounded-xl bg-[#4F46E5] text-white py-2.5 px-4 text-xs font-semibold hover:bg-[#4338CA] transition"
               >
                 <Mail className="h-3.5 w-3.5" />
                 <span>Email Lead</span>
@@ -741,48 +774,48 @@ export default function AdminPage() {
               {selectedLead.phone_number ? (
                 <a
                   href={`tel:${selectedLead.phone_number}`}
-                  className="flex items-center justify-center gap-2 rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] text-[#242321] py-2.5 px-4 text-xs font-semibold hover:bg-white transition"
+                  className="flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-slate-50 text-[#0F172A] py-2.5 px-4 text-xs font-semibold hover:bg-white transition"
                 >
-                  <Phone className="h-3.5 w-3.5 text-[#590907]" />
+                  <Phone className="h-3.5 w-3.5 text-[#4F46E5]" />
                   <span>Call {selectedLead.phone_number}</span>
                 </a>
               ) : (
-                <div className="flex items-center justify-center gap-2 rounded-xl border border-[rgba(89,9,7,0.1)] bg-zinc-50 text-zinc-400 py-2.5 px-4 text-xs">
+                <div className="flex items-center justify-center gap-2 rounded-xl border border-slate-100 bg-slate-50 text-slate-400 py-2.5 px-4 text-xs">
                   <span>Phone not provided</span>
                 </div>
               )}
             </div>
 
             {/* Structured Specifications Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-[#FBF7F0] border border-[rgba(89,9,7,0.08)] text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-slate-50 border border-slate-100 text-xs">
               <div>
-                <span className="text-[#A5A79B] block text-[10px] uppercase font-bold">Inquiry Type</span>
-                <span className="font-semibold text-[#242321]">{selectedLead.inquiry_type || 'General'}</span>
+                <span className="text-[#94A3B8] block text-[10px] uppercase font-bold">Inquiry Type</span>
+                <span className="font-semibold text-[#0F172A]">{selectedLead.inquiry_type || 'General'}</span>
               </div>
               <div>
-                <span className="text-[#A5A79B] block text-[10px] uppercase font-bold">Interested Plan</span>
-                <span className="font-semibold text-[#242321]">{selectedLead.interested_plan || 'Starter'}</span>
+                <span className="text-[#94A3B8] block text-[10px] uppercase font-bold">Interested Plan</span>
+                <span className="font-semibold text-[#0F172A]">{selectedLead.interested_plan || 'Starter'}</span>
               </div>
               <div>
-                <span className="text-[#A5A79B] block text-[10px] uppercase font-bold">Team Size</span>
-                <span className="font-semibold text-[#242321]">{selectedLead.employee_count || 'Unspecified'}</span>
+                <span className="text-[#94A3B8] block text-[10px] uppercase font-bold">Team Size</span>
+                <span className="font-semibold text-[#0F172A]">{selectedLead.employee_count || 'Unspecified'}</span>
               </div>
               <div>
-                <span className="text-[#A5A79B] block text-[10px] uppercase font-bold">Received At</span>
-                <span className="font-semibold text-[#242321]">
+                <span className="text-[#94A3B8] block text-[10px] uppercase font-bold">Received At</span>
+                <span className="font-semibold text-[#0F172A]">
                   {new Date(selectedLead.created_at).toLocaleString('en-IN')}
                 </span>
               </div>
               <div>
-                <span className="text-[#A5A79B] block text-[10px] uppercase font-bold">Source Channel</span>
-                <span className="font-semibold text-[#242321]">{selectedLead.source || 'website'}</span>
+                <span className="text-[#94A3B8] block text-[10px] uppercase font-bold">Source Channel</span>
+                <span className="font-semibold text-[#0F172A]">{selectedLead.source || 'website'}</span>
               </div>
               <div>
-                <span className="text-[#A5A79B] block text-[10px] uppercase font-bold">Lifecycle Status</span>
+                <span className="text-[#94A3B8] block text-[10px] uppercase font-bold">Lifecycle Status</span>
                 <select
                   value={selectedLead.status}
                   onChange={(e) => handleStatusChange(selectedLead.id, e.target.value as Lead['status'])}
-                  className="mt-0.5 rounded-lg border border-[rgba(89,9,7,0.2)] bg-white px-2 py-0.5 text-xs font-semibold text-[#590907] outline-none"
+                  className="mt-0.5 rounded-lg border border-slate-200 bg-white px-2 py-0.5 text-xs font-semibold text-[#4F46E5] outline-none"
                 >
                   <option value="new">New</option>
                   <option value="contacted">Contacted</option>
@@ -795,17 +828,17 @@ export default function AdminPage() {
 
             {/* Submitted Message */}
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#6B615A] block mb-1.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#64748B] block mb-1.5">
                 Lead Inquiry Message:
               </span>
-              <div className="p-4 rounded-xl border border-[rgba(89,9,7,0.1)] bg-white text-xs sm:text-sm text-[#242321] leading-relaxed italic">
+              <div className="p-4 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm text-[#0F172A] leading-relaxed italic">
                 "{selectedLead.message || 'No additional note provided by prospect.'}"
               </div>
             </div>
 
             {/* Internal Admin Notes */}
             <div className="space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#6B615A] block">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#64748B] block">
                 Internal Administrative Notes:
               </span>
               <textarea
@@ -813,14 +846,14 @@ export default function AdminPage() {
                 value={notesDraft}
                 onChange={(e) => setNotesDraft(e.target.value)}
                 placeholder="Log call updates, team requirements, discount commitments, or next action items..."
-                className="w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-3 text-xs sm:text-sm text-[#242321] outline-none focus:border-[#590907] resize-y"
+                className="w-full rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs sm:text-sm text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white resize-y"
               />
               <div className="flex justify-end">
                 <button
                   type="button"
                   onClick={handleSaveNotes}
                   disabled={savingNotes}
-                  className="rounded-full bg-[#590907] text-[#F8F6F1] px-5 py-2 text-xs font-semibold hover:bg-[#590907]/90 transition cursor-pointer"
+                  className="rounded-full bg-[#4F46E5] text-white px-5 py-2 text-xs font-semibold hover:bg-[#4338CA] transition cursor-pointer"
                 >
                   {savingNotes ? 'Saving Notes...' : 'Save Internal Notes'}
                 </button>
@@ -834,17 +867,17 @@ export default function AdminPage() {
       {/* 7. MODAL: ADD LEAD MANUALLY                                           */}
       {/* ===================================================================== */}
       {showAddLeadModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-lg rounded-3xl bg-white border border-[rgba(89,9,7,0.15)] shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto space-y-5">
-            <div className="flex items-start justify-between border-b border-[rgba(89,9,7,0.08)] pb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-xs">
+          <div className="w-full max-w-lg rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto space-y-5">
+            <div className="flex items-start justify-between border-b border-slate-100 pb-4">
               <div>
-                <span className="text-[11px] font-bold uppercase tracking-wider text-[#590907]">MANUAL PIPELINE LOG</span>
-                <h3 className="text-xl font-bold font-serif text-[#242321] mt-1">Record Prospect Lead</h3>
+                <span className="text-[11px] font-bold uppercase tracking-wider text-[#4F46E5]">MANUAL PIPELINE LOG</span>
+                <h3 className="text-xl font-bold text-[#0F172A] mt-1">Record Prospect Lead</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setShowAddLeadModal(false)}
-                className="p-1.5 rounded-full hover:bg-[#F3EBDD] text-[#6B615A] cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-slate-100 text-[#64748B] cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -852,7 +885,7 @@ export default function AdminPage() {
 
             <form onSubmit={handleCreateManualLead} className="space-y-4">
               <div className="grid grid-cols-2 gap-3">
-                <label className="block text-xs font-semibold text-[#242321]">
+                <label className="block text-xs font-semibold text-[#0F172A]">
                   Full Name *
                   <input
                     type="text"
@@ -860,11 +893,11 @@ export default function AdminPage() {
                     value={newLeadForm.full_name}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, full_name: e.target.value })}
                     placeholder="e.g. Vikramaditya Roy"
-                    className="mt-1 w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-2.5 text-xs text-[#242321] outline-none focus:border-[#590907]"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white"
                   />
                 </label>
 
-                <label className="block text-xs font-semibold text-[#242321]">
+                <label className="block text-xs font-semibold text-[#0F172A]">
                   Business Email *
                   <input
                     type="email"
@@ -872,13 +905,13 @@ export default function AdminPage() {
                     value={newLeadForm.business_email}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, business_email: e.target.value })}
                     placeholder="vroy@enterprise.in"
-                    className="mt-1 w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-2.5 text-xs text-[#242321] outline-none focus:border-[#590907]"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white"
                   />
                 </label>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <label className="block text-xs font-semibold text-[#242321]">
+                <label className="block text-xs font-semibold text-[#0F172A]">
                   Company Name *
                   <input
                     type="text"
@@ -886,29 +919,29 @@ export default function AdminPage() {
                     value={newLeadForm.company_name}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, company_name: e.target.value })}
                     placeholder="Enterprise Corp"
-                    className="mt-1 w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-2.5 text-xs text-[#242321] outline-none focus:border-[#590907]"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white"
                   />
                 </label>
 
-                <label className="block text-xs font-semibold text-[#242321]">
+                <label className="block text-xs font-semibold text-[#0F172A]">
                   Phone Number
                   <input
                     type="tel"
                     value={newLeadForm.phone_number}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, phone_number: e.target.value })}
                     placeholder="+91 98000 11223"
-                    className="mt-1 w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-2.5 text-xs text-[#242321] outline-none focus:border-[#590907]"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white"
                   />
                 </label>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <label className="block text-xs font-semibold text-[#242321]">
+                <label className="block text-xs font-semibold text-[#0F172A]">
                   Inquiry Type
                   <select
                     value={newLeadForm.inquiry_type}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, inquiry_type: e.target.value })}
-                    className="mt-1 w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-2.5 text-xs text-[#242321] outline-none"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-[#0F172A] outline-none"
                   >
                     <option value="Book a Demo">Book a Demo</option>
                     <option value="Pricing Enquiry">Pricing Enquiry</option>
@@ -917,12 +950,12 @@ export default function AdminPage() {
                   </select>
                 </label>
 
-                <label className="block text-xs font-semibold text-[#242321]">
+                <label className="block text-xs font-semibold text-[#0F172A]">
                   Interested Plan
                   <select
                     value={newLeadForm.interested_plan}
                     onChange={(e) => setNewLeadForm({ ...newLeadForm, interested_plan: e.target.value })}
-                    className="mt-1 w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-2.5 text-xs text-[#242321] outline-none"
+                    className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-[#0F172A] outline-none"
                   >
                     <option value="Starter">Starter (30 emp)</option>
                     <option value="Professional">Professional (75 emp)</option>
@@ -931,14 +964,14 @@ export default function AdminPage() {
                 </label>
               </div>
 
-              <label className="block text-xs font-semibold text-[#242321]">
+              <label className="block text-xs font-semibold text-[#0F172A]">
                 Notes / Requirements
                 <textarea
                   rows={3}
                   value={newLeadForm.message}
                   onChange={(e) => setNewLeadForm({ ...newLeadForm, message: e.target.value })}
                   placeholder="Details discussed during phone or personal meeting..."
-                  className="mt-1 w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] p-2.5 text-xs text-[#242321] outline-none focus:border-[#590907]"
+                  className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 p-2.5 text-xs text-[#0F172A] outline-none focus:border-[#4F46E5] focus:bg-white"
                 />
               </label>
 
@@ -946,13 +979,13 @@ export default function AdminPage() {
                 <button
                   type="button"
                   onClick={() => setShowAddLeadModal(false)}
-                  className="rounded-full border border-[rgba(89,9,7,0.15)] px-4 py-2 text-xs font-semibold text-[#6B615A] hover:bg-[#F3EBDD] cursor-pointer"
+                  className="rounded-full border border-slate-200 px-4 py-2 text-xs font-semibold text-[#64748B] hover:bg-slate-100 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="rounded-full bg-[#590907] text-[#F8F6F1] px-5 py-2 text-xs font-semibold hover:bg-[#590907]/90 cursor-pointer"
+                  className="rounded-full bg-[#4F46E5] text-white px-5 py-2 text-xs font-semibold hover:bg-[#4338CA] cursor-pointer"
                 >
                   Save Lead
                 </button>
@@ -966,48 +999,48 @@ export default function AdminPage() {
       {/* 8. MODAL: MONGODB ATLAS ARCHITECTURE & AI AGENT MIGRATIONS            */}
       {/* ===================================================================== */}
       {showDbInfoModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
-          <div className="w-full max-w-2xl rounded-3xl bg-white border border-[rgba(89,9,7,0.15)] shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto space-y-5">
-            <div className="flex items-start justify-between border-b border-[rgba(89,9,7,0.08)] pb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-xs">
+          <div className="w-full max-w-2xl rounded-3xl bg-white border border-slate-200 shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto space-y-5">
+            <div className="flex items-start justify-between border-b border-slate-100 pb-4">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-xl bg-[#299D68]/10 text-[#299D68] flex items-center justify-center">
+                <div className="h-10 w-10 rounded-xl bg-emerald-50 text-[#10B981] flex items-center justify-center">
                   <Database className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold font-serif text-[#242321]">MongoDB Atlas Architecture</h3>
-                  <p className="text-xs text-[#6B615A]">Dedicated Cloud Cluster &amp; Direct AI Agent Migrations</p>
+                  <h3 className="text-xl font-bold text-[#0F172A]">MongoDB Atlas Architecture</h3>
+                  <p className="text-xs text-[#64748B]">Dedicated Cloud Cluster &amp; Direct AI Agent Migrations</p>
                 </div>
               </div>
               <button
                 type="button"
                 onClick={() => setShowDbInfoModal(false)}
-                className="p-1.5 rounded-full hover:bg-[#F3EBDD] text-[#6B615A] cursor-pointer"
+                className="p-1.5 rounded-full hover:bg-slate-100 text-[#64748B] cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
-            <div className="space-y-4 text-xs leading-relaxed text-[#4A423D]">
-              <div className="p-4 rounded-xl bg-[#FBF7F0] border border-[rgba(89,9,7,0.08)] space-y-2">
-                <div className="font-bold text-[#242321] flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-[#299D68]"></span>
+            <div className="space-y-4 text-xs leading-relaxed text-[#334155]">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                <div className="font-bold text-[#0F172A] flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-[#10B981]"></span>
                   <span>Cluster Details &amp; Telemetry:</span>
                 </div>
-                <ul className="list-disc pl-5 space-y-1 text-[#6B615A]">
-                  <li><b>Cluster Host:</b> <code className="text-[#590907] font-mono">cluster0.la6tjpd.mongodb.net</code></li>
-                  <li><b>Database Name:</b> <code className="text-[#590907] font-mono">flowpeople</code></li>
-                  <li><b>Primary Collection:</b> <code className="text-[#590907] font-mono">leads</code> (with 6 verified indexes)</li>
-                  <li><b>AI Migration Agent:</b> Direct migrations through <code className="text-[#590907] font-mono">npm run db:migrate</code></li>
+                <ul className="list-disc pl-5 space-y-1 text-[#64748B]">
+                  <li><b>Cluster Host:</b> <code className="text-[#4F46E5] font-mono">cluster0.la6tjpd.mongodb.net</code></li>
+                  <li><b>Database Name:</b> <code className="text-[#4F46E5] font-mono">flowpeople</code></li>
+                  <li><b>Primary Collection:</b> <code className="text-[#4F46E5] font-mono">leads</code> (with 6 verified indexes)</li>
+                  <li><b>AI Migration Agent:</b> Direct migrations through <code className="text-[#4F46E5] font-mono">npm run db:migrate</code></li>
                 </ul>
               </div>
 
-              <div className="p-4 rounded-xl bg-zinc-900 text-zinc-100 font-mono text-[11px] overflow-x-auto space-y-1">
-                <div className="text-zinc-400"># Active MongoDB Atlas Connection (.env):</div>
+              <div className="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-[11px] overflow-x-auto space-y-1">
+                <div className="text-slate-400"># Active MongoDB Atlas Connection (.env):</div>
                 <div className="text-emerald-400">MONGODB_URI="mongodb+srv://hqfluxora_db_user:***@cluster0.la6tjpd.mongodb.net/flowpeople?..."</div>
                 <div className="text-emerald-400">MONGODB_DB_NAME="flowpeople"</div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#299D68]/10 border border-[#299D68]/30 text-[#299D68] text-xs">
+              <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs">
                 <b>AI Agent Direct Migration Enabled:</b> Whenever database schemas, indexes, or collections are modified, AI agents directly execute database migrations and status inspections via the dedicated MongoDB driver scripts.
               </div>
             </div>
@@ -1016,7 +1049,7 @@ export default function AdminPage() {
               <button
                 type="button"
                 onClick={() => setShowDbInfoModal(false)}
-                className="rounded-full bg-[#590907] text-[#F8F6F1] px-5 py-2 text-xs font-semibold hover:bg-[#590907]/90 cursor-pointer"
+                className="rounded-full bg-[#4F46E5] text-white px-5 py-2 text-xs font-semibold hover:bg-[#4338CA] cursor-pointer"
               >
                 Close Details
               </button>

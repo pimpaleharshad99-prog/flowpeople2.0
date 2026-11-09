@@ -70,7 +70,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="relative z-30 overflow-hidden bg-[#1c1b19] text-[#F8F6F1]">
+    <footer className="relative z-30 overflow-hidden bg-[#0B0F19] text-[#F8FAFC] border-t border-slate-800/80">
       <div className="mx-auto max-w-6xl px-4 pt-16 sm:px-8">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5">
           {/* Brand Column */}
@@ -78,12 +78,12 @@ export default function Footer() {
             <Link to="/" className="inline-block transition hover:opacity-90">
               <BrandLogo variant="footer" />
             </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-[#F8F6F1]/75">
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-slate-400">
               Simple, friendly attendance and HR for modern teams. By Fluxora.
             </p>
-            <div className="mt-5 space-y-1.5 text-xs text-[#F8F6F1]/65">
+            <div className="mt-5 space-y-1.5 text-xs text-slate-400">
               <div>
-                <a href="mailto:hqfluxora@gmail.com" className="hover:text-white transition font-medium text-[#E8D2B5]">
+                <a href="mailto:hqfluxora@gmail.com" className="hover:text-white transition font-medium text-[#60A5FA]">
                   hqfluxora@gmail.com
                 </a>
               </div>
@@ -93,7 +93,7 @@ export default function Footer() {
           {/* Product Column */}
           <div>
             <h4 className="text-sm font-semibold text-white">Product</h4>
-            <ul className="mt-4 space-y-2 text-sm text-[#F8F6F1]/65">
+            <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li>
                 <Link to="/how-it-works" className="hover:text-white transition">
                   How It Works
@@ -140,7 +140,7 @@ export default function Footer() {
           {/* Company Column */}
           <div>
             <h4 className="text-sm font-semibold text-white">Company</h4>
-            <ul className="mt-4 space-y-2 text-sm text-[#F8F6F1]/65">
+            <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li>
                 <Link to="/about" className="hover:text-white transition">
                   About FlowPeople
@@ -172,7 +172,7 @@ export default function Footer() {
           {/* Get In Touch Column */}
           <div>
             <h4 className="text-sm font-semibold text-white">Get in touch</h4>
-            <ul className="mt-4 space-y-2.5 text-sm text-[#F8F6F1]/65">
+            <ul className="mt-4 space-y-2.5 text-sm text-slate-400">
               <li>
                 <a href="mailto:hqfluxora@gmail.com" className="hover:text-white transition font-medium">
                   hqfluxora@gmail.com
@@ -181,14 +181,14 @@ export default function Footer() {
               <li>
                 <Link
                   to="/contact?type=Book%20a%20Demo"
-                  className="hover:text-white transition inline-flex items-center gap-1.5 text-xs text-[#E8D2B5] font-semibold hover:underline"
+                  className="hover:text-white transition inline-flex items-center gap-1.5 text-xs text-[#60A5FA] font-semibold hover:underline"
                 >
                   <span>Book a Demo</span>
                   <span aria-hidden="true">&rarr;</span>
                 </Link>
               </li>
               <li className="pt-2">
-                <span className="text-xs text-[#A5A79B] block">Response within 24 business hours</span>
+                <span className="text-xs text-slate-500 block">Response within 24 business hours</span>
               </li>
             </ul>
           </div>
@@ -196,7 +196,7 @@ export default function Footer() {
           {/* Legal & Security */}
           <div>
             <h4 className="text-sm font-semibold text-white">Legal &amp; Trust</h4>
-            <ul className="mt-4 space-y-2 text-sm text-[#F8F6F1]/65">
+            <ul className="mt-4 space-y-2 text-sm text-slate-400">
               <li>
                 <Link to="/privacy" className="hover:text-white transition">
                   Privacy Policy
@@ -226,7 +226,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-[#F8F6F1]/50 sm:flex-row">
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-slate-800 pt-6 text-xs text-slate-500 sm:flex-row">
           <span>© 2026 Fluxora. All rights reserved.</span>
           <span className="flex gap-5">
             <Link to="/privacy" className="hover:text-white transition">Privacy Policy</Link>
@@ -252,11 +252,11 @@ export default function Footer() {
             WebkitBackgroundClip: 'text',
             backgroundClip: 'text',
             backgroundImage:
-              'radial-gradient(circle 240px at var(--mx) var(--my), rgba(255,236,205,calc(0.95*var(--o))) 0%, rgba(232,210,181,calc(0.55*var(--o))) 40%, rgba(255,255,255,0) 100%), linear-gradient(100deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.07) 100%)',
+              'radial-gradient(circle 240px at var(--mx) var(--my), rgba(96,165,250,calc(0.95*var(--o))) 0%, rgba(56,189,248,calc(0.55*var(--o))) 40%, rgba(255,255,255,0) 100%), linear-gradient(100deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.08) 100%)',
             transition: '--o .3s',
           }}
         >
-          FLUXORA<span className="text-[#A5A79B]/80">.hq</span>
+          FLUXORA<span className="text-slate-600">.hq</span>
         </div>
       </div>
     </footer>

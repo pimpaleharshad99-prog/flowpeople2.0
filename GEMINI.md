@@ -24,7 +24,7 @@ Every single page or route in this repository (`f:\flowpeople`) **MUST** use the
 
       {/* Right Action CTA */}
       <div className="flex items-center gap-2">
-        <button onClick={handleBookDemo} className="rounded-full bg-[#590907] px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-[#F8F6F1] shadow-sm transition hover:bg-[#590907]/90">
+        <button onClick={handleBookDemo} className="rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm transition hover:brightness-110">
           Book Demo
         </button>
       </div>
@@ -32,21 +32,21 @@ Every single page or route in this repository (`f:\flowpeople`) **MUST** use the
   </header>
   ```
 - **Experience Switcher Dock Rules**:
-  - The active page must carry: `rounded-full bg-[#590907] text-[#F8F6F1] px-3.5 sm:px-4 py-1.5 font-semibold shadow-xs transition`
-  - Inactive pages must carry: `rounded-full text-[#242321] hover:text-[#590907] hover:bg-white/40 px-3.5 sm:px-4 py-1.5 transition`
+  - The active page must carry: `rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white px-3.5 sm:px-4 py-1.5 font-semibold shadow-xs transition`
+  - Inactive pages must carry: `rounded-full text-[#334155] hover:text-[#4F46E5] hover:bg-white/40 px-3.5 sm:px-4 py-1.5 transition`
   - When a new page is added to the project, its pill should be represented in the dock or linked through the standard React Router navigation.
 - **Required Stylesheet Classes**:
   ```css
   .nav-glass {
-    background: linear-gradient(135deg, rgba(255, 253, 249, 0.78) 0%, rgba(246, 238, 226, 0.68) 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.88) 0%, rgba(241, 245, 249, 0.78) 100%);
     backdrop-filter: blur(26px) saturate(190%);
     -webkit-backdrop-filter: blur(26px) saturate(190%);
-    border: 1px solid rgba(89, 9, 7, 0.12);
-    box-shadow: 0 16px 36px -12px rgba(89, 9, 7, 0.14), 0 4px 16px -4px rgba(36, 35, 33, 0.08);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 16px 36px -12px rgba(79, 70, 229, 0.12), 0 4px 16px -4px rgba(15, 23, 42, 0.06);
   }
   .nav-glass-dock {
-    background: rgba(255, 255, 255, 0.55);
-    border: 1px solid rgba(89, 9, 7, 0.12);
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(15, 23, 42, 0.08);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
   }
@@ -54,14 +54,18 @@ Every single page or route in this repository (`f:\flowpeople`) **MUST** use the
 
 ### Footer Contract:
 - **Container Structure**:
-  `<footer class="relative z-30 overflow-hidden bg-[#1c1b19] text-[#F8F6F1]">`
+  `<footer class="relative z-30 overflow-hidden bg-[#0B0F19] text-[#F8FAFC] border-t border-slate-800/80">`
 - **Columns**: 5-column responsive grid (Brand intro, Experiences, Platform, Get in touch, Copyright).
 - **Interactive Stage**: Mouse-tracking radial spotlight `FLUXORA.hq` wordmark (`#fxWrap` / `#fxWord`) with vanilla JavaScript event handler.
 
-## 2. Design System Tokens
-- **Burgundy Accent**: `#590907`
-- **Gradient Secondary**: `#981C14` to `#E0AF84`
-- **Warm Cream Background / Pill**: `#E8D2B5` / `#F8F6F1`
-- **Charcoal Text**: `#242321`
-- **Footer Dark**: `#1c1b19`
+## 2. Design System Tokens (Enterprise Tech Blue & Indigo)
+- **Primary Brand Accent**: Royal Indigo `#4F46E5` & Electric Blue `#2563EB`
+- **Cyan / Sky Highlight**: `#38BDF8` / `#60A5FA`
+- **Brand Squircle Emblem**: Gradient `from-[#38BDF8] via-[#2563EB] to-[#4F46E5]` with white `F.` emblem
+- **Light Surfaces / Body**: Clean Modern Slate `#F8FAFC`
+- **Soft Tint / Pill Surfaces**: Ethereal Blue/Indigo `#EEF2FF` & Border `#E0E7FF` / `#E2E8F0`
+- **Dark Deep Text**: Charcoal Slate `#0F172A`
+- **Muted Subtext**: Slate Gray `#64748B`
+- **Dark Showrooms & Stages**: Midnight Obsidian `#0B0F19` to `#1E1B4B`
+- **Success Accent**: Emerald Green `#10B981`
 

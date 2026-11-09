@@ -103,40 +103,40 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="privacy-page-root min-h-screen pt-24 pb-20">
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden border-b border-[rgba(89,9,7,0.08)] bg-gradient-to-b from-[#F3EBDD]/50 to-[#FBF7F0] py-14 sm:py-20">
+      <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-[#F3EBDD]/50 to-[#FBF7F0] py-14 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-8">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#590907] uppercase">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#4F46E5] uppercase">
             <ShieldCheck className="h-3.5 w-3.5" />
             <span>LEGAL & PRIVACY</span>
           </div>
 
-          <h1 className="mt-5 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl leading-[1.06]">
-            Your Data. Your Trust. <span className="text-[#590907]">Our Responsibility.</span>
+          <h1 className="mt-5 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#0F172A] font-serif max-w-5xl leading-[1.06]">
+            Your Data. Your Trust. <span className="text-[#4F46E5]">Our Responsibility.</span>
           </h1>
 
-          <p className="mt-6 max-w-4xl text-lg sm:text-xl text-[#242321] font-medium leading-relaxed">
+          <p className="mt-6 max-w-4xl text-lg sm:text-xl text-[#0F172A] font-medium leading-relaxed">
             At FlowPeople, we understand the importance of personal and organizational information.
             This Privacy Policy explains how we collect, use, store and protect information when you
             use our HR management platform.
           </p>
 
           {/* Metadata Strip */}
-          <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-8 rounded-2xl bg-white/80 p-4 sm:p-5 text-xs sm:text-sm text-[#6B615A] shadow-sm border border-[rgba(89,9,7,0.08)] backdrop-blur-md">
+          <div className="mt-8 flex flex-wrap items-center gap-4 sm:gap-8 rounded-2xl bg-white/80 p-4 sm:p-5 text-xs sm:text-sm text-[#64748B] shadow-sm border border-slate-200 backdrop-blur-md">
             <div>
-              <span className="font-semibold text-[#242321]">Effective Date:</span>{' '}
-              <span className="font-mono text-[#590907]">November 2026</span>
+              <span className="font-semibold text-[#0F172A]">Effective Date:</span>{' '}
+              <span className="font-mono text-[#4F46E5]">November 2026</span>
             </div>
-            <div className="hidden h-4 w-px bg-[#590907]/15 sm:block" />
+            <div className="hidden h-4 w-px bg-[#4F46E5]/15 sm:block" />
             <div>
-              <span className="font-semibold text-[#242321]">Policy Version:</span>{' '}
-              <span className="font-mono font-medium text-[#242321]">v1.2 (DPDPA 2023 Aligned)</span>
+              <span className="font-semibold text-[#0F172A]">Policy Version:</span>{' '}
+              <span className="font-mono font-medium text-[#0F172A]">v1.2 (DPDPA 2023 Aligned)</span>
             </div>
 
             <div className="ml-auto flex items-center gap-2 no-print">
               <button
                 type="button"
                 onClick={handlePrint}
-                className="inline-flex items-center gap-1.5 rounded-full bg-[#590907] px-3.5 py-1.5 text-xs font-semibold text-[#F8F6F1] shadow-xs transition hover:bg-[#590907]/90 cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#4F46E5] px-3.5 py-1.5 text-xs font-semibold text-[#F8F6F1] shadow-xs transition hover:bg-[#4F46E5]/90 cursor-pointer"
                 title="Print or save as PDF"
               >
                 <Printer className="h-3.5 w-3.5" />
@@ -154,17 +154,17 @@ export default function PrivacyPolicyPage() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex w-full items-center justify-between rounded-xl border border-[rgba(89,9,7,0.15)] bg-white p-3.5 text-sm font-semibold text-[#242321] shadow-xs"
+            className="flex w-full items-center justify-between rounded-xl border border-slate-200 bg-white p-3.5 text-sm font-semibold text-[#0F172A] shadow-xs"
           >
             <span className="flex items-center gap-2">
-              <FileText className="h-4 w-4 text-[#590907]" />
+              <FileText className="h-4 w-4 text-[#4F46E5]" />
               <span>Table of Contents (Jump to section)</span>
             </span>
-            <ChevronDown className={`h-4 w-4 text-[#590907] transition-transform ${mobileMenuOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`h-4 w-4 text-[#4F46E5] transition-transform ${mobileMenuOpen ? 'rotate-180' : ''}`} />
           </button>
 
           {mobileMenuOpen && (
-            <div className="mt-2 rounded-xl border border-[rgba(89,9,7,0.12)] bg-white p-3 shadow-lg">
+            <div className="mt-2 rounded-xl border border-slate-200 bg-white p-3 shadow-lg">
               <div className="max-h-72 overflow-y-auto space-y-1">
                 {SECTIONS.map((sec) => (
                   <button
@@ -172,8 +172,8 @@ export default function PrivacyPolicyPage() {
                     type="button"
                     onClick={() => scrollToSection(sec.id)}
                     className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-xs font-medium transition ${activeSection === sec.id
-                      ? 'bg-[#590907] text-[#F8F6F1]'
-                      : 'text-[#242321] hover:bg-[#F3EBDD]/60'
+                      ? 'bg-[#4F46E5] text-[#F8F6F1]'
+                      : 'text-[#0F172A] hover:bg-slate-100/60'
                       }`}
                   >
                     <span className="font-mono opacity-60">{sec.number}</span>
@@ -188,8 +188,8 @@ export default function PrivacyPolicyPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           {/* Desktop Sticky Table of Contents */}
           <aside className="hidden lg:block lg:col-span-4 sticky top-28 toc-container no-print">
-            <div className="rounded-2xl border border-[rgba(89,9,7,0.1)] bg-white/70 p-5 shadow-xs backdrop-blur-md">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-[#590907]">
+            <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 shadow-xs backdrop-blur-md">
+              <h3 className="text-xs font-bold uppercase tracking-widest text-[#4F46E5]">
                 Table of Contents
               </h3>
               <nav className="mt-4 space-y-1 max-h-[calc(100vh-180px)] overflow-y-auto pr-1">
@@ -198,7 +198,7 @@ export default function PrivacyPolicyPage() {
                     key={sec.id}
                     type="button"
                     onClick={() => scrollToSection(sec.id)}
-                    className={`toc-link flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs transition cursor-pointer ${activeSection === sec.id ? 'active' : 'text-[#6B615A] hover:text-[#590907] hover:bg-black/5'
+                    className={`toc-link flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs transition cursor-pointer ${activeSection === sec.id ? 'active' : 'text-[#64748B] hover:text-[#4F46E5] hover:bg-black/5'
                       }`}
                   >
                     <span className="font-mono text-[11px] opacity-50 shrink-0">{sec.number}</span>
@@ -207,23 +207,23 @@ export default function PrivacyPolicyPage() {
                 ))}
               </nav>
 
-              <div className="mt-6 pt-4 border-t border-[rgba(89,9,7,0.08)] text-[11px] text-[#6B615A]">
+              <div className="mt-6 pt-4 border-t border-slate-200 text-[11px] text-[#64748B]">
                 <p>Designed for complete compliance with the <b>Digital Personal Data Protection Act, 2023 (India)</b>.</p>
               </div>
             </div>
           </aside>
 
           {/* Legal Content Column */}
-          <article className="lg:col-span-8 content-column space-y-14 text-[#242321] leading-relaxed">
+          <article className="lg:col-span-8 content-column space-y-14 text-[#0F172A] leading-relaxed">
             {/* SECTION 1 */}
             <section id="sec-1" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">01.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">01.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Introduction & Scope
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Welcome to <b>FlowPeople</b>, an intelligent Human Resource Management System (HRMS)
                   architected and operated by <b>FLUXORA Technologies</b> ("Fluxora", "we", "us", or "our").
@@ -237,8 +237,8 @@ export default function PrivacyPolicyPage() {
                   biometric kiosk terminal simulators, or associated cloud utilities.
                 </p>
                 <div className="legal-callout legal-callout-cream">
-                  <h4 className="font-semibold text-sm text-[#590907]">Enterprise B2B Scope</h4>
-                  <p className="mt-1 text-xs text-[#6B615A]">
+                  <h4 className="font-semibold text-sm text-[#4F46E5]">Enterprise B2B Scope</h4>
+                  <p className="mt-1 text-xs text-[#64748B]">
                     FlowPeople operates as a B2B enterprise business platform. Our customers are employer
                     organizations. If you are an employee, contractor, or intern accessing FlowPeople, your
                     employer determines the categories of data collected and serves as your primary contact
@@ -251,19 +251,19 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 2 */}
             <section id="sec-2" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">02.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">02.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Information We Collect
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Depending on the specific FlowPeople license tier (Starter, Professional, or Enterprise)
                   and the system modules enabled by your organization administrator, the platform processes
                   the following categories of information:
                 </p>
 
-                <div className="overflow-x-auto rounded-xl border border-[rgba(89,9,7,0.1)] bg-white shadow-xs">
+                <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-xs">
                   <table className="legal-table">
                     <thead>
                       <tr>
@@ -330,17 +330,17 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 3 */}
             <section id="sec-3" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">03.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">03.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   How We Use Information
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Fluxora processes collected information exclusively on behalf of and under the documented
                   instructions of our customer organizations, for the following legitimate business purposes:
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-[#4A423D]">
+                <ul className="list-disc pl-5 space-y-2 text-[#64748B]">
                   <li>
                     <b>Delivering Core HR Services:</b> Facilitating employee directory management,
                     role-based access management, shift schedules, and self-service portal functionality.
@@ -376,12 +376,12 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 4: BIOMETRICS & FACE ATTENDANCE */}
             <section id="sec-4" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">04.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">04.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Face Attendance & Biometric Information
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   FlowPeople offers an optional, hardware-dependent <b>Biometric Face Attendance Kiosk Mode</b> designed
                   for contactless employee check-in. Given the sensitive nature of facial data, we maintain strict
@@ -389,8 +389,8 @@ export default function PrivacyPolicyPage() {
                 </p>
 
                 <div className="legal-callout legal-callout-burgundy">
-                  <h4 className="font-semibold text-sm text-[#590907]">Critical Distinction: Photographs vs. Biometric Templates</h4>
-                  <p className="mt-1 text-xs text-[#242321]/80 leading-relaxed">
+                  <h4 className="font-semibold text-sm text-[#4F46E5]">Critical Distinction: Photographs vs. Biometric Templates</h4>
+                  <p className="mt-1 text-xs text-[#0F172A]/80 leading-relaxed">
                     <b>Reference Photographs:</b> Standard 2D visual photographs displayed in employee profile badges
                     or directory avatars. These are treated as general personal identification records.<br />
                     <b>Biometric Vector Templates:</b> Where facial recognition vision algorithms are deployed on client-compatible
@@ -400,47 +400,47 @@ export default function PrivacyPolicyPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <h3 className="font-semibold text-lg text-[#242321]">Key Biometric Commitments:</h3>
+                  <h3 className="font-semibold text-lg text-[#0F172A]">Key Biometric Commitments:</h3>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4 shadow-xs">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-[#590907]">
+                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-[#4F46E5]">
                         <CheckCircle2 className="h-4 w-4" />
                         <span>Explicit Employee Consent</span>
                       </div>
-                      <p className="mt-2 text-xs text-[#6B615A]">
+                      <p className="mt-2 text-xs text-[#64748B]">
                         Client organizations are contractually and legally obligated under the DPDPA 2023 to obtain
                         verifiable, informed consent from employees before enrolling them in biometric face attendance.
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4 shadow-xs">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-[#590907]">
+                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-[#4F46E5]">
                         <CheckCircle2 className="h-4 w-4" />
                         <span>Mandatory Non-Biometric Alternative</span>
                       </div>
-                      <p className="mt-2 text-xs text-[#6B615A]">
+                      <p className="mt-2 text-xs text-[#64748B]">
                         Organizations must offer alternative check-in mechanisms—including Mobile GPS Geofencing,
                         PIN/QR codes, or supervisor manual entries—without prejudice or penalty to employees who decline face enrollment.
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4 shadow-xs">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-[#590907]">
+                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-[#4F46E5]">
                         <CheckCircle2 className="h-4 w-4" />
                         <span>Purpose Limitation</span>
                       </div>
-                      <p className="mt-2 text-xs text-[#6B615A]">
+                      <p className="mt-2 text-xs text-[#64748B]">
                         Biometric vectors are processed strictly for workforce timekeeping and entrance authentication.
                         They are never utilized for commercial profiling, mood analysis, or third-party surveillance.
                       </p>
                     </div>
 
-                    <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4 shadow-xs">
-                      <div className="flex items-center gap-2 text-xs font-semibold text-[#590907]">
+                    <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-xs">
+                      <div className="flex items-center gap-2 text-xs font-semibold text-[#4F46E5]">
                         <CheckCircle2 className="h-4 w-4" />
                         <span>Permanent Deletion Upon Exit</span>
                       </div>
-                      <p className="mt-2 text-xs text-[#6B615A]">
+                      <p className="mt-2 text-xs text-[#64748B]">
                         Upon an employee's resignation, termination, or formal withdrawal of consent, the client
                         administrator is required to purge the corresponding biometric template immediately.
                       </p>
@@ -448,7 +448,7 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
 
-                <p className="text-xs text-[#6B615A] italic">
+                <p className="text-xs text-[#64748B] italic">
                   *Note: Specific facial recognition capabilities vary depending on the client’s designated physical
                   tablet hardware, operating system camera sensors, and whether local on-device processing or cloud vision APIs are configured.
                 </p>
@@ -458,22 +458,22 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 5 */}
             <section id="sec-5" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">05.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">05.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Data Ownership & Legal Responsibilities
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Under the <b>Digital Personal Data Protection Act, 2023 (India)</b> and comparable global privacy frameworks:
                 </p>
                 <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-2xl border border-[rgba(89,9,7,0.12)] bg-[#FBF7F0] p-5">
-                    <div className="flex items-center gap-2 font-bold text-[#590907]">
+                  <div className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-5">
+                    <div className="flex items-center gap-2 font-bold text-[#4F46E5]">
                       <Building2 className="h-4 w-4" />
                       <span>Customer Organization: Data Fiduciary</span>
                     </div>
-                    <ul className="mt-3 space-y-2 text-xs text-[#6B615A] list-disc pl-4">
+                    <ul className="mt-3 space-y-2 text-xs text-[#64748B] list-disc pl-4">
                       <li>Determines the purposes and legal grounds for processing employee data.</li>
                       <li>Responsible for issuing accurate privacy notices to employees at the time of data collection.</li>
                       <li>Responsible for collecting and documenting valid consent or relying on legitimate uses.</li>
@@ -481,12 +481,12 @@ export default function PrivacyPolicyPage() {
                     </ul>
                   </div>
 
-                  <div className="rounded-2xl border border-[rgba(89,9,7,0.12)] bg-[#FBF7F0] p-5">
-                    <div className="flex items-center gap-2 font-bold text-[#242321]">
+                  <div className="rounded-2xl border border-slate-200 bg-[#F8FAFC] p-5">
+                    <div className="flex items-center gap-2 font-bold text-[#0F172A]">
                       <Database className="h-4 w-4" />
                       <span>Fluxora / FlowPeople: Data Processor</span>
                     </div>
-                    <ul className="mt-3 space-y-2 text-xs text-[#6B615A] list-disc pl-4">
+                    <ul className="mt-3 space-y-2 text-xs text-[#64748B] list-disc pl-4">
                       <li>Processes personal data solely to provide the contracted FlowPeople HRMS software services.</li>
                       <li>Does not own, lease, or monetize customer employee data.</li>
                       <li>Implements technical and organizational safeguards agreed in the software license agreement.</li>
@@ -500,17 +500,17 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 6 */}
             <section id="sec-6" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">06.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">06.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Data Storage & Infrastructure Architecture
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   FlowPeople is engineered around client data independence rather than multi-tenant aggregation.
                   Depending on your organization's deployment configuration:
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-[#4A423D]">
+                <ul className="list-disc pl-5 space-y-2 text-[#64748B]">
                   <li>
                     <b>Dedicated Client Database:</b> Where configured, each client organization is provisioned with
                     a dedicated database cluster (e.g. hosted via MongoDB Atlas or client-managed cloud infrastructure).
@@ -536,15 +536,15 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 7 */}
             <section id="sec-7" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">07.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">07.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Data Sharing & Third Parties
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <div className="legal-callout legal-callout-cream">
-                  <h4 className="font-semibold text-sm text-[#590907]">Our Absolute Commitment: No Sale of Personal Data</h4>
-                  <p className="mt-1 text-xs text-[#242321]/80">
+                  <h4 className="font-semibold text-sm text-[#4F46E5]">Our Absolute Commitment: No Sale of Personal Data</h4>
+                  <p className="mt-1 text-xs text-[#0F172A]/80">
                     Fluxora does not sell, rent, monetize, or trade your employee records, attendance telemetry, or business
                     information to data brokers, ad networks, or third-party marketing entities. Ever.
                   </p>
@@ -553,7 +553,7 @@ export default function PrivacyPolicyPage() {
                   We share personal information strictly with vetted service providers ("Sub-processors") essential
                   for delivering the application:
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-[#4A423D]">
+                <ul className="list-disc pl-5 space-y-2 text-[#64748B]">
                   <li><b>Database & Cloud Infrastructure:</b> MongoDB Atlas, Google Cloud Platform, Amazon Web Services.</li>
                   <li><b>Storage Integrations:</b> Google Workspace (Google Drive API) for document archival.</li>
                   <li><b>Communication & Email Delivery:</b> Transactional email services for invitations and password resets.</li>
@@ -565,37 +565,37 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 8 */}
             <section id="sec-8" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">08.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">08.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Data Security Measures
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   We deploy multi-layered technical and organizational safeguards designed to protect personal data against
                   accidental loss, unauthorized destruction, alteration, or unlawful access:
                 </p>
                 <div className="grid gap-3 sm:grid-cols-2 text-xs">
-                  <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4">
-                    <b className="text-sm font-semibold text-[#590907] block mb-1">Role-Based Access Control (RBAC)</b>
+                  <div className="rounded-xl border border-slate-200 bg-white p-4">
+                    <b className="text-sm font-semibold text-[#4F46E5] block mb-1">Role-Based Access Control (RBAC)</b>
                     Strict permission gates ensure managers, standard employees, and super-administrators view only the data necessary for their role.
                   </div>
-                  <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4">
-                    <b className="text-sm font-semibold text-[#590907] block mb-1">Encrypted Transmission</b>
+                  <div className="rounded-xl border border-slate-200 bg-white p-4">
+                    <b className="text-sm font-semibold text-[#4F46E5] block mb-1">Encrypted Transmission</b>
                     All data transmitted between browsers, mobile devices, kiosks, and servers is encrypted in transit using industry-standard TLS (HTTPS).
                   </div>
-                  <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4">
-                    <b className="text-sm font-semibold text-[#590907] block mb-1">Database-Level Security</b>
+                  <div className="rounded-xl border border-slate-200 bg-white p-4">
+                    <b className="text-sm font-semibold text-[#4F46E5] block mb-1">Database-Level Security</b>
                     Dedicated MongoDB Atlas clusters feature TLS 1.3 encryption in transit, AES-256 storage encryption at rest, and strict network access controls.
                   </div>
-                  <div className="rounded-xl border border-[rgba(89,9,7,0.1)] bg-white p-4">
-                    <b className="text-sm font-semibold text-[#590907] block mb-1">Rolling Automated Backups</b>
+                  <div className="rounded-xl border border-slate-200 bg-white p-4">
+                    <b className="text-sm font-semibold text-[#4F46E5] block mb-1">Rolling Automated Backups</b>
                     Monthly automated backups with three months of rolling retention safeguard against catastrophic hardware failure.
                   </div>
                 </div>
                 <div className="legal-callout legal-callout-sage">
-                  <h4 className="font-semibold text-sm text-[#242321]">Realistic Security Disclosure</h4>
-                  <p className="mt-1 text-xs text-[#6B615A]">
+                  <h4 className="font-semibold text-sm text-[#0F172A]">Realistic Security Disclosure</h4>
+                  <p className="mt-1 text-xs text-[#64748B]">
                     While we implement rigorous, professional safeguards, no internet transmission or electronic storage method
                     can be guaranteed 100% immune from sophisticated cyberattacks, zero-day vulnerabilities, or human error.
                     Security is a joint responsibility requiring secure client credential hygiene.
@@ -607,17 +607,17 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 9 */}
             <section id="sec-9" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">09.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">09.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Data Retention & Deletion
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Retention schedules are determined primarily by our customer organizations in accordance with their
                   statutory employment, tax, and labor law obligations:
                 </p>
-                <ul className="list-disc pl-5 space-y-2 text-[#4A423D]">
+                <ul className="list-disc pl-5 space-y-2 text-[#64748B]">
                   <li>
                     <b>Active Contracts:</b> We retain organizational data for the duration of the active FlowPeople license agreement.
                   </li>
@@ -639,52 +639,52 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 10: USER RIGHTS */}
             <section id="sec-10" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">10.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">10.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   User Rights Under Indian Law (DPDPA 2023)
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Under the <b>Digital Personal Data Protection Act, 2023</b>, individual data principals (employees,
                   contractors, and administrators) possess specific statutory rights regarding their personal data:
                 </p>
                 <div className="space-y-3">
-                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-[rgba(89,9,7,0.08)]">
-                    <UserCheck className="h-5 w-5 text-[#590907] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200">
+                    <UserCheck className="h-5 w-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
-                      <b className="text-sm font-semibold text-[#242321]">Right to Access Information:</b>
-                      <p className="text-xs text-[#6B615A] mt-0.5">
+                      <b className="text-sm font-semibold text-[#0F172A]">Right to Access Information:</b>
+                      <p className="text-xs text-[#64748B] mt-0.5">
                         You have the right to request a summary of personal data being processed and the identities of third parties with whom it has been shared.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-[rgba(89,9,7,0.08)]">
-                    <FileText className="h-5 w-5 text-[#590907] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200">
+                    <FileText className="h-5 w-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
-                      <b className="text-sm font-semibold text-[#242321]">Right to Correction & Updating:</b>
-                      <p className="text-xs text-[#6B615A] mt-0.5">
+                      <b className="text-sm font-semibold text-[#0F172A]">Right to Correction & Updating:</b>
+                      <p className="text-xs text-[#64748B] mt-0.5">
                         You have the right to correct inaccurate or misleading personal data, complete incomplete records, and update out-of-date information.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-[rgba(89,9,7,0.08)]">
-                    <UserX className="h-5 w-5 text-[#590907] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200">
+                    <UserX className="h-5 w-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
-                      <b className="text-sm font-semibold text-[#242321]">Right to Erasure:</b>
-                      <p className="text-xs text-[#6B615A] mt-0.5">
+                      <b className="text-sm font-semibold text-[#0F172A]">Right to Erasure:</b>
+                      <p className="text-xs text-[#64748B] mt-0.5">
                         You have the right to request the erasure of your personal data where retention is no longer necessary for the purpose for which it was processed, subject to statutory labor and tax record laws.
                       </p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-[rgba(89,9,7,0.08)]">
-                    <HelpCircle className="h-5 w-5 text-[#590907] shrink-0 mt-0.5" />
+                  <div className="flex items-start gap-3 p-3.5 bg-white rounded-xl border border-slate-200">
+                    <HelpCircle className="h-5 w-5 text-[#4F46E5] shrink-0 mt-0.5" />
                     <div>
-                      <b className="text-sm font-semibold text-[#242321]">Right of Grievance Redressal:</b>
-                      <p className="text-xs text-[#6B615A] mt-0.5">
+                      <b className="text-sm font-semibold text-[#0F172A]">Right of Grievance Redressal:</b>
+                      <p className="text-xs text-[#64748B] mt-0.5">
                         You have the right to register a grievance with the Data Fiduciary or our designated Grievance Officer, and if unsatisfied, escalate to the Data Protection Board of India.
                       </p>
                     </div>
@@ -692,8 +692,8 @@ export default function PrivacyPolicyPage() {
                 </div>
 
                 <div className="legal-callout legal-callout-cream">
-                  <h4 className="font-semibold text-sm text-[#590907]">How to Exercise Your Rights</h4>
-                  <p className="mt-1 text-xs text-[#6B615A]">
+                  <h4 className="font-semibold text-sm text-[#4F46E5]">How to Exercise Your Rights</h4>
+                  <p className="mt-1 text-xs text-[#64748B]">
                     Because FlowPeople processes data on behalf of your employer, please submit requests directly to your
                     organization’s HR department or Data Protection representative. Fluxora will facilitate and execute all
                     valid verified technical requests received from authorized organization administrators.
@@ -705,12 +705,12 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 11 */}
             <section id="sec-11" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">11.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">11.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Cookies & Technical Data
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   FlowPeople uses strictly <b>essential technical cookies and local storage tokens</b> necessary for
                   authenticating user sessions, maintaining navigation state across kiosk simulators, and securing API calls.
@@ -725,12 +725,12 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 12 */}
             <section id="sec-12" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">12.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">12.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Children's Privacy
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   FlowPeople is strictly a business-to-business corporate workforce software platform. It is not intended,
                   designed, or marketed for use by individuals under the age of 18 ("Children" under Indian data protection laws).
@@ -742,12 +742,12 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 13 */}
             <section id="sec-13" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">13.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">13.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Cross-Border Data Transfers
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Personal data collected through FlowPeople is primarily stored and processed on servers located within India.
                   However, where client organizations integrate with global cloud service providers (e.g. Google Drive, MongoDB Atlas,
@@ -760,12 +760,12 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 14 */}
             <section id="sec-14" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">14.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">14.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Policy Updates
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Fluxora may periodically update this Privacy Policy to reflect enhancements in FlowPeople features,
                   evolving biometric regulations, or statutory amendments under Indian law.
@@ -781,52 +781,52 @@ export default function PrivacyPolicyPage() {
             {/* SECTION 15: GRIEVANCE REDRESSAL */}
             <section id="sec-15" className="scroll-mt-28">
               <div className="flex items-baseline gap-3">
-                <span className="font-mono text-sm font-bold text-[#590907]">15.</span>
-                <h2 className="text-2xl font-bold tracking-tight text-[#242321]">
+                <span className="font-mono text-sm font-bold text-[#4F46E5]">15.</span>
+                <h2 className="text-2xl font-bold tracking-tight text-[#0F172A]">
                   Contact & Statutory Grievance Redressal
                 </h2>
               </div>
-              <div className="mt-4 space-y-4 text-[15px] text-[#4A423D]">
+              <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   In compliance with Section 10 of India’s <b>Digital Personal Data Protection Act, 2023</b>, Fluxora
                   has designated a <b>Data Protection & Grievance Officer</b> to address concerns, queries, or statutory complaints:
                 </p>
 
                 {/* Contact Card */}
-                <div className="rounded-2xl border border-[rgba(89,9,7,0.15)] bg-white p-6 shadow-sm space-y-4">
+                <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2 text-xs">
                     <div>
-                      <span className="text-[#6B615A] block uppercase font-mono tracking-wider">Legal Entity</span>
-                      <span className="font-bold text-sm text-[#242321] block mt-1">
+                      <span className="text-[#64748B] block uppercase font-mono tracking-wider">Legal Entity</span>
+                      <span className="font-bold text-sm text-[#0F172A] block mt-1">
                         FLUXORA Technologies
                       </span>
-                      <span className="text-[#6B615A] text-[11px] block mt-0.5">
+                      <span className="text-[#64748B] text-[11px] block mt-0.5">
                         Brand: FlowPeople · Parent: Fluxora
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-[#6B615A] block uppercase font-mono tracking-wider">Designated Grievance Officer</span>
-                      <span className="font-bold text-sm text-[#242321] block mt-1">
+                      <span className="text-[#64748B] block uppercase font-mono tracking-wider">Designated Grievance Officer</span>
+                      <span className="font-bold text-sm text-[#0F172A] block mt-1">
                         Data Protection &amp; Compliance Lead
                       </span>
-                      <span className="text-[#6B615A] text-[11px] block mt-0.5">
+                      <span className="text-[#64748B] text-[11px] block mt-0.5">
                         Statutory Grievance Redressal Cell
                       </span>
                     </div>
 
                     <div>
-                      <span className="text-[#6B615A] block uppercase font-mono tracking-wider">Privacy & Grievance Email</span>
+                      <span className="text-[#64748B] block uppercase font-mono tracking-wider">Privacy & Grievance Email</span>
                       <a
                         href="mailto:hqfluxora@gmail.com"
-                        className="font-bold text-sm text-[#590907] hover:underline block mt-1"
+                        className="font-bold text-sm text-[#4F46E5] hover:underline block mt-1"
                       >
                         hqfluxora@gmail.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="pt-4 border-t border-[rgba(89,9,7,0.08)] text-xs text-[#6B615A] space-y-1">
+                  <div className="pt-4 border-t border-slate-200 text-xs text-[#64748B] space-y-1">
                     <p>
                       <b>Response Procedure:</b> Our Grievance Office acknowledges receipt of statutory complaints within
                       <b> 48 business hours</b> and provides a formal substantive resolution within <b>30 calendar days</b>.
@@ -849,7 +849,7 @@ export default function PrivacyPolicyPage() {
           type="button"
           id="backToTopBtn"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-[#590907] text-[#F8F6F1] shadow-lg transition hover:bg-[#590907]/90 hover:scale-105 no-print cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center rounded-full bg-[#4F46E5] text-[#F8F6F1] shadow-lg transition hover:bg-[#4F46E5]/90 hover:scale-105 no-print cursor-pointer"
           aria-label="Back to top"
           title="Back to top"
         >

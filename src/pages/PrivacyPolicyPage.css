@@ -1,14 +1,14 @@
 /* FlowPeople Privacy Policy Page Styles */
 
 .privacy-page-root {
-  --bg-privacy: #FBF7F0;
+  --bg-privacy: #F8FAFC;
   --surface-privacy: #FFFFFF;
-  --fg-privacy: #242321;
-  --muted-privacy: #6B615A;
-  --burgundy: #590907;
-  --cream: #E8D2B5;
-  --sage: #A5A79B;
-  --line-privacy: rgba(89, 9, 7, 0.08);
+  --fg-privacy: #0F172A;
+  --muted-privacy: #64748B;
+  --burgundy: #4F46E5;
+  --cream: #EEF2FF;
+  --sage: #94A3B8;
+  --line-privacy: rgba(15, 23, 42, 0.08);
 
   background-color: var(--bg-privacy);
   color: var(--fg-privacy);
@@ -28,18 +28,18 @@ html {
 }
 
 .legal-callout-burgundy {
-  border-color: #590907;
-  background-color: rgba(89, 9, 7, 0.04);
+  border-color: #4F46E5;
+  background-color: rgba(79, 70, 229, 0.05);
 }
 
 .legal-callout-cream {
-  border-color: #A3432F;
-  background-color: rgba(232, 210, 181, 0.35);
+  border-color: #2563EB;
+  background-color: rgba(238, 242, 255, 0.6);
 }
 
 .legal-callout-sage {
-  border-color: #7A7C70;
-  background-color: rgba(165, 167, 155, 0.15);
+  border-color: #64748B;
+  background-color: rgba(148, 163, 184, 0.12);
 }
 
 /* Table of Contents Active Link */
@@ -48,10 +48,10 @@ html {
 }
 
 .toc-link.active {
-  color: #590907;
+  color: #4F46E5;
   font-weight: 600;
-  background-color: rgba(89, 9, 7, 0.06);
-  border-left: 3px solid #590907;
+  background-color: rgba(79, 70, 229, 0.08);
+  border-left: 3px solid #4F46E5;
   padding-left: 0.85rem;
 }
 

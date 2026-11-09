@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
 
 .pricing-page-root {
-  --bg: #FBF7F0;
-  --bg-2: #F3EBDD;
+  --bg: #F8FAFC;
+  --bg-2: #F1F5F9;
   --surface: #FFFFFF;
-  --fg: #2A2320;
-  --fg-2: #6B615A;
-  --line: rgba(42, 35, 32, 0.08);
-  --sage: #A5A79B;
-  --cream: #E8D2B5;
-  --burgundy: #590907;
-  --on-burgundy: #FBF7F0;
-  --ok: #4C7A5C;
-  --shadow: 0 10px 40px -16px rgba(89, 9, 7, 0.18);
+  --fg: #0F172A;
+  --fg-2: #64748B;
+  --line: rgba(15, 23, 42, 0.08);
+  --sage: #94A3B8;
+  --cream: #EEF2FF;
+  --burgundy: #4F46E5;
+  --on-burgundy: #FFFFFF;
+  --ok: #10B981;
+  --shadow: 0 10px 40px -16px rgba(79, 70, 229, 0.15);
   --body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
   
   font-family: var(--body);
@@ -133,7 +133,7 @@
 
 .pricing-h1 em {
   font-style: normal;
-  background: linear-gradient(100deg, #590907 0%, #A3432F 45%, #C98A4B 70%, #590907 100%);
+  background: linear-gradient(100deg, #2563EB 0%, #4F46E5 45%, #38BDF8 70%, #2563EB 100%);
   background-size: 220% 100%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -144,7 +144,7 @@
 
 .hero-pricing-lead {
   margin: 24px auto 0;
-  color: #242321;
+  color: #0F172A;
   font-weight: 500;
   font-size: 1.25rem;
   max-width: 68ch;
@@ -192,19 +192,19 @@
 }
 
 .coin.gold {
-  background: radial-gradient(circle at 30% 25%, #FFF1D6 0, #E8D2B5 38%, #C9A36B 100%);
-  color: #590907;
-  box-shadow: 0 18px 30px -12px rgba(120, 80, 30, 0.5), inset 0 -6px 10px rgba(120, 80, 30, 0.25);
+  background: radial-gradient(circle at 30% 25%, #EFF6FF 0, #DBEAFE 38%, #93C5FD 100%);
+  color: #1E3A8A;
+  box-shadow: 0 18px 30px -12px rgba(37, 99, 235, 0.4), inset 0 -6px 10px rgba(37, 99, 235, 0.2);
 }
 
 .coin.wine {
-  background: radial-gradient(circle at 30% 25%, #9A3A33 0, #590907 55%, #3A0504 100%);
-  color: #F3DDBA;
-  box-shadow: 0 18px 30px -12px rgba(89, 9, 7, 0.55), inset 0 -6px 10px rgba(0, 0, 0, 0.3);
+  background: radial-gradient(circle at 30% 25%, #818CF8 0, #4F46E5 55%, #1E1B4B 100%);
+  color: #FFFFFF;
+  box-shadow: 0 18px 30px -12px rgba(79, 70, 229, 0.55), inset 0 -6px 10px rgba(0, 0, 0, 0.3);
 }
 
 .coin.wine::before {
-  border-color: rgba(243, 221, 186, 0.4);
+  border-color: rgba(224, 231, 255, 0.4);
 }
 
 .c1 { width: 96px; height: 96px; font-size: 2.6rem; left: 7%; top: 16%; }
@@ -275,7 +275,7 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s;
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(232, 210, 181, 0.45), transparent 60%);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), rgba(99, 102, 241, 0.25), transparent 60%);
 }
 
 .pricing-card:hover .card-glow {
@@ -283,7 +283,7 @@
 }
 
 .pricing-card.pro {
-  background: linear-gradient(180deg, #FFF9F0, #FFFFFF 40%);
+  background: linear-gradient(180deg, #EEF2FF, #FFFFFF 40%);
   box-shadow: 0 0 0 2px var(--burgundy), var(--shadow);
 }
 

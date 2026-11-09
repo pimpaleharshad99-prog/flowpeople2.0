@@ -121,22 +121,22 @@ export default function HowItWorksPage() {
   const [activeStepIdx, setActiveStepIdx] = useState<number>(0);
 
   return (
-    <div className="how-it-works-page min-h-screen bg-[#FBF7F0] text-[#242321] pt-24 pb-20">
+    <div className="how-it-works-page min-h-screen bg-[#F8FAFC] text-[#0F172A] pt-24 pb-20">
       {/* ===================================================================== */}
       {/* 1. HERO SECTION                                                       */}
       {/* ===================================================================== */}
-      <section className="relative overflow-hidden border-b border-[rgba(89,9,7,0.08)] bg-gradient-to-b from-[#F3EBDD]/60 via-[#FBF7F0] to-[#FBF7F0] py-16 sm:py-24">
+      <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-[#F3EBDD]/60 via-[#FBF7F0] to-[#FBF7F0] py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#590907] uppercase mb-6">
-            <Sparkles className="h-3.5 w-3.5 text-[#590907]" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#4F46E5] uppercase mb-6">
+            <Sparkles className="h-3.5 w-3.5 text-[#4F46E5]" />
             <span>HOW IT WORKS</span>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl mx-auto leading-[1.06]">
-            HR Management. <span className="text-[#590907]">Made Effortless.</span>
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#0F172A] font-serif max-w-5xl mx-auto leading-[1.06]">
+            HR Management. <span className="text-[#4F46E5]">Made Effortless.</span>
           </h1>
 
-          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#242321] font-medium leading-relaxed">
+          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#0F172A] font-medium leading-relaxed">
             From setting up your organization to managing everyday employee operations, FlowPeople brings
             your essential HR workflows together in one organized platform.
           </p>
@@ -144,7 +144,7 @@ export default function HowItWorksPage() {
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Link
               to="/pricing"
-              className="inline-flex items-center gap-2 rounded-full bg-[#590907] px-6 py-3 text-xs sm:text-sm font-semibold text-[#F8F6F1] shadow-xs transition hover:bg-[#590907]/90"
+              className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5] px-6 py-3 text-xs sm:text-sm font-semibold text-[#F8F6F1] shadow-xs transition hover:bg-[#4F46E5]/90"
             >
               <span>Explore Pricing</span>
               <ArrowRight className="h-4 w-4" />
@@ -152,7 +152,7 @@ export default function HowItWorksPage() {
 
             <Link
               to="/contact?type=Book%20a%20Demo"
-              className="inline-flex items-center gap-2 rounded-full border border-[rgba(89,9,7,0.2)] bg-white/80 px-6 py-3 text-xs sm:text-sm font-semibold text-[#242321] shadow-xs backdrop-blur-md transition hover:bg-white hover:text-[#590907]"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-6 py-3 text-xs sm:text-sm font-semibold text-[#0F172A] shadow-xs backdrop-blur-md transition hover:bg-white hover:text-[#4F46E5]"
             >
               <span>Book a Demo</span>
             </Link>
@@ -166,10 +166,10 @@ export default function HowItWorksPage() {
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#242321] font-serif">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A] font-serif">
               Five Simple Steps to Total HR Clarity
             </h2>
-            <p className="text-sm text-[#6B615A]">
+            <p className="text-sm text-[#64748B]">
               Click any step to inspect the workflow, data architecture, and operational mechanics.
             </p>
           </div>
@@ -183,8 +183,8 @@ export default function HowItWorksPage() {
                 onClick={() => setActiveStepIdx(idx)}
                 className={`flex items-center gap-2.5 rounded-full px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${
                   activeStepIdx === idx
-                    ? 'bg-[#590907] text-[#F8F6F1] shadow-sm'
-                    : 'bg-white border border-[rgba(89,9,7,0.12)] text-[#242321] hover:bg-[#F3EBDD]/60'
+                    ? 'bg-[#4F46E5] text-[#F8F6F1] shadow-sm'
+                    : 'bg-white border border-slate-200 text-[#0F172A] hover:bg-slate-100/60'
                 }`}
               >
                 <span className="font-mono text-xs opacity-75">{s.step}</span>
@@ -194,33 +194,33 @@ export default function HowItWorksPage() {
           </div>
 
           {/* Active Step Showcase Card */}
-          <div className="rounded-3xl border border-[rgba(89,9,7,0.12)] bg-white p-6 sm:p-10 shadow-sm">
+          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
               {/* Left Column: Narrative & Inclusions */}
               <div className="lg:col-span-7 space-y-5">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#590907] font-mono text-xs font-bold text-[#F8F6F1]">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#4F46E5] font-mono text-xs font-bold text-[#F8F6F1]">
                     {STEPS[activeStepIdx].step}
                   </span>
-                  <span className="text-xs font-bold tracking-wider uppercase text-[#590907]">
+                  <span className="text-xs font-bold tracking-wider uppercase text-[#4F46E5]">
                     {STEPS[activeStepIdx].badge}
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#242321] font-serif">
+                <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#0F172A] font-serif">
                   {STEPS[activeStepIdx].title}
                 </h3>
 
-                <p className="text-sm sm:text-base text-[#6B615A] leading-relaxed">
+                <p className="text-sm sm:text-base text-[#64748B] leading-relaxed">
                   {STEPS[activeStepIdx].summary}
                 </p>
 
                 <div className="pt-2 space-y-2.5">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#242321]">
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#0F172A]">
                     Key Capabilities &amp; Architecture:
                   </div>
                   {STEPS[activeStepIdx].details.map((detail, dIdx) => (
-                    <div key={dIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#4A423D]">
+                    <div key={dIdx} className="flex items-start gap-2.5 text-xs sm:text-sm text-[#64748B]">
                       <CheckCircle2 className="h-4 w-4 text-[#299D68] shrink-0 mt-0.5" />
                       <span>{detail}</span>
                     </div>
@@ -230,9 +230,9 @@ export default function HowItWorksPage() {
 
               {/* Right Column: Visual Mockup Plate */}
               <div className="lg:col-span-5">
-                <div className="rounded-2xl border border-[rgba(89,9,7,0.1)] bg-gradient-to-br from-[#FBF7F0] to-[#F3EBDD] p-6 shadow-inner space-y-5">
-                  <div className="flex items-center justify-between border-b border-[rgba(89,9,7,0.08)] pb-3">
-                    <span className="text-xs font-bold text-[#590907]">
+                <div className="rounded-2xl border border-slate-200 bg-gradient-to-br from-[#FBF7F0] to-[#F3EBDD] p-6 shadow-inner space-y-5">
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                    <span className="text-xs font-bold text-[#4F46E5]">
                       {STEPS[activeStepIdx].mockupTitle}
                     </span>
                     <span className="h-2 w-2 rounded-full bg-[#299D68]" />
@@ -242,15 +242,15 @@ export default function HowItWorksPage() {
                     {STEPS[activeStepIdx].mockupDetails.map((item, iIdx) => (
                       <div
                         key={iIdx}
-                        className="flex items-center justify-between p-3 rounded-xl bg-white border border-[rgba(89,9,7,0.06)] shadow-2xs text-xs"
+                        className="flex items-center justify-between p-3 rounded-xl bg-white border border-slate-200 shadow-2xs text-xs"
                       >
-                        <span className="text-[#6B615A]">{item.label}</span>
-                        <span className="font-semibold text-[#242321] font-mono">{item.val}</span>
+                        <span className="text-[#64748B]">{item.label}</span>
+                        <span className="font-semibold text-[#0F172A] font-mono">{item.val}</span>
                       </div>
                     ))}
                   </div>
 
-                  <div className="pt-2 text-center text-[11px] text-[#6B615A]">
+                  <div className="pt-2 text-center text-[11px] text-[#64748B]">
                     Designed for dedicated, single-tenant organizational data ownership.
                   </div>
                 </div>
@@ -263,13 +263,13 @@ export default function HowItWorksPage() {
       {/* ===================================================================== */}
       {/* 3. STEP-BY-STEP VERTICAL TIMELINE BREAKDOWN                           */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-28 bg-[#F3EBDD]/40 border-t border-[rgba(89,9,7,0.08)]">
+      <section className="py-20 sm:py-28 bg-slate-100/40 border-t border-slate-200">
         <div className="mx-auto max-w-5xl px-4 sm:px-8">
           <div className="text-center max-w-xl mx-auto mb-16 space-y-3">
-            <h2 className="text-3xl font-bold tracking-tight text-[#242321] font-serif">
+            <h2 className="text-3xl font-bold tracking-tight text-[#0F172A] font-serif">
               The Complete Operational Lifecycle
             </h2>
-            <p className="text-xs sm:text-sm text-[#6B615A]">
+            <p className="text-xs sm:text-sm text-[#64748B]">
               How FlowPeople coordinates workforce administration from day one.
             </p>
           </div>
@@ -283,17 +283,17 @@ export default function HowItWorksPage() {
                 }`}
               >
                 {/* Center Node Marker */}
-                <div className="absolute left-7 sm:left-1/2 -translate-x-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-[#590907] text-white font-mono text-xs font-bold shadow-md ring-4 ring-[#FBF7F0]">
+                <div className="absolute left-7 sm:left-1/2 -translate-x-1/2 flex h-8 w-8 items-center justify-center rounded-full bg-[#4F46E5] text-white font-mono text-xs font-bold shadow-md ring-4 ring-[#FBF7F0]">
                   {s.step}
                 </div>
 
                 {/* Content Box */}
-                <div className="ml-14 sm:ml-0 sm:w-1/2 p-6 rounded-2xl bg-white border border-[rgba(89,9,7,0.08)] shadow-xs">
-                  <span className="text-[10px] font-bold tracking-wider uppercase text-[#590907]">
+                <div className="ml-14 sm:ml-0 sm:w-1/2 p-6 rounded-2xl bg-white border border-slate-200 shadow-xs">
+                  <span className="text-[10px] font-bold tracking-wider uppercase text-[#4F46E5]">
                     {s.badge}
                   </span>
-                  <h3 className="mt-1 text-lg font-bold text-[#242321]">{s.title}</h3>
-                  <p className="mt-2 text-xs sm:text-sm text-[#6B615A] leading-relaxed">
+                  <h3 className="mt-1 text-lg font-bold text-[#0F172A]">{s.title}</h3>
+                  <p className="mt-2 text-xs sm:text-sm text-[#64748B] leading-relaxed">
                     {s.summary}
                   </p>
                 </div>
@@ -310,12 +310,12 @@ export default function HowItWorksPage() {
       {/* 4. FINAL CTA (POSH SCULPTED CURVES & GOLDEN LUXURY)                  */}
       {/* ===================================================================== */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
-        <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5)] border-2 border-[#D4AF37]/35">
+        <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E1B4B] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5)] border-2 border-indigo-500/30">
           {/* Dynamic Golden Lightfall Canvas Background */}
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
             <Lightfall
-              colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
-              backgroundColor="#3D0604"
+              colors={['#60A5FA', '#818CF8', '#38BDF8', '#C7D2FE', '#FFFFFF']}
+              backgroundColor="#0B0F19"
               speed={0.25}
               streakCount={3}
               streakWidth={1.3}
@@ -327,17 +327,17 @@ export default function HowItWorksPage() {
             />
           </div>
 
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-[#D4AF37]/15 blur-3xl pointer-events-none" />
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-[#FFE4B8]/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#FFE4B8] backdrop-blur-md">
-              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-blue-400/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-blue-200 backdrop-blur-md">
+              <Sparkles className="h-3.5 w-3.5 text-[#38BDF8]" />
               <span>Simple Onboarding</span>
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#F8F6F1] font-serif leading-[1.1]">
               Ready to Simplify <br className="hidden sm:inline" />
-              <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
+              <span className="italic font-normal bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
                 Your Everyday HR?
               </span>
             </h2>
@@ -349,10 +349,10 @@ export default function HowItWorksPage() {
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 to="/pricing"
-                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#FFE4B8] via-[#E8D2B5] to-[#D4AF37] px-8 py-4 text-sm font-bold text-[#3A1B12] shadow-lg shadow-[#D4AF37]/20 transition-all hover:scale-[1.03] hover:shadow-xl"
+                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 transition-all hover:scale-[1.03] hover:shadow-xl"
               >
                 <span>Explore Pricing</span>
-                <ArrowRight className="h-4 w-4 text-[#3A1B12]" />
+                <ArrowRight className="h-4 w-4 text-white" />
               </Link>
 
               <Link

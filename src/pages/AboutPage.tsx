@@ -29,32 +29,32 @@ import './AboutPage.css';
 
 const CAPABILITIES = [
   {
-    icon: <Users className="h-6 w-6 text-[#590907]" />,
+    icon: <Users className="h-6 w-6 text-[#4F46E5]" />,
     title: 'Employee Management',
     desc: 'Organize employee information, profiles, documents and workforce records in a single dependable directory.'
   },
   {
-    icon: <Clock className="h-6 w-6 text-[#590907]" />,
+    icon: <Clock className="h-6 w-6 text-[#4F46E5]" />,
     title: 'Attendance Management',
     desc: 'Simplify attendance tracking and workforce visibility, including contactless face attendance where supported.'
   },
   {
-    icon: <CalendarDays className="h-6 w-6 text-[#590907]" />,
+    icon: <CalendarDays className="h-6 w-6 text-[#4F46E5]" />,
     title: 'Leave Management',
     desc: 'Manage employee leave requests, custom approval workflows and statutory leave records seamlessly.'
   },
   {
-    icon: <LayoutDashboard className="h-6 w-6 text-[#590907]" />,
+    icon: <LayoutDashboard className="h-6 w-6 text-[#4F46E5]" />,
     title: 'HR Dashboard',
     desc: 'Give administrators and HR teams a centralized, real-time command center for all workforce operations.'
   },
   {
-    icon: <BarChart3 className="h-6 w-6 text-[#590907]" />,
+    icon: <BarChart3 className="h-6 w-6 text-[#4F46E5]" />,
     title: 'Reports and Insights',
     desc: 'Generate useful HR operational reports and export organizational information in structured PDF or CSV formats.'
   },
   {
-    icon: <Database className="h-6 w-6 text-[#590907]" />,
+    icon: <Database className="h-6 w-6 text-[#4F46E5]" />,
     title: 'Connected Infrastructure',
     desc: 'Support database-backed workflows and direct cloud integrations such as Google Drive where configured.'
   }
@@ -151,20 +151,20 @@ export default function AboutPage() {
       {/* ===================================================================== */}
       {/* 1. HERO SECTION — OUR STORY                                           */}
       {/* ===================================================================== */}
-      <section className="relative overflow-hidden border-b border-[rgba(89,9,7,0.08)] py-20 sm:py-28 lg:py-36">
+      <section className="relative overflow-hidden border-b border-slate-200 py-20 sm:py-28 lg:py-36">
         <div className="about-hero-bg absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-6xl px-4 sm:px-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#590907] uppercase mb-6">
-            <Heart className="h-3.5 w-3.5 text-[#590907]" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#4F46E5] uppercase mb-6">
+            <Heart className="h-3.5 w-3.5 text-[#4F46E5]" />
             <span>ABOUT FLOWPEOPLE</span>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl mx-auto leading-[1.06]">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#0F172A] font-serif max-w-5xl mx-auto leading-[1.06]">
             People Are the Heart of <span className="about-sheen-text">Every Business.</span>
           </h1>
 
-          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#242321] font-medium leading-relaxed">
+          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#0F172A] font-medium leading-relaxed">
             Managing people shouldn't mean managing endless paperwork, scattered spreadsheets and
             disconnected systems. FlowPeople brings essential HR operations together in one intelligent,
             streamlined platform.
@@ -174,7 +174,7 @@ export default function AboutPage() {
             <a
               href="#why-we-built"
               onClick={scrollToWhy}
-              className="inline-flex items-center gap-2 rounded-full bg-[#590907] px-6 py-3.5 text-sm font-semibold text-[#F8F6F1] shadow-sm transition hover:bg-[#590907]/90 hover:scale-[1.02] cursor-pointer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5] px-6 py-3.5 text-sm font-semibold text-[#F8F6F1] shadow-sm transition hover:bg-[#4F46E5]/90 hover:scale-[1.02] cursor-pointer"
             >
               <span>Explore FlowPeople</span>
               <ArrowDown className="h-4 w-4" />
@@ -182,7 +182,7 @@ export default function AboutPage() {
 
             <Link
               to="/pricing"
-              className="inline-flex items-center gap-2 rounded-full border border-[rgba(89,9,7,0.2)] bg-white/70 px-6 py-3.5 text-sm font-semibold text-[#242321] shadow-xs backdrop-blur-md transition hover:bg-white hover:text-[#590907]"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[#0F172A] shadow-xs backdrop-blur-md transition hover:bg-white hover:text-[#4F46E5]"
             >
               <span>View Pricing Plans</span>
               <ArrowRight className="h-4 w-4" />
@@ -191,7 +191,7 @@ export default function AboutPage() {
 
           {/* Floating Cinematic Interface Cards */}
           <div className="relative mt-16 sm:mt-20 max-w-4xl mx-auto">
-            <div className="rounded-3xl border border-[rgba(89,9,7,0.12)] bg-white/60 p-4 sm:p-6 shadow-[0_20px_60px_-15px_rgba(89,9,7,0.14)] backdrop-blur-xl">
+            <div className="rounded-3xl border border-slate-200 bg-white/60 p-4 sm:p-6 shadow-[0_20px_60px_-15px_rgba(89,9,7,0.14)] backdrop-blur-xl">
               <div className="relative aspect-[16/9] sm:aspect-[21/9] overflow-hidden rounded-2xl bg-gradient-to-br from-[#232220] to-[#121110] p-6 text-left text-white flex flex-col justify-between">
                 {/* Visual Top Bar */}
                 <div className="flex items-center justify-between border-b border-white/10 pb-4">
@@ -201,7 +201,7 @@ export default function AboutPage() {
                       FlowPeople Workforce Node · Active Pulse
                     </span>
                   </div>
-                  <span className="text-[11px] font-mono text-[#E8D2B5]">v1.2 Commercial Edition</span>
+                  <span className="text-[11px] font-mono text-blue-300">v1.2 Commercial Edition</span>
                 </div>
 
                 {/* Dashboard Metrics Snapshot */}
@@ -218,7 +218,7 @@ export default function AboutPage() {
                   </div>
                   <div>
                     <div className="text-[11px] uppercase tracking-wider text-white/60">Pending Leaves</div>
-                    <div className="mt-1 text-2xl sm:text-3xl font-bold font-mono text-[#E8D2B5]">3</div>
+                    <div className="mt-1 text-2xl sm:text-3xl font-bold font-mono text-blue-300">3</div>
                     <div className="text-[10px] text-white/70 mt-0.5">Avg resolution 14m</div>
                   </div>
                   <div>
@@ -234,29 +234,29 @@ export default function AboutPage() {
                     <CheckCircle2 className="h-4 w-4 text-[#299D68]" />
                     <span>Dedicated Client Database &amp; Google Drive Connected</span>
                   </span>
-                  <span className="text-[11px] font-mono text-white/50">Zero Recurring Maintenance <span className="text-[9px] text-[#FFE4B8]/80">(T&C Apply)</span></span>
+                  <span className="text-[11px] font-mono text-white/50">Zero Recurring Maintenance <span className="text-[9px] text-blue-200/80">(T&C Apply)</span></span>
                 </div>
               </div>
             </div>
 
             {/* Subtle Floating Interactive Badges */}
-            <div className="float-element-slow hidden sm:flex absolute -bottom-5 -left-6 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl border border-[rgba(89,9,7,0.1)] text-left">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#590907]/10 text-[#590907]">
+            <div className="float-element-slow hidden sm:flex absolute -bottom-5 -left-6 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl border border-slate-200 text-left">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#4F46E5]/10 text-[#4F46E5]">
                 <ScanFace className="h-5 w-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-[#242321]">Contactless Kiosk Mode</div>
-                <div className="text-[11px] text-[#6B615A]">Sub-second face verification</div>
+                <div className="text-xs font-bold text-[#0F172A]">Contactless Kiosk Mode</div>
+                <div className="text-[11px] text-[#64748B]">Sub-second face verification</div>
               </div>
             </div>
 
-            <div className="float-element-delayed hidden sm:flex absolute -top-6 -right-6 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl border border-[rgba(89,9,7,0.1)] text-left">
+            <div className="float-element-delayed hidden sm:flex absolute -top-6 -right-6 items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl border border-slate-200 text-left">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#299D68]/10 text-[#299D68]">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <div>
-                <div className="text-xs font-bold text-[#242321]">Perpetual License</div>
-                <div className="text-[11px] text-[#6B615A]">Pay once, own the software</div>
+                <div className="text-xs font-bold text-[#0F172A]">Perpetual License</div>
+                <div className="text-[11px] text-[#64748B]">Pay once, own the software</div>
               </div>
             </div>
           </div>
@@ -271,16 +271,16 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
             {/* Left Narrative Column */}
             <div className="lg:col-span-6 space-y-6">
-              <div className="inline-flex items-center gap-2 rounded-full bg-[#E8D2B5]/40 px-3.5 py-1 text-xs font-semibold text-[#590907] uppercase">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#EEF2FF]/40 px-3.5 py-1 text-xs font-semibold text-[#4F46E5] uppercase">
                 <Compass className="h-3.5 w-3.5" />
                 <span>WHY WE BUILT FLOWPEOPLE</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#242321] font-serif leading-[1.15]">
-                HR Should Work for People. <span className="text-[#590907]">Not Against Them.</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] font-serif leading-[1.15]">
+                HR Should Work for People. <span className="text-[#4F46E5]">Not Against Them.</span>
               </h2>
 
-              <div className="space-y-4 text-base sm:text-lg text-[#6B615A] leading-relaxed">
+              <div className="space-y-4 text-base sm:text-lg text-[#64748B] leading-relaxed">
                 <p>
                   Growing businesses deserve better tools to manage their teams. Yet many organizations
                   still depend on manual processes, disconnected spreadsheets and expensive software systems.
@@ -294,7 +294,7 @@ export default function AboutPage() {
                 </p>
               </div>
 
-              <div className="pt-2 flex items-center gap-4 text-sm font-semibold text-[#590907]">
+              <div className="pt-2 flex items-center gap-4 text-sm font-semibold text-[#4F46E5]">
                 <span className="flex items-center gap-2">
                   <Check className="h-4 w-4" />
                   <span>No Monthly Subscriptions</span>
@@ -309,16 +309,16 @@ export default function AboutPage() {
             {/* Right Product Dashboard Visual */}
             <div className="lg:col-span-6">
               <div className="about-glass-card rounded-3xl p-6 sm:p-8 space-y-6">
-                <div className="flex items-center justify-between border-b border-[rgba(89,9,7,0.08)] pb-4">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-4">
                   <div className="flex items-center gap-3">
                     <img
                       src={FP_IMAGES.rahul_avatar}
                       alt="Employee Avatar"
-                      className="h-11 w-11 rounded-full object-cover border-2 border-[#E8D2B5]"
+                      className="h-11 w-11 rounded-full object-cover border-2 border-[#38BDF8]"
                     />
                     <div>
-                      <div className="text-sm font-bold text-[#242321]">Rahul Sharma</div>
-                      <div className="text-xs text-[#6B615A]">Senior Product Designer · Marketing</div>
+                      <div className="text-sm font-bold text-[#0F172A]">Rahul Sharma</div>
+                      <div className="text-xs text-[#64748B]">Senior Product Designer · Marketing</div>
                     </div>
                   </div>
                   <span className="rounded-full bg-[#299D68]/15 px-3 py-1 text-xs font-semibold text-[#299D68]">
@@ -328,32 +328,32 @@ export default function AboutPage() {
 
                 {/* Timeline flow */}
                 <div className="space-y-3 text-xs">
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-[#FBF7F0] border border-[rgba(89,9,7,0.06)]">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-[#F8FAFC] border border-slate-200">
                     <div className="flex items-center gap-2.5">
-                      <ScanFace className="h-4 w-4 text-[#590907]" />
-                      <span className="font-semibold text-[#242321]">Entrance Kiosk Verified</span>
+                      <ScanFace className="h-4 w-4 text-[#4F46E5]" />
+                      <span className="font-semibold text-[#0F172A]">Entrance Kiosk Verified</span>
                     </div>
-                    <span className="text-[#6B615A] font-mono">09:14:02 AM</span>
+                    <span className="text-[#64748B] font-mono">09:14:02 AM</span>
                   </div>
 
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-[#FBF7F0] border border-[rgba(89,9,7,0.06)]">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-[#F8FAFC] border border-slate-200">
                     <div className="flex items-center gap-2.5">
                       <CalendarDays className="h-4 w-4 text-[#299D68]" />
-                      <span className="font-semibold text-[#242321]">Earned Leave Approved</span>
+                      <span className="font-semibold text-[#0F172A]">Earned Leave Approved</span>
                     </div>
-                    <span className="text-[#6B615A] font-mono">2 Days (Nov 14–15)</span>
+                    <span className="text-[#64748B] font-mono">2 Days (Nov 14–15)</span>
                   </div>
 
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-[#FBF7F0] border border-[rgba(89,9,7,0.06)]">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-[#F8FAFC] border border-slate-200">
                     <div className="flex items-center gap-2.5">
-                      <Database className="h-4 w-4 text-[#590907]" />
-                      <span className="font-semibold text-[#242321]">Google Drive Backup Synchronized</span>
+                      <Database className="h-4 w-4 text-[#4F46E5]" />
+                      <span className="font-semibold text-[#0F172A]">Google Drive Backup Synchronized</span>
                     </div>
-                    <span className="text-[#6B615A] font-mono">100% Synced</span>
+                    <span className="text-[#64748B] font-mono">100% Synced</span>
                   </div>
                 </div>
 
-                <div className="pt-2 text-center text-xs text-[#6B615A]">
+                <div className="pt-2 text-center text-xs text-[#64748B]">
                   Workforce records stay synchronized in real time across devices.
                 </div>
               </div>
@@ -365,49 +365,49 @@ export default function AboutPage() {
       {/* ===================================================================== */}
       {/* 3. OUR MISSION                                                        */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-28 bg-[#F3EBDD]/60 border-y border-[rgba(89,9,7,0.08)]">
+      <section className="py-20 sm:py-28 bg-slate-100/60 border-y border-slate-200">
         <div className="mx-auto max-w-5xl px-4 sm:px-8 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold text-[#590907] uppercase">
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3.5 py-1 text-xs font-semibold text-[#4F46E5] uppercase">
             <Sparkles className="h-3.5 w-3.5" />
             <span>OUR MISSION</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#242321] font-serif leading-[1.12]">
-            Make Workforce Management <span className="text-[#590907]">Simpler.</span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#0F172A] font-serif leading-[1.12]">
+            Make Workforce Management <span className="text-[#4F46E5]">Simpler.</span>
           </h2>
 
-          <div className="max-w-3xl mx-auto space-y-4 text-base sm:text-xl text-[#6B615A] leading-relaxed">
+          <div className="max-w-3xl mx-auto space-y-4 text-base sm:text-xl text-[#64748B] leading-relaxed">
             <p>
               Our mission is to help businesses spend less time managing administrative complexity and
               more time building productive, connected teams.
             </p>
-            <p className="font-medium text-[#242321]">
+            <p className="font-medium text-[#0F172A]">
               We believe HR technology should be practical, accessible and designed around the real needs
               of organizations.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-10 text-left">
-            <div className="p-6 bg-white/80 rounded-2xl border border-[rgba(89,9,7,0.08)] shadow-xs">
-              <div className="text-sm font-bold text-[#590907] uppercase tracking-wider mb-2">01 · Practicality</div>
-              <h3 className="text-lg font-bold text-[#242321]">Real-World Workflows</h3>
-              <p className="mt-2 text-xs text-[#6B615A] leading-relaxed">
+            <div className="p-6 bg-white/80 rounded-2xl border border-slate-200 shadow-xs">
+              <div className="text-sm font-bold text-[#4F46E5] uppercase tracking-wider mb-2">01 · Practicality</div>
+              <h3 className="text-lg font-bold text-[#0F172A]">Real-World Workflows</h3>
+              <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
                 Tools built for how people actually arrive, work, take leave, and get paid. No bloat.
               </p>
             </div>
 
-            <div className="p-6 bg-white/80 rounded-2xl border border-[rgba(89,9,7,0.08)] shadow-xs">
-              <div className="text-sm font-bold text-[#590907] uppercase tracking-wider mb-2">02 · Independence</div>
-              <h3 className="text-lg font-bold text-[#242321]">Data Sovereignty</h3>
-              <p className="mt-2 text-xs text-[#6B615A] leading-relaxed">
+            <div className="p-6 bg-white/80 rounded-2xl border border-slate-200 shadow-xs">
+              <div className="text-sm font-bold text-[#4F46E5] uppercase tracking-wider mb-2">02 · Independence</div>
+              <h3 className="text-lg font-bold text-[#0F172A]">Data Sovereignty</h3>
+              <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
                 Your records stay in your own database and client Google Drive. We never monetize employee data.
               </p>
             </div>
 
-            <div className="p-6 bg-white/80 rounded-2xl border border-[rgba(89,9,7,0.08)] shadow-xs">
-              <div className="text-sm font-bold text-[#590907] uppercase tracking-wider mb-2">03 · Predictability</div>
-              <h3 className="text-lg font-bold text-[#242321]">Transparent Value</h3>
-              <p className="mt-2 text-xs text-[#6B615A] leading-relaxed">
+            <div className="p-6 bg-white/80 rounded-2xl border border-slate-200 shadow-xs">
+              <div className="text-sm font-bold text-[#4F46E5] uppercase tracking-wider mb-2">03 · Predictability</div>
+              <h3 className="text-lg font-bold text-[#0F172A]">Transparent Value</h3>
+              <p className="mt-2 text-xs text-[#64748B] leading-relaxed">
                 A one-time perpetual license with ₹0 recurring maintenance fees (T&C Apply) gives businesses peace of mind.
               </p>
             </div>
@@ -418,17 +418,17 @@ export default function AboutPage() {
       {/* ===================================================================== */}
       {/* 4. OUR VISION                                                         */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-28 bg-[#1E1D1B] text-[#F8F6F1] relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#590907]/25 via-transparent to-transparent pointer-events-none" />
+      <section className="py-20 sm:py-28 bg-[#0B0F19] text-[#F8FAFC] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#4F46E5]/25 via-transparent to-transparent pointer-events-none" />
 
         <div className="relative mx-auto max-w-5xl px-4 sm:px-8 text-center space-y-6">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold text-[#E8D2B5] uppercase">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1 text-xs font-semibold text-blue-300 uppercase">
             <Layers className="h-3.5 w-3.5" />
             <span>OUR VISION</span>
           </div>
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white font-serif leading-[1.12]">
-            A Smarter Way to Build <span className="text-[#E8D2B5]">Better Workplaces.</span>
+            A Smarter Way to Build <span className="text-blue-300">Better Workplaces.</span>
           </h2>
 
           <div className="max-w-3xl mx-auto space-y-4 text-base sm:text-lg text-white/75 leading-relaxed">
@@ -472,14 +472,14 @@ export default function AboutPage() {
       <section className="py-20 sm:py-28">
         <div className="mx-auto max-w-6xl px-4 sm:px-8">
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold text-[#590907] uppercase">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3.5 py-1 text-xs font-semibold text-[#4F46E5] uppercase">
               <Briefcase className="h-3.5 w-3.5" />
               <span>CORE CAPABILITIES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#242321] font-serif">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] font-serif">
               What FlowPeople Brings Together
             </h2>
-            <p className="text-base text-[#6B615A]">
+            <p className="text-base text-[#64748B]">
               Essential workforce tools organized into one seamless, unified environment.
             </p>
           </div>
@@ -488,14 +488,14 @@ export default function AboutPage() {
             {CAPABILITIES.map((cap, idx) => (
               <div
                 key={idx}
-                className="capability-card rounded-2xl bg-white p-7 border border-[rgba(89,9,7,0.08)] shadow-xs flex flex-col justify-between"
+                className="capability-card rounded-2xl bg-white p-7 border border-slate-200 shadow-xs flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F3EBDD] mb-5">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100 mb-5">
                     {cap.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-[#242321] mb-2">{cap.title}</h3>
-                  <p className="text-xs sm:text-sm text-[#6B615A] leading-relaxed">{cap.desc}</p>
+                  <h3 className="text-lg font-bold text-[#0F172A] mb-2">{cap.title}</h3>
+                  <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">{cap.desc}</p>
                 </div>
               </div>
             ))}
@@ -506,17 +506,17 @@ export default function AboutPage() {
       {/* ===================================================================== */}
       {/* 6. OUR PHILOSOPHY                                                     */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-28 bg-[#FBF7F0] border-t border-[rgba(89,9,7,0.08)]">
+      <section className="py-20 sm:py-28 bg-[#F8FAFC] border-t border-slate-200">
         <div className="mx-auto max-w-6xl px-4 sm:px-8">
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#E8D2B5]/50 px-3.5 py-1 text-xs font-semibold text-[#590907] uppercase">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#EEF2FF]/50 px-3.5 py-1 text-xs font-semibold text-[#4F46E5] uppercase">
               <Compass className="h-3.5 w-3.5" />
               <span>GUIDING PRINCIPLES</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#242321] font-serif">
-              Technology Should Simplify. <span className="text-[#590907]">Not Complicate.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] font-serif">
+              Technology Should Simplify. <span className="text-[#4F46E5]">Not Complicate.</span>
             </h2>
-            <p className="text-base text-[#6B615A]">
+            <p className="text-base text-[#64748B]">
               Three simple beliefs that guide how we build, license, and support FlowPeople.
             </p>
           </div>
@@ -525,11 +525,11 @@ export default function AboutPage() {
             {PHILOSOPHY_PILLARS.map((p) => (
               <div
                 key={p.number}
-                className="rounded-3xl bg-white p-8 border border-[rgba(89,9,7,0.09)] shadow-xs hover:shadow-md transition-shadow relative overflow-hidden"
+                className="rounded-3xl bg-white p-8 border border-slate-200 shadow-xs hover:shadow-md transition-shadow relative overflow-hidden"
               >
-                <div className="text-3xl font-bold font-mono text-[#590907]/25 mb-4">{p.number}</div>
-                <h3 className="text-xl font-bold text-[#242321] mb-3">{p.title}</h3>
-                <p className="text-sm text-[#6B615A] leading-relaxed">{p.desc}</p>
+                <div className="text-3xl font-bold font-mono text-[#4F46E5]/25 mb-4">{p.number}</div>
+                <h3 className="text-xl font-bold text-[#0F172A] mb-3">{p.title}</h3>
+                <p className="text-sm text-[#64748B] leading-relaxed">{p.desc}</p>
               </div>
             ))}
           </div>
@@ -539,17 +539,17 @@ export default function AboutPage() {
       {/* ===================================================================== */}
       {/* 7. WHY FLOWPEOPLE (DIFFERENTIATION)                                   */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-28 bg-[#F3EBDD]/40 border-t border-[rgba(89,9,7,0.08)]">
+      <section className="py-20 sm:py-28 bg-slate-100/40 border-t border-slate-200">
         <div className="mx-auto max-w-6xl px-4 sm:px-8">
           <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold text-[#590907] uppercase">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3.5 py-1 text-xs font-semibold text-[#4F46E5] uppercase">
               <ShieldCheck className="h-3.5 w-3.5" />
               <span>THE FLOWPEOPLE DIFFERENCE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#242321] font-serif">
-              Powerful HR Management. <span className="text-[#590907]">Without Unnecessary Complexity.</span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#0F172A] font-serif">
+              Powerful HR Management. <span className="text-[#4F46E5]">Without Unnecessary Complexity.</span>
             </h2>
-            <p className="text-base text-[#6B615A]">
+            <p className="text-base text-[#64748B]">
               How our software licensing and architecture stands apart from traditional enterprise software.
             </p>
           </div>
@@ -559,17 +559,17 @@ export default function AboutPage() {
             {COMPARISON_POINTS.map((pt, idx) => (
               <div
                 key={idx}
-                className="rounded-2xl bg-white p-6 border border-[rgba(89,9,7,0.08)] shadow-xs space-y-4"
+                className="rounded-2xl bg-white p-6 border border-slate-200 shadow-xs space-y-4"
               >
-                <h3 className="text-base font-bold text-[#242321] border-b border-[rgba(89,9,7,0.06)] pb-3">
+                <h3 className="text-base font-bold text-[#0F172A] border-b border-slate-200 pb-3">
                   {pt.title}
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div className="p-3 rounded-xl bg-red-50/50 border border-red-100 text-[#6B615A]">
+                  <div className="p-3 rounded-xl bg-red-50/50 border border-red-100 text-[#64748B]">
                     <div className="font-semibold text-red-900 mb-1">Traditional HRMS</div>
                     {pt.traditional}
                   </div>
-                  <div className="p-3 rounded-xl bg-[#299D68]/5 border border-[#299D68]/20 text-[#242321]">
+                  <div className="p-3 rounded-xl bg-[#299D68]/5 border border-[#299D68]/20 text-[#0F172A]">
                     <div className="font-semibold text-[#299D68] mb-1">FlowPeople Approach</div>
                     {pt.flowpeople}
                   </div>
@@ -583,17 +583,17 @@ export default function AboutPage() {
       {/* ===================================================================== */}
       {/* 8. OUR BRAND (FLUXORA RELATIONSHIP)                                   */}
       {/* ===================================================================== */}
-      <section className="py-20 sm:py-28 border-t border-[rgba(89,9,7,0.08)] bg-white">
+      <section className="py-20 sm:py-28 border-t border-slate-200 bg-white">
         <div className="mx-auto max-w-4xl px-4 sm:px-8 text-center space-y-6">
           <div className="flex justify-center mb-4">
             <BrandLogo variant="navbar" />
           </div>
 
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#242321] font-serif">
-            FlowPeople. A Product by <span className="text-[#590907]">Fluxora.</span>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0F172A] font-serif">
+            FlowPeople. A Product by <span className="text-[#4F46E5]">Fluxora.</span>
           </h2>
 
-          <div className="max-w-2xl mx-auto space-y-4 text-base sm:text-lg text-[#6B615A] leading-relaxed">
+          <div className="max-w-2xl mx-auto space-y-4 text-base sm:text-lg text-[#64748B] leading-relaxed">
             <p>
               FlowPeople is part of the Fluxora vision to build practical, thoughtfully designed technology
               products that help businesses work smarter.
@@ -605,16 +605,16 @@ export default function AboutPage() {
           </div>
 
           <div className="pt-6 flex flex-wrap items-center justify-center gap-3 sm:gap-6">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-[#D4AF37]/30 px-4 py-2 text-xs font-semibold text-[#242321] shadow-xs backdrop-blur-md">
-              <Building2 className="h-4 w-4 text-[#590907]" />
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-indigo-500/30 px-4 py-2 text-xs font-semibold text-[#0F172A] shadow-xs backdrop-blur-md">
+              <Building2 className="h-4 w-4 text-[#4F46E5]" />
               <span>Independent Product Engineering</span>
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-[#D4AF37]/30 px-4 py-2 text-xs font-semibold text-[#242321] shadow-xs backdrop-blur-md">
-              <ShieldCheck className="h-4 w-4 text-[#590907]" />
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-indigo-500/30 px-4 py-2 text-xs font-semibold text-[#0F172A] shadow-xs backdrop-blur-md">
+              <ShieldCheck className="h-4 w-4 text-[#4F46E5]" />
               <span>Strict Privacy &amp; Data Ethics</span>
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-[#D4AF37]/30 px-4 py-2 text-xs font-semibold text-[#242321] shadow-xs backdrop-blur-md">
-              <Compass className="h-4 w-4 text-[#590907]" />
+            <span className="inline-flex items-center gap-2 rounded-full bg-white/70 border border-indigo-500/30 px-4 py-2 text-xs font-semibold text-[#0F172A] shadow-xs backdrop-blur-md">
+              <Compass className="h-4 w-4 text-[#4F46E5]" />
               <span>Crafted for Modern Workplaces</span>
             </span>
           </div>
@@ -625,12 +625,12 @@ export default function AboutPage() {
       {/* 9. FINAL CTA (POSH SCULPTED CURVES & GOLDEN LUXURY)                  */}
       {/* ===================================================================== */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
-        <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5)] border-2 border-[#D4AF37]/35">
+        <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E1B4B] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5)] border-2 border-indigo-500/30">
           {/* Dynamic Golden Lightfall Canvas Background */}
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
             <Lightfall
-              colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
-              backgroundColor="#3D0604"
+              colors={['#60A5FA', '#818CF8', '#38BDF8', '#C7D2FE', '#FFFFFF']}
+              backgroundColor="#0B0F19"
               speed={0.25}
               streakCount={3}
               streakWidth={1.3}
@@ -643,17 +643,17 @@ export default function AboutPage() {
           </div>
 
           {/* Golden Ambient Glow */}
-          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-[#D4AF37]/15 blur-3xl pointer-events-none" />
+          <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-[#FFE4B8]/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#FFE4B8] backdrop-blur-md">
-              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-blue-400/40 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-blue-200 backdrop-blur-md">
+              <Sparkles className="h-3.5 w-3.5 text-[#38BDF8]" />
               <span>Transform Your Workplace</span>
             </div>
 
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#F8F6F1] font-serif leading-[1.1]">
               Let's Make Workflows <br className="hidden sm:inline" />
-              <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
+              <span className="italic font-normal bg-gradient-to-r from-white via-blue-100 to-indigo-200 bg-clip-text text-transparent">
                 Work Better.
               </span>
             </h2>
@@ -665,10 +665,10 @@ export default function AboutPage() {
             <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 to="/pricing"
-                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#FFE4B8] via-[#E8D2B5] to-[#D4AF37] px-8 py-4 text-sm font-bold text-[#3A1B12] shadow-lg shadow-[#D4AF37]/20 transition-all hover:scale-[1.03] hover:shadow-xl"
+                className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-indigo-500/25 transition-all hover:scale-[1.03] hover:shadow-xl"
               >
                 <span>Explore Pricing</span>
-                <ArrowRight className="h-4 w-4 text-[#3A1B12]" />
+                <ArrowRight className="h-4 w-4 text-white" />
               </Link>
 
               <button
@@ -692,22 +692,22 @@ export default function AboutPage() {
           onClick={() => setInquiryModalOpen(false)}
         >
           <div
-            className="bg-[#FFFFFF] text-[#242321] w-[min(480px,calc(100vw-32px))] rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] p-7 grid gap-4"
+            className="bg-[#FFFFFF] text-[#0F172A] w-[min(480px,calc(100vw-32px))] rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] p-7 grid gap-4"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
             aria-labelledby="about-dlg-t"
           >
-            <h3 id="about-dlg-t" className="text-[1.5rem] font-semibold text-[#242321]">
+            <h3 id="about-dlg-t" className="text-[1.5rem] font-semibold text-[#0F172A]">
               Talk to our team
             </h3>
 
-            <p className="text-xs text-[#6B615A]">
+            <p className="text-xs text-[#64748B]">
               Learn more about how FlowPeople can transform your team's HR operations.
             </p>
 
             <form onSubmit={handleInquirySubmit} className="grid gap-4 mt-2">
-              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#242321]">
+              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Your name
                 <input
                   type="text"
@@ -716,11 +716,11 @@ export default function AboutPage() {
                   onChange={(e) => setInquiryName(e.target.value)}
                   autoComplete="name"
                   placeholder="Your full name"
-                  className="p-3 bg-[#FBF7F0] text-[#242321] border border-[rgba(42,35,32,0.08)] rounded-[14px] text-[1rem] outline-none focus:border-[#590907]"
+                  className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 />
               </label>
 
-              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#242321]">
+              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Work email
                 <input
                   type="email"
@@ -729,11 +729,11 @@ export default function AboutPage() {
                   onChange={(e) => setInquiryEmail(e.target.value)}
                   autoComplete="email"
                   placeholder="name@company.com"
-                  className="p-3 bg-[#FBF7F0] text-[#242321] border border-[rgba(42,35,32,0.08)] rounded-[14px] text-[1rem] outline-none focus:border-[#590907]"
+                  className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 />
               </label>
 
-              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#242321]">
+              <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Number of employees
                 <input
                   type="text"
@@ -741,7 +741,7 @@ export default function AboutPage() {
                   value={inquirySize}
                   onChange={(e) => setInquirySize(e.target.value)}
                   placeholder="For example, 45"
-                  className="p-3 bg-[#FBF7F0] text-[#242321] border border-[rgba(42,35,32,0.08)] rounded-[14px] text-[1rem] outline-none focus:border-[#590907]"
+                  className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 />
               </label>
 
@@ -755,13 +755,13 @@ export default function AboutPage() {
                 <button
                   type="button"
                   onClick={() => setInquiryModalOpen(false)}
-                  className="inline-flex items-center justify-center rounded-full bg-[#F3EBDD] text-[#242321] px-5 py-3 text-xs font-semibold hover:bg-[#E8D2B5] transition flex-1"
+                  className="inline-flex items-center justify-center rounded-full bg-slate-100 text-[#0F172A] px-5 py-3 text-xs font-semibold hover:bg-[#EEF2FF] transition flex-1"
                 >
                   Close
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full bg-[#590907] text-[#F8F6F1] px-5 py-3 text-xs font-semibold hover:bg-[#590907]/90 transition flex-1"
+                  className="inline-flex items-center justify-center rounded-full bg-[#4F46E5] text-[#F8F6F1] px-5 py-3 text-xs font-semibold hover:bg-[#4F46E5]/90 transition flex-1"
                 >
                   Send Inquiry
                 </button>

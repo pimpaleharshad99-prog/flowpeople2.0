@@ -129,22 +129,22 @@ export default function AnnouncementsPage() {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <div className="announcements-page min-h-screen bg-[#FBF7F0] text-[#242321] pt-24 pb-20">
+    <div className="announcements-page min-h-screen bg-[#F8FAFC] text-[#0F172A] pt-24 pb-20">
       {/* ===================================================================== */}
       {/* 1. HERO SECTION                                                       */}
       {/* ===================================================================== */}
-      <section className="relative overflow-hidden border-b border-[rgba(89,9,7,0.08)] bg-gradient-to-b from-[#F3EBDD]/60 via-[#FBF7F0] to-[#FBF7F0] py-16 sm:py-24">
+      <section className="relative overflow-hidden border-b border-slate-200 bg-gradient-to-b from-[#F3EBDD]/60 via-[#FBF7F0] to-[#FBF7F0] py-16 sm:py-24">
         <div className="mx-auto max-w-6xl px-4 sm:px-8 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-[#590907]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#590907] uppercase mb-6">
-            <Bell className="h-3.5 w-3.5 text-[#590907]" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#4F46E5] uppercase mb-6">
+            <Bell className="h-3.5 w-3.5 text-[#4F46E5]" />
             <span>ANNOUNCEMENT CENTER</span>
           </div>
 
-          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl mx-auto leading-[1.06]">
-            What's New at <span className="text-[#590907]">FlowPeople.</span>
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#0F172A] font-serif max-w-5xl mx-auto leading-[1.06]">
+            What's New at <span className="text-[#4F46E5]">FlowPeople.</span>
           </h1>
 
-          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#242321] font-medium leading-relaxed">
+          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#0F172A] font-medium leading-relaxed">
             Discover product updates, improvements, announcements and important information from the
             FlowPeople engineering and product team.
           </p>
@@ -152,19 +152,19 @@ export default function AnnouncementsPage() {
           {/* Search Bar & Dev Sample Banner */}
           <div className="mt-8 max-w-lg mx-auto relative">
             <div className="relative flex items-center">
-              <Search className="absolute left-4 h-4 w-4 text-[#6B615A]" />
+              <Search className="absolute left-4 h-4 w-4 text-[#64748B]" />
               <input
                 type="text"
                 placeholder="Search releases, features, updates..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-full border border-[rgba(89,9,7,0.15)] bg-white py-3.5 pl-11 pr-4 text-xs sm:text-sm text-[#242321] shadow-xs outline-none focus:border-[#590907]"
+                className="w-full rounded-full border border-slate-200 bg-white py-3.5 pl-11 pr-4 text-xs sm:text-sm text-[#0F172A] shadow-xs outline-none focus:border-[#4F46E5]"
               />
               {searchQuery && (
                 <button
                   type="button"
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-4 text-xs text-[#6B615A] hover:text-[#590907]"
+                  className="absolute right-4 text-xs text-[#64748B] hover:text-[#4F46E5]"
                 >
                   Clear
                 </button>
@@ -186,8 +186,8 @@ export default function AnnouncementsPage() {
               onClick={() => setSelectedCategory(cat)}
               className={`rounded-full px-4 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${
                 selectedCategory === cat
-                  ? 'bg-[#590907] text-[#F8F6F1] shadow-xs'
-                  : 'bg-white border border-[rgba(89,9,7,0.12)] text-[#242321] hover:bg-[#F3EBDD]/50'
+                  ? 'bg-[#4F46E5] text-[#F8F6F1] shadow-xs'
+                  : 'bg-white border border-slate-200 text-[#0F172A] hover:bg-slate-100/50'
               }`}
             >
               {cat}
@@ -205,29 +205,29 @@ export default function AnnouncementsPage() {
             {filteredAnnouncements.map((item) => (
               <article
                 key={item.id}
-                className="rounded-3xl border border-[rgba(89,9,7,0.1)] bg-white p-7 shadow-xs hover:shadow-md transition flex flex-col justify-between"
+                className="rounded-3xl border border-slate-200 bg-white p-7 shadow-xs hover:shadow-md transition flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="rounded-full bg-[#590907]/10 px-3 py-1 text-[10px] font-bold tracking-wider uppercase text-[#590907]">
+                    <span className="rounded-full bg-[#4F46E5]/10 px-3 py-1 text-[10px] font-bold tracking-wider uppercase text-[#4F46E5]">
                       {item.badge}
                     </span>
-                    <span className="flex items-center gap-1.5 text-xs text-[#6B615A] font-mono">
+                    <span className="flex items-center gap-1.5 text-xs text-[#64748B] font-mono">
                       <Calendar className="h-3.5 w-3.5" />
                       <span>{item.date}</span>
                     </span>
                   </div>
 
-                  <h2 className="text-xl font-bold tracking-tight text-[#242321] font-serif leading-snug">
+                  <h2 className="text-xl font-bold tracking-tight text-[#0F172A] font-serif leading-snug">
                     {item.title}
                   </h2>
 
-                  <p className="mt-3 text-xs sm:text-sm text-[#6B615A] leading-relaxed">
+                  <p className="mt-3 text-xs sm:text-sm text-[#64748B] leading-relaxed">
                     {item.summary}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-[rgba(89,9,7,0.06)] flex items-center justify-between">
+                <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
                   <span className="text-[11px] text-[#A5A79B] font-mono">
                     {item.version ? `Release ${item.version}` : 'Announcement'}
                   </span>
@@ -235,7 +235,7 @@ export default function AnnouncementsPage() {
                   <button
                     type="button"
                     onClick={() => setSelectedAnnouncement(item)}
-                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#590907] hover:underline cursor-pointer"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-[#4F46E5] hover:underline cursor-pointer"
                   >
                     <span>Read Release Notes</span>
                     <ChevronRight className="h-4 w-4" />
@@ -246,12 +246,12 @@ export default function AnnouncementsPage() {
           </div>
         ) : (
           /* Attractive Empty State */
-          <div className="rounded-3xl border border-[rgba(89,9,7,0.1)] bg-white p-12 text-center max-w-md mx-auto space-y-4">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F3EBDD] text-[#590907] mx-auto">
+          <div className="rounded-3xl border border-slate-200 bg-white p-12 text-center max-w-md mx-auto space-y-4">
+            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 text-[#4F46E5] mx-auto">
               <Info className="h-6 w-6" />
             </div>
-            <h3 className="text-lg font-bold text-[#242321]">No Announcements Found</h3>
-            <p className="text-xs text-[#6B615A]">
+            <h3 className="text-lg font-bold text-[#0F172A]">No Announcements Found</h3>
+            <p className="text-xs text-[#64748B]">
               There are currently no updates matching your selected filter "{selectedCategory}" or search query.
             </p>
             <button
@@ -260,7 +260,7 @@ export default function AnnouncementsPage() {
                 setSelectedCategory('All');
                 setSearchQuery('');
               }}
-              className="inline-flex items-center gap-1.5 rounded-full bg-[#590907] px-4 py-2 text-xs font-semibold text-[#F8F6F1] shadow-xs hover:bg-[#590907]/90"
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#4F46E5] px-4 py-2 text-xs font-semibold text-[#F8F6F1] shadow-xs hover:bg-[#4F46E5]/90"
             >
               Reset Filters
             </button>
@@ -277,52 +277,52 @@ export default function AnnouncementsPage() {
           onClick={() => setSelectedAnnouncement(null)}
         >
           <div
-            className="bg-white text-[#242321] w-[min(580px,calc(100vw-32px))] rounded-[28px] shadow-2xl p-7 max-h-[85vh] overflow-y-auto space-y-5"
+            className="bg-white text-[#0F172A] w-[min(580px,calc(100vw-32px))] rounded-[28px] shadow-2xl p-7 max-h-[85vh] overflow-y-auto space-y-5"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
           >
-            <div className="flex items-center justify-between border-b border-[rgba(89,9,7,0.08)] pb-3">
-              <span className="text-xs font-bold text-[#590907] uppercase">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+              <span className="text-xs font-bold text-[#4F46E5] uppercase">
                 {selectedAnnouncement.badge}
               </span>
               <button
                 type="button"
                 onClick={() => setSelectedAnnouncement(null)}
-                className="text-[#6B615A] hover:text-[#590907]"
+                className="text-[#64748B] hover:text-[#4F46E5]"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
 
             <div>
-              <div className="text-xs text-[#6B615A] font-mono">{selectedAnnouncement.date}</div>
-              <h3 className="text-2xl font-bold text-[#242321] font-serif mt-1">
+              <div className="text-xs text-[#64748B] font-mono">{selectedAnnouncement.date}</div>
+              <h3 className="text-2xl font-bold text-[#0F172A] font-serif mt-1">
                 {selectedAnnouncement.title}
               </h3>
             </div>
 
-            <p className="text-sm text-[#4A423D] leading-relaxed">
+            <p className="text-sm text-[#64748B] leading-relaxed">
               {selectedAnnouncement.summary}
             </p>
 
             <div className="space-y-2.5 pt-2">
-              <div className="text-xs font-bold uppercase tracking-wider text-[#242321]">
+              <div className="text-xs font-bold uppercase tracking-wider text-[#0F172A]">
                 Release Highlights:
               </div>
               {selectedAnnouncement.content.map((point, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs text-[#4A423D]">
+                <div key={idx} className="flex items-start gap-2.5 text-xs text-[#64748B]">
                   <CheckCircle2 className="h-4 w-4 text-[#299D68] shrink-0 mt-0.5" />
                   <span>{point}</span>
                 </div>
               ))}
             </div>
 
-            <div className="pt-4 border-t border-[rgba(89,9,7,0.08)] flex justify-end">
+            <div className="pt-4 border-t border-slate-200 flex justify-end">
               <button
                 type="button"
                 onClick={() => setSelectedAnnouncement(null)}
-                className="rounded-full bg-[#590907] text-[#F8F6F1] px-5 py-2 text-xs font-semibold hover:bg-[#590907]/90"
+                className="rounded-full bg-[#4F46E5] text-[#F8F6F1] px-5 py-2 text-xs font-semibold hover:bg-[#4F46E5]/90"
               >
                 Close
               </button>
