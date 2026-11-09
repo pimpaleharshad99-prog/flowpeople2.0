@@ -188,11 +188,11 @@ export default function FaqPage() {
             <span>KNOWLEDGE BASE &amp; FAQ</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-[#242321] font-serif max-w-3xl mx-auto leading-[1.1]">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl mx-auto leading-[1.06]">
             Questions? <span className="text-[#590907]">We've Got Answers.</span>
           </h1>
 
-          <p className="mt-5 max-w-2xl mx-auto text-base sm:text-lg text-[#6B615A] leading-relaxed">
+          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#242321] font-medium leading-relaxed">
             Everything you need to know about FlowPeople, its features, one-time perpetual pricing and implementation.
           </p>
 

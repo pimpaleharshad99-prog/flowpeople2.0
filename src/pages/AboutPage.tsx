@@ -23,6 +23,7 @@ import {
 } from 'lucide-react';
 import { FP_IMAGES } from '../assets/fpImages';
 import BrandLogo from '../components/BrandLogo';
+import Lightfall from '../components/Lightfall';
 import { leadService } from '../services/leadService';
 import './AboutPage.css';
 
@@ -159,11 +160,11 @@ export default function AboutPage() {
             <span>ABOUT FLOWPEOPLE</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#242321] font-serif max-w-4xl mx-auto leading-[1.08]">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl mx-auto leading-[1.06]">
             People Are the Heart of <span className="about-sheen-text">Every Business.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl mx-auto text-base sm:text-lg lg:text-xl text-[#6B615A] leading-relaxed">
+          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#242321] font-medium leading-relaxed">
             Managing people shouldn't mean managing endless paperwork, scattered spreadsheets and
             disconnected systems. FlowPeople brings essential HR operations together in one intelligent,
             streamlined platform.
@@ -625,6 +626,22 @@ export default function AboutPage() {
       {/* ===================================================================== */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
         <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5)] border-2 border-[#D4AF37]/35">
+          {/* Dynamic Golden Lightfall Canvas Background */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
+            <Lightfall
+              colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
+              backgroundColor="#3D0604"
+              speed={0.25}
+              streakCount={3}
+              streakWidth={1.3}
+              twinkle={0.35}
+              backgroundGlow={0.25}
+              headGlow={0.75}
+              bloom={0.4}
+              mouseInteraction={false}
+            />
+          </div>
+
           {/* Golden Ambient Glow */}
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-[#D4AF37]/15 blur-3xl pointer-events-none" />
 

@@ -21,6 +21,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { FP_IMAGES } from '../assets/fpImages';
+import Lightfall from '../components/Lightfall';
 
 export default function FeaturesPage() {
   return (
@@ -35,11 +36,11 @@ export default function FeaturesPage() {
             <span>PLATFORM CAPABILITIES</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-[#242321] font-serif max-w-3xl mx-auto leading-[1.1]">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl mx-auto leading-[1.06]">
             Everything Your HR Team Needs. <span className="text-[#590907]">In One Place.</span>
           </h1>
 
-          <p className="mt-5 max-w-2xl mx-auto text-base sm:text-lg text-[#6B615A] leading-relaxed">
+          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#242321] font-medium leading-relaxed">
             Bring employee management, attendance, leave workflows and workforce administration into
             one connected experience.
           </p>
@@ -466,6 +467,22 @@ export default function FeaturesPage() {
       {/* ===================================================================== */}
       <section className="py-16 sm:py-24 px-4 sm:px-6 max-w-6xl mx-auto">
         <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5)] border-2 border-[#D4AF37]/35">
+          {/* Dynamic Golden Lightfall Canvas Background */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
+            <Lightfall
+              colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
+              backgroundColor="#3D0604"
+              speed={0.25}
+              streakCount={3}
+              streakWidth={1.3}
+              twinkle={0.35}
+              backgroundGlow={0.25}
+              headGlow={0.75}
+              bloom={0.4}
+              mouseInteraction={false}
+            />
+          </div>
+
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-[#D4AF37]/15 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 max-w-3xl mx-auto space-y-6">

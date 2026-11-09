@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Lightfall from '../components/Lightfall';
 import {
   Sparkles,
   ArrowRight,
@@ -28,11 +29,11 @@ export default function AboutFluxoraPage() {
             <span>THE COMPANY BEHIND THE SOFTWARE</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-bold tracking-tight text-[#242321] font-serif max-w-3xl mx-auto leading-[1.1]">
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl mx-auto leading-[1.06]">
             Building Technology That <span className="text-[#590907]">Moves Businesses Forward.</span>
           </h1>
 
-          <p className="mt-5 max-w-2xl mx-auto text-base sm:text-lg text-[#6B615A] leading-relaxed">
+          <p className="mt-6 max-w-3xl mx-auto text-lg sm:text-xl lg:text-2xl text-[#242321] font-medium leading-relaxed">
             Fluxora is focused on creating practical, thoughtfully designed digital products that simplify
             everyday business challenges.
           </p>
@@ -249,6 +250,22 @@ export default function AboutFluxoraPage() {
       {/* 6. SECTION E: OUR VISION & FINAL CTA WITH LUXURY GOLDEN TOUCH         */}
       {/* ===================================================================== */}
       <section className="relative py-20 sm:py-28 bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] text-center overflow-hidden border-t-2 border-[#D4AF37]/35 shadow-[inset_0_10px_40px_rgba(0,0,0,0.5)]">
+        {/* Dynamic Golden Lightfall Canvas Background */}
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
+          <Lightfall
+            colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
+            backgroundColor="#3D0604"
+            speed={0.25}
+            streakCount={3}
+            streakWidth={1.3}
+            twinkle={0.35}
+            backgroundGlow={0.25}
+            headGlow={0.75}
+            bloom={0.4}
+            mouseInteraction={false}
+          />
+        </div>
+
         {/* Ambient Golden Radial Glow Halos */}
         <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#D4AF37]/25 via-[#FFE4B8]/10 to-transparent blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#D4AF37]/10 blur-3xl" />

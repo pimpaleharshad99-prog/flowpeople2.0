@@ -193,14 +193,14 @@ export default function LandingHubPage() {
           </div>
 
           {/* Hero Main Headline with Gold Gradient Accent */}
-          <h1 className="serif-heading mt-5 text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-semibold tracking-tight text-white leading-[1.06] max-w-4xl drop-shadow-[0_6px_28px_rgba(0,0,0,0.7)]">
+          <h1 className="serif-heading mt-6 text-5xl sm:text-7xl md:text-8xl lg:text-[84px] font-bold tracking-tight text-white leading-[1.04] max-w-5xl drop-shadow-[0_8px_32px_rgba(0,0,0,0.85)]">
             Next-Gen Attendance. <br />
             <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
               Effortless from Every Angle.
             </span>
           </h1>
 
-          <p className="mt-5 max-w-2xl text-base sm:text-lg md:text-xl text-[#F8F6F1]/90 font-light leading-relaxed drop-shadow-sm">
+          <p className="mt-6 max-w-3xl text-lg sm:text-xl md:text-2xl text-[#F8F6F1] font-normal leading-relaxed drop-shadow-md">
             Welcome your team with contactless facial recognition at the reception desk, or let mobile staff check in instantly within a verified 100m GPS geofence.
           </p>
 
@@ -555,6 +555,22 @@ export default function LandingHubPage() {
         {/* CLOSING CTA BAND — ULTRA POSH CURVED DESIGN WITH GOLDEN TOUCHES     */}
         {/* ------------------------------------------------------------------- */}
         <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5)] border-2 border-[#D4AF37]/35 mt-20">
+          {/* Dynamic Golden Lightfall Canvas Background */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
+            <Lightfall
+              colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
+              backgroundColor="#3D0604"
+              speed={0.25}
+              streakCount={3}
+              streakWidth={1.3}
+              twinkle={0.35}
+              backgroundGlow={0.25}
+              headGlow={0.75}
+              bloom={0.4}
+              mouseInteraction={false}
+            />
+          </div>
+
           {/* Subtle Golden Glow Element */}
           <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[500px] h-[300px] rounded-full bg-[#D4AF37]/15 blur-3xl pointer-events-none" />
 

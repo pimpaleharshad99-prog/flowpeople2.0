@@ -176,11 +176,11 @@ export default function TermsPage() {
             <span>LEGAL & AGREEMENTS</span>
           </div>
 
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#242321] sm:text-5xl lg:text-6xl font-serif">
+          <h1 className="mt-5 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl leading-[1.06]">
             Clear Terms. <span className="text-[#590907]">Better Business.</span>
           </h1>
 
-          <p className="mt-5 max-w-3xl text-base sm:text-lg leading-relaxed text-[#6B615A]">
+          <p className="mt-6 max-w-4xl text-lg sm:text-xl text-[#242321] font-medium leading-relaxed">
             These Terms &amp; Conditions govern your access to and use of FlowPeople. Please read them
             carefully before purchasing, licensing, or deploying our platform.
           </p>

@@ -110,11 +110,11 @@ export default function PrivacyPolicyPage() {
             <span>LEGAL & PRIVACY</span>
           </div>
 
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-[#242321] sm:text-5xl lg:text-6xl font-serif">
+          <h1 className="mt-5 text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-[#141312] font-serif max-w-5xl leading-[1.06]">
             Your Data. Your Trust. <span className="text-[#590907]">Our Responsibility.</span>
           </h1>
 
-          <p className="mt-5 max-w-3xl text-base sm:text-lg leading-relaxed text-[#6B615A]">
+          <p className="mt-6 max-w-4xl text-lg sm:text-xl text-[#242321] font-medium leading-relaxed">
             At FlowPeople, we understand the importance of personal and organizational information.
             This Privacy Policy explains how we collect, use, store and protect information when you
             use our HR management platform.

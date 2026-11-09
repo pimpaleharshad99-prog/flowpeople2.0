@@ -314,17 +314,17 @@ export default function BiometricAttendancePage() {
             {/* Center Area: Left Editorial Headline & Right Kiosk HUD */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto">
               {/* Left Column Editorial */}
-              <div className="lg:col-span-7 text-white space-y-4 max-w-xl">
-                <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#FFE4B8] backdrop-blur-md">
-                  <Sparkles className="h-3 w-3" />
+              <div className="lg:col-span-7 text-white space-y-5 max-w-2xl">
+                <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#FFE4B8] backdrop-blur-md">
+                  <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
                   <span>{currentScene.eyebrow}</span>
                 </div>
 
-                <h1 className="serif-heading text-4xl sm:text-6xl md:text-7xl font-semibold leading-tight text-white drop-shadow-md">
+                <h1 className="serif-heading text-5xl sm:text-7xl md:text-8xl font-bold leading-[1.04] text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)]">
                   {currentScene.heading}
                 </h1>
 
-                <p className="text-base sm:text-xl text-white/85 leading-relaxed">
+                <p className="text-lg sm:text-2xl text-white font-medium leading-relaxed drop-shadow-md">
                   {currentScene.subtext}
                 </p>
 

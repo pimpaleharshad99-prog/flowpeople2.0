@@ -173,7 +173,7 @@ export default function GpsAttendancePage() {
 
         <div className="relative z-10 mx-auto max-w-7xl w-full flex flex-col lg:flex-row items-center justify-between gap-12">
           {/* Left: Narrative & 5-Stage Step Controls */}
-          <div className="max-w-xl text-[#F8F6F1] space-y-6">
+          <div className="max-w-2xl lg:max-w-2xl text-[#F8F6F1] space-y-6">
             {/* Zone Status Pill */}
             <div className="inline-flex items-center gap-2.5 rounded-full border border-[#FFE4B8]/40 bg-white/10 px-4 py-1.5 backdrop-blur-xl shadow-md">
               <MapPin className="h-4 w-4 text-[#299D68]" />
@@ -195,13 +195,13 @@ export default function GpsAttendancePage() {
 
             {/* Dynamic Headline & Narrative */}
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wider text-[#E8D2B5] mb-2">
+              <div className="text-xs font-semibold uppercase tracking-wider text-[#E8D2B5] mb-2.5">
                 {curScene.tag} · {curScene.distance}
               </div>
-              <h1 className="serif-heading text-4xl sm:text-6xl font-semibold tracking-tight leading-[1.08] text-white">
+              <h1 className="serif-heading text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05] text-white drop-shadow-md">
                 {curScene.head}
               </h1>
-              <p className="mt-4 text-sm sm:text-base text-[#F8F6F1]/85 leading-relaxed">
+              <p className="mt-5 text-base sm:text-lg md:text-xl text-[#F8F6F1] font-normal leading-relaxed drop-shadow-sm">
                 {curScene.sub}
               </p>
             </div>
@@ -378,15 +378,15 @@ export default function GpsAttendancePage() {
       {/* ===================================================================== */}
       <section className="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
         {/* Mode Switcher Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-4xl mx-auto mb-14">
           <div className="inline-flex items-center gap-2 rounded-full bg-[#E8D2B5]/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-[#590907] mb-3">
             <Radio className="h-3.5 w-3.5" />
             <span>Interactive Live Simulation</span>
           </div>
-          <h2 className="serif-heading text-4xl sm:text-6xl font-semibold text-[#242321]">
+          <h2 className="serif-heading text-4xl sm:text-6xl lg:text-7xl font-bold text-[#141312] leading-[1.08]">
             Right Place. <span className="italic text-[#590907]">Right Time.</span>
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-[#242321]/75">
+          <p className="mt-5 text-lg sm:text-xl text-[#242321] font-medium max-w-3xl mx-auto leading-relaxed">
             Test how FlowPeople verifies your location in real time. Click the status card below to simulate an instant check-in.
           </p>
 

@@ -101,13 +101,14 @@
 }
 
 .pricing-h1 {
-  font-size: clamp(2.7rem, 8.4vw, 6.6rem);
+  font-size: clamp(2.9rem, 8.8vw, 7rem);
   line-height: 1.02;
   letter-spacing: -0.04em;
   display: grid;
   gap: 0.04em;
   justify-items: center;
-  font-weight: 600;
+  font-weight: 700;
+  color: #141312;
   margin: 0;
 }
 
@@ -143,9 +144,11 @@
 
 .hero-pricing-lead {
   margin: 24px auto 0;
-  color: var(--fg-2);
-  font-size: 1.2rem;
-  max-width: 58ch;
+  color: #242321;
+  font-weight: 500;
+  font-size: 1.25rem;
+  max-width: 68ch;
+  line-height: 1.6;
   opacity: 0;
   animation: fpFade 0.9s 0.8s forwards;
 }

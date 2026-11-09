@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Sparkles, ArrowRight } from 'lucide-react';
+import Lightfall from '../components/Lightfall';
 import './PricingPage.css';
 import { leadService } from '../services/leadService';
 
@@ -496,11 +497,11 @@ export default function PricingPage() {
       <main className="max-w-[1160px] mx-auto px-4 sm:px-6">
         {/* Section 1: Pricing Cards */}
         <section id="pricing" className="py-16 sm:py-24" aria-labelledby="pricing-h">
-          <div className="grid gap-3.5 mb-8 sm:mb-12 max-w-[720px]">
-            <h2 id="pricing-h" className="text-[clamp(1.9rem,4vw,2.9rem)] font-semibold tracking-tight text-[#2A2320]">
+          <div className="grid gap-3.5 mb-8 sm:mb-12 max-w-[850px]">
+            <h2 id="pricing-h" className="text-[clamp(2.2rem,4.5vw,3.5rem)] font-bold tracking-tight text-[#141312]">
               Pay once. Own the license.
             </h2>
-            <p className="text-[#6B615A] text-[1.1rem] max-w-[58ch]">
+            <p className="text-[#242321] font-medium text-[1.18rem] max-w-[65ch] leading-relaxed">
               Three licenses, each a single payment with no recurring FlowPeople maintenance fee (T&C Apply).
               Pick the one that matches your headcount and the way you work.
             </p>
@@ -779,6 +780,22 @@ export default function PricingPage() {
         {/* Section 6: Final CTA with Opulent Golden Touch */}
         <section id="contact" className="pb-16 sm:pb-28 pt-4" aria-labelledby="fin-h">
           <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5),0_0_40px_rgba(212,175,55,0.18)] border-2 border-[#D4AF37]/40">
+            {/* Dynamic Golden Lightfall Canvas Background */}
+            <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
+              <Lightfall
+                colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
+                backgroundColor="#3D0604"
+                speed={0.25}
+                streakCount={3}
+                streakWidth={1.3}
+                twinkle={0.35}
+                backgroundGlow={0.25}
+                headGlow={0.75}
+                bloom={0.4}
+                mouseInteraction={false}
+              />
+            </div>
+
             {/* Ambient Golden Radial Glow Halos */}
             <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#D4AF37]/25 via-[#FFE4B8]/10 to-transparent blur-3xl" />
             <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#D4AF37]/10 blur-3xl" />
