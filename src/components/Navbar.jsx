@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 const NAV_ITEMS = [
   { id: "welcome", label: "Welcome Hub", path: "/" },
@@ -19,18 +20,8 @@ const DOT_COLOR = {
 
 function Logo() {
   return (
-    <Link to="/" className="flex shrink-0 items-center gap-3 transition hover:opacity-90" aria-label="FlowPeople home">
-      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-lg font-bold text-white shadow-lg shadow-indigo-600/40">
-        F.
-      </span>
-      <span className="leading-none">
-        <span className="block text-lg font-semibold tracking-tight text-white">
-          Flow<span className="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent">people</span>
-        </span>
-        <span className="mt-1 block text-[10px] font-medium uppercase tracking-[0.25em] text-slate-300">
-          BY FLUXORA
-        </span>
-      </span>
+    <Link to="/" className="flex shrink-0 items-center transition hover:opacity-95" aria-label="FlowPeople home">
+      <BrandLogo variant="navbar" theme="dark" />
     </Link>
   );
 }

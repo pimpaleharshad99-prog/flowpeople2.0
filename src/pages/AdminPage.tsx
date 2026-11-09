@@ -254,19 +254,7 @@ export default function AdminPage() {
         <div className="relative z-10 w-full max-w-[420px] text-center mb-7">
           <Link to="/" className="inline-block transition hover:opacity-90">
             <div className="flex flex-col items-center">
-              {/* Gradient Squircle Emblem with F. */}
-              <div className="relative flex items-center justify-center h-14 w-14 rounded-[18px] bg-gradient-to-br from-[#38BDF8] via-[#2563EB] to-[#4F46E5] shadow-lg shadow-blue-500/25 mb-3">
-                <span className="text-white font-black text-2xl font-sans tracking-tight">F.</span>
-              </div>
-
-              {/* Wordmark */}
-              <div className="flex items-center text-2xl font-extrabold tracking-tight">
-                <span className="text-[#0F172A]">Flow</span>
-                <span className="text-[#4F46E5]">people</span>
-              </div>
-              <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#64748B] mt-0.5">
-                BY FLUXORA
-              </span>
+              <BrandLogo variant="navbar" theme="light" className="scale-110" />
             </div>
           </Link>
 
