@@ -1,411 +1,279 @@
-import React, { useState } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
-import BrandLogo from './BrandLogo';
-import {
-  Navbar as AceternityNavbar,
-  NavBody,
-  MobileNav,
-  MobileNavHeader,
-  MobileNavToggle,
-  MobileNavMenu,
-  NavbarButton,
-  useNavbar,
-} from './ui/resizable-navbar';
+// src/components/Navbar.jsx
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 
-function NavbarContent({ visible: propVisible }) {
-  const context = useNavbar();
-  const visible = propVisible !== undefined ? propVisible : context.visible;
-  const navigate = useNavigate();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [hoveredIdx, setHoveredIdx] = useState(null);
+const NAV_ITEMS = [
+  { id: "welcome", label: "Welcome Hub", path: "/" },
+  { id: "biometric", label: "Biometric", path: "/biometric-attendance", dot: "green" },
+  { id: "gps", label: "GPS Attendance", path: "/gps-attendance", dot: "blue" },
+  { id: "pricing", label: "Pricing", path: "/pricing" },
+  { id: "how-it-works", label: "How It Works", path: "/how-it-works" },
+  { id: "features", label: "Features", path: "/features" },
+];
 
-  const handleNavigateHome = () => {
-    setMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    setTimeout(() => {
-      window.dispatchEvent(new Event('resize'));
-      window.dispatchEvent(new Event('scroll'));
-    }, 50);
-  };
+const DOT_COLOR = {
+  green: "bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]",
+  blue: "bg-blue-400 shadow-[0_0_8px_rgba(96,165,250,0.8)]",
+};
 
-  const handleBookDemo = () => {
-    setMobileMenuOpen(false);
-    const el = document.getElementById('contact') || document.getElementById('choose-attendance');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      navigate('/contact?type=Book%20a%20Demo');
-    }
-  };
-
-  const navLinks = [
-    { name: 'Welcome Hub', to: '/', end: true, badge: null },
-    {
-      name: 'Biometric',
-      to: '/biometric-attendance',
-      end: false,
-      badge: (
-        <span className="relative flex h-2 w-2 mr-1" aria-hidden="true">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#10B981] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#10B981]"></span>
-        </span>
-      ),
-    },
-    {
-      name: 'GPS Attendance',
-      to: '/gps-attendance',
-      end: false,
-      badge: (
-        <span className="relative flex h-2 w-2 mr-1" aria-hidden="true">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2563EB] opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-[#2563EB]"></span>
-        </span>
-      ),
-    },
-    { name: 'Pricing', to: '/pricing', end: false, badge: null },
-    { name: 'How It Works', to: '/how-it-works', end: false, badge: null },
-    { name: 'Features', to: '/features', end: false, badge: null },
-    { name: 'About', to: '/about', end: false, badge: null },
-  ];
-
+function Logo() {
   return (
-    <>
-      {/* ============================================================== */}
-      {/* DESKTOP RESIZABLE NAVBAR (Screen width >= lg)                   */}
-      {/* Shrinks to sleek pill; "Book Demo" & "About" only stay at top  */}
-      {/* ============================================================== */}
-      <NavBody
-        contractedWidth="760px"
-        expandedWidth="100%"
-        visible={visible}
-        className="justify-between gap-3 sm:gap-4"
-      >
-        {/* Left: FlowPeople Brand Logo */}
-        <Link
-          to="/"
-          onClick={handleNavigateHome}
-          className="relative z-20 flex items-center gap-2 transition hover:opacity-90 flex-shrink-0"
-          aria-label="FlowPeople by Fluxora Home"
-        >
-          <BrandLogo variant="navbar" />
-        </Link>
-
-        {/* Center Pill Dock: Bezel-less & transparent when scrolled */}
-        <nav
-          aria-label="Experience Navigation"
-          onMouseLeave={() => setHoveredIdx(null)}
-          className={`relative flex items-center gap-0.5 sm:gap-1 rounded-full p-1 text-xs sm:text-[13px] font-medium flex-shrink-0 whitespace-nowrap transition-all duration-300 ${
-            visible
-              ? 'bg-transparent border-0 border-transparent shadow-none'
-              : 'nav-glass-dock border border-indigo-100/60'
-          }`}
-        >
-          {navLinks.map((item, idx) => {
-            const isAbout = item.to === '/about';
-
-            const linkElement = (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end={item.end}
-                onClick={item.to === '/' ? handleNavigateHome : undefined}
-                onMouseEnter={() => setHoveredIdx(idx)}
-                className={({ isActive }) =>
-                  `relative rounded-full px-2.5 sm:px-3 py-1.5 transition flex items-center z-10 whitespace-nowrap flex-shrink-0 leading-none ${
-                    isActive
-                      ? 'bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white shadow-xs font-semibold'
-                      : 'text-[#334155] hover:text-[#4F46E5]'
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {/* Floating hover capsule across inactive items */}
-                    {!isActive && hoveredIdx === idx && (
-                      <motion.div
-                        layoutId="hovered-nav-dock"
-                        className="absolute inset-0 rounded-full bg-white/70 shadow-xs border border-indigo-100/60 -z-10"
-                        transition={{
-                          type: 'spring',
-                          stiffness: 350,
-                          damping: 30,
-                        }}
-                      />
-                    )}
-                    {item.badge}
-                    <span className="whitespace-nowrap">{item.name}</span>
-                  </>
-                )}
-              </NavLink>
-            );
-
-            // "About" only stays at the upper part (removed on scroll like Book Demo)
-            if (isAbout) {
-              return (
-                <AnimatePresence key={item.to}>
-                  {!visible && (
-                    <motion.div
-                      initial={{ opacity: 0, width: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, width: 'auto', scale: 1 }}
-                      exit={{ opacity: 0, width: 0, scale: 0.9 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden flex items-center flex-shrink-0"
-                    >
-                      {linkElement}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              );
-            }
-
-            return linkElement;
-          })}
-        </nav>
-
-        {/* Right CTA Action: ONLY stays at upper part; removed on scroll */}
-        <AnimatePresence>
-          {!visible && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, width: 0 }}
-              animate={{ opacity: 1, scale: 1, width: 'auto' }}
-              exit={{ opacity: 0, scale: 0.9, width: 0 }}
-              transition={{ duration: 0.2 }}
-              className="flex items-center gap-2 flex-shrink-0 overflow-hidden"
-            >
-              <NavbarButton
-                variant="gradient"
-                onClick={handleBookDemo}
-                className="shadow-md shadow-indigo-500/20 whitespace-nowrap"
-              >
-                Book Demo
-              </NavbarButton>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </NavBody>
-
-      {/* ============================================================== */}
-      {/* MOBILE RESIZABLE NAVBAR (Screen width < lg)                     */}
-      {/* Quick pill only stays at upper part; removed on scroll          */}
-      {/* ============================================================== */}
-      <MobileNav visible={visible}>
-        <MobileNavHeader>
-          {/* Brand Logo */}
-          <Link
-            to="/"
-            onClick={handleNavigateHome}
-            className="flex items-center gap-2 transition hover:opacity-90"
-            aria-label="FlowPeople by Fluxora Home"
-          >
-            <BrandLogo variant="navbar" />
-          </Link>
-
-          <div className="flex items-center gap-2">
-            {/* Quick Mobile "Book Demo" pill: ONLY stays at upper part */}
-            <AnimatePresence>
-              {!visible && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, width: 0 }}
-                  animate={{ opacity: 1, scale: 1, width: 'auto' }}
-                  exit={{ opacity: 0, scale: 0.9, width: 0 }}
-                  transition={{ duration: 0.2 }}
-                  className="hidden sm:inline-flex overflow-hidden"
-                >
-                  <button
-                    type="button"
-                    onClick={handleBookDemo}
-                    className="items-center justify-center rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white px-4 py-1.5 text-xs font-semibold hover:from-[#1D4ED8] hover:to-[#4338CA] transition shadow-sm cursor-pointer whitespace-nowrap"
-                  >
-                    Book Demo
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Mobile Animated Hamburger / Close Button */}
-            <MobileNavToggle
-              isOpen={mobileMenuOpen}
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            />
-          </div>
-        </MobileNavHeader>
-
-        {/* Mobile Navigation Drawer with AnimatePresence */}
-        <MobileNavMenu
-          isOpen={mobileMenuOpen}
-          onClose={() => setMobileMenuOpen(false)}
-        >
-          {/* Full Grid of 12 Navigation Destinations */}
-          <div className="grid grid-cols-2 gap-2 text-xs font-medium w-full">
-            <NavLink
-              to="/"
-              end
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              Welcome Hub
-            </NavLink>
-
-            <NavLink
-              to="/how-it-works"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              How It Works
-            </NavLink>
-
-            <NavLink
-              to="/features"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              Features
-            </NavLink>
-
-            <NavLink
-              to="/biometric-attendance"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              Biometric Attendance
-            </NavLink>
-
-            <NavLink
-              to="/gps-attendance"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              GPS Attendance
-            </NavLink>
-
-            <NavLink
-              to="/pricing"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              Pricing Plans
-            </NavLink>
-
-            <NavLink
-              to="/who-its-for"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              Who It's For
-            </NavLink>
-
-            <NavLink
-              to="/about"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              About FlowPeople
-            </NavLink>
-
-            <NavLink
-              to="/about-fluxora"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              About Fluxora
-            </NavLink>
-
-            <NavLink
-              to="/faq"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              FAQ
-            </NavLink>
-
-            <NavLink
-              to="/announcements"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              Announcements
-            </NavLink>
-
-            <NavLink
-              to="/contact"
-              onClick={() => setMobileMenuOpen(false)}
-              className={({ isActive }) =>
-                `p-2.5 rounded-xl transition ${
-                  isActive ? 'bg-[#4F46E5] text-white font-semibold' : 'text-[#334155] hover:bg-indigo-50/70'
-                }`
-              }
-            >
-              Contact Us
-            </NavLink>
-          </div>
-
-          {/* Full-width Book a Demo CTA in mobile drawer */}
-          <div className="pt-2 border-t border-slate-200/80 w-full">
-            <button
-              type="button"
-              onClick={handleBookDemo}
-              className="w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white py-3 text-xs font-semibold shadow-md shadow-indigo-500/20 hover:from-[#1D4ED8] hover:to-[#4338CA] transition cursor-pointer"
-            >
-              <span>Book a Demo</span>
-              <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-          </div>
-        </MobileNavMenu>
-      </MobileNav>
-    </>
+    <Link to="/" className="flex shrink-0 items-center gap-3 transition hover:opacity-90" aria-label="FlowPeople home">
+      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 text-lg font-bold text-white shadow-lg shadow-indigo-600/40">
+        F.
+      </span>
+      <span className="leading-none">
+        <span className="block text-lg font-semibold tracking-tight text-white">
+          Flow<span className="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent">people</span>
+        </span>
+        <span className="mt-1 block text-[10px] font-medium uppercase tracking-[0.25em] text-slate-300">
+          BY FLUXORA
+        </span>
+      </span>
+    </Link>
   );
 }
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [active, setActive] = useState("welcome");
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Track window scroll to subtly refine backdrop when scrolling
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // 1. Mark section in view as active using IntersectionObserver
+  useEffect(() => {
+    // If not on home page, match active item based on current pathname
+    if (location.pathname !== "/") {
+      const matched = NAV_ITEMS.find((item) => item.path === location.pathname);
+      if (matched) {
+        setActive(matched.id);
+        return;
+      }
+    }
+
+    const sectionElements = NAV_ITEMS.map((item) => {
+      return (
+        document.getElementById(item.id) ||
+        (item.id === "welcome" && document.getElementById("welcome-hero")) ||
+        (item.id === "biometric" && (document.getElementById("option-biometric") || document.getElementById("biometric-section"))) ||
+        (item.id === "gps" && (document.getElementById("option-gps") || document.getElementById("gps-section"))) ||
+        (item.id === "pricing" && document.getElementById("pricing-section")) ||
+        (item.id === "how-it-works" && document.getElementById("how-it-works-section")) ||
+        (item.id === "features" && document.getElementById("features-section"))
+      );
+    }).filter((el) => el !== null);
+
+    if (sectionElements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            const rawId = e.target.id;
+            if (rawId === "welcome-hero" || rawId === "welcome") setActive("welcome");
+            else if (rawId.includes("biometric")) setActive("biometric");
+            else if (rawId.includes("gps")) setActive("gps");
+            else if (rawId.includes("pricing")) setActive("pricing");
+            else if (rawId.includes("how-it-works")) setActive("how-it-works");
+            else if (rawId.includes("features")) setActive("features");
+            else setActive(rawId);
+          }
+        });
+      },
+      { rootMargin: "-30% 0px -55% 0px" }
+    );
+
+    sectionElements.forEach((s) => observer.observe(s));
+    return () => observer.disconnect();
+  }, [location.pathname]);
+
+  // 2. Close mobile menu on Escape key press
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  // 3. Navigation handler (smooth in-page scroll if section exists, or route navigation)
+  const go = (item) => {
+    setOpen(false);
+
+    const targetElement =
+      document.getElementById(item.id) ||
+      (item.id === "welcome" && (document.getElementById("welcome-hero") || document.getElementById("view-hub"))) ||
+      (item.id === "biometric" && document.getElementById("option-biometric")) ||
+      (item.id === "gps" && document.getElementById("option-gps"));
+
+    if (targetElement && location.pathname === "/") {
+      setActive(item.id);
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    } else {
+      setActive(item.id);
+      navigate(item.path);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  const handleBookDemo = () => {
+    setOpen(false);
+    const contactSection =
+      document.getElementById("business-inquiry") ||
+      document.getElementById("contact") ||
+      document.getElementById("choose-attendance");
+
+    if (contactSection && (location.pathname === "/contact" || location.pathname === "/")) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/contact?type=Book%20a%20Demo");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
-    <AceternityNavbar scrollThreshold={30}>
-      <NavbarContent />
-    </AceternityNavbar>
+    <header className="fixed inset-x-0 top-4 z-50 px-4">
+      {/* ============================================================== */}
+      {/* SINGLE CONTAINER PILL (NO SECOND PILL BEHIND LINKS)            */}
+      {/* ============================================================== */}
+      <nav
+        aria-label="Main"
+        className={`relative mx-auto w-full max-w-6xl rounded-full border border-white/10 px-3.5 py-2.5 transition-all duration-300 backdrop-blur-xl sm:px-5 ${
+          scrolled
+            ? "bg-slate-900/80 shadow-[0_12px_45px_-8px_rgba(79,70,229,0.5)]"
+            : "bg-slate-900/60 shadow-[0_8px_40px_-8px_rgba(79,70,229,0.45)]"
+        }`}
+      >
+        {/* Subtle hairline gradient top highlight line */}
+        <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+        <div className="flex items-center justify-between gap-4">
+          {/* 1. Left: Brand Logo (Crisp & Readable on dark backgrounds) */}
+          <Logo />
+
+          {/* 2. Middle: Desktop Links (Single container, NO extra nested pill background) */}
+          <ul className="hidden min-w-0 items-center gap-1 lg:flex">
+            {NAV_ITEMS.map((item) => {
+              const isActive = active === item.id;
+              return (
+                <li key={item.id} className="shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => go(item)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={[
+                      "relative inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-200 cursor-pointer",
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400",
+                      isActive
+                        ? "bg-white/10 text-white font-semibold"
+                        : "text-slate-300 hover:text-white hover:bg-white/5",
+                    ].join(" ")}
+                  >
+                    {item.dot && (
+                      <span className={`h-2 w-2 rounded-full ${DOT_COLOR[item.dot]}`} />
+                    )}
+                    <span>{item.label}</span>
+                    {isActive && (
+                      <span className="absolute inset-x-4 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-indigo-400 to-violet-400 shadow-[0_0_8px_rgba(129,140,248,0.8)]" />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* 3. Right: CTA Button & Mobile Hamburger Toggle */}
+          <div className="flex shrink-0 items-center gap-2">
+            <button
+              type="button"
+              onClick={handleBookDemo}
+              className="group hidden items-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-indigo-600/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 cursor-pointer sm:inline-flex"
+            >
+              <span>Book a Demo</span>
+              <ArrowUpRight
+                size={16}
+                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
+            </button>
+
+            {/* Accessible Hamburger Toggle for < lg */}
+            <button
+              type="button"
+              onClick={() => setOpen((o) => !o)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 cursor-pointer lg:hidden"
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+
+        {/* ============================================================== */}
+        {/* MOBILE MENU DROPDOWN PANEL                                     */}
+        {/* ============================================================== */}
+        {open && (
+          <div
+            id="mobile-menu"
+            className="absolute inset-x-0 top-full mt-3 rounded-3xl border border-white/10 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-2xl lg:hidden animate-in fade-in slide-in-from-top-2 duration-200"
+          >
+            <ul className="space-y-1">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.id}>
+                  <button
+                    type="button"
+                    onClick={() => go(item)}
+                    className={`flex w-full items-center gap-2.5 rounded-2xl px-4 py-3 text-left text-sm font-medium transition-colors cursor-pointer ${
+                      active === item.id
+                        ? "bg-white/10 text-white font-semibold"
+                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`}
+                  >
+                    {item.dot && (
+                      <span className={`h-2 w-2 rounded-full ${DOT_COLOR[item.dot]}`} />
+                    )}
+                    <span>{item.label}</span>
+                  </button>
+                </li>
+              ))}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setOpen(false);
+                    navigate("/about");
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="flex w-full items-center gap-2.5 rounded-2xl px-4 py-3 text-left text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white transition-colors cursor-pointer"
+                >
+                  <span>About FlowPeople</span>
+                </button>
+              </li>
+            </ul>
+
+            <button
+              type="button"
+              onClick={handleBookDemo}
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition hover:from-indigo-500 hover:to-violet-500 cursor-pointer"
+            >
+              <span>Book a Demo</span>
+              <ArrowUpRight size={16} />
+            </button>
+          </div>
+        )}
+      </nav>
+    </header>
   );
 }

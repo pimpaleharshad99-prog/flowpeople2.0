@@ -100,10 +100,10 @@ export default function BrandLogo({ variant = 'navbar', className = '' }) {
       <BrandEmblem size={36} className="rounded-xl" />
       <div className="flex flex-col leading-none">
         <span className="text-[17px] font-bold tracking-tight">
-          <span className="text-[#0F172A]">Flow</span>
-          <span className="text-[#4F46E5]">people</span>
+          <span className="text-white">Flow</span>
+          <span className="bg-gradient-to-r from-indigo-300 to-violet-300 bg-clip-text text-transparent">people</span>
         </span>
-        <span className="mt-0.5 text-[9px] font-bold uppercase tracking-[0.26em] text-[#64748B]">
+        <span className="mt-0.5 text-[9px] font-medium uppercase tracking-[0.25em] text-slate-300">
           BY FLUXORA
         </span>
       </div>

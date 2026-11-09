@@ -150,8 +150,8 @@ export default function LandingHubPage() {
       {/* 1. HERO SECTION WITH LIGHTFALL ANIMATION (TECH BLUE & INDIGO)        */}
       {/* ===================================================================== */}
       <section
-        id="welcome-hero"
-        className="relative min-h-[96vh] sm:min-h-screen flex flex-col justify-between overflow-hidden bg-[#0B0F19] text-[#F8FAFC] pt-24 pb-12 sm:pt-32 sm:pb-16 px-4 sm:px-6"
+        id="welcome"
+        className="relative min-h-[96vh] sm:min-h-screen flex flex-col justify-between overflow-hidden bg-[#0B0F19] text-[#F8FAFC] scroll-mt-28 pt-28 pb-12 md:pt-32 sm:pb-16 px-4 sm:px-6"
       >
         {/* React Bits <Lightfall /> Component with Blue & Cyan Electric Palette */}
         <div className="absolute inset-0 pointer-events-auto z-0 overflow-hidden">
@@ -320,7 +320,7 @@ export default function LandingHubPage() {
         {/* ------------------------------------------------------------------- */}
         {/* OPTION 01: BIOMETRIC ATTENDANCE CARD (POSH CURVES)                  */}
         {/* ------------------------------------------------------------------- */}
-        <div id="option-biometric" className="frosted-showcase-card rounded-[40px] sm:rounded-[52px] p-7 sm:p-12 lg:p-16 mb-16 shadow-[0_24px_70px_-20px_rgba(79,70,229,0.12)] border border-slate-200 bg-white/90 backdrop-blur-xl">
+        <div id="biometric" className="frosted-showcase-card scroll-mt-28 rounded-[40px] sm:rounded-[52px] p-7 sm:p-12 lg:p-16 mb-16 shadow-[0_24px_70px_-20px_rgba(79,70,229,0.12)] border border-slate-200 bg-white/90 backdrop-blur-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             {/* Left: Narrative & Interactive Step Pills */}
             <div className="lg:col-span-5 space-y-6">
@@ -433,7 +433,7 @@ export default function LandingHubPage() {
         {/* ------------------------------------------------------------------- */}
         {/* OPTION 02: GPS ATTENDANCE CARD (POSH CURVES)                        */}
         {/* ------------------------------------------------------------------- */}
-        <div id="option-gps" className="frosted-showcase-card rounded-[40px] sm:rounded-[52px] p-7 sm:p-12 lg:p-16 shadow-[0_24px_70px_-20px_rgba(37,99,235,0.12)] border border-slate-200 bg-white/90 backdrop-blur-xl">
+        <div id="gps" className="frosted-showcase-card scroll-mt-28 rounded-[40px] sm:rounded-[52px] p-7 sm:p-12 lg:p-16 shadow-[0_24px_70px_-20px_rgba(37,99,235,0.12)] border border-slate-200 bg-white/90 backdrop-blur-xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             {/* Left: Visual Stage with Interactive Smartphone HUD */}
             <div className="lg:col-span-7 order-2 lg:order-1">
@@ -554,7 +554,7 @@ export default function LandingHubPage() {
         {/* ------------------------------------------------------------------- */}
         {/* CLOSING CTA BAND — ENTERPRISE TECH BLUE & INDIGO                    */}
         {/* ------------------------------------------------------------------- */}
-        <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E1B4B] text-white p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(79,70,229,0.35)] border-2 border-indigo-500/30 mt-20">
+        <div id="business-inquiry" className="scroll-mt-28 rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#0B0F19] via-[#0F172A] to-[#1E1B4B] text-white p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(79,70,229,0.35)] border-2 border-indigo-500/30 mt-20">
           {/* Dynamic Blue Lightfall Canvas Background */}
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
             <Lightfall
