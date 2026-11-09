@@ -4,6 +4,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { FP_IMAGES } from '../assets/fpImages';
 import BrandLogo from '../components/BrandLogo';
+import Lightfall from '../components/Lightfall';
 import {
   CheckCircle2,
   ScanFace,
@@ -952,15 +953,62 @@ export default function BiometricAttendancePage() {
         </div>
       </section>
 
-      {/* #why (Burgundy Comparison Band) */}
-      <section id="why" className="relative z-30 bg-[#590907] text-[#F8F6F1] py-20 px-4 sm:px-8">
-        <div className="mx-auto max-w-5xl text-center space-y-6">
-          <h2 className="serif-heading text-3xl sm:text-5xl font-semibold text-white">
-            Why teams choose FlowPeople
+      {/* #why (Opulent Golden Touch Comparison Band) */}
+      <section id="why" className="relative z-30 bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] py-20 sm:py-28 px-4 sm:px-8 overflow-hidden border-y-2 border-[#D4AF37]/35 shadow-[inset_0_10px_40px_rgba(0,0,0,0.5)]">
+        {/* Dynamic Golden Lightfall Canvas Background */}
+        <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
+          <Lightfall
+            colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
+            backgroundColor="#3D0604"
+            speed={0.25}
+            streakCount={3}
+            streakWidth={1.3}
+            twinkle={0.35}
+            backgroundGlow={0.25}
+            headGlow={0.75}
+            bloom={0.4}
+            mouseInteraction={false}
+          />
+        </div>
+
+        {/* Ambient Golden Radial Glow Halos */}
+        <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#D4AF37]/25 via-[#FFE4B8]/10 to-transparent blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#D4AF37]/10 blur-3xl" />
+
+        <div className="relative z-10 mx-auto max-w-5xl text-center space-y-6">
+          {/* Opulent Luminous Eyebrow Pill */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4AF37]/20 via-white/15 to-[#D4AF37]/20 border border-[#FFE4B8]/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#FFE4B8] shadow-[0_4px_24px_rgba(212,175,55,0.2)] backdrop-blur-xl">
+            <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+            <span>The FlowPeople Difference</span>
+          </div>
+
+          {/* Serif Headline with Gold Shimmer Accent */}
+          <h2 className="serif-heading text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] max-w-3xl mx-auto drop-shadow-sm">
+            Why teams choose{' '}
+            <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
+              FlowPeople.
+            </span>
           </h2>
-          <p className="max-w-2xl mx-auto text-sm sm:text-base text-[#F8F6F1]/85">
+
+          <p className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-[#F8F6F1]/90 font-light leading-relaxed drop-shadow-sm">
             Traditional card readers break, fingerprint sensors jam, and manual registers get forged. FlowPeople solves attendance with elegant computer vision and reliable geofencing.
           </p>
+
+          {/* 3 Opulent Gold Feature Badges */}
+          <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto text-left">
+            <div className="rounded-2xl border border-[#FFE4B8]/30 bg-white/5 backdrop-blur-md p-4 text-center">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#FFE4B8]">Sub-2s Match</span>
+              <p className="text-xs text-white/80 mt-1 font-light">Zero queues at the reception desk</p>
+            </div>
+            <div className="rounded-2xl border border-[#FFE4B8]/30 bg-white/5 backdrop-blur-md p-4 text-center">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#FFE4B8]">Dual Check-In</span>
+              <p className="text-xs text-white/80 mt-1 font-light">Front-desk kiosk &amp; 100m GPS zone</p>
+            </div>
+            <div className="rounded-2xl border border-[#FFE4B8]/30 bg-white/5 backdrop-blur-md p-4 text-center">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#FFE4B8]">Perpetual License</span>
+              <p className="text-xs text-white/80 mt-1 font-light">₹0 Recurring Maintenance (T&amp;C Apply)</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1038,27 +1086,61 @@ export default function BiometricAttendancePage() {
         </div>
       </section>
 
-      {/* #contact (Book a Demo CTA) */}
-      <section id="contact" className="relative z-30 bg-[#242321] text-[#F8F6F1] py-20 px-4 sm:px-8 border-t border-white/10">
-        <div className="mx-auto max-w-4xl text-center space-y-6">
-          <h2 className="serif-heading text-3xl sm:text-5xl font-semibold text-white">
-            Ready to simplify attendance?
-          </h2>
-          <p className="max-w-xl mx-auto text-sm sm:text-base text-white/80">
-            Set up FlowPeople in under 15 minutes. Try it free with your team today.
-          </p>
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your work email"
-              className="w-full rounded-full bg-white/10 border border-white/20 px-5 py-3 text-sm text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#FFE4B8]"
+      {/* #contact (Book a Demo CTA with Golden Touch) */}
+      <section id="contact" className="relative z-30 bg-[#160202] py-20 px-4 sm:px-8">
+        <div className="rounded-[40px] sm:rounded-[52px] bg-gradient-to-br from-[#590907] via-[#430604] to-[#1C0202] text-[#F8F6F1] p-10 sm:p-16 lg:p-20 text-center relative overflow-hidden shadow-[0_32px_80px_-20px_rgba(89,9,7,0.5),0_0_40px_rgba(212,175,55,0.18)] border-2 border-[#D4AF37]/40 max-w-5xl mx-auto">
+          {/* Dynamic Golden Lightfall Canvas Background */}
+          <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden opacity-60">
+            <Lightfall
+              colors={['#FFE4B8', '#D4AF37', '#FFF5E4', '#E8D2B5', '#F5D061']}
+              backgroundColor="#3D0604"
+              speed={0.25}
+              streakCount={3}
+              streakWidth={1.3}
+              twinkle={0.35}
+              backgroundGlow={0.25}
+              headGlow={0.75}
+              bloom={0.4}
+              mouseInteraction={false}
             />
-            <button
-              type="button"
-              className="w-full sm:w-auto shrink-0 rounded-full bg-[#590907] text-[#F8F6F1] px-6 py-3 text-sm font-bold hover:bg-[#590907]/90 transition shadow-md"
-            >
-              Get Started Free
-            </button>
+          </div>
+
+          <div className="pointer-events-none absolute -top-32 left-1/2 -translate-x-1/2 w-[600px] h-[340px] rounded-full bg-gradient-to-b from-[#D4AF37]/25 via-[#FFE4B8]/10 to-transparent blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-24 right-10 w-[400px] h-[250px] rounded-full bg-[#D4AF37]/10 blur-3xl" />
+
+          <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+            <div className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#D4AF37]/20 via-white/15 to-[#D4AF37]/20 border border-[#FFE4B8]/60 px-5 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-[#FFE4B8] shadow-[0_4px_24px_rgba(212,175,55,0.2)] backdrop-blur-xl">
+              <Sparkles className="h-3.5 w-3.5 text-[#D4AF37]" />
+              <span>Ready in 15 Minutes</span>
+            </div>
+
+            <h2 className="serif-heading text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-[1.1] max-w-2xl mx-auto drop-shadow-sm">
+              Ready to simplify{' '}
+              <span className="italic font-normal bg-gradient-to-r from-[#FFFDF9] via-[#FFE4B8] to-[#D4AF37] bg-clip-text text-transparent">
+                attendance?
+              </span>
+            </h2>
+
+            <p className="max-w-xl mx-auto text-base sm:text-lg text-[#F8F6F1]/90 font-light leading-relaxed drop-shadow-sm">
+              Set up FlowPeople in under 15 minutes. Try it free with your team today with zero recurring software fees (T&amp;C Apply).
+            </p>
+
+            <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
+              <Link
+                to="/contact?type=Book%20a%20Demo"
+                className="group inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#FFE4B8] via-[#E8D2B5] to-[#D4AF37] text-[#3A1B12] px-8 sm:px-10 py-4 text-sm sm:text-base font-bold shadow-xl shadow-[#D4AF37]/25 hover:shadow-[0_12px_36px_rgba(212,175,55,0.45)] hover:scale-[1.03] transition-all border border-[#FFFDF9]/60 cursor-pointer"
+              >
+                <span>Book a Live Demo</span>
+                <ArrowRight className="h-4 w-4 text-[#3A1B12] transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+
+              <Link
+                to="/pricing"
+                className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 hover:bg-white/20 px-7 py-4 text-sm sm:text-base font-semibold text-white shadow-md backdrop-blur-md transition-all hover:scale-[1.02] cursor-pointer"
+              >
+                <span>View One-Time Pricing</span>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
