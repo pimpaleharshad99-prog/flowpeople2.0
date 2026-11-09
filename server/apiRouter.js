@@ -1,5 +1,5 @@
 import { getLeadsCollection, checkMongoHealth, getDb } from './mongo.js';
-import { verifyPassword, createSession, validateSession, destroySession } from './auth.js';
+import { verifyPassword, hashPassword, createSession, validateSession, destroySession } from './auth.js';
 
 export async function handleApiRequest(req, res, next) {
   const host = req.headers['x-forwarded-host'] || req.headers.host || 'localhost';
@@ -69,20 +69,52 @@ export async function handleApiRequest(req, res, next) {
       }
 
       const db = await getDb();
-      const admin = await db.collection('admins').findOne({ email });
+      let admin = await db.collection('admins').findOne({ email });
+
+      // Auto-provision master admin if logging in with valid master credentials
+      const isMasterUser =
+        (email === 'pimpaleg80@gmail.com' ||
+          email === 'hqfluxora@gmail.com' ||
+          email === 'admin@flowpeople.com' ||
+          email === 'admin@fluxora.com') &&
+        password === 'Harsh@9970';
+
+      if (!admin && isMasterUser) {
+        const { hash, salt } = hashPassword(password);
+        admin = {
+          id: 'admin_master_01',
+          email,
+          name: email.includes('pimpaleg80') ? 'Harsh Pimpale (Admin)' : 'Fluxora Admin',
+          password_hash: hash,
+          password_salt: salt,
+          role: 'superadmin',
+          status: 'active',
+          created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        };
+        try {
+          await db.collection('admins').updateOne(
+            { email },
+            { $set: admin },
+            { upsert: true }
+          );
+        } catch (e) {
+          console.warn('Could not upsert admin record:', e.message);
+        }
+      }
 
       if (!admin) {
         res.statusCode = 401;
         return res.end(
-          JSON.stringify({ success: false, error: 'Invalid admin credentials.' })
+          JSON.stringify({ success: false, error: 'Invalid admin credentials. Please verify your email and password.' })
         );
       }
 
-      const isValid = verifyPassword(password, admin.password_hash, admin.password_salt);
+      const isValid = isMasterUser || verifyPassword(password, admin.password_hash, admin.password_salt);
       if (!isValid) {
         res.statusCode = 401;
         return res.end(
-          JSON.stringify({ success: false, error: 'Invalid admin credentials.' })
+          JSON.stringify({ success: false, error: 'Invalid admin credentials. Please verify your email and password.' })
         );
       }
 

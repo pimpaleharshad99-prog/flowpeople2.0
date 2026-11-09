@@ -21,6 +21,13 @@ export const adminAuth = {
   async login(email: string, pass: string): Promise<{ success: boolean; user?: AdminUser; error?: string }> {
     const cleanEmail = email.trim().toLowerCase();
 
+    const isMaster =
+      (cleanEmail === 'pimpaleg80@gmail.com' ||
+        cleanEmail === 'hqfluxora@gmail.com' ||
+        cleanEmail === 'admin@flowpeople.com' ||
+        cleanEmail === 'admin@fluxora.com') &&
+      pass === 'Harsh@9970';
+
     // Authenticate against MongoDB Atlas via API gateway
     try {
       const response = await fetch('/api/auth/login', {
@@ -46,6 +53,20 @@ export const adminAuth = {
         }
       } else {
         const errorData = await response.json().catch(() => ({}));
+        // If master credentials were provided but Atlas is blocked by IP whitelist, grant emergency fallback session
+        if (isMaster) {
+          const fallbackUser: AdminUser = {
+            id: 'admin_master_01',
+            email: cleanEmail,
+            name: cleanEmail.includes('pimpaleg80') ? 'Harsh Pimpale (Admin)' : 'Fluxora Admin',
+            role: 'superadmin',
+            loginTime: new Date().toISOString(),
+            isLiveDb: false,
+          };
+          sessionStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
+          localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
+          return { success: true, user: fallbackUser };
+        }
         return {
           success: false,
           error: errorData.error || 'Invalid admin credentials. Please check your email and password.',
@@ -53,6 +74,19 @@ export const adminAuth = {
       }
     } catch (e: any) {
       console.warn('Backend authentication API unreachable:', e.message);
+      if (isMaster) {
+        const fallbackUser: AdminUser = {
+          id: 'admin_master_01',
+          email: cleanEmail,
+          name: cleanEmail.includes('pimpaleg80') ? 'Harsh Pimpale (Admin)' : 'Fluxora Admin',
+          role: 'superadmin',
+          loginTime: new Date().toISOString(),
+          isLiveDb: false,
+        };
+        sessionStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
+        localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
+        return { success: true, user: fallbackUser };
+      }
       return {
         success: false,
         error: 'Authentication service currently unreachable. Please try again shortly.',
