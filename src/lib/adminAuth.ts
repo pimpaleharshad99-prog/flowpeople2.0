@@ -5,10 +5,6 @@
 const ADMIN_STORAGE_KEY = 'flowpeople_admin_session';
 const ADMIN_TOKEN_KEY = 'flowpeople_admin_token';
 
-// Master credentials specified by user:
-export const MASTER_ADMIN_EMAIL = 'pimpaleg80@gmail.com';
-export const MASTER_ADMIN_PASS = 'Harsh@9970';
-
 export interface AdminUser {
   id?: string;
   email: string;
@@ -25,7 +21,7 @@ export const adminAuth = {
   async login(email: string, pass: string): Promise<{ success: boolean; user?: AdminUser; error?: string }> {
     const cleanEmail = email.trim().toLowerCase();
 
-    // 1. First attempt live authentication against MongoDB Atlas
+    // Authenticate against MongoDB Atlas via API gateway
     try {
       const response = await fetch('/api/auth/login', {
         method: 'POST',
@@ -50,26 +46,17 @@ export const adminAuth = {
         }
       } else {
         const errorData = await response.json().catch(() => ({}));
-        if (response.status === 401) {
-          return { success: false, error: errorData.error || 'Invalid admin credentials.' };
-        }
+        return {
+          success: false,
+          error: errorData.error || 'Invalid admin credentials. Please check your email and password.',
+        };
       }
     } catch (e: any) {
-      console.warn('Backend API unreachable or offline, evaluating local credentials fallback:', e.message);
-    }
-
-    // 2. Offline / local fallback check for master credentials
-    if (cleanEmail === MASTER_ADMIN_EMAIL.toLowerCase() && pass === MASTER_ADMIN_PASS) {
-      const user: AdminUser = {
-        email: MASTER_ADMIN_EMAIL,
-        name: 'Harsh Pimpale (Admin)',
-        role: 'superadmin',
-        loginTime: new Date().toISOString(),
-        isLiveDb: false,
+      console.warn('Backend authentication API unreachable:', e.message);
+      return {
+        success: false,
+        error: 'Authentication service currently unreachable. Please try again shortly.',
       };
-      sessionStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(user));
-      localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(user));
-      return { success: true, user };
     }
 
     return { success: false, error: 'Invalid admin credentials. Please check your email or password.' };
@@ -81,9 +68,10 @@ export const adminAuth = {
   isAuthenticated(): boolean {
     try {
       const session = sessionStorage.getItem(ADMIN_STORAGE_KEY) || localStorage.getItem(ADMIN_STORAGE_KEY);
-      if (!session) return false;
+      const token = sessionStorage.getItem(ADMIN_TOKEN_KEY) || localStorage.getItem(ADMIN_TOKEN_KEY);
+      if (!session || !token) return false;
       const user = JSON.parse(session);
-      return user && user.email === MASTER_ADMIN_EMAIL;
+      return Boolean(user && user.role === 'superadmin');
     } catch {
       return false;
     }

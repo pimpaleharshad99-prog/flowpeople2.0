@@ -27,7 +27,7 @@ import {
   ChevronRight,
   ArrowUpDown
 } from 'lucide-react';
-import { adminAuth, MASTER_ADMIN_EMAIL, MASTER_ADMIN_PASS, AdminUser } from '../lib/adminAuth';
+import { adminAuth, AdminUser } from '../lib/adminAuth';
 import { leadService } from '../services/leadService';
 import { Lead } from '../lib/database';
 import BrandLogo from '../components/BrandLogo';
@@ -122,11 +122,6 @@ export default function AdminPage() {
     } finally {
       setIsLoggingIn(false);
     }
-  };
-
-  const fillDefaultCredentials = () => {
-    setLoginEmail(MASTER_ADMIN_EMAIL);
-    setLoginPass(MASTER_ADMIN_PASS);
   };
 
   const handleLogout = async () => {
@@ -279,7 +274,8 @@ export default function AdminPage() {
                     required
                     value={loginEmail}
                     onChange={(e) => setLoginEmail(e.target.value)}
-                    placeholder="pimpaleg80@gmail.com"
+                    placeholder="admin@flowpeople.com"
+                    autoComplete="email"
                     className="w-full rounded-xl border border-[rgba(89,9,7,0.15)] bg-[#FBF7F0] pl-10 pr-4 py-2.5 text-xs sm:text-sm text-[#242321] outline-none focus:border-[#590907]"
                   />
                 </div>
@@ -320,18 +316,6 @@ export default function AdminPage() {
                     </>
                   )}
                 </button>
-              </div>
-
-              {/* Quick Fill Preset Button for Convenience */}
-              <div className="pt-3 border-t border-[rgba(89,9,7,0.08)] flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={fillDefaultCredentials}
-                  className="text-[11px] text-[#590907] hover:underline font-medium inline-flex items-center gap-1 cursor-pointer"
-                >
-                  <span>Auto-fill configured credentials</span>
-                </button>
-                <span className="text-[10px] text-[#A5A79B]">pimpaleg80@...</span>
               </div>
             </form>
           </div>
