@@ -35,6 +35,11 @@ function mongoApiPlugin() {
 }
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, './src'),
+    },
+  },
   plugins: [react(), mongoApiPlugin()],
   build: {
     target: 'es2020',
@@ -47,7 +52,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom')) {
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router-dom') || id.includes('motion')) {
               return 'vendor-react';
             }
             if (id.includes('lucide-react')) {

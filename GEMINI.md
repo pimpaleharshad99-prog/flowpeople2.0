@@ -3,33 +3,33 @@
 ## 1. Global Shell Contract (Navbar & Footer Uniformity)
 Every single page or route in this repository (`f:\flowpeople`) **MUST** use the exact same upper frosted-glass navigation bar and footer layout as established by the global React components (`src/components/Navbar.jsx` and `src/components/Footer.jsx`).
 
-### Top Navigation Bar Contract:
+### Top Navigation Bar Contract (Aceternity UI Resizable Navbar):
 - **Container Structure**:
+  Powered by `@/components/ui/resizable-navbar.jsx` implementing official Aceternity UI spring physics (`stiffness: 220, damping: 40`), `useScroll()`, and `useMotionValueEvent()`.
   ```jsx
-  <header className="fixed top-2.5 sm:top-4 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none">
-    <div className="mx-auto max-w-6xl nav-glass rounded-2xl sm:rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between pointer-events-auto shadow-sm">
-      {/* Brand Logo */}
-      <Link to="/" className="flex items-center gap-2 transition hover:opacity-90">
-        <BrandLogo variant="navbar" />
-      </Link>
-
-      {/* Center Experience Switcher Dock */}
-      <nav aria-label="Experience Navigation" className="nav-glass-dock hidden lg:flex items-center gap-1 rounded-full p-1 text-xs sm:text-sm font-medium">
-        <NavLink to="/" end className="...">Welcome Hub</NavLink>
-        <NavLink to="/biometric-attendance" className="...">Biometric</NavLink>
-        <NavLink to="/gps-attendance" className="...">GPS Attendance</NavLink>
-        <NavLink to="/pricing" className="...">Pricing</NavLink>
-        <NavLink to="/about" className="...">About</NavLink>
+  <AceternityNavbar scrollThreshold={40}>
+    {/* Desktop Resizable Container */}
+    <NavBody contractedWidth="86%" expandedWidth="100%" minWidth="920px" className="border border-slate-200/80">
+      <Link to="/" className="flex items-center gap-2"><BrandLogo variant="navbar" /></Link>
+      <nav aria-label="Experience Navigation" className="nav-glass-dock relative flex items-center gap-1 rounded-full p-1 text-xs sm:text-sm font-medium border border-indigo-100/60">
+        {/* Navigation links with Aceternity motion layoutId="hovered-nav-dock" capsule */}
       </nav>
-
-      {/* Right Action CTA */}
       <div className="flex items-center gap-2">
-        <button onClick={handleBookDemo} className="rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] px-4 sm:px-5 py-2 text-xs sm:text-sm font-semibold text-white shadow-sm transition hover:brightness-110">
-          Book Demo
-        </button>
+        <NavbarButton variant="gradient" onClick={handleBookDemo}>Book Demo</NavbarButton>
       </div>
-    </div>
-  </header>
+    </NavBody>
+
+    {/* Mobile Resizable Container & AnimatePresence Drawer */}
+    <MobileNav className="border border-slate-200/80">
+      <MobileNavHeader>
+        <Link to="/"><BrandLogo variant="navbar" /></Link>
+        <MobileNavToggle isOpen={mobileMenuOpen} onClick={...} />
+      </MobileNavHeader>
+      <MobileNavMenu isOpen={mobileMenuOpen} onClose={...}>
+        {/* 12-route grid drawer + Book a Demo CTA */}
+      </MobileNavMenu>
+    </MobileNav>
+  </AceternityNavbar>
   ```
 - **Experience Switcher Dock Rules**:
   - The active page must carry: `rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white px-3.5 sm:px-4 py-1.5 font-semibold shadow-xs transition`
