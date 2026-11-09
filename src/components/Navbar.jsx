@@ -74,10 +74,10 @@ function NavbarContent({ visible: propVisible }) {
     <>
       {/* ============================================================== */}
       {/* DESKTOP RESIZABLE NAVBAR (Screen width >= lg)                   */}
-      {/* Shrinks to sleek 820px pill; "Book Demo" only stays at top     */}
+      {/* Shrinks to sleek pill; "Book Demo" & "About" only stay at top  */}
       {/* ============================================================== */}
       <NavBody
-        contractedWidth="820px"
+        contractedWidth="760px"
         expandedWidth="100%"
         visible={visible}
         className="border border-slate-200/80 justify-between gap-3 sm:gap-4"
@@ -98,41 +98,66 @@ function NavbarContent({ visible: propVisible }) {
           onMouseLeave={() => setHoveredIdx(null)}
           className="nav-glass-dock relative flex items-center gap-0.5 sm:gap-1 rounded-full p-1 text-xs sm:text-[13px] font-medium border border-indigo-100/60 flex-shrink-0 whitespace-nowrap"
         >
-          {navLinks.map((item, idx) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              end={item.end}
-              onClick={item.to === '/' ? handleNavigateHome : undefined}
-              onMouseEnter={() => setHoveredIdx(idx)}
-              className={({ isActive }) =>
-                `relative rounded-full px-2.5 sm:px-3 py-1.5 transition flex items-center z-10 whitespace-nowrap flex-shrink-0 leading-none ${
-                  isActive
-                    ? 'bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white shadow-xs font-semibold'
-                    : 'text-[#334155] hover:text-[#4F46E5]'
-                }`
-              }
-            >
-              {({ isActive }) => (
-                <>
-                  {/* Floating hover capsule across inactive items */}
-                  {!isActive && hoveredIdx === idx && (
+          {navLinks.map((item, idx) => {
+            const isAbout = item.to === '/about';
+
+            const linkElement = (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                end={item.end}
+                onClick={item.to === '/' ? handleNavigateHome : undefined}
+                onMouseEnter={() => setHoveredIdx(idx)}
+                className={({ isActive }) =>
+                  `relative rounded-full px-2.5 sm:px-3 py-1.5 transition flex items-center z-10 whitespace-nowrap flex-shrink-0 leading-none ${
+                    isActive
+                      ? 'bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white shadow-xs font-semibold'
+                      : 'text-[#334155] hover:text-[#4F46E5]'
+                  }`
+                }
+              >
+                {({ isActive }) => (
+                  <>
+                    {/* Floating hover capsule across inactive items */}
+                    {!isActive && hoveredIdx === idx && (
+                      <motion.div
+                        layoutId="hovered-nav-dock"
+                        className="absolute inset-0 rounded-full bg-white/70 shadow-xs border border-indigo-100/60 -z-10"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 350,
+                          damping: 30,
+                        }}
+                      />
+                    )}
+                    {item.badge}
+                    <span className="whitespace-nowrap">{item.name}</span>
+                  </>
+                )}
+              </NavLink>
+            );
+
+            // "About" only stays at the upper part (removed on scroll like Book Demo)
+            if (isAbout) {
+              return (
+                <AnimatePresence key={item.to}>
+                  {!visible && (
                     <motion.div
-                      layoutId="hovered-nav-dock"
-                      className="absolute inset-0 rounded-full bg-white/70 shadow-xs border border-indigo-100/60 -z-10"
-                      transition={{
-                        type: 'spring',
-                        stiffness: 350,
-                        damping: 30,
-                      }}
-                    />
+                      initial={{ opacity: 0, width: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, width: 'auto', scale: 1 }}
+                      exit={{ opacity: 0, width: 0, scale: 0.9 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden flex items-center flex-shrink-0"
+                    >
+                      {linkElement}
+                    </motion.div>
                   )}
-                  {item.badge}
-                  <span className="whitespace-nowrap">{item.name}</span>
-                </>
-              )}
-            </NavLink>
-          ))}
+                </AnimatePresence>
+              );
+            }
+
+            return linkElement;
+          })}
         </nav>
 
         {/* Right CTA Action: ONLY stays at upper part; removed on scroll */}
