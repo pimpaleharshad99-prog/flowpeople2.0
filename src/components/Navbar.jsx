@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import BrandLogo from './BrandLogo';
+import ResizableNavbar from './ui/resizable-navbar';
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -24,8 +25,12 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-2.5 sm:top-4 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none">
-      <div className="mx-auto max-w-6xl nav-glass rounded-2xl sm:rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between pointer-events-auto shadow-sm border border-slate-200/80">
+    <ResizableNavbar
+      className="fixed top-2.5 sm:top-4 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none"
+      containerClassName="mx-auto w-full max-w-6xl transition-all duration-500 ease-out"
+      compactContainerClassName="max-w-5xl translate-y-1"
+    >
+      <div className="w-full nav-glass rounded-2xl sm:rounded-full px-3.5 sm:px-5 py-2.5 flex items-center justify-between pointer-events-auto shadow-sm border border-slate-200/80">
         {/* Left: Brand Logo */}
         <Link
           to="/"
@@ -306,6 +311,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-    </header>
+    </ResizableNavbar>
   );
 }
