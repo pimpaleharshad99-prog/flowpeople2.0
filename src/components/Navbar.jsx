@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import BrandLogo from './BrandLogo';
 import {
   Navbar as AceternityNavbar,
@@ -11,9 +11,12 @@ import {
   MobileNavToggle,
   MobileNavMenu,
   NavbarButton,
+  useNavbar,
 } from './ui/resizable-navbar';
 
-export default function Navbar() {
+function NavbarContent({ visible: propVisible }) {
+  const context = useNavbar();
+  const visible = propVisible !== undefined ? propVisible : context.visible;
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredIdx, setHoveredIdx] = useState(null);
@@ -68,14 +71,15 @@ export default function Navbar() {
   ];
 
   return (
-    <AceternityNavbar scrollThreshold={30}>
+    <>
       {/* ============================================================== */}
       {/* DESKTOP RESIZABLE NAVBAR (Screen width >= lg)                   */}
-      {/* Uses Aceternity spring physics to contract width & elevation    */}
+      {/* Shrinks to sleek 720px pill; "Book Demo" only stays at top     */}
       {/* ============================================================== */}
       <NavBody
-        contractedWidth="840px"
+        contractedWidth="720px"
         expandedWidth="100%"
+        visible={visible}
         className="border border-slate-200/80"
       >
         {/* Left: FlowPeople Brand Logo */}
@@ -102,7 +106,7 @@ export default function Navbar() {
               onClick={item.to === '/' ? handleNavigateHome : undefined}
               onMouseEnter={() => setHoveredIdx(idx)}
               className={({ isActive }) =>
-                `relative rounded-full px-3.5 sm:px-4 py-1.5 transition flex items-center z-10 ${
+                `relative rounded-full px-3 sm:px-3.5 py-1.5 transition flex items-center z-10 ${
                   isActive
                     ? 'bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white shadow-xs font-semibold'
                     : 'text-[#334155] hover:text-[#4F46E5]'
@@ -131,23 +135,33 @@ export default function Navbar() {
           ))}
         </nav>
 
-        {/* Right CTA Action */}
-        <div className="flex items-center gap-2 flex-shrink-0">
-          <NavbarButton
-            variant="gradient"
-            onClick={handleBookDemo}
-            className="shadow-md shadow-indigo-500/20"
-          >
-            Book Demo
-          </NavbarButton>
-        </div>
+        {/* Right CTA Action: ONLY stays at upper part; removed on scroll */}
+        <AnimatePresence>
+          {!visible && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, width: 0 }}
+              animate={{ opacity: 1, scale: 1, width: 'auto' }}
+              exit={{ opacity: 0, scale: 0.9, width: 0 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center gap-2 flex-shrink-0 overflow-hidden"
+            >
+              <NavbarButton
+                variant="gradient"
+                onClick={handleBookDemo}
+                className="shadow-md shadow-indigo-500/20 whitespace-nowrap"
+              >
+                Book Demo
+              </NavbarButton>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </NavBody>
 
       {/* ============================================================== */}
       {/* MOBILE RESIZABLE NAVBAR (Screen width < lg)                     */}
-      {/* Uses Aceternity spring physics + AnimatePresence mobile drawer  */}
+      {/* Quick pill only stays at upper part; removed on scroll          */}
       {/* ============================================================== */}
-      <MobileNav className="border border-slate-200/80">
+      <MobileNav visible={visible} className="border border-slate-200/80">
         <MobileNavHeader>
           {/* Brand Logo */}
           <Link
@@ -160,14 +174,26 @@ export default function Navbar() {
           </Link>
 
           <div className="flex items-center gap-2">
-            {/* Quick Mobile "Book Demo" pill (visible on sm: screens) */}
-            <button
-              type="button"
-              onClick={handleBookDemo}
-              className="hidden sm:inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white px-4 py-1.5 text-xs font-semibold hover:from-[#1D4ED8] hover:to-[#4338CA] transition shadow-sm cursor-pointer"
-            >
-              Book Demo
-            </button>
+            {/* Quick Mobile "Book Demo" pill: ONLY stays at upper part */}
+            <AnimatePresence>
+              {!visible && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9, width: 0 }}
+                  animate={{ opacity: 1, scale: 1, width: 'auto' }}
+                  exit={{ opacity: 0, scale: 0.9, width: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="hidden sm:inline-flex overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    onClick={handleBookDemo}
+                    className="items-center justify-center rounded-full bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white px-4 py-1.5 text-xs font-semibold hover:from-[#1D4ED8] hover:to-[#4338CA] transition shadow-sm cursor-pointer whitespace-nowrap"
+                  >
+                    Book Demo
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Mobile Animated Hamburger / Close Button */}
             <MobileNavToggle
@@ -330,7 +356,7 @@ export default function Navbar() {
             </NavLink>
           </div>
 
-          {/* Full-width Book a Demo CTA */}
+          {/* Full-width Book a Demo CTA in mobile drawer */}
           <div className="pt-2 border-t border-slate-200/80 w-full">
             <button
               type="button"
@@ -343,6 +369,14 @@ export default function Navbar() {
           </div>
         </MobileNavMenu>
       </MobileNav>
+    </>
+  );
+}
+
+export default function Navbar() {
+  return (
+    <AceternityNavbar scrollThreshold={30}>
+      <NavbarContent />
     </AceternityNavbar>
   );
 }
