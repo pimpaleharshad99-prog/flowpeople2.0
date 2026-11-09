@@ -65,21 +65,22 @@ export default function Navbar() {
       const matched = NAV_ITEMS.find((item) => item.path === location.pathname);
       if (matched) {
         setActive(matched.id);
-        return;
       }
+      return;
     }
 
     const sectionElements = NAV_ITEMS.map((item) => {
-      return (
-        document.getElementById(item.id) ||
-        (item.id === "welcome" && document.getElementById("welcome-hero")) ||
-        (item.id === "biometric" && (document.getElementById("option-biometric") || document.getElementById("biometric-section"))) ||
-        (item.id === "gps" && (document.getElementById("option-gps") || document.getElementById("gps-section"))) ||
-        (item.id === "pricing" && document.getElementById("pricing-section")) ||
-        (item.id === "how-it-works" && document.getElementById("how-it-works-section")) ||
-        (item.id === "features" && document.getElementById("features-section"))
-      );
-    }).filter((el): el is HTMLElement => el !== null);
+      if (item.id === "welcome") {
+        return document.getElementById("welcome") || document.getElementById("welcome-hero");
+      }
+      if (item.id === "biometric") {
+        return document.getElementById("biometric") || document.getElementById("option-biometric") || document.getElementById("biometric-section");
+      }
+      if (item.id === "gps") {
+        return document.getElementById("gps") || document.getElementById("option-gps") || document.getElementById("gps-section");
+      }
+      return document.getElementById(item.id);
+    }).filter((el): el is HTMLElement => el instanceof HTMLElement);
 
     if (sectionElements.length === 0) return;
 
@@ -101,7 +102,11 @@ export default function Navbar() {
       { rootMargin: "-30% 0px -55% 0px" }
     );
 
-    sectionElements.forEach((s) => observer.observe(s));
+    sectionElements.forEach((s) => {
+      if (s instanceof HTMLElement) {
+        observer.observe(s);
+      }
+    });
     return () => observer.disconnect();
   }, [location.pathname]);
 
