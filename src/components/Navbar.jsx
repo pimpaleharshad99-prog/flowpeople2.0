@@ -68,15 +68,14 @@ export default function Navbar() {
   ];
 
   return (
-    <AceternityNavbar scrollThreshold={40}>
+    <AceternityNavbar scrollThreshold={30}>
       {/* ============================================================== */}
       {/* DESKTOP RESIZABLE NAVBAR (Screen width >= lg)                   */}
       {/* Uses Aceternity spring physics to contract width & elevation    */}
       {/* ============================================================== */}
       <NavBody
-        contractedWidth="86%"
+        contractedWidth="840px"
         expandedWidth="100%"
-        minWidth="920px"
         className="border border-slate-200/80"
       >
         {/* Left: FlowPeople Brand Logo */}

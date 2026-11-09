@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, createContext, useContext } from "react";
 import {
   motion,
   AnimatePresence,
@@ -14,84 +14,109 @@ import { cn } from "@/lib/utils";
  * 
  * Features:
  * - Spring-physics scroll resizing (width, elevation, vertical padding, offset)
+ * - Seamless desktop navbar contraction from wide (1152px) down to sleek pill (840px)
+ * - Dual-layer scroll detection (Motion useScroll + native window scroll listener)
+ * - Context-driven visibility distribution for bulletproof state reactivity
  * - Smooth layoutId hover capsule animations on desktop nav items
  * - Fully animated mobile drawer with AnimatePresence
  * - Tabler icons for accessible mobile toggle
  * - Enterprise Tech Blue & Indigo theme integration
  */
 
+export const NavbarContext = createContext({ visible: false });
+export const useNavbar = () => useContext(NavbarContext);
+
 export const Navbar = ({
   children,
   className,
-  scrollThreshold = 50,
+  scrollThreshold = 30,
 }) => {
   const ref = useRef(null);
-  const { scrollY } = useScroll();
   const [visible, setVisible] = useState(false);
 
+  // 1. Direct native window scroll listener for zero-lag reactivity
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setVisible(window.scrollY > scrollThreshold);
-    }
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const scrollY =
+            window.pageYOffset ||
+            document.documentElement.scrollTop ||
+            window.scrollY ||
+            0;
+          setVisible(scrollY > scrollThreshold);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [scrollThreshold]);
 
+  // 2. Motion scroll value listener for integrated Motion spring scheduling
+  const { scrollY } = useScroll();
   useMotionValueEvent(scrollY, "change", (latest) => {
-    if (latest > scrollThreshold) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
+    setVisible(latest > scrollThreshold);
   });
 
   return (
-    <header
-      ref={ref}
-      className={cn(
-        "fixed top-2.5 sm:top-4 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none transition-transform duration-200",
-        className
-      )}
-    >
-      {React.Children.map(children, (child) =>
-        React.isValidElement(child)
-          ? React.cloneElement(child, { visible })
-          : child
-      )}
-    </header>
+    <NavbarContext.Provider value={{ visible }}>
+      <header
+        ref={ref}
+        className={cn(
+          "fixed top-2.5 sm:top-4 inset-x-0 z-50 px-3 sm:px-6 pointer-events-none transition-transform duration-200",
+          className
+        )}
+      >
+        {React.Children.map(children, (child) =>
+          React.isValidElement(child)
+            ? React.cloneElement(child, { visible })
+            : child
+        )}
+      </header>
+    </NavbarContext.Provider>
   );
 };
 
 export const NavBody = ({
   children,
   className,
-  visible = false,
-  contractedWidth = "86%",
+  visible: propVisible,
+  contractedWidth = "840px",
   expandedWidth = "100%",
-  minWidth = "880px",
 }) => {
+  const context = useNavbar();
+  const visible = propVisible !== undefined ? propVisible : context.visible;
+
   return (
     <motion.div
       animate={{
         backdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
         WebkitBackdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
         boxShadow: visible
-          ? "0 20px 40px -12px rgba(79, 70, 229, 0.18), 0 4px 16px -4px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(79, 70, 229, 0.12)"
-          : "0 12px 28px -12px rgba(79, 70, 229, 0.10), 0 2px 10px -4px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.08)",
+          ? "0 20px 40px -12px rgba(79, 70, 229, 0.22), 0 4px 16px -4px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(79, 70, 229, 0.15)"
+          : "0 10px 28px -12px rgba(79, 70, 229, 0.10), 0 2px 10px -4px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.08)",
         width: visible ? contractedWidth : expandedWidth,
-        y: visible ? 4 : 0,
-        paddingTop: visible ? "0.55rem" : "0.7rem",
-        paddingBottom: visible ? "0.55rem" : "0.7rem",
+        maxWidth: visible ? contractedWidth : "1152px",
+        y: visible ? 8 : 0,
+        paddingTop: visible ? "0.45rem" : "0.7rem",
+        paddingBottom: visible ? "0.45rem" : "0.7rem",
+        paddingLeft: visible ? "1.25rem" : "1.5rem",
+        paddingRight: visible ? "1.25rem" : "1.5rem",
       }}
       transition={{
         type: "spring",
-        stiffness: 220,
-        damping: 40,
+        stiffness: 240,
+        damping: 32,
         mass: 0.8,
       }}
-      style={{
-        minWidth: minWidth,
-      }}
       className={cn(
-        "pointer-events-auto relative z-[60] mx-auto hidden w-full max-w-6xl flex-row items-center justify-between self-start rounded-full px-4 sm:px-6 py-2.5 lg:flex nav-glass",
+        "pointer-events-auto relative z-[60] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full py-2.5 lg:flex nav-glass",
         className
       )}
     >
@@ -162,28 +187,34 @@ export const NavItems = ({
 export const MobileNav = ({
   children,
   className,
-  visible = false,
+  visible: propVisible,
 }) => {
+  const context = useNavbar();
+  const visible = propVisible !== undefined ? propVisible : context.visible;
+
   return (
     <motion.div
       animate={{
         backdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
         WebkitBackdropFilter: visible ? "blur(26px) saturate(190%)" : "blur(18px) saturate(180%)",
         boxShadow: visible
-          ? "0 18px 36px -12px rgba(79, 70, 229, 0.18), 0 4px 16px -4px rgba(15, 23, 42, 0.08), 0 0 0 1px rgba(79, 70, 229, 0.12)"
-          : "0 12px 28px -12px rgba(79, 70, 229, 0.10), 0 2px 10px -4px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.08)",
-        width: visible ? "94%" : "100%",
-        y: visible ? 4 : 0,
+          ? "0 18px 36px -12px rgba(79, 70, 229, 0.22), 0 4px 16px -4px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(79, 70, 229, 0.15)"
+          : "0 10px 24px -12px rgba(79, 70, 229, 0.10), 0 2px 10px -4px rgba(15, 23, 42, 0.06), 0 0 0 1px rgba(15, 23, 42, 0.08)",
+        width: visible ? "90%" : "100%",
+        maxWidth: visible ? "90%" : "100%",
+        y: visible ? 6 : 0,
         borderRadius: visible ? "1.25rem" : "1.5rem",
+        paddingTop: visible ? "0.45rem" : "0.65rem",
+        paddingBottom: visible ? "0.45rem" : "0.65rem",
       }}
       transition={{
         type: "spring",
-        stiffness: 220,
-        damping: 40,
+        stiffness: 240,
+        damping: 32,
         mass: 0.8,
       }}
       className={cn(
-        "pointer-events-auto relative z-50 mx-auto flex w-full max-w-6xl flex-col items-center justify-between rounded-2xl px-3.5 py-2.5 sm:px-5 lg:hidden nav-glass",
+        "pointer-events-auto relative z-50 mx-auto flex w-full max-w-6xl flex-col items-center justify-between rounded-2xl px-3.5 py-2 sm:px-5 lg:hidden nav-glass",
         className
       )}
     >
@@ -332,4 +363,5 @@ export default {
   MobileNavMenu,
   NavbarLogo,
   NavbarButton,
+  useNavbar,
 };
