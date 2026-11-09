@@ -39,23 +39,10 @@ export default defineConfig({
   build: {
     target: 'es2020',
     cssCodeSplit: true,
-    chunkSizeWarningLimit: 1200,
+    chunkSizeWarningLimit: 1500,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        app: resolve(__dirname, 'app.html'),
-        pricing: resolve(__dirname, 'pricing.html'),
-        privacy: resolve(__dirname, 'privacy.html'),
-        terms: resolve(__dirname, 'terms.html'),
-        about: resolve(__dirname, 'about.html'),
-        howItWorks: resolve(__dirname, 'how-it-works.html'),
-        features: resolve(__dirname, 'features.html'),
-        announcements: resolve(__dirname, 'announcements.html'),
-        faq: resolve(__dirname, 'faq.html'),
-        aboutFluxora: resolve(__dirname, 'about-fluxora.html'),
-        whoItsFor: resolve(__dirname, 'who-its-for.html'),
-        contact: resolve(__dirname, 'contact.html'),
-        admin: resolve(__dirname, 'admin.html')
       },
       output: {
         manualChunks(id) {
@@ -65,6 +52,9 @@ export default defineConfig({
             }
             if (id.includes('lucide-react')) {
               return 'vendor-icons';
+            }
+            if (id.includes('gsap')) {
+              return 'vendor-gsap';
             }
             return 'vendor-misc';
           }
