@@ -9,7 +9,7 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { motion } from "motion/react";
-import BusinessInquiryForm from "../components/contact/BusinessInquiryForm";
+import InquiryForm from "../components/contact/InquiryForm";
 
 const INQUIRY_CHANNELS = [
   "Product Demonstrations",
@@ -194,7 +194,7 @@ export default function ContactPage() {
             transition={{ duration: 0.45, delay: 0.08 }}
             className="lg:col-span-7"
           >
-            <BusinessInquiryForm
+            <InquiryForm
               selectedInquiryType={selectedInquiryType}
               onInquiryTypeChange={setSelectedInquiryType}
             />
