@@ -824,13 +824,6 @@ export default function PrivacyPolicyPage() {
                         hqfluxora@gmail.com
                       </a>
                     </div>
-
-                    <div>
-                      <span className="text-[#6B615A] block uppercase font-mono tracking-wider">Registered Business Office</span>
-                      <span className="text-[#242321] text-xs block mt-1 leading-relaxed">
-                        Fluxora Corporate Headquarters, India
-                      </span>
-                    </div>
                   </div>
 
                   <div className="pt-4 border-t border-[rgba(89,9,7,0.08)] text-xs text-[#6B615A] space-y-1">

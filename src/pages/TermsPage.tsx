@@ -236,11 +236,10 @@ export default function TermsPage() {
                     key={sec.id}
                     type="button"
                     onClick={() => scrollToSection(sec.id)}
-                    className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-xs font-medium transition ${
-                      activeSection === sec.id
-                        ? 'bg-[#590907] text-[#F8F6F1]'
-                        : 'text-[#242321] hover:bg-[#F3EBDD]/60'
-                    }`}
+                    className={`flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-xs font-medium transition ${activeSection === sec.id
+                      ? 'bg-[#590907] text-[#F8F6F1]'
+                      : 'text-[#242321] hover:bg-[#F3EBDD]/60'
+                      }`}
                   >
                     <span className="font-mono opacity-60">{sec.number}</span>
                     <span>{sec.title}</span>
@@ -264,9 +263,8 @@ export default function TermsPage() {
                     key={sec.id}
                     type="button"
                     onClick={() => scrollToSection(sec.id)}
-                    className={`toc-link flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs transition cursor-pointer ${
-                      activeSection === sec.id ? 'active' : 'text-[#6B615A] hover:text-[#590907] hover:bg-black/5'
-                    }`}
+                    className={`toc-link flex w-full items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-left text-xs transition cursor-pointer ${activeSection === sec.id ? 'active' : 'text-[#6B615A] hover:text-[#590907] hover:bg-black/5'
+                      }`}
                   >
                     <span className="font-mono text-[11px] opacity-50 shrink-0">{sec.number}</span>
                     <span className="truncate">{sec.title}</span>
@@ -874,13 +872,6 @@ export default function TermsPage() {
                       >
                         hqfluxora@gmail.com
                       </a>
-                    </div>
-
-                    <div>
-                      <span className="text-[#6B615A] block uppercase font-mono tracking-wider">Registered Corporate Address</span>
-                      <span className="text-[#242321] text-xs block mt-1 leading-relaxed">
-                        Fluxora Corporate Headquarters, India
-                      </span>
                     </div>
 
                     <div>

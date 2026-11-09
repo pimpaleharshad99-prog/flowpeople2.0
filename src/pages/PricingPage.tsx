@@ -361,9 +361,8 @@ export default function PricingPage() {
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
 
-    card.style.transform = `translateY(-8px) rotateX(${(0.5 - y) * 6}deg) rotateY(${
-      (x - 0.5) * 8
-    }deg)`;
+    card.style.transform = `translateY(-8px) rotateX(${(0.5 - y) * 6}deg) rotateY(${(x - 0.5) * 8
+      }deg)`;
     card.style.setProperty('--mx', `${x * 100}%`);
     card.style.setProperty('--my', `${y * 100}%`);
   };
@@ -744,9 +743,8 @@ export default function PricingPage() {
                 >
                   <span className="text-[#2A2320] font-medium text-[0.95rem]">{row.item}</span>
                   <span
-                    className={`font-semibold whitespace-nowrap text-right text-[0.95rem] ${
-                      row.isOk ? 'text-[#4C7A5C]' : 'text-[#6B615A]'
-                    }`}
+                    className={`font-semibold whitespace-nowrap text-right text-[0.95rem] ${row.isOk ? 'text-[#4C7A5C]' : 'text-[#6B615A]'
+                      }`}
                   >
                     {row.cost}
                   </span>
