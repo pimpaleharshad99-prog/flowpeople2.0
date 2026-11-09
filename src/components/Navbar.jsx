@@ -74,13 +74,13 @@ function NavbarContent({ visible: propVisible }) {
     <>
       {/* ============================================================== */}
       {/* DESKTOP RESIZABLE NAVBAR (Screen width >= lg)                   */}
-      {/* Shrinks to sleek 720px pill; "Book Demo" only stays at top     */}
+      {/* Shrinks to sleek 820px pill; "Book Demo" only stays at top     */}
       {/* ============================================================== */}
       <NavBody
-        contractedWidth="720px"
+        contractedWidth="820px"
         expandedWidth="100%"
         visible={visible}
-        className="border border-slate-200/80"
+        className="border border-slate-200/80 justify-between gap-3 sm:gap-4"
       >
         {/* Left: FlowPeople Brand Logo */}
         <Link
@@ -96,7 +96,7 @@ function NavbarContent({ visible: propVisible }) {
         <nav
           aria-label="Experience Navigation"
           onMouseLeave={() => setHoveredIdx(null)}
-          className="nav-glass-dock relative flex items-center gap-1 rounded-full p-1 text-xs sm:text-sm font-medium border border-indigo-100/60"
+          className="nav-glass-dock relative flex items-center gap-0.5 sm:gap-1 rounded-full p-1 text-xs sm:text-[13px] font-medium border border-indigo-100/60 flex-shrink-0 whitespace-nowrap"
         >
           {navLinks.map((item, idx) => (
             <NavLink
@@ -106,7 +106,7 @@ function NavbarContent({ visible: propVisible }) {
               onClick={item.to === '/' ? handleNavigateHome : undefined}
               onMouseEnter={() => setHoveredIdx(idx)}
               className={({ isActive }) =>
-                `relative rounded-full px-3 sm:px-3.5 py-1.5 transition flex items-center z-10 ${
+                `relative rounded-full px-2.5 sm:px-3 py-1.5 transition flex items-center z-10 whitespace-nowrap flex-shrink-0 leading-none ${
                   isActive
                     ? 'bg-gradient-to-r from-[#2563EB] to-[#4F46E5] text-white shadow-xs font-semibold'
                     : 'text-[#334155] hover:text-[#4F46E5]'
@@ -128,7 +128,7 @@ function NavbarContent({ visible: propVisible }) {
                     />
                   )}
                   {item.badge}
-                  <span>{item.name}</span>
+                  <span className="whitespace-nowrap">{item.name}</span>
                 </>
               )}
             </NavLink>
