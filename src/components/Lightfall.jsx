@@ -632,8 +632,7 @@ const Lightfall = ({
     };
 
     const wake = () => {
-      if (!document.hidden && (!raf || raf === 0)) {
-        visible = true;
+      if (!document.hidden && visible && (!raf || raf === 0)) {
         raf = requestAnimationFrame(frame);
       }
     };
@@ -693,10 +692,14 @@ const Lightfall = ({
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(container);
     const intersection = new IntersectionObserver(entries => {
-      visible = entries.some(entry => entry.isIntersecting);
-      if (visible) {
+      const isNowVisible = entries.some(entry => entry.isIntersecting);
+      visible = isNowVisible;
+      if (isNowVisible) {
         last = 0;
-        wake();
+        if (!raf) raf = requestAnimationFrame(frame);
+      } else if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
       }
     });
     intersection.observe(container);

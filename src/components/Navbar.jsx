@@ -42,11 +42,19 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  // Track window scroll to subtly refine backdrop when scrolling
+  // Smooth throttled scroll listener: switches cleanly between top & scrolled states without jank
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -148,23 +156,26 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed inset-x-0 top-4 z-50 px-4">
+    <header className="fixed inset-x-0 top-4 z-50 px-4 pointer-events-none">
       {/* ============================================================== */}
       {/* SINGLE CONTAINER PILL (NO SECOND PILL BEHIND LINKS)            */}
+      {/* When at top (scrolled up): NO blur, crystal clear hero         */}
+      {/* When scrolled down: Sleek dark surface with subtle depth       */}
       {/* ============================================================== */}
       <nav
         aria-label="Main"
-        className={`relative mx-auto w-full max-w-6xl rounded-full border border-white/10 px-3.5 py-2.5 transition-all duration-300 backdrop-blur-xl sm:px-5 ${
+        style={{ WebkitFontSmoothing: "antialiased", transform: "translateZ(0)" }}
+        className={`pointer-events-auto relative mx-auto w-full max-w-6xl rounded-full border px-3.5 py-2.5 sm:px-5 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-200 ease-out ${
           scrolled
-            ? "bg-slate-900/80 shadow-[0_12px_45px_-8px_rgba(79,70,229,0.5)]"
-            : "bg-slate-900/60 shadow-[0_8px_40px_-8px_rgba(79,70,229,0.45)]"
+            ? "border-white/15 bg-slate-900/85 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.45)]"
+            : "border-white/10 bg-slate-900/40 backdrop-blur-none shadow-none"
         }`}
       >
         {/* Subtle hairline gradient top highlight line */}
         <div className="pointer-events-none absolute inset-x-12 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 
         <div className="flex items-center justify-between gap-4">
-          {/* 1. Left: Brand Logo (Crisp & Readable on dark backgrounds) */}
+          {/* 1. Left: Brand Logo (Crisp & Readable) */}
           <Logo />
 
           {/* 2. Middle: Desktop Links (Single container, NO extra nested pill background) */}
@@ -178,7 +189,7 @@ export default function Navbar() {
                     onClick={() => go(item)}
                     aria-current={isActive ? "true" : undefined}
                     className={[
-                      "relative inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-200 cursor-pointer",
+                      "relative inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition-colors duration-150 cursor-pointer",
                       "focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400",
                       isActive
                         ? "bg-white/10 text-white font-semibold"
@@ -203,12 +214,12 @@ export default function Navbar() {
             <button
               type="button"
               onClick={handleBookDemo}
-              className="group hidden items-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-indigo-600/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 cursor-pointer sm:inline-flex"
+              className="group hidden items-center gap-1.5 whitespace-nowrap rounded-full bg-gradient-to-r from-indigo-600 to-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/30 transition-all duration-150 hover:-translate-y-0.5 hover:shadow-indigo-600/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300 cursor-pointer sm:inline-flex"
             >
               <span>Book a Demo</span>
               <ArrowUpRight
                 size={16}
-                className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                className="transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
               />
             </button>
 
@@ -232,7 +243,7 @@ export default function Navbar() {
         {open && (
           <div
             id="mobile-menu"
-            className="absolute inset-x-0 top-full mt-3 rounded-3xl border border-white/10 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-2xl lg:hidden animate-in fade-in slide-in-from-top-2 duration-200"
+            className="absolute inset-x-0 top-full mt-3 rounded-3xl border border-white/10 bg-slate-900/95 p-3 shadow-2xl backdrop-blur-xl lg:hidden animate-in fade-in slide-in-from-top-2 duration-150"
           >
             <ul className="space-y-1">
               {NAV_ITEMS.map((item) => (
