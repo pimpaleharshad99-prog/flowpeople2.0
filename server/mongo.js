@@ -1,3 +1,4 @@
+// server/mongo.js
 import dns from 'node:dns';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
@@ -5,11 +6,14 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
-// Fix Windows / local ISP DNS resolution issues with MongoDB Atlas SRV records
-try {
-  dns.setServers(['8.8.8.8', '1.1.1.1']);
-} catch (e) {
-  // Ignore if not permitted in current runtime
+// Fix local ISP DNS resolution issues with MongoDB Atlas SRV records
+// ONLY run in local development or Windows, never in Vercel/AWS Linux serverless
+if (process.platform === 'win32' || process.env.NODE_ENV === 'development') {
+  try {
+    dns.setServers(['8.8.8.8', '1.1.1.1']);
+  } catch (e) {
+    // Ignore if not permitted in current runtime
+  }
 }
 
 const uri =
@@ -18,19 +22,24 @@ const uri =
 
 const dbName = process.env.MONGODB_DB_NAME || 'flowpeople';
 
-let client = null;
-let clientPromise = null;
+const mongoOptions = {
+  serverSelectionTimeoutMS: 15000,
+  connectTimeoutMS: 15000,
+  maxPoolSize: 10,
+  tls: true,
+};
 
+// Global connection caching for serverless environments (Vercel)
 export async function getMongoClient() {
-  if (!client) {
-    client = new MongoClient(uri, {
-      serverSelectionTimeoutMS: 25000,
-      connectTimeoutMS: 25000,
-      maxPoolSize: 10,
+  if (!globalThis._mongoClientPromise) {
+    const client = new MongoClient(uri, mongoOptions);
+    globalThis._mongoClientPromise = client.connect().catch((err) => {
+      // Clear cached promise on rejection so subsequent serverless requests can retry
+      globalThis._mongoClientPromise = null;
+      throw err;
     });
-    clientPromise = client.connect();
   }
-  return clientPromise;
+  return globalThis._mongoClientPromise;
 }
 
 export async function getDb(databaseName = dbName) {
@@ -55,19 +64,13 @@ export async function checkMongoHealth() {
       collections: collections.map((c) => c.name),
     };
   } catch (error) {
+    let errorMsg = error.message;
+    if (errorMsg.includes('SSL alert number 80') || errorMsg.includes('ssl3_read_bytes') || errorMsg.includes('tlsv1 alert')) {
+      errorMsg = 'MongoDB Atlas blocked connection: IP not whitelisted. Please add 0.0.0.0/0 to Atlas Network Access.';
+    }
     return {
       connected: false,
-      error: error.message,
-      cluster: 'cluster0.la6tjpd.mongodb.net',
+      error: errorMsg,
     };
   }
 }
-
-export async function closeMongoClient() {
-  if (client) {
-    await client.close();
-    client = null;
-    clientPromise = null;
-  }
-}
-

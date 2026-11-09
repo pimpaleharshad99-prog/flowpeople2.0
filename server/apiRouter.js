@@ -209,9 +209,20 @@ export async function handleApiRequest(req, res, next) {
           source: body.source || 'website_inquiry_form',
         };
 
-        await col.insertOne(newLead);
-        res.statusCode = 201;
-        return res.end(JSON.stringify({ success: true, lead: newLead, isLive: true }));
+        try {
+          const col = await getLeadsCollection();
+          await col.insertOne(newLead);
+          res.statusCode = 201;
+          return res.end(JSON.stringify({ success: true, lead: newLead, isLive: true }));
+        } catch (dbErr) {
+          console.error('MongoDB Atlas insertion error:', dbErr.message);
+          let userMsg = dbErr.message;
+          if (userMsg.includes('SSL alert number 80') || userMsg.includes('ssl3_read_bytes') || userMsg.includes('tlsv1 alert')) {
+            userMsg = 'MongoDB Atlas rejected connection: IP not whitelisted. Please add 0.0.0.0/0 under MongoDB Atlas > Security > Network Access.';
+          }
+          res.statusCode = 503;
+          return res.end(JSON.stringify({ success: false, error: userMsg, lead: newLead, fallbackCached: true }));
+        }
       }
     }
 
@@ -277,7 +288,13 @@ export async function handleApiRequest(req, res, next) {
   } catch (error) {
     console.error('API Error:', error);
     res.statusCode = 500;
-    return res.end(JSON.stringify({ success: false, error: error.message }));
+    let errorMessage = error.message || 'Internal server error';
+
+    if (errorMessage.includes('SSL alert number 80') || errorMessage.includes('ssl3_read_bytes') || errorMessage.includes('tlsv1 alert')) {
+      errorMessage = 'MongoDB Atlas rejected connection: IP not whitelisted. Please add 0.0.0.0/0 under MongoDB Atlas > Security > Network Access.';
+    }
+
+    return res.end(JSON.stringify({ success: false, error: errorMessage }));
   }
 }
 

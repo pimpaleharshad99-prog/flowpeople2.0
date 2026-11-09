@@ -311,11 +311,19 @@ export default function InquiryForm({
       }
     } catch (err: unknown) {
       setStatus("error");
-      setStatusErrorMessage(
+      let msg =
         err instanceof Error
           ? err.message
-          : "Something went wrong. Please try again or email us directly at hqfluxora@gmail.com."
-      );
+          : "Something went wrong. Please try again or email us directly at hqfluxora@gmail.com.";
+      if (
+        msg.includes("SSL alert number 80") ||
+        msg.includes("ssl3_read_bytes") ||
+        msg.includes("tlsv1 alert")
+      ) {
+        msg =
+          "MongoDB Atlas rejected connection: IP not whitelisted. Please add 0.0.0.0/0 under MongoDB Atlas > Security > Network Access.";
+      }
+      setStatusErrorMessage(msg);
     }
   };
 
