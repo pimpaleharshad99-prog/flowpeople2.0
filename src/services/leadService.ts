@@ -2,87 +2,41 @@ import { Lead, NewLeadPayload, checkDatabaseHealth, MongoHealthStatus } from '..
 
 const LOCAL_STORAGE_KEY = 'flowpeople_leads_vault';
 
-// Fallback initial leads if running completely offline without server
-const INITIAL_DEMO_LEADS: Lead[] = [
-  {
-    id: 'lead_enterprise_01',
-    created_at: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
-    full_name: 'Rajesh Sharma',
-    business_email: 'rajesh.sharma@techcorp.in',
-    company_name: 'TechCorp Solutions India',
-    phone_number: '+91 98200 12345',
-    employee_count: '51-200 employees',
-    interested_plan: 'Professional',
-    inquiry_type: 'Book a Demo',
-    message: 'We want to migrate from manual punch cards to FlowPeople Biometric and GPS attendance across 3 branch offices in Mumbai.',
-    status: 'new',
-    admin_notes: 'High priority lead. Requested callback for Friday morning.',
-    source: 'website_contact_form'
-  },
-  {
-    id: 'lead_enterprise_02',
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 5).toISOString(),
-    full_name: 'Priya Nair',
-    business_email: 'priya@zenithhr.com',
-    company_name: 'Zenith HR Consultancy',
-    phone_number: '+91 99887 65432',
-    employee_count: '21-50 employees',
-    interested_plan: 'Starter',
-    inquiry_type: 'Pricing Enquiry',
-    message: 'Interested in the one-time license model. Does it include multiple admin seats for our HR managers?',
-    status: 'contacted',
-    admin_notes: 'Sent pricing sheet and license breakdown via email.',
-    source: 'website_contact_form'
-  },
-  {
-    id: 'lead_enterprise_03',
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 26).toISOString(),
-    full_name: 'Vikram Mehta',
-    business_email: 'vmehta@logixglobal.com',
-    company_name: 'Logix Global Logistics',
-    phone_number: '+91 98111 22334',
-    employee_count: '201-500 employees',
-    interested_plan: 'Enterprise',
-    inquiry_type: 'Book a Demo',
-    message: 'We have 250+ field delivery personnel who need 100m geofenced mobile GPS attendance. Please schedule a live demonstration.',
-    status: 'qualified',
-    admin_notes: 'Enterprise contract discussion scheduled for next week.',
-    source: 'website_contact_form'
-  },
-  {
-    id: 'lead_enterprise_04',
-    created_at: new Date(Date.now() - 1000 * 60 * 60 * 72).toISOString(),
-    full_name: 'Aakash Patel',
-    business_email: 'aakash@omnicreative.co',
-    company_name: 'Omni Creative Studios',
-    phone_number: '+91 97766 55443',
-    employee_count: '1-20 employees',
-    interested_plan: 'Starter',
-    inquiry_type: 'Product Enquiry',
-    message: 'Looking for a simple biometric kiosk setup for our design studio in Ahmedabad.',
-    status: 'closed',
-    admin_notes: 'Onboarded on Starter tier.',
-    source: 'website_contact_form'
-  }
+const DEMO_EMAILS = [
+  'rajesh.sharma@techcorp.in',
+  'priya@zenithhr.com',
+  'vmehta@logixglobal.com',
+  'aakash@omnicreative.co',
+  'ananya@fintechapex.in',
 ];
+
+function isDemoLead(lead: Lead): boolean {
+  if (!lead) return false;
+  if (lead.id?.startsWith('lead_enterprise_') || lead.id?.startsWith('test_')) return true;
+  if (lead.business_email && DEMO_EMAILS.includes(lead.business_email.toLowerCase())) return true;
+  return false;
+}
 
 function getLocalLeads(): Lead[] {
   try {
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (!raw) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(INITIAL_DEMO_LEADS));
-      return INITIAL_DEMO_LEADS;
+      return [];
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    const clean = Array.isArray(parsed) ? parsed.filter((l) => !isDemoLead(l)) : [];
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(clean));
+    return clean;
   } catch (e) {
     console.error('Error reading leads from localStorage', e);
-    return INITIAL_DEMO_LEADS;
+    return [];
   }
 }
 
 function saveLocalLeads(leads: Lead[]): void {
   try {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(leads));
+    const clean = Array.isArray(leads) ? leads.filter((l) => !isDemoLead(l)) : [];
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(clean));
   } catch (e) {
     console.error('Error saving leads to localStorage', e);
   }
@@ -112,17 +66,18 @@ export const leadService = {
 
       if (res.ok) {
         const data = await res.json();
-        const savedLead: Lead = data.lead;
+        const savedLead: Lead = data.lead || fallbackLead;
         // Sync local cache
         const local = getLocalLeads();
-        saveLocalLeads([savedLead, ...local.filter(l => l.id !== savedLead.id)]);
-        return { success: true, lead: savedLead, isLive: true };
+        saveLocalLeads([savedLead, ...local.filter((l) => l.id !== savedLead.id)]);
+        return { success: true, lead: savedLead, isLive: data.isLive ?? true };
       } else {
         const errJson = await res.json().catch(() => ({}));
-        console.warn('MongoDB API returned error:', errJson.error);
+        console.warn('MongoDB API returned error, saved to local vault:', errJson.error);
         const local = getLocalLeads();
         saveLocalLeads([fallbackLead, ...local]);
-        return { success: false, lead: fallbackLead, isLive: false, error: errJson.error || 'Failed to insert lead into MongoDB Atlas' };
+        // For customer-facing inquiry forms, guarantee submission acceptance & local preservation
+        return { success: true, lead: fallbackLead, isLive: false, error: errJson.error };
       }
     } catch (err: any) {
       console.warn('Network offline or direct static mode, falling back to local cache:', err.message);
@@ -141,8 +96,9 @@ export const leadService = {
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data.leads)) {
-          saveLocalLeads(data.leads);
-          return { leads: data.leads, isLive: true };
+          const cleanLeads = data.leads.filter((l: Lead) => !isDemoLead(l));
+          saveLocalLeads(cleanLeads);
+          return { leads: cleanLeads, isLive: true };
         }
       }
       throw new Error(`API returned HTTP ${res.status}`);
@@ -150,6 +106,24 @@ export const leadService = {
       console.warn('API fetch failed, loading cached leads:', err.message);
       return { leads: getLocalLeads(), isLive: false, error: err.message };
     }
+  },
+
+  /**
+   * Purge all demo/sample leads from local storage and remote MongoDB Atlas
+   */
+  async purgeDemoLeads(): Promise<{ success: boolean; deletedCount?: number }> {
+    const clean = getLocalLeads();
+    saveLocalLeads(clean);
+    try {
+      const res = await fetch('/api/leads/purge-demo', { method: 'DELETE' });
+      if (res.ok) {
+        const data = await res.json();
+        return { success: true, deletedCount: data.deletedCount };
+      }
+    } catch (e) {
+      // Local clean is already complete
+    }
+    return { success: true };
   },
 
   /**

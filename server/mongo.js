@@ -23,10 +23,11 @@ const uri =
 const dbName = process.env.MONGODB_DB_NAME || 'flowpeople';
 
 const mongoOptions = {
-  serverSelectionTimeoutMS: 15000,
-  connectTimeoutMS: 15000,
-  maxPoolSize: 10,
-  tls: true,
+  serverSelectionTimeoutMS: 10000,
+  connectTimeoutMS: 10000,
+  socketTimeoutMS: 20000,
+  maxPoolSize: 5,
+  minPoolSize: 0,
 };
 
 // Global connection caching for serverless environments (Vercel)
