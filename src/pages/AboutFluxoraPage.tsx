@@ -179,7 +179,7 @@ export default function AboutFluxoraPage() {
               <div className="text-xs font-mono font-bold text-[#4F46E5]">PHASE 03</div>
               <h3 className="text-lg font-bold text-[#0F172A]">Build Useful Digital Experiences</h3>
               <p className="text-xs sm:text-sm text-[#64748B] leading-relaxed">
-                We engineer on robust foundations (React, MongoDB Atlas, Node.js, Google Cloud) prioritizing uptime and data privacy.
+                We engineer on robust foundations (React, Supabase PostgreSQL, Node.js, Google Cloud) prioritizing uptime and data privacy.
               </p>
             </div>
 

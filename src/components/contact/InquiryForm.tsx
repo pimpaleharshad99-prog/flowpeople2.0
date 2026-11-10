@@ -286,7 +286,7 @@ export default function InquiryForm({
       const inquiryLabel = INQUIRY_TYPES.find((t) => t.id === data.inquiryType)?.label || "Book a Demo";
       const planName = data.plan === "unsure" ? "Not sure yet" : PLANS.find((p) => p.id === data.plan)?.name || "Starter";
 
-      // 1. Submit through FlowPeople live lead service (MongoDB Atlas + local cache)
+      // 1. Submit through FlowPeople live lead service (Supabase PostgreSQL + local cache)
       const res = await leadService.submitLead({
         full_name: data.fullName.trim(),
         business_email: data.email.trim(),
@@ -311,18 +311,10 @@ export default function InquiryForm({
       }
     } catch (err: unknown) {
       setStatus("error");
-      let msg =
+      const msg =
         err instanceof Error
           ? err.message
           : "Something went wrong. Please try again or email us directly at hqfluxora@gmail.com.";
-      if (
-        msg.includes("SSL alert number 80") ||
-        msg.includes("ssl3_read_bytes") ||
-        msg.includes("tlsv1 alert")
-      ) {
-        msg =
-          "MongoDB Atlas rejected connection: IP not whitelisted. Please add 0.0.0.0/0 under MongoDB Atlas > Security > Network Access.";
-      }
       setStatusErrorMessage(msg);
     }
   };

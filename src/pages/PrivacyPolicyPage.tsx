@@ -513,7 +513,7 @@ export default function PrivacyPolicyPage() {
                 <ul className="list-disc pl-5 space-y-2 text-[#64748B]">
                   <li>
                     <b>Dedicated Client Database:</b> Where configured, each client organization is provisioned with
-                    a dedicated database cluster (e.g. hosted via MongoDB Atlas or client-managed cloud infrastructure).
+                    a dedicated database cluster (e.g. hosted via Supabase PostgreSQL or client-managed cloud infrastructure).
                     Customer data is physically or logically isolated and is not co-mingled with other tenants.
                   </li>
                   <li>
@@ -554,7 +554,7 @@ export default function PrivacyPolicyPage() {
                   for delivering the application:
                 </p>
                 <ul className="list-disc pl-5 space-y-2 text-[#64748B]">
-                  <li><b>Database & Cloud Infrastructure:</b> MongoDB Atlas, Google Cloud Platform, Amazon Web Services.</li>
+                  <li><b>Database & Cloud Infrastructure:</b> Supabase PostgreSQL, Google Cloud Platform, Amazon Web Services.</li>
                   <li><b>Storage Integrations:</b> Google Workspace (Google Drive API) for document archival.</li>
                   <li><b>Communication & Email Delivery:</b> Transactional email services for invitations and password resets.</li>
                   <li><b>Statutory & Regulatory Disclosures:</b> We may disclose data only if strictly mandated by binding court orders, statutory law enforcement requests, or applicable regulatory mandates under Indian law.</li>
@@ -586,7 +586,7 @@ export default function PrivacyPolicyPage() {
                   </div>
                   <div className="rounded-xl border border-slate-200 bg-white p-4">
                     <b className="text-sm font-semibold text-[#4F46E5] block mb-1">Database-Level Security</b>
-                    Dedicated MongoDB Atlas clusters feature TLS 1.3 encryption in transit, AES-256 storage encryption at rest, and strict network access controls.
+                    Dedicated Supabase PostgreSQL instances feature TLS 1.3 encryption in transit, AES-256 storage encryption at rest, and strict Row Level Security (RLS) controls.
                   </div>
                   <div className="rounded-xl border border-slate-200 bg-white p-4">
                     <b className="text-sm font-semibold text-[#4F46E5] block mb-1">Rolling Automated Backups</b>
@@ -750,7 +750,7 @@ export default function PrivacyPolicyPage() {
               <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
                   Personal data collected through FlowPeople is primarily stored and processed on servers located within India.
-                  However, where client organizations integrate with global cloud service providers (e.g. Google Drive, MongoDB Atlas,
+                  However, where client organizations integrate with global cloud service providers (e.g. Google Drive, Supabase,
                   or AWS cloud availability zones), data may be transferred, hosted, or backed up in server locations across other
                   jurisdictions, in accordance with applicable rules and transfer whitelist notifications issued under the DPDPA 2023.
                 </p>

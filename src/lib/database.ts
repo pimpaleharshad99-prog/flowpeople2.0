@@ -6,40 +6,45 @@ export interface Lead {
   business_email: string;
   company_name: string;
   phone_number?: string;
+  phone?: string;
   employee_count?: string;
   interested_plan?: string;
   inquiry_type?: string;
+  designation?: string;
   message?: string;
   status: 'new' | 'contacted' | 'qualified' | 'closed' | 'archived';
   admin_notes?: string;
   source?: string;
-  _id?: string;
 }
 
-export type NewLeadPayload = Omit<Lead, 'id' | 'created_at' | 'updated_at' | 'status' | '_id'>;
+export type NewLeadPayload = Omit<Lead, 'id' | 'created_at' | 'updated_at' | 'status'>;
 
-export interface MongoHealthStatus {
+export interface DatabaseHealthStatus {
   connected: boolean;
   database?: string;
-  cluster?: string;
-  collections?: string[];
+  provider?: string;
   error?: string;
 }
 
 /**
- * Checks the status of the MongoDB Atlas connection via our backend API
+ * Checks the status of the Supabase PostgreSQL connection via backend API
  */
-export async function checkDatabaseHealth(): Promise<MongoHealthStatus> {
+export async function checkDatabaseHealth(): Promise<DatabaseHealthStatus> {
   try {
     const res = await fetch('/api/db/health');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return await res.json();
+    const data = await res.json();
+    return {
+      connected: Boolean(data.connected || data.status === 'ok'),
+      database: data.database || 'postgres',
+      provider: data.provider || 'Supabase PostgreSQL',
+    };
   } catch (e: any) {
     return {
       connected: false,
-      cluster: 'cluster0.la6tjpd.mongodb.net',
+      database: 'postgres',
+      provider: 'Supabase PostgreSQL',
       error: e.message || 'Offline',
     };
   }
 }
-

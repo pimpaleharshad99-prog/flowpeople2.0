@@ -35,7 +35,7 @@ const FAQ_DATA: FaqItem[] = [
   {
     category: 'General',
     q: 'How does FlowPeople work?',
-    a: 'FlowPeople is deployed on your organization’s dedicated database (such as MongoDB Atlas / Cloud Database) and connected to your own Google Drive storage. Employees access self-service profiles or check in via entrance kiosks / mobile geofencing, while administrators monitor attendance, approve leaves, and generate compliance reports through a centralized dashboard.'
+    a: 'FlowPeople is deployed on your organization’s dedicated database (such as Supabase PostgreSQL / Cloud Database) and connected to your own Google Drive storage. Employees access self-service profiles or check in via entrance kiosks / mobile geofencing, while administrators monitor attendance, approve leaves, and generate compliance reports through a centralized dashboard.'
   },
   {
     category: 'General',
@@ -67,7 +67,7 @@ const FAQ_DATA: FaqItem[] = [
   {
     category: 'Pricing and Licensing',
     q: 'Are hosting and infrastructure charges included?',
-    a: 'External hosting (such as MongoDB Atlas database hosting) and Google Drive storage fees are paid directly by your organization to those independent cloud providers. We configure and link them during onboarding, but their external infrastructure usage costs sit outside our license.'
+    a: 'External hosting (such as Supabase database hosting) and Google Drive storage fees are paid directly by your organization to those independent cloud providers. We configure and link them during onboarding, but their external infrastructure usage costs sit outside our license.'
   },
   {
     category: 'Pricing and Licensing',
@@ -106,7 +106,7 @@ const FAQ_DATA: FaqItem[] = [
   {
     category: 'Data and Security',
     q: 'Where is organizational data stored?',
-    a: 'Your organizational data is stored in your dedicated database instance (MongoDB Atlas / Cloud Database) and your client-owned Google Drive. We do not aggregate customer records into a shared multi-tenant marketing pool.'
+    a: 'Your organizational data is stored in your dedicated database instance (Supabase PostgreSQL / Cloud Database) and your client-owned Google Drive. We do not aggregate customer records into a shared multi-tenant marketing pool.'
   },
   {
     category: 'Data and Security',
@@ -234,11 +234,10 @@ export default function FaqPage() {
                 setSelectedCategory(cat);
                 setOpenIndex(null);
               }}
-              className={`rounded-full px-4 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${
-                selectedCategory === cat
-                  ? 'bg-[#4F46E5] text-[#F8F6F1] shadow-xs'
-                  : 'bg-white border border-slate-200 text-[#0F172A] hover:bg-slate-100/50'
-              }`}
+              className={`rounded-full px-4 py-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${selectedCategory === cat
+                ? 'bg-[#4F46E5] text-[#F8F6F1] shadow-xs'
+                : 'bg-white border border-slate-200 text-[#0F172A] hover:bg-slate-100/50'
+                }`}
             >
               {cat}
             </button>
@@ -265,9 +264,8 @@ export default function FaqPage() {
                 >
                   <span className="pr-4">{item.q}</span>
                   <ChevronDown
-                    className={`h-4 w-4 text-[#4F46E5] shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180' : ''
-                    }`}
+                    className={`h-4 w-4 text-[#4F46E5] shrink-0 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''
+                      }`}
                   />
                 </button>
 

@@ -179,11 +179,17 @@ export default function BiometricAttendancePage() {
     };
   }, []);
 
-  const jumpToSceneProgress = (targetP) => {
+  const SCENE_TARGETS = [0.02, 0.28, 0.52, 0.73, 0.92];
+
+  const jumpToScene = (idx) => {
     if (!trackRef.current) return;
+    const trackRect = trackRef.current.getBoundingClientRect();
+    const trackTop = trackRect.top + window.scrollY;
     const maxScroll = trackRef.current.offsetHeight - window.innerHeight;
+    const targetP = SCENE_TARGETS[idx] ?? 0;
+    setActiveSceneIdx(idx);
     window.scrollTo({
-      top: maxScroll * targetP,
+      top: trackTop + maxScroll * targetP,
       behavior: 'smooth'
     });
   };
@@ -297,7 +303,7 @@ export default function BiometricAttendancePage() {
                     <div
                       key={i}
                       className="h-1.5 w-8 sm:w-12 rounded-full bg-white/20 overflow-hidden cursor-pointer"
-                      onClick={() => jumpToSceneProgress(i * 0.22)}
+                      onClick={() => jumpToScene(i)}
                     >
                       <div
                         className="h-full bg-[#EEF2FF] transition-all duration-150"
@@ -349,8 +355,8 @@ export default function BiometricAttendancePage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                      className="rounded-full border border-white/40 text-white px-5 py-2.5 text-xs sm:text-sm font-semibold hover:bg-white/10 transition flex items-center gap-1.5"
+                      onClick={() => jumpToScene(0)}
+                      className="rounded-full border border-white/40 text-white px-5 py-2.5 text-xs sm:text-sm font-semibold hover:bg-white/10 transition flex items-center gap-1.5 cursor-pointer focus-visible:ring-2 focus-visible:ring-white"
                     >
                       <RotateCcw className="h-3.5 w-3.5" />
                       Replay Story
@@ -453,8 +459,8 @@ export default function BiometricAttendancePage() {
                   <button
                     key={i}
                     type="button"
-                    onClick={() => jumpToSceneProgress(i * 0.22)}
-                    className="hover:text-white transition font-mono px-1"
+                    onClick={() => jumpToScene(i)}
+                    className="hover:text-white transition font-mono px-1 cursor-pointer focus-visible:ring-1 focus-visible:ring-white rounded"
                   >
                     0{i + 1}
                   </button>

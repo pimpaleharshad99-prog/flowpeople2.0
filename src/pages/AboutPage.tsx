@@ -102,7 +102,7 @@ const COMPARISON_POINTS = [
   {
     title: 'External Cost Transparency',
     traditional: 'Hidden markup on cloud hosting, backups, and storage fees.',
-    flowpeople: 'Completely transparent third-party costs (MongoDB Atlas, Drive) billed directly by those services.'
+    flowpeople: 'Completely transparent third-party costs (Supabase PostgreSQL, Drive) billed directly by those services.'
   },
   {
     title: 'Deployment & Setup',

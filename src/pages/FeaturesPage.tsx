@@ -180,7 +180,7 @@ export default function FeaturesPage() {
         </section>
 
         {/* C. LEAVE MANAGEMENT */}
-        <section id="leave-management" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <section id="leave-management" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center scroll-mt-28">
           <div className="lg:col-span-6 space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3 py-1 text-xs font-semibold text-[#4F46E5]">
               <CalendarDays className="h-3.5 w-3.5" />
@@ -296,7 +296,8 @@ export default function FeaturesPage() {
         </section>
 
         {/* E. REPORTS AND ANALYTICS */}
-        <section id="reports-analytics" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div id="reports" className="sr-only scroll-mt-28" />
+        <section id="reports-analytics" className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center scroll-mt-28">
           <div className="lg:col-span-6 space-y-5">
             <div className="inline-flex items-center gap-2 rounded-full bg-[#4F46E5]/10 px-3 py-1 text-xs font-semibold text-[#4F46E5]">
               <BarChart3 className="h-3.5 w-3.5" />
@@ -428,7 +429,7 @@ export default function FeaturesPage() {
             <ul className="space-y-2.5 text-xs sm:text-sm text-[#64748B]">
               <li className="flex items-center gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-[#299D68]" />
-                <span><b>MongoDB Atlas:</b> Dedicated cloud database cluster isolation and enterprise encryption.</span>
+                <span><b>Supabase PostgreSQL:</b> Dedicated cloud database instance isolation and enterprise encryption.</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <CheckCircle2 className="h-4 w-4 text-[#299D68]" />
@@ -450,7 +451,7 @@ export default function FeaturesPage() {
               <div className="grid grid-cols-2 gap-3 text-xs">
                 <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
                   <b className="text-sm font-bold text-[#0F172A] block">Database</b>
-                  <p className="text-[11px] text-[#64748B] mt-1">MongoDB Atlas Cluster</p>
+                  <p className="text-[11px] text-[#64748B] mt-1">Supabase PostgreSQL</p>
                 </div>
                 <div className="p-3.5 rounded-xl bg-white border border-slate-200 shadow-2xs">
                   <b className="text-sm font-bold text-[#0F172A] block">Drive Storage</b>

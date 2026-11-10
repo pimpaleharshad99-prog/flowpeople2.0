@@ -50,56 +50,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // 1. Mark section in view as active using IntersectionObserver
+  // 1. Synchronize active navigation pill strictly with current route
   useEffect(() => {
-    // If not on home page, match active item based on current pathname
-    if (location.pathname !== "/") {
-      const matched = NAV_ITEMS.find((item) => item.path === location.pathname);
-      if (matched) {
-        setActive(matched.id);
-      }
-      return;
+    const matched = NAV_ITEMS.find((item) => item.path === location.pathname);
+    if (matched) {
+      setActive(matched.id);
+    } else if (location.pathname === "/") {
+      setActive("welcome");
     }
-
-    const sectionElements = NAV_ITEMS.map((item) => {
-      if (item.id === "welcome") {
-        return document.getElementById("welcome") || document.getElementById("welcome-hero");
-      }
-      if (item.id === "biometric") {
-        return document.getElementById("biometric") || document.getElementById("option-biometric") || document.getElementById("biometric-section");
-      }
-      if (item.id === "gps") {
-        return document.getElementById("gps") || document.getElementById("option-gps") || document.getElementById("gps-section");
-      }
-      return document.getElementById(item.id);
-    }).filter((el) => el instanceof Element);
-
-    if (sectionElements.length === 0) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            const rawId = e.target.id;
-            if (rawId === "welcome-hero" || rawId === "welcome") setActive("welcome");
-            else if (rawId.includes("biometric")) setActive("biometric");
-            else if (rawId.includes("gps")) setActive("gps");
-            else if (rawId.includes("pricing")) setActive("pricing");
-            else if (rawId.includes("how-it-works")) setActive("how-it-works");
-            else if (rawId.includes("features")) setActive("features");
-            else setActive(rawId);
-          }
-        });
-      },
-      { rootMargin: "-30% 0px -55% 0px" }
-    );
-
-    sectionElements.forEach((s) => {
-      if (s instanceof Element) {
-        observer.observe(s);
-      }
-    });
-    return () => observer.disconnect();
   }, [location.pathname]);
 
   // 2. Close mobile menu on Escape key press
@@ -111,39 +69,29 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  // 3. Navigation handler (smooth in-page scroll if section exists, or route navigation)
+  // 3. Navigation handler (route navigation with instant top landing via ScrollToTop)
   const go = (item) => {
     setOpen(false);
-
-    const targetElement =
-      document.getElementById(item.id) ||
-      (item.id === "welcome" && (document.getElementById("welcome-hero") || document.getElementById("view-hub"))) ||
-      (item.id === "biometric" && document.getElementById("option-biometric")) ||
-      (item.id === "gps" && document.getElementById("option-gps"));
-
-    if (targetElement && location.pathname === "/") {
-      setActive(item.id);
-      targetElement.scrollIntoView({ behavior: "smooth" });
-    } else {
-      setActive(item.id);
+    setActive(item.id);
+    if (location.pathname !== item.path) {
       navigate(item.path);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     }
   };
 
   const handleBookDemo = () => {
     setOpen(false);
-    const contactSection =
-      document.getElementById("business-inquiry") ||
-      document.getElementById("contact") ||
-      document.getElementById("choose-attendance");
-
-    if (contactSection && (location.pathname === "/contact" || location.pathname === "/")) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      navigate("/contact?type=Book%20a%20Demo");
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    if (location.pathname === "/contact") {
+      const contactSection =
+        document.getElementById("business-inquiry") ||
+        document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
     }
+    navigate("/contact?type=Book%20a%20Demo");
   };
 
   return (

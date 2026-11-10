@@ -78,7 +78,7 @@ const FAQS = [
   },
   {
     q: 'Are hosting and database charges included?',
-    a: 'No. Dedicated database hosting (such as MongoDB Atlas or client cloud instances) is billed directly by those independent infrastructure providers. We configure and connect them during initial onboarding, but usage charges sit outside our software license.'
+    a: 'No. Dedicated database hosting (such as Supabase or client cloud instances) is billed directly by those independent infrastructure providers. We configure and connect them during initial onboarding, but usage charges sit outside our software license.'
   },
   {
     q: 'Is Google Drive storage free?',
@@ -354,7 +354,7 @@ export default function TermsPage() {
                   </div>
                   <div>
                     <b className="text-sm font-semibold text-[#4F46E5]">Third-Party Services:</b>
-                    <span className="text-[#64748B] block mt-0.5">Independent external cloud services connected to FlowPeople, including MongoDB Atlas database hosting, Google Drive storage, and authentication APIs.</span>
+                    <span className="text-[#64748B] block mt-0.5">Independent external cloud services connected to FlowPeople, including Supabase database hosting, Google Drive storage, and authentication APIs.</span>
                   </div>
                 </div>
               </div>
@@ -396,7 +396,7 @@ export default function TermsPage() {
                   </div>
                   <div className="p-3.5 bg-white rounded-xl border border-slate-200">
                     <b className="text-sm font-semibold text-[#0F172A] block">Third-Party Storage Integrations</b>
-                    Integration connectors with Google Drive for customer-owned file storage and MongoDB Atlas for database hosting.
+                    Integration connectors with Google Drive for customer-owned file storage and Supabase for database hosting.
                   </div>
                 </div>
               </div>
@@ -479,7 +479,7 @@ export default function TermsPage() {
                 <div className="space-y-2 text-xs text-[#64748B]">
                   <p><b>Statutory Taxes:</b> All stated fees exclude Goods and Services Tax (GST) and applicable statutory surcharges, which will be invoiced at the prevailing statutory rate.</p>
                   <p><b>Zero Software Maintenance:</b> Fluxora charges ₹0 in recurring software maintenance fees for the purchased version (T&C Apply).</p>
-                  <p><b>Separate Infrastructure Charges:</b> External infrastructure fees—including database hosting (MongoDB Atlas), cloud storage (Google Drive), physical tablet kiosks, and third-party API fees—are payable directly by the Customer to those respective providers.</p>
+                  <p><b>Separate Infrastructure Charges:</b> External infrastructure fees—including database hosting (Supabase), cloud storage (Google Drive), physical tablet kiosks, and third-party API fees—are payable directly by the Customer to those respective providers.</p>
                   <p><b>Custom Development:</b> Bespoke integrations, special workflows, or on-site engineering beyond the plan scope are quoted and invoiced separately.</p>
                 </div>
               </div>
@@ -515,7 +515,7 @@ export default function TermsPage() {
               </div>
               <div className="mt-4 space-y-4 text-[15px] text-[#64748B]">
                 <p>
-                  FlowPeople integrates with enterprise cloud utilities chosen by the Customer, including MongoDB Atlas
+                  FlowPeople integrates with enterprise cloud utilities chosen by the Customer, including Supabase
                   for database hosting and Google Drive for document management:
                 </p>
                 <ul className="list-disc pl-5 space-y-2 text-[#64748B]">

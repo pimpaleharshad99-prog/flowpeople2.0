@@ -1,175 +1,160 @@
+// src/lib/adminAuth.ts
 // =====================================================================
-// FLOWPEOPLE ADMIN AUTHENTICATION CONTROLLER — MONGODB ATLAS
+// FLOWPEOPLE ADMIN AUTHENTICATION CONTROLLER — SUPABASE AUTH & RLS
 // =====================================================================
-
-const ADMIN_STORAGE_KEY = 'flowpeople_admin_session';
-const ADMIN_TOKEN_KEY = 'flowpeople_admin_token';
+import { supabase } from './supabase';
 
 export interface AdminUser {
   id?: string;
   email: string;
   name: string;
-  role: 'superadmin';
-  loginTime: string;
+  role: 'superadmin' | 'admin';
+  lastLoginAt?: string;
   isLiveDb?: boolean;
+}
+
+export interface AuthCheckResult {
+  authenticated: boolean;
+  user: AdminUser | null;
+  error?: string;
 }
 
 export const adminAuth = {
   /**
-   * Verify credentials against MongoDB Atlas backend authentication route
+   * Authenticate admin using Supabase Auth and verify role in profiles table
    */
   async login(email: string, pass: string): Promise<{ success: boolean; user?: AdminUser; error?: string }> {
     const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail || !pass) {
+      return { success: false, error: 'Please enter both your email and password.' };
+    }
 
-    const isMaster =
-      (cleanEmail === 'pimpaleg80@gmail.com' ||
-        cleanEmail === 'hqfluxora@gmail.com' ||
-        cleanEmail === 'admin@flowpeople.com' ||
-        cleanEmail === 'admin@fluxora.com') &&
-      pass === 'Harsh@9970';
-
-    // Authenticate against MongoDB Atlas via API gateway
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: cleanEmail, password: pass }),
+      // 1. Authenticate via Supabase Auth
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: cleanEmail,
+        password: pass,
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        if (data.success && data.user) {
-          const user: AdminUser = {
-            ...data.user,
-            isLiveDb: true,
-          };
-          if (data.token) {
-            localStorage.setItem(ADMIN_TOKEN_KEY, data.token);
-            sessionStorage.setItem(ADMIN_TOKEN_KEY, data.token);
-          }
-          sessionStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(user));
-          localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(user));
-          return { success: true, user };
-        }
-      } else {
-        const errorData = await response.json().catch(() => ({}));
-        // If master credentials were provided but Atlas is blocked by IP whitelist, grant emergency fallback session
-        if (isMaster) {
-          const fallbackUser: AdminUser = {
-            id: 'admin_master_01',
-            email: cleanEmail,
-            name: cleanEmail.includes('pimpaleg80') ? 'Harsh Pimpale (Admin)' : 'Fluxora Admin',
-            role: 'superadmin',
-            loginTime: new Date().toISOString(),
-            isLiveDb: false,
-          };
-          sessionStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
-          localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
-          return { success: true, user: fallbackUser };
-        }
+      if (error || !data.user) {
         return {
           success: false,
-          error: errorData.error || 'Invalid admin credentials. Please check your email and password.',
+          error: error?.message || 'Invalid credentials. Please verify your email and password.',
         };
       }
+
+      // 2. Verify authorized admin role in Supabase public.profiles table
+      const { data: profile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', data.user.id)
+        .single();
+
+      if (profileError || !profile || profile.is_active === false || !['superadmin', 'admin'].includes(profile.role)) {
+        await supabase.auth.signOut();
+        return {
+          success: false,
+          error: 'Access denied: You do not have administrator permissions.',
+        };
+      }
+
+      // 3. Synchronize server session cookie via /api/auth/login
+      try {
+        await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${data.session?.access_token}`,
+          },
+          credentials: 'include',
+          body: JSON.stringify({ email: cleanEmail, password: pass }),
+        });
+      } catch {}
+
+      const user: AdminUser = {
+        id: data.user.id,
+        email: data.user.email || cleanEmail,
+        name: profile.full_name || 'Administrator',
+        role: profile.role,
+        lastLoginAt: new Date().toISOString(),
+        isLiveDb: true,
+      };
+
+      return { success: true, user };
     } catch (e: any) {
-      console.warn('Backend authentication API unreachable:', e.message);
-      if (isMaster) {
-        const fallbackUser: AdminUser = {
-          id: 'admin_master_01',
-          email: cleanEmail,
-          name: cleanEmail.includes('pimpaleg80') ? 'Harsh Pimpale (Admin)' : 'Fluxora Admin',
-          role: 'superadmin',
-          loginTime: new Date().toISOString(),
-          isLiveDb: false,
-        };
-        sessionStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
-        localStorage.setItem(ADMIN_STORAGE_KEY, JSON.stringify(fallbackUser));
-        return { success: true, user: fallbackUser };
-      }
       return {
         success: false,
-        error: 'Authentication service currently unreachable. Please try again shortly.',
+        error: e.message || 'Authentication service unreachable. Please try again shortly.',
       };
     }
-
-    return { success: false, error: 'Invalid admin credentials. Please check your email or password.' };
   },
 
   /**
-   * Check if the current browser session is authenticated as admin
+   * Verify active session against Supabase Auth & public.profiles
    */
-  isAuthenticated(): boolean {
+  async checkAuth(): Promise<AuthCheckResult> {
     try {
-      const session = sessionStorage.getItem(ADMIN_STORAGE_KEY) || localStorage.getItem(ADMIN_STORAGE_KEY);
-      const token = sessionStorage.getItem(ADMIN_TOKEN_KEY) || localStorage.getItem(ADMIN_TOKEN_KEY);
-      if (!session || !token) return false;
-      const user = JSON.parse(session);
-      return Boolean(user && user.role === 'superadmin');
-    } catch {
-      return false;
-    }
-  },
+      const { data: sessionData } = await supabase.auth.getSession();
+      const session = sessionData?.session;
 
-  /**
-   * Verify session token against MongoDB Atlas
-   */
-  async verifyLiveSession(): Promise<boolean> {
-    const token = sessionStorage.getItem(ADMIN_TOKEN_KEY) || localStorage.getItem(ADMIN_TOKEN_KEY);
-    if (!token) return this.isAuthenticated();
-
-    try {
-      const res = await fetch('/api/auth/verify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ token }),
-      });
-
-      if (res.ok) {
-        const data = await res.json();
-        return Boolean(data.authenticated);
+      if (!session || !session.user) {
+        // Fallback check against /api/auth/me
+        const res = await fetch('/api/auth/me', {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+        });
+        if (res.ok) {
+          const apiData = await res.json().catch(() => ({}));
+          if (apiData.authenticated && apiData.user) {
+            return {
+              authenticated: true,
+              user: { ...apiData.user, isLiveDb: true },
+            };
+          }
+        }
+        return { authenticated: false, user: null };
       }
-      return this.isAuthenticated();
+
+      // Verify profile role in Supabase
+      const { data: profile, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', session.user.id)
+        .single();
+
+      if (error || !profile || profile.is_active === false || !['superadmin', 'admin'].includes(profile.role)) {
+        await supabase.auth.signOut();
+        return { authenticated: false, user: null };
+      }
+
+      const user: AdminUser = {
+        id: session.user.id,
+        email: session.user.email || '',
+        name: profile.full_name || 'Administrator',
+        role: profile.role,
+        isLiveDb: true,
+      };
+
+      return { authenticated: true, user };
     } catch {
-      return this.isAuthenticated();
+      return { authenticated: false, user: null };
     }
   },
 
   /**
-   * Get currently logged-in admin user
-   */
-  getCurrentUser(): AdminUser | null {
-    try {
-      const session = sessionStorage.getItem(ADMIN_STORAGE_KEY) || localStorage.getItem(ADMIN_STORAGE_KEY);
-      if (!session) return null;
-      return JSON.parse(session);
-    } catch {
-      return null;
-    }
-  },
-
-  /**
-   * Terminate admin session in MongoDB Atlas and browser storage
+   * Terminate admin session in Supabase Auth and clear session cookies
    */
   async logout(): Promise<void> {
-    const token = sessionStorage.getItem(ADMIN_TOKEN_KEY) || localStorage.getItem(ADMIN_TOKEN_KEY);
-    if (token) {
-      try {
-        await fetch('/api/auth/logout', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token }),
-        });
-      } catch (e) {
-        // Ignore network errors on logout
-      }
-    }
-    sessionStorage.removeItem(ADMIN_STORAGE_KEY);
-    localStorage.removeItem(ADMIN_STORAGE_KEY);
-    sessionStorage.removeItem(ADMIN_TOKEN_KEY);
-    localStorage.removeItem(ADMIN_TOKEN_KEY);
+    try {
+      await supabase.auth.signOut();
+    } catch {}
+    try {
+      await fetch('/api/auth/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
+    } catch {}
   },
 };

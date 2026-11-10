@@ -73,13 +73,24 @@ export default function AdminPage() {
     message: ''
   });
 
-  // Verify authentication on mount
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  // Verify server-side authentication session on mount
   useEffect(() => {
-    if (adminAuth.isAuthenticated()) {
-      setUser(adminAuth.getCurrentUser());
-    } else {
-      setUser(null);
-    }
+    let active = true;
+    adminAuth.checkAuth().then((res) => {
+      if (active) {
+        if (res.authenticated && res.user) {
+          setUser(res.user);
+        } else {
+          setUser(null);
+        }
+        setIsCheckingAuth(false);
+      }
+    });
+    return () => {
+      active = false;
+    };
   }, []);
 
   // Fetch leads when authenticated
@@ -93,6 +104,10 @@ export default function AdminPage() {
     setLoading(true);
     try {
       const res = await leadService.getLeads();
+      if (!res.isLive && res.error && res.error.includes('Unauthorized')) {
+        setUser(null);
+        return;
+      }
       setLeads(res.leads);
       setIsLiveDatabase(res.isLive);
       if (res.error) {
@@ -153,15 +168,19 @@ export default function AdminPage() {
 
   // Delete Lead Handler
   const handleDeleteLead = async (leadId: string) => {
+    if (!leadId) {
+      alert('Error: Missing lead identifier.');
+      return;
+    }
     if (window.confirm('Are you sure you want to delete this lead? This action cannot be undone.')) {
       const res = await leadService.deleteLead(leadId);
       if (res.success) {
-        setLeads((prev) => prev.filter((l) => l.id !== leadId));
-        if (selectedLead?.id === leadId) {
+        setLeads((prev) => prev.filter((l) => l.id !== leadId && (l as any)._id !== leadId));
+        if (selectedLead?.id === leadId || (selectedLead as any)?._id === leadId) {
           setSelectedLead(null);
         }
       } else {
-        alert(res.error || 'Failed to delete lead from MongoDB Atlas database.');
+        alert(res.error || 'Failed to delete lead from Supabase database.');
       }
     }
   };
@@ -193,7 +212,7 @@ export default function AdminPage() {
         message: ''
       });
     } else {
-      alert(res.error || 'Failed to save lead into MongoDB Atlas database.');
+      alert(res.error || 'Failed to save lead into Supabase database.');
     }
   };
 
@@ -234,6 +253,20 @@ export default function AdminPage() {
     const qualifiedCount = leads.filter((l) => l.status === 'qualified' || l.status === 'contacted').length;
     return { total, newCount, demoCount, qualifiedCount };
   }, [leads]);
+
+  // =========================================================================
+  // VIEW 0: SESSION VERIFICATION LOADING STATE
+  // =========================================================================
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-screen bg-[#F8FAFC] text-[#0F172A] flex flex-col justify-center items-center py-12 px-4">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-8 w-8 border-3 border-[#4F46E5] border-t-transparent rounded-full animate-spin" />
+          <span className="text-xs font-semibold text-[#64748B]">Verifying secure admin session...</span>
+        </div>
+      </div>
+    );
+  }
 
   // =========================================================================
   // VIEW 1: ADMIN LOGIN SCREEN (When not authenticated)
@@ -303,7 +336,7 @@ export default function AdminPage() {
                   </label>
                   <button
                     type="button"
-                    onClick={() => alert('Password reset is managed by your enterprise administrator or MongoDB Atlas master config.')}
+                    onClick={() => alert('Password reset is managed via Supabase Auth email recovery or your system administrator.')}
                     className="text-xs text-[#4F46E5] hover:underline font-medium cursor-pointer"
                   >
                     Forgot password?
@@ -328,7 +361,7 @@ export default function AdminPage() {
                   {isLoggingIn ? (
                     <>
                       <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      <span>Verifying with MongoDB Atlas...</span>
+                      <span>Verifying with Supabase Auth...</span>
                     </>
                   ) : (
                     <span>Sign in</span>
@@ -379,20 +412,20 @@ export default function AdminPage() {
                   type="button"
                   onClick={() => setShowDbInfoModal(true)}
                   className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#10B981] bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 cursor-pointer"
-                  title="Connected to MongoDB Atlas (cluster0.la6tjpd.mongodb.net)"
+                  title="Connected to Supabase PostgreSQL (aws-0-ap-northeast-2.pooler.supabase.com)"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-[#10B981] animate-pulse"></span>
-                  <span>MongoDB Atlas Live</span>
+                  <span>Supabase Live</span>
                 </button>
               ) : (
                 <button
                   type="button"
                   onClick={() => setShowDbInfoModal(true)}
                   className="inline-flex items-center gap-1.5 text-[11px] font-medium text-amber-600 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 cursor-pointer"
-                  title="Click to view MongoDB Atlas architecture"
+                  title="Click to view Supabase architecture"
                 >
                   <span className="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
-                  <span>MongoDB Vault (Cached)</span>
+                  <span>Supabase Vault (Cached)</span>
                 </button>
               )}
             </div>
@@ -548,11 +581,10 @@ export default function AdminPage() {
                 key={tab.id}
                 type="button"
                 onClick={() => setStatusFilter(tab.id)}
-                className={`rounded-full px-3 py-1 font-medium transition cursor-pointer ${
-                  statusFilter === tab.id
+                className={`rounded-full px-3 py-1 font-medium transition cursor-pointer ${statusFilter === tab.id
                     ? 'bg-[#4F46E5] text-white shadow-xs'
                     : 'bg-slate-100 text-[#64748B] hover:bg-slate-200'
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
@@ -641,11 +673,10 @@ export default function AdminPage() {
                       <td className="py-4 px-4">
                         <div>
                           <span
-                            className={`inline-block rounded-md px-2 py-0.5 text-[11px] font-semibold ${
-                              lead.inquiry_type?.toLowerCase().includes('demo')
+                            className={`inline-block rounded-md px-2 py-0.5 text-[11px] font-semibold ${lead.inquiry_type?.toLowerCase().includes('demo')
                                 ? 'bg-indigo-50 text-[#4F46E5] border border-indigo-100'
                                 : 'bg-slate-100 text-slate-700'
-                            }`}
+                              }`}
                           >
                             {lead.inquiry_type || 'General'}
                           </span>
@@ -672,15 +703,14 @@ export default function AdminPage() {
                         <select
                           value={lead.status}
                           onChange={(e) => handleStatusChange(lead.id, e.target.value as Lead['status'])}
-                          className={`rounded-full px-2.5 py-1 text-xs font-semibold border outline-none cursor-pointer ${
-                            lead.status === 'new'
+                          className={`rounded-full px-2.5 py-1 text-xs font-semibold border outline-none cursor-pointer ${lead.status === 'new'
                               ? 'bg-amber-50 text-amber-800 border-amber-200'
                               : lead.status === 'contacted'
-                              ? 'bg-blue-50 text-blue-800 border-blue-200'
-                              : lead.status === 'qualified'
-                              ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
-                              : 'bg-zinc-100 text-zinc-700 border-zinc-200'
-                          }`}
+                                ? 'bg-blue-50 text-blue-800 border-blue-200'
+                                : lead.status === 'qualified'
+                                  ? 'bg-emerald-50 text-emerald-800 border-emerald-200'
+                                  : 'bg-zinc-100 text-zinc-700 border-zinc-200'
+                            }`}
                         >
                           <option value="new">New</option>
                           <option value="contacted">Contacted</option>
@@ -706,7 +736,7 @@ export default function AdminPage() {
                           </button>
                           <button
                             type="button"
-                            onClick={() => handleDeleteLead(lead.id)}
+                            onClick={() => handleDeleteLead(lead.id || (lead as any)._id)}
                             className="p-1.5 rounded-lg text-[#94A3B8] hover:bg-red-50 hover:text-red-700 transition cursor-pointer"
                             title="Delete Lead"
                           >
@@ -984,7 +1014,7 @@ export default function AdminPage() {
       )}
 
       {/* ===================================================================== */}
-      {/* 8. MODAL: MONGODB ATLAS ARCHITECTURE & AI AGENT MIGRATIONS            */}
+      {/* 8. MODAL: SUPABASE POSTGRESQL ARCHITECTURE & SECURITY                  */}
       {/* ===================================================================== */}
       {showDbInfoModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4 backdrop-blur-xs">
@@ -995,8 +1025,8 @@ export default function AdminPage() {
                   <Database className="h-5 w-5" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-[#0F172A]">MongoDB Atlas Architecture</h3>
-                  <p className="text-xs text-[#64748B]">Dedicated Cloud Cluster &amp; Direct AI Agent Migrations</p>
+                  <h3 className="text-xl font-bold text-[#0F172A]">Supabase PostgreSQL Architecture</h3>
+                  <p className="text-xs text-[#64748B]">Enterprise Relational Database &amp; Row Level Security (RLS)</p>
                 </div>
               </div>
               <button
@@ -1012,24 +1042,26 @@ export default function AdminPage() {
               <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
                 <div className="font-bold text-[#0F172A] flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-[#10B981]"></span>
-                  <span>Cluster Details &amp; Telemetry:</span>
+                  <span>Database Details &amp; Telemetry:</span>
                 </div>
                 <ul className="list-disc pl-5 space-y-1 text-[#64748B]">
-                  <li><b>Cluster Host:</b> <code className="text-[#4F46E5] font-mono">cluster0.la6tjpd.mongodb.net</code></li>
-                  <li><b>Database Name:</b> <code className="text-[#4F46E5] font-mono">flowpeople</code></li>
-                  <li><b>Primary Collection:</b> <code className="text-[#4F46E5] font-mono">leads</code> (with 6 verified indexes)</li>
-                  <li><b>AI Migration Agent:</b> Direct migrations through <code className="text-[#4F46E5] font-mono">npm run db:migrate</code></li>
+                  <li><b>Database Engine:</b> <code className="text-[#4F46E5] font-mono">Supabase PostgreSQL 15+</code></li>
+                  <li><b>Project Ref:</b> <code className="text-[#4F46E5] font-mono">cmjsjxtjijawgspklfxt (AWS Seoul)</code></li>
+                  <li><b>Primary Table:</b> <code className="text-[#4F46E5] font-mono">public.leads</code> (UUID primary keys, indexed)</li>
+                  <li><b>Access Control:</b> <code className="text-[#4F46E5] font-mono">public.profiles</code> + Supabase RLS Policies</li>
+                  <li><b>Authentication:</b> <code className="text-[#4F46E5] font-mono">Supabase Auth (JWT + Session Tokens)</code></li>
                 </ul>
               </div>
 
               <div className="p-4 rounded-xl bg-slate-900 text-slate-100 font-mono text-[11px] overflow-x-auto space-y-1">
-                <div className="text-slate-400"># Active MongoDB Atlas Connection (.env):</div>
-                <div className="text-emerald-400">MONGODB_URI="mongodb+srv://hqfluxora_db_user:***@cluster0.la6tjpd.mongodb.net/flowpeople?..."</div>
-                <div className="text-emerald-400">MONGODB_DB_NAME="flowpeople"</div>
+                <div className="text-slate-400"># Cloud Backend &amp; Database Architecture:</div>
+                <div className="text-emerald-400">DATABASE_URL="postgresql://postgres.[ref]:[protected]@[host]:5432/postgres"</div>
+                <div className="text-emerald-400">AUTH_PROVIDER="Supabase Auth (Native cryptographic JWTs)"</div>
+                <div className="text-emerald-400">SECURITY_MODEL="PostgreSQL Row Level Security (RLS) enabled"</div>
               </div>
 
               <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs">
-                <b>AI Agent Direct Migration Enabled:</b> Whenever database schemas, indexes, or collections are modified, AI agents directly execute database migrations and status inspections via the dedicated MongoDB driver scripts.
+                <b>Strict Row Level Security (RLS) Active:</b> Public visitors can safely submit leads via anon policies, while lead viewing, status updates, and deletions are strictly restricted to authenticated administrators verified through Supabase Auth and the profiles table.
               </div>
             </div>
 

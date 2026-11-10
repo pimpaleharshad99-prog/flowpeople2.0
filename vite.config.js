@@ -2,9 +2,9 @@ import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-function mongoApiPlugin() {
+function apiRouterPlugin() {
   return {
-    name: 'mongo-api-plugin',
+    name: 'api-router-plugin',
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         if (req.url && req.url.startsWith('/api/')) {
@@ -40,7 +40,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
     },
   },
-  plugins: [react(), mongoApiPlugin()],
+  plugins: [react(), apiRouterPlugin()],
   build: {
     target: 'es2020',
     cssCodeSplit: true,

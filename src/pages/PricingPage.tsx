@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import Lightfall from '../components/Lightfall';
 import './PricingPage.css';
@@ -254,7 +255,7 @@ const COST_ROWS = [
   { item: 'One-time license purchase', cost: 'Paid once', isOk: true },
   { item: 'Recurring FlowPeople maintenance (T&C Apply)', cost: '₹0', isOk: true },
   { item: 'GST', cost: 'Additional', isOk: false },
-  { item: 'MongoDB Atlas / database hosting', cost: 'Additional', isOk: false },
+  { item: 'Supabase / cloud database hosting', cost: 'Additional', isOk: false },
   { item: 'Google Drive storage', cost: 'Additional', isOk: false },
   { item: 'Hardware (for example face attendance devices)', cost: 'Additional', isOk: false },
   { item: 'Third-party API costs', cost: 'Additional', isOk: false },
@@ -276,7 +277,7 @@ const FAQS = [
   },
   {
     q: 'Are hosting and storage included?',
-    a: 'No. MongoDB Atlas or cloud database hosting and Google Drive storage are paid directly by you to those providers. We set them up for you, but their usage costs are additional. GST is also additional.'
+    a: 'No. Supabase or cloud database hosting and Google Drive storage are paid directly by you to those providers. We set them up for you, but their usage costs are additional. GST is also additional.'
   },
   {
     q: 'What happens if we exceed the employee limit?',
@@ -301,6 +302,7 @@ const FAQS = [
 ];
 
 export default function PricingPage() {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [selectedPlan, setSelectedPlan] = useState<string>('Starter');
   const [inquiryName, setInquiryName] = useState<string>('');
@@ -308,6 +310,20 @@ export default function PricingPage() {
   const [inquirySize, setInquirySize] = useState<string>('');
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setIsSubmitted(false);
+    setInquiryName('');
+    setInquiryEmail('');
+    setInquirySize('');
+  };
+
+  const handleScheduleDemo = (e: React.MouseEvent) => {
+    e.preventDefault();
+    closeModal();
+    navigate(`/contact?type=Book%20a%20Demo&plan=${encodeURIComponent(selectedPlan)}`);
+  };
 
   // Animated counters
   const [displayPrices, setDisplayPrices] = useState<number[]>([0, 0, 0]);
@@ -847,7 +863,7 @@ export default function PricingPage() {
       {modalOpen && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[rgba(42,35,32,0.4)] backdrop-blur-sm"
-          onClick={() => setModalOpen(false)}
+          onClick={closeModal}
         >
           <div
             className="bg-[#FFFFFF] text-[#2A2320] w-[min(480px,calc(100vw-32px))] rounded-[28px] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] p-7 grid gap-4 animate-[fpPop_0.35s_cubic-bezier(0.2,0.8,0.2,1)]"
@@ -905,10 +921,17 @@ export default function PricingPage() {
               <label className="grid gap-1.5 text-[0.85rem] font-semibold text-[#0F172A]">
                 Number of employees
                 <input
-                  type="text"
-                  inputMode="numeric"
+                  type="number"
+                  min="1"
+                  max="100000"
+                  step="1"
                   value={inquirySize}
-                  onChange={(e) => setInquirySize(e.target.value)}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === '' || (Number(val) > 0 && !val.includes('-') && !val.includes('.'))) {
+                      setInquirySize(val);
+                    }
+                  }}
                   placeholder="For example, 60"
                   className="p-3 bg-[#F8FAFC] text-[#0F172A] border border-slate-200 rounded-[14px] text-[1rem] outline-none focus:border-[#4F46E5]"
                 />
@@ -923,9 +946,13 @@ export default function PricingPage() {
                   <div>Inquiry received! Our team will contact you shortly regarding the <b>{selectedPlan}</b> plan.</div>
                   <div className="text-xs text-[#0F172A]">
                     Need custom workflows or enterprise terms?{' '}
-                    <a href={`/contact?type=Book%20a%20Demo&plan=${selectedPlan}`} className="underline text-[#4F46E5] font-semibold">
+                    <button
+                      type="button"
+                      onClick={handleScheduleDemo}
+                      className="underline text-[#4F46E5] hover:text-[#4338CA] font-semibold cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] rounded px-0.5 inline-flex items-center gap-0.5 transition"
+                    >
                       Schedule a live demonstration &rarr;
-                    </a>
+                    </button>
                   </div>
                 </div>
               )}
@@ -933,12 +960,12 @@ export default function PricingPage() {
               <div className="flex gap-2.5 flex-wrap mt-2">
                 <button
                   type="button"
-                  onClick={() => setModalOpen(false)}
-                  className="pricing-btn ghost flex-1"
+                  onClick={closeModal}
+                  className="pricing-btn ghost flex-1 cursor-pointer focus-visible:ring-2 focus-visible:ring-slate-400"
                 >
                   Close
                 </button>
-                <button type="submit" disabled={isSubmitting} className="pricing-btn flex-1 disabled:opacity-50">
+                <button type="submit" disabled={isSubmitting} className="pricing-btn flex-1 disabled:opacity-50 cursor-pointer focus-visible:ring-2 focus-visible:ring-indigo-500">
                   {isSubmitting ? 'Transmitting...' : 'Send inquiry'}
                 </button>
               </div>

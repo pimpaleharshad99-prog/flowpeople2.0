@@ -4,7 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
 import { handleApiRequest } from './apiRouter.js';
-import { checkMongoHealth } from './mongo.js';
+import { checkSupabaseHealth } from './supabase.js';
 
 dotenv.config();
 
@@ -64,11 +64,11 @@ const server = http.createServer(async (req, res) => {
 
 server.listen(port, async () => {
   console.log(`🚀 FlowPeople server running at http://localhost:${port}`);
-  const health = await checkMongoHealth();
+  const health = await checkSupabaseHealth();
   if (health.connected) {
-    console.log(`✓ Connected to MongoDB Atlas [${health.database}] on ${health.cluster}`);
+    console.log(`✓ Connected to Supabase PostgreSQL & Auth [${health.provider}]`);
   } else {
-    console.warn(`⚠️ MongoDB Atlas connection warning:`, health.error);
+    console.warn(`⚠️ Supabase connection warning:`, health.error);
   }
 });
 

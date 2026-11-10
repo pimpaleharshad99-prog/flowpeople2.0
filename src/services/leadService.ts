@@ -1,4 +1,5 @@
-import { Lead, NewLeadPayload, checkDatabaseHealth, MongoHealthStatus } from '../lib/database';
+import { Lead, NewLeadPayload, checkDatabaseHealth, DatabaseHealthStatus } from '../lib/database';
+import { supabase } from '../lib/supabase';
 
 const LOCAL_STORAGE_KEY = 'flowpeople_leads_vault';
 
@@ -44,7 +45,7 @@ function saveLocalLeads(leads: Lead[]): void {
 
 export const leadService = {
   /**
-   * Submit a new lead through contact / demo form into MongoDB Atlas
+   * Submit a new lead through contact / demo form into Supabase PostgreSQL
    */
   async submitLead(payload: NewLeadPayload): Promise<{ success: boolean; lead: Lead; isLive: boolean; error?: string }> {
     const fallbackLead: Lead = {
@@ -58,6 +59,36 @@ export const leadService = {
     };
 
     try {
+      // 1. Direct Supabase submission
+      const newLeadData = {
+        full_name: payload.full_name,
+        business_email: payload.business_email,
+        company_name: payload.company_name || '',
+        phone_number: payload.phone_number || payload.phone || '',
+        phone: payload.phone || payload.phone_number || '',
+        employee_count: payload.employee_count || '',
+        interested_plan: payload.interested_plan || '',
+        inquiry_type: payload.inquiry_type || '',
+        designation: payload.designation || '',
+        message: payload.message || '',
+        status: 'new',
+        admin_notes: '',
+        source: payload.source || 'website_inquiry_form',
+      };
+
+      const { data: inserted, error: insertError } = await supabase
+        .from('leads')
+        .insert([newLeadData])
+        .select();
+
+      if (!insertError && inserted && inserted.length > 0) {
+        const savedLead: Lead = inserted[0];
+        const local = getLocalLeads();
+        saveLocalLeads([savedLead, ...local.filter(l => l.id !== savedLead.id)]);
+        return { success: true, lead: savedLead, isLive: true };
+      }
+
+      // 2. Fallback to API route if direct insert policy restricted .select()
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -66,18 +97,15 @@ export const leadService = {
 
       if (res.ok) {
         const data = await res.json();
-        const savedLead: Lead = data.lead || fallbackLead;
-        // Sync local cache
+        const savedLead: Lead = data.lead;
         const local = getLocalLeads();
-        saveLocalLeads([savedLead, ...local.filter((l) => l.id !== savedLead.id)]);
-        return { success: true, lead: savedLead, isLive: data.isLive ?? true };
+        saveLocalLeads([savedLead, ...local.filter(l => l.id !== savedLead.id)]);
+        return { success: true, lead: savedLead, isLive: true };
       } else {
         const errJson = await res.json().catch(() => ({}));
-        console.warn('MongoDB API returned error, saved to local vault:', errJson.error);
         const local = getLocalLeads();
         saveLocalLeads([fallbackLead, ...local]);
-        // For customer-facing inquiry forms, guarantee submission acceptance & local preservation
-        return { success: true, lead: fallbackLead, isLive: false, error: errJson.error };
+        return { success: false, lead: fallbackLead, isLive: false, error: errJson.error || 'Failed to insert lead into database' };
       }
     } catch (err: any) {
       console.warn('Network offline or direct static mode, falling back to local cache:', err.message);
@@ -88,11 +116,27 @@ export const leadService = {
   },
 
   /**
-   * Fetch all leads for the admin dashboard from MongoDB Atlas
+   * Fetch all leads for the admin dashboard from Supabase PostgreSQL
    */
   async getLeads(): Promise<{ leads: Lead[]; isLive: boolean; error?: string }> {
     try {
-      const res = await fetch('/api/leads');
+      // 1. First attempt direct query through authenticated Supabase client
+      const { data: supabaseLeads, error: supabaseError } = await supabase
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (!supabaseError && Array.isArray(supabaseLeads)) {
+        const cleanLeads = supabaseLeads.filter((l: Lead) => !isDemoLead(l));
+        saveLocalLeads(cleanLeads);
+        return { leads: cleanLeads, isLive: true };
+      }
+
+      // 2. Fallback to /api/leads serverless endpoint with credentials
+      const res = await fetch('/api/leads', {
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
       if (res.ok) {
         const data = await res.json();
         if (Array.isArray(data.leads)) {
@@ -100,6 +144,8 @@ export const leadService = {
           saveLocalLeads(cleanLeads);
           return { leads: cleanLeads, isLive: true };
         }
+      } else if (res.status === 401) {
+        return { leads: [], isLive: false, error: 'Unauthorized: Admin authentication required.' };
       }
       throw new Error(`API returned HTTP ${res.status}`);
     } catch (err: any) {
@@ -109,13 +155,26 @@ export const leadService = {
   },
 
   /**
-   * Purge all demo/sample leads from local storage and remote MongoDB Atlas
+   * Purge all demo/sample leads from local storage and remote Supabase database
    */
   async purgeDemoLeads(): Promise<{ success: boolean; deletedCount?: number }> {
     const clean = getLocalLeads();
     saveLocalLeads(clean);
     try {
-      const res = await fetch('/api/leads/purge-demo', { method: 'DELETE' });
+      const { data, error } = await supabase
+        .from('leads')
+        .delete()
+        .in('business_email', DEMO_EMAILS);
+
+      if (!error) {
+        return { success: true };
+      }
+
+      const res = await fetch('/api/leads/purge-demo', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+      });
       if (res.ok) {
         const data = await res.json();
         return { success: true, deletedCount: data.deletedCount };
@@ -127,7 +186,7 @@ export const leadService = {
   },
 
   /**
-   * Update the status of a lead in MongoDB Atlas
+   * Update the status of a lead in Supabase PostgreSQL
    */
   async updateLeadStatus(id: string, status: Lead['status']): Promise<{ success: boolean; isLive?: boolean; error?: string }> {
     // Update local cache optimistically
@@ -136,9 +195,21 @@ export const leadService = {
     saveLocalLeads(updated);
 
     try {
+      // 1. Direct Supabase update
+      const { error: sbError } = await supabase
+        .from('leads')
+        .update({ status, updated_at: new Date().toISOString() })
+        .eq('id', id);
+
+      if (!sbError) {
+        return { success: true, isLive: true };
+      }
+
+      // 2. Fallback to API route
       const res = await fetch(`/api/leads/${encodeURIComponent(id)}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ status })
       });
       return { success: res.ok, isLive: res.ok };
@@ -148,7 +219,7 @@ export const leadService = {
   },
 
   /**
-   * Update internal admin notes in MongoDB Atlas
+   * Update internal admin notes in Supabase PostgreSQL
    */
   async updateLeadNotes(id: string, admin_notes: string): Promise<{ success: boolean; isLive?: boolean; error?: string }> {
     // Update local cache optimistically
@@ -157,9 +228,21 @@ export const leadService = {
     saveLocalLeads(updated);
 
     try {
+      // 1. Direct Supabase update
+      const { error: sbError } = await supabase
+        .from('leads')
+        .update({ admin_notes, updated_at: new Date().toISOString() })
+        .eq('id', id);
+
+      if (!sbError) {
+        return { success: true, isLive: true };
+      }
+
+      // 2. Fallback to API route
       const res = await fetch(`/api/leads/${encodeURIComponent(id)}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({ admin_notes })
       });
       return { success: res.ok, isLive: res.ok };
@@ -169,37 +252,58 @@ export const leadService = {
   },
 
   /**
-   * Delete a lead from MongoDB Atlas
+   * Delete a lead from Supabase PostgreSQL
    */
   async deleteLead(id: string): Promise<{ success: boolean; isLive?: boolean; error?: string }> {
+    if (!id) {
+      return { success: false, isLive: false, error: 'Lead identifier is required.' };
+    }
     try {
+      // 1. Direct Supabase delete
+      const { error: sbError } = await supabase
+        .from('leads')
+        .delete()
+        .eq('id', id);
+
+      if (!sbError) {
+        const local = getLocalLeads();
+        saveLocalLeads(local.filter((l) => l.id !== id));
+        return { success: true, isLive: true };
+      }
+
+      // 2. Fallback to API route
       const res = await fetch(`/api/leads/${encodeURIComponent(id)}`, {
         method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
       });
 
       if (res.ok) {
-        // Remove from local cache after confirmed database delete
         const local = getLocalLeads();
         saveLocalLeads(local.filter((l) => l.id !== id));
         return { success: true, isLive: true };
       } else {
         const errJson = await res.json().catch(() => ({}));
-        console.error('Failed to delete lead from MongoDB:', errJson.error);
-        return { success: false, isLive: false, error: errJson.error || `HTTP ${res.status} deletion failed` };
+        let errMsg = errJson.error;
+        if (res.status === 401) {
+          errMsg = 'Session expired. Please log in again.';
+        } else if (res.status === 404) {
+          errMsg = errJson.error || 'Lead not found or incorrect API route.';
+        } else if (res.status >= 500) {
+          errMsg = 'Server error. Please try again.';
+        }
+        return { success: false, isLive: false, error: errMsg || `HTTP ${res.status} deletion failed` };
       }
     } catch (err: any) {
-      console.warn('Network error while deleting lead from MongoDB:', err.message);
-      const local = getLocalLeads();
-      saveLocalLeads(local.filter((l) => l.id !== id));
-      return { success: true, isLive: false, error: err.message };
+      console.warn('Network error while deleting lead from Supabase:', err.message);
+      return { success: false, isLive: false, error: 'Network error: could not connect to server.' };
     }
   },
 
   /**
-   * Check connection status to MongoDB Atlas
+   * Check connection status to Supabase PostgreSQL
    */
-  async checkConnection(): Promise<MongoHealthStatus> {
+  async checkConnection(): Promise<DatabaseHealthStatus> {
     return checkDatabaseHealth();
   }
 };

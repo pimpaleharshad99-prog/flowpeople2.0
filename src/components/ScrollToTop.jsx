@@ -9,22 +9,23 @@ export default function ScrollToTop() {
   useEffect(() => {
     if (hash) {
       const id = hash.replace('#', '');
+      // shortcut: short timeout instead of MutationObserver; sufficient for client-rendered pages
       const timer = setTimeout(() => {
-        const element = document.getElementById(id);
+        const element = document.getElementById(id) || document.querySelector(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
-      }, 80);
+      }, 100);
       return () => clearTimeout(timer);
-    } else {
-      window.scrollTo(0, 0);
     }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
 
     // Refresh ScrollTrigger calculations after DOM paint
     if (typeof ScrollTrigger !== 'undefined') {
       const refreshTimer = setTimeout(() => {
         ScrollTrigger.refresh();
-      }, 100);
+      }, 120);
       return () => clearTimeout(refreshTimer);
     }
   }, [pathname, hash]);

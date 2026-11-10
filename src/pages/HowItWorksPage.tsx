@@ -36,7 +36,7 @@ const STEPS: Step[] = [
     title: 'Set Up Your Organization',
     summary: 'Register your business, configure your company profile, establish administrator access, and connect your dedicated database and Google Drive.',
     details: [
-      'Dedicated client database initialization (MongoDB Atlas) ensures complete tenant data isolation.',
+      'Dedicated client database initialization (Supabase PostgreSQL) ensures complete tenant data isolation.',
       'Google Drive integration links your company-owned storage for employee documents and monthly automated backups.',
       'Configure organizational hierarchy, official departments, working calendar, and company-wide policies.'
     ],
@@ -175,13 +175,16 @@ export default function HowItWorksPage() {
           </div>
 
           {/* Stepper Tabs Bar */}
-          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-4 mb-12 no-scrollbar">
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 mb-12 flex-nowrap md:flex-wrap md:justify-center scroll-smooth px-2 no-scrollbar">
             {STEPS.map((s, idx) => (
               <button
                 key={s.step}
                 type="button"
-                onClick={() => setActiveStepIdx(idx)}
-                className={`flex items-center gap-2.5 rounded-full px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer ${
+                onClick={(e) => {
+                  setActiveStepIdx(idx);
+                  e.currentTarget.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }}
+                className={`flex items-center gap-2.5 shrink-0 rounded-full px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-semibold whitespace-nowrap transition cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] ${
                   activeStepIdx === idx
                     ? 'bg-[#4F46E5] text-[#F8F6F1] shadow-sm'
                     : 'bg-white border border-slate-200 text-[#0F172A] hover:bg-slate-100/60'
